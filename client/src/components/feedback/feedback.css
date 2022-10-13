@@ -1,0 +1,74 @@
+.rsvp {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 66px;
+  margin-bottom: 66px;
+  gap: 30px;
+  align-items: center;
+}
+
+.rsvpContainer {
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rsvpName {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+}
+
+.rsvpContainer input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+}
+
+.rsvpContainer select:hover {
+  cursor: pointer;
+}
+
+.rsvpBtn {
+  padding: 15px;
+  width: 25%;
+  background-color: var(--color-blue3);
+  color: white;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border-color: var(--color-blue3);
+}
+
+.rsvpBtn:hover {
+  background-color: var(--color-gold2);
+  color: var(--color-blue3);
+}
+
+.rsvpSuccess {
+  margin-top: 30px;
+  padding: 20px;
+  color: green;
+  border: 1px solid green;
+  width: 95%;
+  max-width: 1080px;
+  border-radius: 10px;
+}
+
+.rsvpSuccess h3 {
+  line-height: 30px;
+}
+
+@media (max-width: 1080px) {
+  .rsvpContainer {
+    width: 95%;
+  }
+
+  .rsvpBtn {
+    width: 95%;
+  }
+}

@@ -1,0 +1,84 @@
+.showcase {
+  width: 100%;
+  height: 100vh;
+  background-position: 0% 65%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.showCaseNames {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.showcaseContainer {
+  width: 100%;
+  max-width: 1080px;
+  margin-top: 220px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  color: #fa5246;
+}
+
+.bookBtn {
+  width: 171px;
+  padding: 15px;
+  cursor: pointer;
+  background-color: #fa5246;
+  border-color: #fa5246;
+  color: white;
+  border-radius: 10px;
+}
+
+.showCaseNames > h1 {
+  font-family: "geoLight";
+  letter-spacing: 10px;
+  font-size: 70px;
+}
+
+.gettingMarriedTxt {
+  font-family: "geoLight";
+  letter-spacing: 10px;
+}
+
+.showcaseAndTxt {
+  font-family: "mustache";
+  font-weight: lighter;
+  font-size: 60px;
+}
+
+@media (max-width: 1080px) {
+  .showcase {
+    background-position: 50% 50%;
+  }
+
+  .showcaseContainer {
+    margin: 0;
+    width: 90%;
+    gap: 20px;
+    height: 250px;
+    margin-top: 50px;
+  }
+
+  .showCaseNames {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin: auto;
+  }
+
+  .showcaseAndTxt {
+    font-size: 50px;
+  }
+
+  .showcaseContainer h1 {
+    font-size: 50px;
+  }
+}

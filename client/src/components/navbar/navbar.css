@@ -1,0 +1,154 @@
+.navbar {
+  background-color: transparent;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.navbarContainer {
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  margin: auto;
+  padding: 10px;
+}
+
+.navbarNav {
+  display: flex;
+  list-style: none;
+  width: 60%;
+  justify-content: space-between;
+}
+
+.navbarNav li {
+  padding-bottom: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.navbarSupport {
+  border: 1px solid #00332c;
+}
+.navbarNav {
+  cursor: pointer;
+}
+
+.navbarSupport:hover {
+  background-color: #00332c;
+  color: white;
+}
+
+.navbarNav li a {
+  text-decoration: none;
+}
+
+.navbarItem:hover {
+  border-bottom: 1px solid var(--color-orange700);
+  border-radius: 0;
+}
+
+.navbarMenuIcon {
+  display: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.whatsappIcon {
+  font-size: 16px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.sidebar {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .navbarMenuIcon {
+    display: block;
+  }
+
+  .navbarContainer {
+    width: 90%;
+  }
+
+  .navbarNav {
+    display: none;
+  }
+
+  .sidebar {
+    position: absolute;
+    width: 50%;
+    height: 100vh;
+    border-right: 1px solid black;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-blue1);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background: #00332c;
+  }
+
+  .sidebarContainer {
+    width: 100%;
+  }
+
+  .sidebarIcon {
+    width: 90%;
+    display: flex;
+    justify-content: right;
+    margin-top: 15px;
+  }
+
+  .navbarCloseIcon {
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+  }
+
+  .navbarCloseIcon:hover {
+    color: red;
+  }
+
+  .sidebarNav {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 25px;
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .sidebarNav li {
+    cursor: pointer;
+  }
+
+  .sidebarLastItem {
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #faae2b;
+    border-radius: 5px;
+  }
+
+  .greyArea {
+    width: 50%;
+    height: 100vh;
+    background-color: #2e2c30;
+    opacity: 0.8;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+  }
+}
