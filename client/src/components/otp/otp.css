@@ -1,0 +1,45 @@
+.otp {
+  width: 100%;
+}
+
+.otpContainer {
+  max-width: 1080px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.otpVerifyBtn {
+  width: 100%;
+  padding: 10px;
+  background-color: #00332c;
+  margin-top: 20px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.digitInput {
+  width: 20px;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid black;
+  margin-left: 10px;
+}
+
+.otpResendBtn {
+  width: 150px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+@media (max-width: 1080px) {
+  .otpContainer {
+    width: 95%;
+  }
+}

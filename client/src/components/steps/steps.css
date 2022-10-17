@@ -1,0 +1,70 @@
+.steps {
+  width: 100%;
+  background-color: #faae2b;
+  padding: 70px 0 70px 0;
+}
+
+.stepsContainer {
+  max-width: 1080px;
+  margin: auto;
+  position: relative;
+}
+
+.stepContainerText {
+  text-align: left;
+}
+
+.stepsItems {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+}
+
+.stepsItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 260px;
+  margin-left: 20px;
+  color: white;
+}
+
+.vespaWhiteImg {
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 360px;
+}
+
+.vespaMerahImg {
+  position: absolute;
+  left: -220px;
+  bottom: -250px;
+  height: 486px;
+}
+
+@media (max-width: 1080px) {
+  .stepsContainer {
+    width: 95%;
+    padding-bottom: 250px;
+  }
+
+  .stepsItems {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    margin-top: 25px;
+  }
+
+  .stepItem {
+    width: 100%;
+  }
+
+  .vespaWhiteImg {
+    width: 300px;
+    right: 0;
+    top: -120px;
+  }
+}

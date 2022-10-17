@@ -1,0 +1,27 @@
+.phoneNumber {
+  width: 100%;
+  background-color: #f2f7f5;
+}
+
+.phoneNumberContainer {
+  width: 100%;
+  max-width: 1080px;
+  text-align: left;
+  margin: auto;
+}
+
+.phoneNumberLoginBtn {
+  width: 100%;
+  padding: 10px;
+  background-color: #00332c;
+  margin-top: 20px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 1080px) {
+  .phoneNumberContainer {
+    width: 95%;
+  }
+}

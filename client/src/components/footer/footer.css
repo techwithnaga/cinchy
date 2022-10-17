@@ -1,0 +1,57 @@
+.footer {
+  width: 100%;
+}
+
+.footerTop {
+  width: 100%;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0% 60%;
+}
+
+.footerTopContainer {
+  display: flex;
+  max-width: 1080px;
+  margin: auto;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.listNavItems {
+  list-style: none;
+}
+
+.listNavItems li {
+  padding: 15px;
+}
+
+.navItem {
+  text-decoration: none;
+  color: white;
+}
+
+.sosmedIcon {
+  font-size: 30px;
+  padding: 15px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.footerBottom {
+  width: 100%;
+  background-color: #00332c;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+}
+
+@media (max-width: 1080px) {
+  .footerTopContainer {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+}

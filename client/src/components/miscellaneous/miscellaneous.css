@@ -1,0 +1,40 @@
+.miscellaneous {
+  width: 100%;
+  padding: 70px 0 70px 0;
+}
+
+.miscellaneousContainer {
+  max-width: 1080px;
+  margin: auto;
+}
+
+.miscellaneousItems {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.miscellaneousItem {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 1080px) {
+  .miscellaneous {
+    padding-top: 200px;
+  }
+  .miscellaneousContainer {
+    width: 95%;
+  }
+  .miscellaneousItems {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .miscellaneousItem {
+    width: 100%;
+  }
+}

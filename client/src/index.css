@@ -1,75 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap");
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 :root {
-  --color-snowgum900: #0C0C0D;
-  --color-snowgum700: #2E2C30;
-  --color-snowgum500: #625E66;
-  
-  --color-yellow900: #BF8521;
-  --color-yellow700: #FAAE2B;
-  
-  --color-orange900: #BF3F36;
-  --color-orange700: #FA5246;
-  --color-orange500: #FA857D;
-  
-  --color-babyPowder700: #D9D9D9;
-  
-  --color-felgrau700:#475D5B;
-  
-  --color-green900: #001A16;
-  --color-green700: #00332C;
-  --color-green500: #33665F;
+  --color-snowgum900: #0c0c0d;
+  --color-snowgum700: #2e2c30;
+  --color-snowgum500: #625e66;
+
+  --color-yellow900: #bf8521;
+  --color-yellow700: #faae2b;
+
+  --color-orange900: #bf3f36;
+  --color-orange700: #fa5246;
+  --color-orange500: #fa857d;
+
+  --color-babyPowder700: #d9d9d9;
+
+  --color-felgrau700: #475d5b;
+
+  --color-green900: #001a16;
+  --color-green700: #00332c;
+  --color-green500: #33665f;
   --color-green300: #739994;
-  --color-green50: #B8CCC9;
+  --color-green50: #b8ccc9;
 }
 
-h1{
+h1 {
+  margin-block-start: 0;
+  margin-block-end: 0;
   font-weight: 600;
   font-size: 49px;
 }
 
-h2{
+h2 {
   font-weight: 600;
-  font-size:  39px;
+  font-size: 39px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
-h3{
+h3 {
+  margin-block-start: 0;
+  margin-block-end: 0;
   font-weight: 600;
   font-size: 31px;
 }
 
-h4{
+h4 {
+  margin-block-start: 0;
+  margin-block-end: 0;
   font-weight: 600;
   font-size: 25px;
 }
 
-h5{
+h5 {
+  margin-block-start: 0;
+  margin-block-end: 0;
   font-weight: 600;
   font-size: 20px;
 }
 
-h6{
+h6 {
+  margin-block-start: 0;
+  margin-block-end: 0;
   font-weight: 600;
   font-size: 16px;
 }
 
-p{
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
   font-weight: 400;
   font-size: 16px;
 }
 
-label{
+label {
+  margin-block-start: 0;
+  margin-block-end: 0;
   font-weight: 400;
   font-size: 12px;
 }
-
-
-
-
-

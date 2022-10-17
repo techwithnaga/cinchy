@@ -6,27 +6,27 @@ const FAQs = () => {
   const data = [
     {
       id: 1,
-      question:
-        "How do I get to the wedding venue? Will transportation be provided?",
+      question: "Which payment methods do you accept?",
       answer:
-        "A shuttle will be provided to and from your ceremony to reception …venue(s), now's the time to share those details, including timing and pickup and drop-off locations.",
+        "You can pay with any debit/credit card - Visa, Mastercard, Maestro, Amex, Discover, Diners, JCB, Unionpay. We use Stripe to process payments, so do not store your card details and never share this information with third parties. ApplePay and GooglePay are also supported.",
     },
     {
       id: 2,
-      question: "What happens after the ceremony?",
+      question: "What do I need to rent a motorbike?",
       answer:
-        "After the ceremony, the bridal party will be taking pictures nearby for around an hour. Guests can head straight to the Courtyard(reception hall) where we will be serving finger foods and beverages.",
+        "To book your motorbike/scooter, all you need is a credit or debit card. When you pick the motorbike up, you'll need: proof of reservation, your passport/ID, valid driving license, debit or credit card.",
     },
     {
       id: 3,
-      question: "Can I bring my kids?",
+      question: "What happen if I damage the motorbike?",
       answer:
-        "Due to [space/constraints or safety restrictions], we are unable to accommodate children at our wedding.",
+        "In most occasions the maximum you might be charged is the security deposit. If you included Premium Insurance with your booking, then your security deposit will be protected. When you pickup up your rental, our local rental partner will explain the procedure to follow and emergency contact details in the event of an accident - your safety always comes first.",
     },
     {
       id: 4,
-      question: "I have dietary restrictions/allergies.",
-      answer: "Let us know under the RSVP comment section below.",
+      question: "Are all fees included in the rental price?",
+      answer:
+        "Yes. The vast majority of our rentals include basic insurance, local taxes and any road fees. You have the option to add 'extras' (ie. One-Way rental, GPS, GoPro, etc) but we'll clearly list any additional costs involved before you book your motorbike/scooter.",
     },
   ];
 
