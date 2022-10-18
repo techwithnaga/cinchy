@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/user.js";
+import otpRoute from "./routes/otp.js";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -17,8 +19,10 @@ const connect = async () => {
 
 //middlewares
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/user", userRoute);
+app.use("/api/otp", otpRoute);
 
 app.listen(8800, () => {
   connect();
