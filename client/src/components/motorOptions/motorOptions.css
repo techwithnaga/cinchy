@@ -12,6 +12,7 @@
 
 .motorOptionsItems {
   display: flex;
+  margin-top: 30px;
 }
 
 .motorOptionsItem {
@@ -37,7 +38,7 @@
   .motorOptionsItems {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+
     gap: 30px;
   }
 
