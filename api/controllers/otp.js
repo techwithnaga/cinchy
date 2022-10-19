@@ -96,8 +96,7 @@ export const getOTP = async (req, res) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "Bearer EAAIfuxmWLU0BAOa0fY3S8nmTBfJp1YQCMaZAVlrjUETN1YE4FrUq9onjQSwdUxGZAxtMgwsREbcsRXQms0WHxhUNzOHAjlkPQbjoXeDelhcOGvTjTBrWsG4IIcorbNXD60Je7HkUKjyhdV8IJfwEqwnoEKLAQMzzXrzSU7FIUXXUy9PYUvaUpPEMlV9YLtJFQ7slnbmkLZCmtWN46ZBW",
+          Authorization: "Bearer " + process.env.FBTOKEN,
         },
         body: JSON.stringify(body),
       }
