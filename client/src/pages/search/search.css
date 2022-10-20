@@ -1,0 +1,60 @@
+.search {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.searchContainer {
+  max-width: 1080px;
+  margin: auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.searchDateTime {
+  display: flex;
+  gap: 15px;
+}
+
+.searchBtn {
+  width: 100%;
+  padding: 10px;
+  background-color: #00332c;
+  margin-top: 20px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.avaiableBikes {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.avaiableBikesCategory {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.avaiableBikesBtn {
+  padding: 10px 25px 10px 25px;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #00332c;
+  border-radius: 4px;
+}
+
+.avaiableBikesBtn:focus {
+  background-color: #475d5b;
+  color: white;
+}
+
+@media (max-width: 1080px) {
+  .searchContainer {
+    width: 95%;
+  }
+}

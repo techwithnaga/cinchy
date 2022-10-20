@@ -7,7 +7,7 @@ const Showcase = () => {
   const navigate = useNavigate();
   const handleBookNowClick = () => {
     console.log("hi");
-    navigate("/login");
+    navigate("/search");
   };
   return (
     <div

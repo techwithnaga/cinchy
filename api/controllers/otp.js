@@ -115,6 +115,7 @@ export const verifyOTP = (req, res) => {
   const hashFromUser = req.body.hash;
   const otpFromUser = req.body.otp;
   const phoneNumber = req.body.phoneNumber;
+  console.log(phoneNumber, otpFromUser, hashFromUser);
   try {
     if (
       otpTool.verifyOTP(phoneNumber, otpFromUser, hashFromUser, process.env.OTP)

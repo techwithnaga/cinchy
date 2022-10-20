@@ -8,6 +8,9 @@
   max-width: 1080px;
   text-align: left;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .phoneNumberLoginBtn {

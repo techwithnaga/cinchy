@@ -11,9 +11,6 @@ const Phonenumber = () => {
     navigate("/otpConfirmation", { state: phonenumber });
   };
 
-  useEffect(() => {
-    console.log(phonenumber);
-  }, [phonenumber]);
   return (
     <div className="phoneNumber">
       <div className="phoneNumberContainer">
@@ -24,7 +21,7 @@ const Phonenumber = () => {
         </p>
         <h5>Whatsapp Phone Number</h5>
         <PhoneInput
-          country={"id"}
+          country={"us"}
           value={phonenumber}
           onChange={(phonenumber) => setPhoneNumber(phonenumber)}
         />

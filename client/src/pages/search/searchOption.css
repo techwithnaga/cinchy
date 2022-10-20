@@ -1,0 +1,18 @@
+.searchOption {
+  width: 95%;
+  padding: 12px;
+  border: 1px solid #00332c;
+  border-radius: 10px;
+}
+
+.searchOptionBookBtn {
+  padding: 15px 25px 15px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.searchOptionInfo {
+  display: flex;
+  justify-content: space-between;
+}
