@@ -16,7 +16,7 @@ const useFetch = (url, method, body) => {
         } else if (method === "post") {
           res = await axios.post(url, body);
         }
-
+        console.log(res);
         setData(res.data);
       } catch (err) {
         setError(err);

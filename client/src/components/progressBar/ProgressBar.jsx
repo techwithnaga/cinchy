@@ -1,7 +1,7 @@
 import React from "react";
 import "./progressBar.css";
 
-const ProgressBar = () => {
+const ProgressBar = ({ step }) => {
   return (
     <div className="progressBar">
       <div className="progressBarContainer">
@@ -9,14 +9,25 @@ const ProgressBar = () => {
           <div className="progressBarDot"></div>
           <div className="progressBarLine"></div>
           <div className="progressBarDot"></div>
-          <div className="progressBarLine"></div>
-          <div className="progressBarDot"></div>
+          <div
+            className="progressBarLine"
+            style={{ borderColor: step < 3 ? "#D9D9D9" : "green" }}
+          ></div>
+          <div
+            className="progressBarDot"
+            style={{ backgroundColor: step < 3 ? "#D9D9D9" : "green" }}
+          ></div>
         </div>
         <br />
         <div className="progressBarText">
           <p className="progressBarItem">Choose booking</p>
           <p className="progressBarItem">Enter Info</p>
-          <p className="progressBarItem">Confirmation</p>
+          <p
+            className="progressBarItem"
+            style={{ color: step < 3 ? "#D9D9D9" : "green" }}
+          >
+            Confirmation
+          </p>
         </div>
       </div>
     </div>

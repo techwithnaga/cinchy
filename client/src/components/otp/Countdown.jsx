@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Countdown = (phonenumber) => {
+const Countdown = ({ phonenumber }) => {
   const [timer, setTimer] = useState(10);
   const [canResend, setCanResend] = useState(false);
   const navigate = useNavigate();
-  const handleResendCode = () => {
+
+  const handleResendCode = async () => {
     setCanResend(false);
     setTimer(10);
     navigate("/otpConfirmation", { state: phonenumber });
+
+    // await axios
+    //   .post("http://localhost:8800/api/otp/getOTP", {
+    //     phonenumber: phonenumber,
+    //   })
+    //   .then((res) => {})
+    //   .catch((err) => {});
   };
 
   useEffect(() => {

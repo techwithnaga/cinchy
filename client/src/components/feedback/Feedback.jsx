@@ -43,7 +43,7 @@ const Feedback = () => {
               Cinchy’s early buddies :) promise we won’t spam.
             </p>
             <div className="rsvpItem">
-              <h6>Request</h6>
+              <h6>Message</h6>
               <textarea
                 name="request"
                 placeholder="e.g. I'd love to have a credit card payment; do you offer"

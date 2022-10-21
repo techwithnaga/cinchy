@@ -1,0 +1,111 @@
+.information {
+  width: 100%;
+}
+
+.informationContainer {
+  max-width: 1080px;
+  margin: auto;
+  text-align: left;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.informationContainer input {
+  padding: 8px;
+}
+
+.driverInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-bottom: 1px solid black;
+  padding-bottom: 25px;
+  padding-top: 25px;
+}
+
+.otherInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  border-bottom: 1px dotted black;
+}
+
+.pickUp {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  border-bottom: 1px solid black;
+}
+
+.emergency {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  border-bottom: 1px solid black;
+}
+
+.flight {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.arrivalDate {
+  width: 45%;
+}
+
+.arrivalDate > input {
+  width: 100%;
+}
+
+.arrivalTime {
+  width: 45%;
+  margin-right: 16px;
+}
+
+.arrivalTime > input {
+  width: 100%;
+}
+
+.informationPaymentSummary {
+  padding-bottom: 15px;
+  padding-top: 25px;
+}
+
+.infoTotal {
+  display: flex;
+  align-items: center;
+}
+
+.informationPaymentSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.infoTotal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.informationContinueBtn {
+  width: 100%;
+  padding: 10px;
+  background-color: #00332c;
+  margin-top: 20px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 1080px) {
+  .informationContainer {
+    width: 95%;
+  }
+}

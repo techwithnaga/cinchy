@@ -66,7 +66,7 @@ export const getOTP = async (req, res) => {
 
   const body = {
     messaging_product: "whatsapp",
-    to: "17085431524",
+    to: `${phoneNumber}`,
     type: "template",
     template: {
       name: "testaja",
@@ -101,6 +101,7 @@ export const getOTP = async (req, res) => {
         body: JSON.stringify(body),
       }
     );
+
     if (response.status === 200) {
       res.status(response.status).json(hash);
     } else {
@@ -115,7 +116,6 @@ export const verifyOTP = (req, res) => {
   const hashFromUser = req.body.hash;
   const otpFromUser = req.body.otp;
   const phoneNumber = req.body.phoneNumber;
-  console.log(phoneNumber, otpFromUser, hashFromUser);
   try {
     if (
       otpTool.verifyOTP(phoneNumber, otpFromUser, hashFromUser, process.env.OTP)
