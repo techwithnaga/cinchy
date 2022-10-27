@@ -9,34 +9,36 @@ const Search = () => {
       <Navbar2></Navbar2>
       <div className="search">
         <div className="searchContainer">
-          <h5>Pick-Up</h5>
-          <div className="searchDateTime">
-            <div className="searchDate">
-              <h6>Date</h6>
-              <input type="text" />
+          <div className="searchDateTimeContainer">
+            <h5>Pick-Up</h5>
+            <div className="searchDateTime">
+              <div className="searchDateTimeItem">
+                <p>Date</p>
+                <input type="text" />
+              </div>
+              <div className="searchDateTimeItem">
+                <p>Time</p>
+                <input type="text" />
+              </div>
             </div>
-            <div className="searchTime">
-              <h6>Time</h6>
-              <input type="text" />
+            <br />
+            <h5>Drop-Off</h5>
+            <div className="searchDateTime">
+              <div className="searchDateTimeItem">
+                <p>Date</p>
+                <input type="text" />
+              </div>
+              <div className="searchDateTimeItem">
+                <p>Time</p>
+                <input type="text" />
+              </div>
             </div>
+            <br />
+            <h5>Duration</h5>
+            <p>3 Day(s)</p>
+            <br />
+            <button className="searchBtn">Search</button>
           </div>
-          <br />
-          <h5>Drop-Off</h5>
-          <div className="searchDateTime">
-            <div className="searchDate">
-              <h6>Date</h6>
-              <input type="text" />
-            </div>
-            <div className="searchTime">
-              <h6>Time</h6>
-              <input type="text" />
-            </div>
-          </div>
-          <br />
-          <h5>Duration</h5>
-          <p>3 Day(s)</p>
-          <br />
-          <button className="searchBtn">Search</button>
 
           <div className="avaiableBikes">
             <h5>Available Bikes</h5>
@@ -47,7 +49,11 @@ const Search = () => {
               <button className="avaiableBikesBtn">Compact</button>
             </div>
             <h6>Recommendation</h6>
-            <SearchOption></SearchOption>
+            <div className="searchResults">
+              <SearchOption></SearchOption>
+              <SearchOption></SearchOption>
+              <SearchOption></SearchOption>
+            </div>
           </div>
         </div>
       </div>

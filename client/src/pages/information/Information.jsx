@@ -2,8 +2,15 @@ import React from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
 import "./information.css";
+import { Navigate } from "react-router-dom";
 
 const Information = () => {
+  const isLoggedIn = sessionStorage.getItem("token");
+  console.log(isLoggedIn);
+  if (isLoggedIn == null) {
+    return <Navigate to={{ pathname: "/login" }}></Navigate>;
+  }
+
   return (
     <div className="information">
       <Navbar2></Navbar2>

@@ -58,7 +58,10 @@ const Otp = () => {
         hash: hash,
       })
       .then((res) => {
-        console.log(res);
+        //save token
+        console.log(res.data.token);
+        sessionStorage.setItem("token", res.data.token);
+
         navigate("/information");
       })
       .catch((err) => {

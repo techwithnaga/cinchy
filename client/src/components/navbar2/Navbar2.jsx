@@ -16,6 +16,13 @@ const Navbar2 = () => {
   //     console.log(window.innerWidth);
   //   };
 
+  const isLoggedIn = sessionStorage.getItem("token");
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    window.location.reload();
+  };
+
   const changeLogo = () => {
     if (window.innerWidth <= 1080) {
       setLogoImg(images.yellowWhiteLogo);
@@ -101,6 +108,9 @@ const Navbar2 = () => {
                 <li className="sidebar2LastItem">
                   <a>BOOK NOW</a>
                 </li>
+                <div className="navbar2Logout" onClick={() => handleLogout()}>
+                  {isLoggedIn ? <p>Log Out</p> : <p></p>}
+                </div>
               </ul>
             </div>
           </div>

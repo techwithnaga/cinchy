@@ -1,10 +1,12 @@
 .search {
   width: 100%;
-  margin-top: 20px;
+  padding-top: 20px;
+  background-color: #f2f7f5;
 }
 
 .searchContainer {
   max-width: 1080px;
+  width: 100%;
   margin: auto;
   text-align: left;
   display: flex;
@@ -12,9 +14,24 @@
   gap: 5px;
 }
 
+.searchDateTimeContainer {
+  background-color: white;
+  padding: 24px;
+}
+
 .searchDateTime {
   display: flex;
-  gap: 15px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.searchDateTimeItem {
+  width: 47%;
+}
+
+.searchDateTimeItem input {
+  width: 90%;
+  padding: 8px;
 }
 
 .searchBtn {
@@ -37,6 +54,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   gap: 2%;
 }
 
@@ -46,11 +64,20 @@
   background: #ffffff;
   border: 1px solid #00332c;
   border-radius: 4px;
+  width: 23%;
 }
 
 .avaiableBikesBtn:focus {
   background-color: #475d5b;
   color: white;
+}
+
+.searchResults {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2%;
 }
 
 @media (max-width: 1080px) {

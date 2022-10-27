@@ -1,6 +1,7 @@
 import otpGen from "otp-generator";
 import otpTool from "otp-without-db";
 import fetch from "node-fetch";
+import jwt from "jsonwebtoken";
 
 // export const sendMessage = async (req, res) => {
 //   const body = {
@@ -120,7 +121,17 @@ export const verifyOTP = (req, res) => {
     if (
       otpTool.verifyOTP(phoneNumber, otpFromUser, hashFromUser, process.env.OTP)
     ) {
-      res.status(200).json("verified!");
+      //generate JWT token
+      let data = {
+        time: Date(),
+        userId: 12,
+      };
+
+      const token = jwt.sign(data, process.env.JWT_SECRET_KEY, {
+        expiresIn: "1800s",
+      });
+
+      res.status(200).json({ token: `${token}` });
     } else {
       res.status(300).json("Wrong OTP!");
     }

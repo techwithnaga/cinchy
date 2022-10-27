@@ -86,7 +86,7 @@
 
   .sidebar {
     position: absolute;
-    width: 50%;
+    width: 70%;
     height: 100vh;
     border-right: 1px solid black;
     right: 0;
@@ -135,7 +135,7 @@
   }
 
   .sidebarLastItem {
-    width: 50%;
+    width: 77%;
     padding: 10px;
     text-align: center;
     border: 1px solid #faae2b;
@@ -143,12 +143,17 @@
   }
 
   .greyArea {
-    width: 50%;
+    width: 30%;
     height: 100vh;
     background-color: #2e2c30;
     opacity: 0.8;
-    z-index: 2;
+    z-index: 1;
     position: absolute;
     top: 0;
+  }
+
+  .navbarLogout {
+    text-align: right;
+    cursor: pointer;
   }
 }

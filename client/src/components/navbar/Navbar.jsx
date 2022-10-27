@@ -6,6 +6,16 @@ import { BsWhatsapp } from "react-icons/bs";
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  if (showSidebar) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "unset";
+  }
+  const isLoggedIn = sessionStorage.getItem("token");
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    window.location.reload();
+  };
   return (
     <nav className="navbar">
       <div className="navbarContainer">
@@ -69,6 +79,9 @@ const Navbar = () => {
                 <li className="sidebarLastItem">
                   <a>BOOK NOW</a>
                 </li>
+                <div className="navbarLogout" onClick={() => handleLogout()}>
+                  {isLoggedIn ? <p>Log Out</p> : <p></p>}
+                </div>
               </ul>
             </div>
           </div>

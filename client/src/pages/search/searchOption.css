@@ -1,8 +1,9 @@
 .searchOption {
-  width: 95%;
+  width: 46.5%;
   padding: 12px;
   border: 1px solid #00332c;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .searchOptionBookBtn {
@@ -15,4 +16,10 @@
 .searchOptionInfo {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 1080px) {
+  .searchOption {
+    width: 95%;
+  }
 }
