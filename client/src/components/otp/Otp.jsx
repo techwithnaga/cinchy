@@ -7,16 +7,15 @@ import axios from "axios";
 
 const Otp = () => {
   const { state } = useLocation();
-  const { data, loading, error, reFetch } = useFetch(
-    "http://localhost:8800/api/otp/getOTP",
-    "post",
-    {
-      phoneNumber: state,
-    }
-  );
-  console.log({ state });
+  // const { data, loading, error, reFetch } = useFetch(
+  //   "http://localhost:8800/api/otp/getOTP",
+  //   "post",
+  //   {
+  //     phoneNumber: state,
+  //   }
+  // );
 
-  const hash = data;
+  // const hash = data;
 
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
@@ -30,36 +29,18 @@ const Otp = () => {
   const [wrongOTP, setWrongOTP] = useState(false);
 
   const handleVerify = async () => {
+    navigate("/information");
     const verificationCode =
       digit1 + digit2 + digit3 + digit4 + digit5 + digit6;
 
-    //   try {
-    //     const res = await axios.post("http://localhost:8800/api/otp/verifyOTP", {
-    //       phoneNumber: state,
-    //       otp: verificationCode,
-    //       hash: hash,
-    //     });
-    //     console.log(res);
-    //     if (res.status === 200) {
-    //       //go to next page
-    //       navigate("/information");
-    //     } else {
-    //       setWrongOTP(true);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    console.log(verificationCode);
     await axios
       .post("http://localhost:8800/api/otp/verifyOTP", {
         phoneNumber: state,
         otp: verificationCode,
-        hash: hash,
+        // hash: hash,
       })
       .then((res) => {
         //save token
-        console.log(res.data.token);
         sessionStorage.setItem("token", res.data.token);
 
         navigate("/information");
@@ -139,16 +120,8 @@ const Otp = () => {
             />
           </div>
           <br />
-          {/* {canResend ? (
-            <button className="otpResendBtn" onClick={() => handleResendCode()}>
-              Resend Code
-            </button>
-          ) : (
-            <button htmlFor="resendCode" className="otpResendBtn" disabled>
-              Resend code in {timer}s
-            </button>
-          )} */}
-          <Countdown phonenumber={state} reFetch={reFetch}></Countdown>
+
+          {/* <Countdown phonenumber={state} reFetch={reFetch}></Countdown> */}
           <button className="otpVerifyBtn" onClick={() => handleVerify()}>
             Verify
           </button>

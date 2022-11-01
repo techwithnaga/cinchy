@@ -1,0 +1,27 @@
+.faq {
+  width: 100%;
+  background-color: #f2f7f5;
+}
+
+.faqContainer {
+  max-width: 784px;
+  margin: auto;
+  padding-top: 50px;
+  min-height: 100vh;
+}
+
+.faqItems {
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faqQuestion {
+  padding: 5px;
+}
+
+.faqAnswer {
+  text-align: left;
+  margin-left: 20px;
+}

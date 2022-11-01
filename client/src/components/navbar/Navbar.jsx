@@ -3,6 +3,7 @@ import images from "../../pictures/picture";
 import "./navbar.css";
 import { MdClose, MdOutlineMenu } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -22,16 +23,24 @@ const Navbar = () => {
         <img src={images.whiteWhiteLogo} alt="" />
         <ul className="navbarNav">
           <li className="navbarItem">
-            <a>About Us</a>
+            <Link style={{ color: "black" }} to="/aboutus">
+              About Us
+            </Link>
           </li>
           <li className="navbarItem">
-            <a>Pricing</a>
+            <Link style={{ color: "black" }} to="/search">
+              Pricing
+            </Link>
           </li>
           <li className="navbarItem">
-            <a>FAQ</a>
+            <Link style={{ color: "black" }} to="/faq">
+              FAQ
+            </Link>
           </li>
           <li className="navbarItem">
-            <a>My Booking</a>
+            <Link style={{ color: "black" }} to="/mybooking">
+              My Booking
+            </Link>
           </li>
           <li className="navbarSupport">
             <a>
@@ -60,16 +69,36 @@ const Navbar = () => {
               </div>
               <ul className="sidebarNav">
                 <li className="sidebarItem">
-                  <a>About Us</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/aboutus"
+                  >
+                    About Us
+                  </Link>
                 </li>
                 <li className="sidebarItem">
-                  <a>Pricing</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/search"
+                  >
+                    Pricing
+                  </Link>
                 </li>
                 <li className="sidebarItem">
-                  <a>FAQ</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/faq"
+                  >
+                    FAQ
+                  </Link>
                 </li>
                 <li className="sidebarItem">
-                  <a>My Booking</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/mybooking"
+                  >
+                    My Booking
+                  </Link>
                 </li>
                 <li className="sidebarLastItem">
                   <a>

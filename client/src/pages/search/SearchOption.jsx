@@ -13,12 +13,12 @@ const SearchOption = () => {
       <BikeOption></BikeOption>
       <div className="searchOptionInfo">
         <div className="searchOptionInfoTxt">
-          <h5>
+          <h6>
             IDR 160K/<label> days</label>
-          </h5>
-          <h5>
+          </h6>
+          <h6>
             IDR 800K/<label> 7days</label>
-          </h5>
+          </h6>
         </div>
         <button
           className="searchOptionBookBtn"

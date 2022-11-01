@@ -1,13 +1,13 @@
 .searchOption {
-  width: 46.5%;
+  width: 45%;
   padding: 12px;
   border: 1px solid #00332c;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .searchOptionBookBtn {
-  padding: 15px 25px 15px 25px;
+  padding: 10px 20px 10px 20px;
   border-radius: 10px;
   cursor: pointer;
   background-color: white;

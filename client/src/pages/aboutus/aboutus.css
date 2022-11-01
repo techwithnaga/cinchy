@@ -1,0 +1,18 @@
+.aboutus {
+  width: 100%;
+  background-color: #f2f7f5;
+  min-height: 100vh;
+}
+
+.aboutusContainer {
+  max-width: 784px;
+  margin: auto;
+  width: 100%;
+  padding-top: 25px;
+}
+
+@media (max-width: 1080px) {
+  .aboutusContainer {
+    width: 95%;
+  }
+}

@@ -7,14 +7,30 @@
   width: 60%;
 }
 
+.bikeOptionHeader {
+  text-align: left;
+}
+.bikeOptionInfoList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bikeOptionInfoList {
+  padding: 0;
+  text-align: left;
+}
+
 .bikeOptionInfoList li {
   list-style: none;
-  display: flex;
-  gap: 3px;
+}
+
+.bikeOptionInfoListItem {
+  color: #90a3bf;
 }
 
 .bikeOptionInfoList li:before {
-  content: "✓";
+  content: "✓  ";
 }
 
 @media (max-width: 1080px) {

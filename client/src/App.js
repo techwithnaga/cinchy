@@ -5,6 +5,10 @@ import Confirmation from "./pages/confirmation/Confirmation.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Information from "./pages/information/Information";
 import Search from "./pages/search/Search";
+import MyBooking from "./pages/myBooking/MyBooking";
+import Aboutus from "./pages/aboutus/Aboutus";
+import BookingConfirmation from "./pages/bookingConfirmation/BookingConfirmation";
+import Faq from "./pages/Faq/Faq";
 
 function App() {
   return (
@@ -16,6 +20,13 @@ function App() {
           <Route path="/otpConfirmation" element={<Confirmation />}></Route>
           <Route path="/information" element={<Information />} />
           <Route path="/search" element={<Search />}></Route>
+          <Route path="/mybooking" element={<MyBooking />}></Route>
+          <Route path="/aboutus" element={<Aboutus></Aboutus>}></Route>
+          <Route path="/faq" element={<Faq></Faq>}></Route>
+          <Route
+            path="/bookingconfirmation"
+            element={<BookingConfirmation></BookingConfirmation>}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>

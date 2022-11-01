@@ -49,6 +49,10 @@
   text-decoration: none;
 }
 
+Link {
+  color: black;
+}
+
 .navbarItem:hover {
   border-bottom: 1px solid var(--color-orange700);
   border-radius: 0;

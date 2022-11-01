@@ -5,7 +5,7 @@
 }
 
 .searchContainer {
-  max-width: 1080px;
+  max-width: 784px;
   width: 100%;
   margin: auto;
   text-align: left;
@@ -77,10 +77,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2%;
+  gap: 1%;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 784px) {
   .searchContainer {
     width: 95%;
   }

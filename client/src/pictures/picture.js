@@ -14,6 +14,7 @@ import yellowWhiteLogo from "./Cinchy_logo_yellow_white.svg";
 import yifei from "./yifei.png";
 import kaori from "./kaori.png";
 import anthony from "./anthony.png";
+import secureIcon from "./secureIcon.png";
 
 const images = {
   yellowGreenLogo,
@@ -32,6 +33,7 @@ const images = {
   yifei,
   anthony,
   kaori,
+  secureIcon,
 };
 
 export default images;

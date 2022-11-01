@@ -16,6 +16,12 @@ const Navbar2 = () => {
   //     console.log(window.innerWidth);
   //   };
 
+  if (showSidebar) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "unset";
+  }
+
   const isLoggedIn = sessionStorage.getItem("token");
 
   const handleLogout = () => {
@@ -24,6 +30,8 @@ const Navbar2 = () => {
   };
 
   const changeLogo = () => {
+    console.log("has change");
+    console.log(window.innerWidth);
     if (window.innerWidth <= 1080) {
       setLogoImg(images.yellowWhiteLogo);
       setIsDarkgreen(true);
@@ -35,9 +43,11 @@ const Navbar2 = () => {
 
   useEffect(() => {
     window.addEventListener("resize", changeLogo);
+    window.addEventListener("hashchange", changeLogo());
 
     return () => {
       window.removeEventListener("resize", changeLogo);
+      window.removeEventListener("hashchange", changeLogo());
     };
   }, []);
   return (
@@ -51,16 +61,24 @@ const Navbar2 = () => {
         </Link>
         <ul className="navbar2Nav">
           <li className="navbar2Item">
-            <a>About Us</a>
+            <Link style={{ color: "black" }} to="/aboutus">
+              About Us
+            </Link>
           </li>
           <li className="navbar2Item">
-            <a>Pricing</a>
+            <Link style={{ color: "black" }} to="/search">
+              Pricing
+            </Link>
           </li>
           <li className="navbar2Item">
-            <a>FAQ</a>
+            <Link style={{ color: "black" }} to="/faq">
+              FAQ
+            </Link>
           </li>
           <li className="navbar2Item">
-            <a>My Booking</a>
+            <Link style={{ color: "black" }} to="/mybooking">
+              My Booking
+            </Link>
           </li>
           <li className="navbar2Support">
             <a>
@@ -89,16 +107,36 @@ const Navbar2 = () => {
               </div>
               <ul className="sidebar2Nav">
                 <li className="sidebar2Item">
-                  <a>About Us</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/aboutus"
+                  >
+                    About Us
+                  </Link>
                 </li>
                 <li className="sidebar2Item">
-                  <a>Pricing</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/search"
+                  >
+                    Pricing
+                  </Link>
                 </li>
                 <li className="sidebar2Item">
-                  <a>FAQ</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/faq"
+                  >
+                    FAQ
+                  </Link>
                 </li>
                 <li className="sidebar2Item">
-                  <a>My Booking</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/mybooking"
+                  >
+                    My Booking
+                  </Link>
                 </li>
                 <li className="sidebar2LastItem">
                   <a>

@@ -5,23 +5,29 @@ import "./bikeOption.css";
 const BikeOption = () => {
   return (
     <div className="bikeOption">
-      <h6>Vespa Primevera</h6>
-      <label style={{ color: "red" }} htmlFor="style">
-        Style
-      </label>
+      <div className="bikeOptionHeader">
+        <h6>Vespa Primevera</h6>
+        <label style={{ color: "red" }} htmlFor="style">
+          Style
+        </label>
+      </div>
       <div className="bikeOptionInfo">
         <img className="bikeOptionInfoImg" src={images.vespaPrimavera} alt="" />
         <ul className="bikeOptionInfoList">
           <li>
-            <p>Sleek & Gorgeous</p>
+            <label className="bikeOptionInfoListItem">Sleek & Gorgeous</label>
           </li>
-          <br />
+
           <li>
-            <p>No doubt. Best insta pic</p>
+            <label className="bikeOptionInfoListItem">
+              No doubt. Best insta pic
+            </label>
           </li>
-          <br />
+
           <li>
-            <p>If you haven't try it. Why not?</p>
+            <label className="bikeOptionInfoListItem">
+              If you haven't try it. Why not?
+            </label>
           </li>
         </ul>
       </div>

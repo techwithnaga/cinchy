@@ -11,11 +11,11 @@ const ProgressBar = ({ step }) => {
           <div className="progressBarDot"></div>
           <div
             className="progressBarLine"
-            style={{ borderColor: step < 3 ? "#D9D9D9" : "green" }}
+            style={{ borderColor: step < 3 ? "#D9D9D9" : "#00332c" }}
           ></div>
           <div
             className="progressBarDot"
-            style={{ backgroundColor: step < 3 ? "#D9D9D9" : "green" }}
+            style={{ backgroundColor: step < 3 ? "#D9D9D9" : "#00332c" }}
           ></div>
         </div>
         <br />
@@ -24,7 +24,7 @@ const ProgressBar = ({ step }) => {
           <p className="progressBarItem">Enter Info</p>
           <p
             className="progressBarItem"
-            style={{ color: step < 3 ? "#D9D9D9" : "green" }}
+            style={{ color: step < 3 ? "#D9D9D9" : "#00332c" }}
           >
             Confirmation
           </p>

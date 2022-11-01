@@ -6,7 +6,7 @@
 
 .phoneNumberContainer {
   width: 100%;
-  max-width: 1080px;
+  max-width: 784px;
   text-align: left;
   margin: auto;
   display: flex;
@@ -24,7 +24,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 784px) {
   .phoneNumberContainer {
     width: 95%;
   }
