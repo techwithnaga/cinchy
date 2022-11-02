@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
 import BikeOption from "../../components/bikeOption/BikeOption";
 import "./bookingConfirmation.css";
 import images from "../../pictures/picture";
+import Modal from "./Modal";
 
 const BookingConfirmation = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="bookingConfirmation">
       <Navbar2></Navbar2>
@@ -31,7 +40,9 @@ const BookingConfirmation = () => {
                 <li>Deposit of IDR 500.000</li>
               </ul>
             </div>
-            <button className="learnMoreBtn">Learn More</button>
+            <button className="learnMoreBtn" onClick={() => openModal()}>
+              Learn More
+            </button>
           </div>
         </div>
         <h3>Confirmation</h3>
@@ -67,6 +78,7 @@ const BookingConfirmation = () => {
           </p>
         </div>
       </div>
+      <Modal isModalOpen={isModalOpen} closeModal={closeModal}></Modal>
     </div>
   );
 };

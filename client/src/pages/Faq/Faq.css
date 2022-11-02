@@ -25,3 +25,13 @@
   text-align: left;
   margin-left: 20px;
 }
+
+.faqMap {
+  width: 100%;
+}
+
+@media (max-width: 1080px) {
+  .faqContainer {
+    width: 95%;
+  }
+}

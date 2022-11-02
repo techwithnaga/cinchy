@@ -10,12 +10,6 @@ const Navbar2 = () => {
   const [logoImg, setLogoImg] = useState(images.yellowGreenLogo);
   const [isDarkgreen, setIsDarkgreen] = useState(false);
 
-  //   const [backgroundColor, setBackgroundColor] = useState ();
-
-  //   const checkSize = () => {
-  //     console.log(window.innerWidth);
-  //   };
-
   if (showSidebar) {
     document.body.style.overflow = "hidden";
   } else {
@@ -30,8 +24,6 @@ const Navbar2 = () => {
   };
 
   const changeLogo = () => {
-    console.log("has change");
-    console.log(window.innerWidth);
     if (window.innerWidth <= 1080) {
       setLogoImg(images.yellowWhiteLogo);
       setIsDarkgreen(true);

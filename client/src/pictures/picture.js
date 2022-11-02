@@ -15,6 +15,7 @@ import yifei from "./yifei.png";
 import kaori from "./kaori.png";
 import anthony from "./anthony.png";
 import secureIcon from "./secureIcon.png";
+import map from "./cinchyMap.png";
 
 const images = {
   yellowGreenLogo,
@@ -34,6 +35,7 @@ const images = {
   anthony,
   kaori,
   secureIcon,
+  map,
 };
 
 export default images;

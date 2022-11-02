@@ -54,4 +54,8 @@
     align-items: center;
     gap: 25px;
   }
+
+  .footerCol2 {
+    margin-right: 45px;
+  }
 }

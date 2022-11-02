@@ -27,6 +27,7 @@ body {
   --color-green500: #33665f;
   --color-green300: #739994;
   --color-green50: #b8ccc9;
+  --transition: all 0.3s linear;
 }
 
 h1 {
