@@ -43,7 +43,7 @@
 @media (max-width: 1080px) {
   .modalContainer {
     width: 80%;
-    height: 80%;
+    height: 100%;
     background-color: #f2f7f5;
     padding: 25px;
     text-align: justify;
