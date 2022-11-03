@@ -7,7 +7,9 @@ const Confirmation = () => {
   return (
     <div className="confirmation">
       <Navbar2></Navbar2>
-      <Otp></Otp>
+      <div className="confirmationContainer">
+        <Otp></Otp>
+      </div>
     </div>
   );
 };

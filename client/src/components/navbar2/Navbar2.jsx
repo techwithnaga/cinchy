@@ -136,7 +136,12 @@ const Navbar2 = () => {
                   </a>
                 </li>
                 <li className="sidebar2LastItem">
-                  <a>BOOK NOW</a>
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/search"
+                  >
+                    BOOK NOW
+                  </Link>
                 </li>
                 <div className="navbar2Logout" onClick={() => handleLogout()}>
                   {isLoggedIn ? <p>Log Out</p> : <p></p>}

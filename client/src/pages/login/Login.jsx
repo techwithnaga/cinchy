@@ -7,7 +7,9 @@ const Login = () => {
   return (
     <div className="login">
       <Navbar2></Navbar2>
-      <Phonenumber></Phonenumber>
+      <div className="loginContainer">
+        <Phonenumber></Phonenumber>
+      </div>
     </div>
   );
 };

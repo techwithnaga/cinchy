@@ -2,3 +2,13 @@
   background-color: #f2f7f5;
   min-height: 100vh;
 }
+
+.confirmationContainer {
+  margin: auto;
+}
+
+@media (max-width: 1080px) {
+  .confirmationContainer {
+    width: 88%;
+  }
+}
