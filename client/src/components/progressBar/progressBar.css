@@ -38,3 +38,15 @@
 .progressBarItem {
   width: 30px;
 }
+
+@media (max-width: 1080px) {
+  .progressBarDot {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+  }
+
+  .progressBarLine {
+    margin-top: 7px;
+  }
+}

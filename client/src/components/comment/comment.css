@@ -41,17 +41,18 @@
 }
 
 @media (max-width: 1080px) {
+  .commentContainer {
+    width: 95%;
+  }
   .commentItems {
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-
-  .commentContainer {
-    width: 95%;
+    width: 100%;
   }
 
   .commentItem {
     width: 100%;
+    box-sizing: border-box;
   }
 }

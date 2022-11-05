@@ -1,7 +1,7 @@
 .showcase {
   width: 100%;
   height: 100vh;
-  background-position: 0% 65%;
+  background-position: 0% 64%;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -26,6 +26,10 @@
   gap: 35px;
   text-align: left;
   color: #fa5246;
+}
+
+.showcaseContainer > h1 {
+  font-size: 80px;
 }
 
 .bookBtn {

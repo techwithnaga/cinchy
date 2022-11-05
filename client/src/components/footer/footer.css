@@ -3,11 +3,11 @@
 }
 
 .footerTop {
-  width: 100%;
   color: white;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0% 60%;
+  background-attachment: fixed;
 }
 
 .footerTopContainer {
@@ -46,9 +46,17 @@
   color: white;
 }
 
+/* .footerCol2 {
+  border: 2px solid green;
+}
+
+.footerCol3 {
+  border: 2px solid yellow;
+} */
+
 @media (max-width: 1080px) {
   .footerTopContainer {
-    width: 95%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;

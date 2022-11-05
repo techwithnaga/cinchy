@@ -13,12 +13,12 @@
 }
 
 .rsvpContainer {
-  width: 100%;
   max-width: 1080px;
   display: flex;
   flex-direction: column;
   text-align: left;
   gap: 20px;
+  position: relative;
 }
 
 .rsvpContainer input,
@@ -26,6 +26,7 @@ textarea,
 select {
   width: 100%;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 .rsvpContainer select:hover {

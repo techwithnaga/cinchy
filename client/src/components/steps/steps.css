@@ -2,12 +2,12 @@
   width: 100%;
   background-color: #faae2b;
   padding: 70px 0 70px 0;
+  position: relative;
 }
 
 .stepsContainer {
   max-width: 1080px;
   margin: auto;
-  position: relative;
 }
 
 .stepContainerText {
@@ -32,9 +32,9 @@
 
 .vespaWhiteImg {
   position: absolute;
-  top: -150px;
-  right: -100px;
-  width: 360px;
+  top: -100px;
+  right: 20px;
+  width: 200px;
 }
 
 .vespaMerahImg {
@@ -63,8 +63,9 @@
   }
 
   .vespaWhiteImg {
+    position: absolute;
     width: 300px;
     right: 0;
-    top: -120px;
+    top: -50px;
   }
 }
