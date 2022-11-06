@@ -2,12 +2,12 @@
   width: 100%;
   background-color: #faae2b;
   padding: 70px 0 70px 0;
-  position: relative;
 }
 
 .stepsContainer {
   max-width: 1080px;
   margin: auto;
+  position: relative;
 }
 
 .stepContainerText {
@@ -32,22 +32,28 @@
 
 .vespaWhiteImg {
   position: absolute;
-  top: -100px;
-  right: 20px;
-  width: 200px;
+  top: -30%;
+  right: -10%;
+  width: 380px;
 }
 
 .vespaMerahImg {
   position: absolute;
-  left: -220px;
-  bottom: -250px;
-  height: 486px;
+  left: -20%;
+  bottom: -50%;
+  width: 600px;
 }
 
 @media (max-width: 1080px) {
   .stepsContainer {
     width: 95%;
     padding-bottom: 250px;
+  }
+
+  .vespaMerahImg {
+    bottom: -20%;
+    left: -55%;
+    width: -25%;
   }
 
   .stepsItems {
@@ -64,8 +70,8 @@
 
   .vespaWhiteImg {
     position: absolute;
-    width: 300px;
-    right: 0;
-    top: -50px;
+    width: 325px;
+    right: -70px;
+    top: -130px;
   }
 }

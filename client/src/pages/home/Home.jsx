@@ -12,7 +12,7 @@ import Comment from "../../components/comment/Comment";
 
 const Home = () => {
   return (
-    <>
+    <div className="homePage">
       <Navbar></Navbar>
       <Showcase></Showcase>
       <MotorOptions></MotorOptions>
@@ -22,7 +22,7 @@ const Home = () => {
       <FAQs></FAQs>
       <Feedback></Feedback>
       <Footer></Footer>
-    </>
+    </div>
   );
 };
 
