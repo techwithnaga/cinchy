@@ -1,8 +1,9 @@
 .motorOptions {
   width: 100%;
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-top: 72px;
+  padding-bottom: 72px;
   background-color: #f2f7f5;
+  color: #00332c;
 }
 
 .motorOptionsContainer {
@@ -12,7 +13,7 @@
 
 .motorOptionsItems {
   display: flex;
-  margin-top: 30px;
+  margin-top: 3em;
 }
 
 .motorOptionsItem {
@@ -27,6 +28,7 @@
 }
 
 .motorOptionsItem img {
+  margin-top: 10%;
   width: 100%;
 }
 
@@ -34,6 +36,10 @@
   .motorOptionsContainer {
     width: 95%;
   }
+
+  /* .motorOptionsContainer > h1 {
+    font-size: 45px;
+  } */
 
   .motorOptionsItems {
     display: flex;

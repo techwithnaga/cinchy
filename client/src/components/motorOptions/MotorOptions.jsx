@@ -6,7 +6,10 @@ const MotorOptions = () => {
   return (
     <div className="motorOptions">
       <div className="motorOptionsContainer">
-        <h1>BEST RIDE YOU CAN PICK IN BALI</h1>
+        <h1>
+          RELIABLE MOTOR RENTAL IN
+          <span style={{ color: "#FAAE2B" }}> BALI</span>
+        </h1>
         <p>New fleet | No hidden fee</p>
         <div className="motorOptionsItems">
           <div className="motorOptionsItem">

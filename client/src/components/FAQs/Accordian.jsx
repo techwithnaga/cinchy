@@ -9,7 +9,7 @@ const Accordian = ({ question, answer }) => {
   return (
     <div className="accordian">
       <div className="accordianQuestion">
-        <h5 className="questionTxt">{question}</h5>
+        <h4 className="questionTxt">{question}</h4>
         {showAnswer ? (
           <MdOutlineKeyboardArrowUp
             className="accordianArrowdown"

@@ -14,7 +14,7 @@
   align-items: center;
   color: black;
   margin: auto;
-  padding: 10px;
+  padding: 20px;
 }
 
 .navbarNav {
@@ -35,6 +35,7 @@
 
 .navbarSupport {
   border: 1px solid #00332c;
+  color: #00332c;
 }
 .navbarNav {
   cursor: pointer;
@@ -47,10 +48,6 @@
 
 .navbarNav li a {
   text-decoration: none;
-}
-
-Link {
-  color: black;
 }
 
 .navbarItem:hover {

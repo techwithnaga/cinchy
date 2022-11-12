@@ -20,25 +20,25 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbarContainer">
-        <img src={images.whiteWhiteLogo} alt="" />
+        <img src={images.whiteWhiteLogo} alt="" style={{ width: "275px" }} />
         <ul className="navbarNav">
           <li className="navbarItem">
-            <Link style={{ color: "black" }} to="/aboutus">
+            <Link style={{ color: "#00332c" }} to="/aboutus">
               About Us
             </Link>
           </li>
           <li className="navbarItem">
-            <Link style={{ color: "black" }} to="/search">
+            <Link style={{ color: "#00332c" }} to="/search">
               Pricing
             </Link>
           </li>
           <li className="navbarItem">
-            <Link style={{ color: "black" }} to="/faq">
+            <Link style={{ color: "#00332c" }} to="/faq">
               FAQ
             </Link>
           </li>
           <li className="navbarItem">
-            <Link style={{ color: "black" }} to="/mybooking">
+            <Link style={{ color: "#00332c" }} to="/mybooking">
               My Booking
             </Link>
           </li>
