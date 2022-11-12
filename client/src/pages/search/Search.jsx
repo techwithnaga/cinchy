@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import "./search.css";
 import { format } from "date-fns";
@@ -20,37 +20,25 @@ const Search = () => {
       key: "selection",
     },
   ]);
-  // const [dates, setDates] = useState({
-  //   startDate: new Date(),
-  //   endDate: new Date(),
-  // });
+
+  const [duration, setDuration] = useState(0);
 
   const [times, setTimes] = useState({
     startTime: "09:00 AM",
     endTime: "09:00 AM",
   });
 
-  const [openStartDate, setOpenStartDate] = useState(false);
-  const [openEndDate, setOpenEndDate] = useState(false);
-
   const [openDateRange, setOpenDateRange] = useState(false);
   const [openStartTime, setOpenStartTime] = useState(false);
   const [openEndTime, setOpenEndTime] = useState(false);
 
-  // const handleSelect = (date, input) => {
-  //   setOpenStartDate(false);
-  //   setOpenEndDate(false);
-  //   setDates({ ...dates, [input]: date });
-  // };
-
-  const handleChange = (item, input) => {
-    console.log(item);
-    if (input === "start") {
-      setOpenStartDate(false);
-      setOpenEndDate(true);
-    }
-    if (input === "end") {
-      setOpenEndDate(false);
+  const handleChange = (item) => {
+    const selection = item.selection;
+    if (selection.startDate === selection.endDate) {
+      const dateRange = document.querySelector(".dateRange");
+      dateRange.style.transform = "translateY(120px)";
+    } else {
+      setOpenDateRange(false);
     }
 
     setDates([item.selection]);
@@ -58,8 +46,19 @@ const Search = () => {
 
   const handleTimeSelect = (e, input) => {
     setOpenStartTime(false);
+    setOpenEndTime(false);
     setTimes({ ...times, [input]: e.target.innerHTML });
   };
+  const day_in_millisecond = 24 * 60 * 60 * 1000;
+  const calculateDuration = () => {
+    let startDate = dates[0].startDate.getTime();
+    let endDate = dates[0].endDate.getTime();
+    setDuration(Math.ceil(Math.abs(endDate - startDate) / day_in_millisecond));
+  };
+
+  useEffect(() => {
+    calculateDuration();
+  }, [dates]);
 
   return (
     <>
@@ -74,28 +73,15 @@ const Search = () => {
 
                 <div
                   className="dateTimeSelection"
-                  // onClick={() => {
-                  //   setOpenStartDate(!openStartDate);
-                  //   setOpenEndDate(false);
-                  // }}
                   onClick={() => {
-                    setOpenStartDate(!openStartDate);
-                    setOpenEndDate(false);
+                    setOpenDateRange(!openDateRange);
                   }}
                 >
                   <p>{`${format(dates[0].startDate, "dd MMM yyyy")}`}</p>
                   <BsCalendar></BsCalendar>
                 </div>
 
-                {/* {openStartDate && (
-                  <Calendar
-                    date={new Date()}
-                    className="date"
-                    onChange={(date) => handleSelect(date, "startDate")}
-                  />
-                )} */}
-
-                {openStartDate && (
+                {openDateRange && (
                   <DateRange
                     className="dateRange"
                     minDate={new Date()}
@@ -203,44 +189,105 @@ const Search = () => {
                 <div
                   className="dateTimeSelection"
                   onClick={() => {
-                    setOpenEndDate(!openEndDate);
-                    setOpenStartDate(false);
+                    setOpenDateRange(!openDateRange);
                   }}
                 >
                   <p>{`${format(dates[0].endDate, "dd MMM yyyy")}`}</p>
                   <BsCalendar></BsCalendar>
                 </div>
-
-                {openEndDate && (
-                  <DateRange
-                    className="dateRange"
-                    minDate={new Date()}
-                    editableDateInputs={true}
-                    onChange={(item) => handleChange(item, "end")}
-                    moveRangeOnFirstSelection={true}
-                    ranges={dates}
-                  />
-                )}
-
-                {/* {openEndDate && (
-                  <Calendar
-                    date={new Date()}
-                    className="date"
-                    onChange={(date) => handleSelect(date, "endDate")}
-                  />
-                )} */}
               </div>
               <div className="searchDateTimeItem">
                 <p>Time</p>
-                <div className="dateTimeSelection">
-                  <p>09:00 AM</p>
+                <div
+                  className="dateTimeSelection"
+                  onClick={() => {
+                    setOpenEndTime(!openEndTime);
+                  }}
+                >
+                  <p>{times.endTime}</p>
                   <IoTimeOutline style={{ fontSize: "130%" }}></IoTimeOutline>
                 </div>
+                {openEndTime && (
+                  <ul className="timeSelection">
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      midnight
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      01:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      02:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      03:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      04:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      05:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      06:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      07:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      08:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      09:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      10:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      11:00 AM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      noon
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      01:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      02:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      03:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      04:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      05:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      06:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      07:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      08:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      09:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      10:00 PM
+                    </li>
+                    <li onClick={(e) => handleTimeSelect(e, "endTime")}>
+                      11:00 PM
+                    </li>
+                  </ul>
+                )}
               </div>
             </div>
             <br />
             <h5>Duration</h5>
-            <p>3 Day(s)</p>
+            <p>{duration} Day(s)</p>
             <br />
             <button className="searchBtn">Search</button>
           </div>
