@@ -11,7 +11,7 @@
   align-items: center;
   color: black;
   margin: auto;
-  padding: 10px;
+  padding: 20px;
 }
 
 .navbar2Nav {
@@ -66,6 +66,11 @@
 
 .sidebar2 {
   display: none;
+}
+
+.logoCinchy {
+  cursor: pointer;
+  width: 275px;
 }
 
 @media (max-width: 1080px) {

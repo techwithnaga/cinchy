@@ -35,7 +35,7 @@
 }
 
 .timeSelection {
-  border: 1px solid black;
+  border: 1px solid rgba(46, 44, 48, 0.4);
   list-style: none;
   width: 100%;
   max-height: 300px;
@@ -96,6 +96,7 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
+  padding-top: 24px;
 }
 
 .avaiableBikesCategory {

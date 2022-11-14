@@ -32,7 +32,7 @@ const FAQs = () => {
 
   return (
     <div className="faqs" id="faqs">
-      <h2>Frequently Asked Questions</h2>
+      <h2>FAQs</h2>
       <div className="faqsContainer">
         {data.map((item) => {
           return (

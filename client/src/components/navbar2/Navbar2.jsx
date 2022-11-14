@@ -48,9 +48,7 @@ const Navbar2 = () => {
       style={{ backgroundColor: isDarkgreen ? "#00332C" : "#f2f7f5" }}
     >
       <div className="navbar2Container">
-        <Link to="/">
-          <img src={logoImg} alt="" />
-        </Link>
+        <img src={logoImg} alt="" className="logoCinchy" />
         <ul className="navbar2Nav">
           <li className="navbar2Item">
             <Link style={{ color: "black" }} to="/aboutus">
