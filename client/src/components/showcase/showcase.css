@@ -1,9 +1,9 @@
 .showcase {
   height: 100vh;
   width: 100%;
-  background-position: 20% 70%;
+  background-position: 0% 70%;
+  background-size: 120% 200%;
   background-repeat: no-repeat;
-  background-size: cover;
   background-attachment: fixed;
   position: relative;
   display: flex;
@@ -70,6 +70,7 @@
 @media (max-width: 1080px) {
   .showcase {
     background-position: 20% 50%;
+    background-size: cover;
   }
 
   .showcaseContainer {

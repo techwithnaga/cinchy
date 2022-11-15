@@ -20,7 +20,11 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbarContainer">
-        <img src={images.whiteWhiteLogo} alt="" style={{ width: "275px" }} />
+        <img
+          src={images.whiteWhiteLogo}
+          alt=""
+          style={{ width: "275px", cursor: "pointer" }}
+        />
         <ul className="navbarNav">
           <li className="navbarItem">
             <Link style={{ color: "#00332c" }} to="/aboutus">

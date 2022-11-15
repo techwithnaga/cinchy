@@ -3,12 +3,13 @@ import images from "../../pictures/picture";
 import "./navbar2.css";
 import { MdClose, MdOutlineMenu } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar2 = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [logoImg, setLogoImg] = useState(images.yellowGreenLogo);
   const [isDarkgreen, setIsDarkgreen] = useState(false);
+  const navigate = useNavigate();
 
   if (showSidebar) {
     document.body.style.overflow = "hidden";
@@ -42,13 +43,23 @@ const Navbar2 = () => {
       window.removeEventListener("hashchange", changeLogo());
     };
   }, []);
+
+  const goToHomePage = () => {
+    navigate("/");
+  };
+
   return (
     <nav
       className="navbar2"
       style={{ backgroundColor: isDarkgreen ? "#00332C" : "#f2f7f5" }}
     >
       <div className="navbar2Container">
-        <img src={logoImg} alt="" className="logoCinchy" />
+        <img
+          src={logoImg}
+          alt=""
+          className="logoCinchy"
+          onClick={() => goToHomePage()}
+        />
         <ul className="navbar2Nav">
           <li className="navbar2Item">
             <Link style={{ color: "black" }} to="/aboutus">
