@@ -79,6 +79,7 @@
   .showcase {
     background-position: 25% 70%;
     background-size: cover;
+    background-attachment: scroll;
   }
 
   .showcaseContainer {
