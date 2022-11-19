@@ -15,8 +15,9 @@ const Showcase = () => {
       style={{ backgroundImage: `url(${images.homepageBackground})` }}
     >
       <div className="showcaseContainer">
-        <h1>Make your travel great again</h1>
-        <h4>Bali motor rental made easy so you can enjoy the journey.</h4>
+        <h1>Make your travel </h1>
+        <h1>great again</h1>
+        <h6>Bali motor rental made easy so you can enjoy the journey.</h6>
         <button className="bookBtn" onClick={() => handleBookNowClick()}>
           BOOK NOW
           <BiRightArrowAlt style={{ fontSize: "25px" }}></BiRightArrowAlt>

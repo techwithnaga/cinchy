@@ -6,7 +6,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: 0% 30%;
+  background-position: 0% center;
   position: relative;
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@
 .showcaseContainer {
   width: 100%;
   max-width: 1080px;
-  margin-top: 170px;
+  margin-top: 12%;
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -32,12 +32,17 @@
 }
 
 .showcaseContainer > h1 {
-  font-size: 80px;
+  line-height: 32px;
+  font-size: 3.35rem;
+  /* font-size: 54px; */
+}
+.showcaseContainer > h6 {
+  margin-top: 16px;
 }
 
 .bookBtn {
   width: 171px;
-  padding: 15px;
+  padding: 12px;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -79,7 +84,7 @@
     margin: 0;
     width: 90%;
     height: 250px;
-    margin-top: 125px;
+    margin-top: 30%;
   }
 
   .showCaseNames {
@@ -94,7 +99,10 @@
     font-size: 50px;
   }
 
-  .showcaseContainer h1 {
-    font-size: 50px;
+  .showcaseContainer > h1 {
+    font-size: 2.5rem;
+  }
+  .showcaseContainer > h6 {
+    font-size: 0.75rem;
   }
 }
