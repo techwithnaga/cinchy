@@ -20,7 +20,8 @@
 .showcaseContainer {
   width: 100%;
   max-width: 1080px;
-  margin-top: 12%;
+  /* border: 1px solid red; */
+  margin-top: 200px;
   height: 500px;
   display: flex;
   flex-direction: column;
