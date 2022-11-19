@@ -1,6 +1,6 @@
 import whiteWhiteLogo from "./Cinchy_logo_white_white_horizontal_tagline_v2.svg";
 import yellowGreenLogo from "./Cinchy_logo_yellow_green_horizontal_tagline_v2.svg";
-import homepageBackground from "./cinchy_motor_scooter_rental_bali_homepage_background.png";
+import homepageBackground from "./cinchy_motor_scooter_rental_bali_homepage_background_v4.png";
 import headCap from "./cinchy_motor_scooter_rental_bali_homepage_feature_head_Cap.png";
 import helmet from "./cinchy_motor_scooter_rental_bali_homepage_feature_helmet.png";
 import phoneHolder from "./cinchy_motor_scooter_rental_bali_homepage_feature_phone_holder.png";

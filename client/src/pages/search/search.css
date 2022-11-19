@@ -1,6 +1,7 @@
 .search {
   width: 100%;
   padding-top: 20px;
+  height: max-content;
   background-color: #f2f7f5;
 }
 
@@ -127,6 +128,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1%;
+  /* box-sizing: border-box; */
 }
 
 .date {
