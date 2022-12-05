@@ -1,4 +1,4 @@
-import MotorDetail from "../models/MotorDetail.js";
+import MotorDetail from "../models/Motor.js";
 
 export const createMotor = async (req, res) => {
   console.log(req.body);

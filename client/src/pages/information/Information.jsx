@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
 import "./information.css";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import useFetch from "../../hooks/useFetch";
 
 const Information = () => {
   const isLoggedIn = sessionStorage.getItem("token");
@@ -13,6 +15,12 @@ const Information = () => {
   const handleContinueConfirmationClick = () => {
     navigate("/bookingconfirmation");
   };
+
+  const { motorGroupId, days } = useContext(SearchContext);
+  const { data, loading, error, reFetch } = useFetch(
+    `http://localhost:8800/api/motorGroup/${motorGroupId}`,
+    "get"
+  );
 
   return (
     <div className="information">
@@ -91,7 +99,7 @@ const Information = () => {
           <h5>Payment Summary</h5>
           <div className="infoTotal">
             <h5 style={{ color: "#90A3BF" }}>Total</h5>
-            <h3 style={{ color: "#00332C" }}>IDR 480K</h3>
+            <h3 style={{ color: "#00332C" }}>IDR {data.price * days}K</h3>
           </div>
         </div>
 

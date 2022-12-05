@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import userRoute from "./routes/user.js";
 import otpRoute from "./routes/otp.js";
 import motorGroupRoute from "./routes/MotorGroup.js";
-import motorDetailRoute from "./routes/MotorDetail.js";
+import motorRoute from "./routes/Motor.js";
 import cors from "cors";
 
 const app = express();
@@ -26,7 +26,7 @@ app.use(cors());
 app.use("/api/user", userRoute);
 app.use("/api/otp", otpRoute);
 app.use("/api/motorGroup", motorGroupRoute);
-app.use("/api/motorDetail", motorDetailRoute);
+app.use("/api/motor", motorRoute);
 
 app.listen(8800, () => {
   connect();

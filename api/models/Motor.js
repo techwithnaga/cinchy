@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 import MotorGroup from "./MotorGroup.js";
 
-const motorDetail = new Schema({
+const motor = new Schema({
   motorCategory: {
     type: Schema.ObjectId,
     ref: MotorGroup,
@@ -28,4 +28,4 @@ const motorDetail = new Schema({
   },
 });
 
-export default mongoose.model("motorDetail", motorDetail);
+export default mongoose.model("motor", motor);

@@ -19,6 +19,15 @@ export const getMotorGroups = async (req, res) => {
   }
 };
 
+export const getMotorGroup = async (req, res) => {
+  try {
+    const motorGroup = await MotorGroup.findById(req.params.id);
+    res.status(200).json(motorGroup);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 export const updateMotorGroup = async (req, res) => {
   try {
     const updatedGroup = await MotorGroup.findByIdAndUpdate(

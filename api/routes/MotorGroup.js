@@ -2,6 +2,7 @@ import express from "express";
 import {
   createMotorGroup,
   getMotorGroups,
+  getMotorGroup,
   updateMotorGroup,
   deleteMotorGroup,
 } from "../controllers/MotorGroup.js";
@@ -9,6 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/", getMotorGroups);
+router.get("/:id", getMotorGroup);
 router.post("/", createMotorGroup);
 router.put("/:id", updateMotorGroup);
 router.delete("/:id", deleteMotorGroup);

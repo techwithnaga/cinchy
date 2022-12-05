@@ -1,28 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import BikeOption from "../../components/bikeOption/BikeOption";
 import { useNavigate } from "react-router-dom";
 import "./searchOption.css";
+import { SearchContext } from "../../context/SearchContext";
 
-const SearchOption = () => {
+const SearchOption = ({ motorGroup, days }) => {
   const navigate = useNavigate();
-  const handleSearchBookNowClick = () => {
+  const { dispatch } = useContext(SearchContext);
+  const handleSearchBookNowClick = (motorGroupId) => {
+    dispatch({ type: "NEW_SEARCH", payload: { motorGroupId, days } });
     navigate("/login");
   };
+
   return (
     <div className="searchOption">
-      <BikeOption></BikeOption>
+      <BikeOption
+        key={motorGroup._id}
+        groupName={motorGroup.groupName}
+        category={motorGroup.category}
+        description={motorGroup.description}
+        photos={motorGroup.photos}
+      ></BikeOption>
       <div className="searchOptionInfo">
         <div className="searchOptionInfoTxt">
+          <br />
           <h6>
-            IDR 160K/<label> days</label>
-          </h6>
-          <h6>
-            IDR 800K/<label> 7days</label>
+            IDR {motorGroup.price}K/<label> day</label>
           </h6>
         </div>
         <button
           className="searchOptionBookBtn"
-          onClick={handleSearchBookNowClick}
+          onClick={() => handleSearchBookNowClick(motorGroup._id)}
         >
           BOOK NOW
         </button>

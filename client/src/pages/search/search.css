@@ -1,6 +1,7 @@
 .search {
   width: 100%;
   padding-top: 20px;
+  min-height: 100vh;
   height: max-content;
   background-color: #f2f7f5;
 }
