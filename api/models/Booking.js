@@ -1,89 +1,88 @@
 import mongoose from "mongoose";
-import MotorDetail from "./MotorDetail";
-import User from "./User";
+import Motor from "./Motor.js";
+import MotorGroup from "./MotorGroup.js";
+import DeliveryFee from "./DeliveryFee.js";
+import User from "./User.js";
 const { Schema } = mongoose;
 
-const BookingSchema = new Schema ({
-    motorId : {
-        type : Schema.objectId,
-        ref: MotorDetail,
-        required : true 
+const BookingSchema = new Schema(
+  {
+    motorGroup: {
+      type: String,
     },
-    pickupDate : {
-        type : Number,
-        required : true
+    motor: {
+      type: String,
     },
-    returnDate : {
-        type : Number,
-        required : true
-    }, 
-    userId : {
-        type : Schema.objectId,
-        ref : User,
-        required : true
+    deliveryDate: {
+      type: Date,
+      required: true,
     },
-    comments : {
-        type : String,
-        required : true
+    returnDate: {
+      type: Date,
+      required: true,
     },
-    flightNumber : {
-        type : String,
+    user: {
+      type: String,
+      required: true,
     },
-    hotelName : {
-        type: String,
+    comments: {
+      type: String,
     },
-    helmetQty : {
-        type : Number,
-        min: 0,
-        max : 2
+    flightNumber: {
+      type: String,
     },
-    vehicleDelivered : {
-        type : Boolean,
-        default: false
+    hotelName: {
+      type: String,
     },
-    vehicleRetured : {
-        type : Boolean,
-        default: false 
-    }, 
-    deliveryLocation :{
-        type : String,
-        required : true
+    helmetQty: {
+      type: Number,
+      min: 0,
+      max: 2,
     },
-    returnedLocation : {
-        type : String,
-        required : true
+    vehicleDelivered: {
+      type: Boolean,
+      default: false,
     },
-    totalRentalPrice : {
-        type : Number,
-        required : true
+    vehicleRetured: {
+      type: Boolean,
+      default: false,
     },
-    deliveryPickupPrice :{
-        type : Number,
-        required : true
+    deliveryLocation: {
+      type: String,
+    },
+    returnedLocation: {
+      type: String,
+    },
+    totalRentalPrice: {
+      type: Number,
+      required: true,
+    },
+    deliveryPickupFee: {
+      type: Number,
+      required: true,
     },
     tncDate: {
-        type : Date,
-    }, 
-    cancelTime : {
-        type : Date
+      type: Date,
     },
-    is_paid : {
-        type : boolean,
-        required : true,
-        default : false
+    cancelTime: {
+      type: Date,
     },
-    is_confirm : {
-        type : boolean,
-        required : true,
-        default : false
+    is_paid: {
+      type: Boolean,
+      default: false,
     },
-    startingKM :{
-        type : Number
+    is_confirm: {
+      type: Boolean,
+      default: false,
     },
-    endingKM : {
-        type : Number
-    }
-
-}); 
+    startingKM: {
+      type: Number,
+    },
+    endingKM: {
+      type: Number,
+    },
+  },
+  { timestamps: true }
+);
 
 export default mongoose.model("BookingSchema", BookingSchema);
