@@ -1,9 +1,9 @@
-.modal {
+.modalError {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   display: grid;
   place-items: center;
@@ -12,16 +12,16 @@
   z-index: -1;
 }
 
-.modalContainer {
+.modalErrorContainer {
   width: 30%;
-  height: 50%;
+  height: max-content;
   background-color: #f2f7f5;
   padding: 25px;
   text-align: justify;
   overflow-y: auto;
 }
 
-.modalHeader {
+.modalErrorHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,13 +29,10 @@
 
 .modalCloseBtn {
   color: #00332c;
-  padding: 10px 20px 10px 20px;
+  padding: 15px 25px 15px 25px;
   background-color: white;
   border-color: #00332c;
   cursor: pointer;
-  margin: auto;
-  margin-top: 2em;
-  width: 100%;
 }
 
 .showModal {
@@ -43,10 +40,18 @@
   z-index: 10;
 }
 
+.okButton {
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: white;
+  margin-top: 1em;
+}
+
 @media (max-width: 1080px) {
-  .modalContainer {
+  .modalErrorContainer {
     width: 80%;
-    height: 100%;
+    height: max-content;
     background-color: #f2f7f5;
     padding: 25px;
     text-align: justify;

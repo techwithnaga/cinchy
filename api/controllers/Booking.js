@@ -23,7 +23,7 @@ export const createBooking = async (req, res) => {
 
 export const calculateDeliveryFee = async (booking) => {
   const deliveryLoc = await DeliveryFee.findById(booking.deliveryLocation);
-  const pickupLoc = await DeliveryFee.findById(booking.returnedLocation);
+  const pickupLoc = await DeliveryFee.findById(booking.returnLocation);
   return deliveryLoc.fee + pickupLoc.fee;
 };
 
@@ -35,6 +35,7 @@ export const calculateRentalPrice = async (booking) => {
     (booking.returnDate.getTime() - booking.deliveryDate.getTime()) /
       milisecondsPerDay
   );
+  booking.rentalDuration = duration;
   return duration * pricePerDay;
 };
 

@@ -35,6 +35,7 @@ const Search = () => {
   const [openDateRange, setOpenDateRange] = useState(false);
   const [openStartTime, setOpenStartTime] = useState(false);
   const [openEndTime, setOpenEndTime] = useState(false);
+  const [showSearchResult, setShowSearchResult] = useState(false);
 
   const handleChange = (item) => {
     const selection = item.selection;
@@ -71,6 +72,7 @@ const Search = () => {
 
   const handleSearch = () => {
     reFetch();
+    setShowSearchResult(true);
     setOption("All");
   };
 
@@ -949,48 +951,51 @@ const Search = () => {
               Search
             </button>
           </div>
-
-          <div className="avaiableBikes">
-            <h5>Available Bikes</h5>
-            <div className="avaiableBikesCategory">
-              <button
-                className="avaiableBikesBtn"
-                onClick={() => setOption("All")}
-              >
-                All
-              </button>
-              <button
-                className="avaiableBikesBtn"
-                onClick={() => setOption("Style")}
-              >
-                Style
-              </button>
-              <button
-                className="avaiableBikesBtn"
-                onClick={() => setOption("Comfort")}
-              >
-                Comfort
-              </button>
-              <button
-                className="avaiableBikesBtn"
-                onClick={() => setOption("Compact")}
-              >
-                Compact
-              </button>
+          {showSearchResult && (
+            <div className="avaiableBikes">
+              <h5>Available Bikes</h5>
+              <div className="avaiableBikesCategory">
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => setOption("All")}
+                >
+                  All
+                </button>
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => setOption("Style")}
+                >
+                  Style
+                </button>
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => setOption("Comfort")}
+                >
+                  Comfort
+                </button>
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => setOption("Compact")}
+                >
+                  Compact
+                </button>
+              </div>
+              <h6>Recommendation</h6>
+              <div className="searchResults">
+                {filteredGroup.map((motorGroup, i) => {
+                  return (
+                    <SearchOption
+                      key={i}
+                      motorGroup={motorGroup}
+                      days={duration}
+                      deliveryDate={dates[0].startDate}
+                      returnDate={dates[0].endDate}
+                    ></SearchOption>
+                  );
+                })}
+              </div>
             </div>
-            <h6>Recommendation</h6>
-            <div className="searchResults">
-              {filteredGroup.map((motorGroup) => {
-                return (
-                  <SearchOption
-                    key={motorGroup._id}
-                    motorGroup={motorGroup}
-                    days={duration}
-                  ></SearchOption>
-                );
-              })}
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </>

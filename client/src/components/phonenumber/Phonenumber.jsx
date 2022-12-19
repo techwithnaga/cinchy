@@ -1,14 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
+import ModalError from "../modalError/ModalError";
 import "./phonenumber.css";
 
 const Phonenumber = () => {
   const [phonenumber, setPhoneNumber] = useState("");
+  const [error, setShowError] = useState(false);
   const navigate = useNavigate();
+
   const handleLoginClick = () => {
-    navigate("/otpConfirmation", { state: phonenumber });
+    if (phonenumber.length < 8) {
+      setShowError(true);
+    } else {
+      navigate("/otpConfirmation", { state: { phoneNumber: phonenumber } });
+    }
+  };
+
+  const closeModal = () => {
+    setShowError(false);
   };
 
   return (
@@ -21,7 +32,7 @@ const Phonenumber = () => {
         </p>
         <h5>Whatsapp Phone Number</h5>
         <PhoneInput
-          country={"us"}
+          country={"id"}
           value={phonenumber}
           onChange={(phonenumber) => setPhoneNumber(phonenumber)}
         />
@@ -32,6 +43,14 @@ const Phonenumber = () => {
           Log in
         </button>
       </div>
+
+      {error && (
+        <ModalError
+          closeModal={closeModal}
+          showError={error}
+          errorMessage="Please enter a valid phonenumber"
+        ></ModalError>
+      )}
     </div>
   );
 };

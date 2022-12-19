@@ -1,5 +1,4 @@
 import React from "react";
-import images from "../../pictures/picture";
 import "./bikeOption.css";
 
 const BikeOption = ({ groupName, category, description, photos }) => {
@@ -12,11 +11,16 @@ const BikeOption = ({ groupName, category, description, photos }) => {
         </label>
       </div>
       <div className="bikeOptionInfo">
-        <img className="bikeOptionInfoImg" src={photos[0]} alt="" />
+        <img
+          className="bikeOptionInfoImg"
+          src={photos[0]}
+          alt=""
+          referrerPolicy="no-referrer"
+        />
         <ul className="bikeOptionInfoList">
-          {description.map((desc) => {
+          {description.map((desc, i) => {
             return (
-              <li>
+              <li key={i}>
                 <label className="bikeOptionInfoListItem">{desc}</label>
               </li>
             );

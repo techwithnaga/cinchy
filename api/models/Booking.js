@@ -21,6 +21,10 @@ const BookingSchema = new Schema(
       type: Date,
       required: true,
     },
+    rentalDuration: {
+      type: Number,
+      required: true,
+    },
     user: {
       type: String,
       required: true,
@@ -43,14 +47,20 @@ const BookingSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    vehicleRetured: {
+    vehicleRetuned: {
       type: Boolean,
       default: false,
     },
     deliveryLocation: {
       type: String,
     },
-    returnedLocation: {
+    deliveryURL: {
+      type: String,
+    },
+    returnLocation: {
+      type: String,
+    },
+    returnURL: {
       type: String,
     },
     totalRentalPrice: {
