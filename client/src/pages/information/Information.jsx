@@ -53,7 +53,7 @@ const Information = () => {
     await axios
       .post("http://localhost:8800/api/booking", booking)
       .then((res) => {
-        navigate("/bookingconfirmation", { state: { newBooking: res.data } });
+        navigate("/bookingSummary", { state: { newBooking: res.data } });
       })
       .catch((error) => {
         console.log(error);

@@ -1,6 +1,8 @@
 .miscellaneous {
   width: 100%;
   padding: 72px 0 72px 0;
+  padding-top: 20em;
+  position: relative;
 }
 
 .miscellaneousContainer {
@@ -20,6 +22,16 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
+}
+
+.video {
+  width: 80%;
+  height: 50vh;
+  margin: auto;
+  border: 1px solid blue;
+  position: absolute;
+  left: 10%;
+  top: -15em;
 }
 
 @media (max-width: 1080px) {
