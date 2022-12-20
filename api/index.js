@@ -6,8 +6,8 @@ import otpRoute from "./routes/otp.js";
 import motorGroupRoute from "./routes/MotorGroup.js";
 import motorDetailRoute from "./routes/MotorDetail.js";
 import cors from "cors";
-import DeliveryFee from "./models/DeliveryFee.js";
 import deliveryFeeRoute from "./routes/DeliveryFee.js";
+import bookingRoute from  "./routes/Booking.js";
 
 const app = express();
 dotenv.config();
@@ -30,6 +30,7 @@ app.use("/api/otp", otpRoute);
 app.use("/api/motorGroup", motorGroupRoute);
 app.use("/api/motorDetail", motorDetailRoute);
 app.use("/api/deliveryFee", deliveryFeeRoute);
+app.use("/api/booking", bookingRoute);
 
 app.listen(8800, () => {
   connect();

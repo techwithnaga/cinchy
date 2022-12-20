@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-import MotorDetail from "./MotorDetail";
-import User from "./User";
+import MotorDetail from "./MotorDetail.js";
+import User from "./User.js";
 const { Schema } = mongoose;
 
 const BookingSchema = new Schema ({
-    motorId : {
-        type : Schema.objectId,
+    motor: {
+        type: Schema.ObjectId,
         ref: MotorDetail,
-        required : true 
-    },
+        required: true,
+      },
     pickupDate : {
         type : Number,
         required : true
@@ -17,11 +17,11 @@ const BookingSchema = new Schema ({
         type : Number,
         required : true
     }, 
-    userId : {
-        type : Schema.objectId,
-        ref : User,
-        required : true
-    },
+    user: {
+        type: Schema.ObjectId,
+        ref: User,
+        required: true,
+      },
     comments : {
         type : String,
         required : true
@@ -68,12 +68,12 @@ const BookingSchema = new Schema ({
         type : Date
     },
     is_paid : {
-        type : boolean,
+        type : Boolean,
         required : true,
         default : false
     },
     is_confirm : {
-        type : boolean,
+        type : Boolean,
         required : true,
         default : false
     },

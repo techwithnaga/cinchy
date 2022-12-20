@@ -28,4 +28,4 @@ const motorDetail = new Schema({
   },
 });
 
-export default mongoose.model("motorDetail", motorDetail);
+export default mongoose.model("MotorDetail", motorDetail);
