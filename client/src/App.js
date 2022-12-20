@@ -7,8 +7,9 @@ import Information from "./pages/information/Information";
 import Search from "./pages/search/Search";
 import MyBooking from "./pages/myBooking/MyBooking";
 import Aboutus from "./pages/aboutus/Aboutus";
-import BookingConfirmation from "./pages/bookingConfirmation/BookingConfirmation";
+import BookingSummary from "./pages/bookingSummary/BookingSummary";
 import Faq from "./pages/Faq/Faq";
+import BookingConfirmation from "./pages/BookingConfirmation/BookingConfirmation";
 
 function App() {
   return (
@@ -24,7 +25,11 @@ function App() {
           <Route path="/aboutus" element={<Aboutus></Aboutus>}></Route>
           <Route path="/faq" element={<Faq></Faq>}></Route>
           <Route
-            path="/bookingconfirmation"
+            path="/bookingSummary"
+            element={<BookingSummary></BookingSummary>}
+          ></Route>
+          <Route
+            path="/bookingConfirmation"
             element={<BookingConfirmation></BookingConfirmation>}
           ></Route>
         </Routes>

@@ -3,12 +3,13 @@ import Navbar2 from "../../components/navbar2/Navbar2";
 import "./search.css";
 import { format } from "date-fns";
 import SearchOption from "./SearchOption";
-import { DateRange, Calendar } from "react-date-range";
+import { DateRange } from "react-date-range";
 import { BsCalendar } from "react-icons/bs";
-import { BsInfoCircleFill } from "react-icons/bs";
 import { IoTimeOutline } from "react-icons/io5";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import useFetch from "../../hooks/useFetch";
+
 // import "react-calendar/dist/Calendar.css";
 // import Calendar from "react-calendar";
 
@@ -34,6 +35,7 @@ const Search = () => {
   const [openDateRange, setOpenDateRange] = useState(false);
   const [openStartTime, setOpenStartTime] = useState(false);
   const [openEndTime, setOpenEndTime] = useState(false);
+  const [showSearchResult, setShowSearchResult] = useState(false);
 
   const handleChange = (item) => {
     const selection = item.selection;
@@ -43,9 +45,7 @@ const Search = () => {
     } else {
       setOpenDateRange(false);
     }
-
     setDates([item.selection]);
-    // console.log(dates);
   };
 
   const handleTimeSelect = (e, input, val) => {
@@ -61,9 +61,35 @@ const Search = () => {
     setDuration(Math.ceil(Math.abs(endDate - startDate) / day_in_millisecond));
   };
 
+  const [option, setOption] = useState("");
+
+  const { data, loading, error, reFetch } = useFetch(
+    "http://localhost:8800/api/motorGroup",
+    "get"
+  );
+
+  const [filteredGroup, setFilteredGroup] = useState(data);
+
+  const handleSearch = () => {
+    reFetch();
+    setShowSearchResult(true);
+    setOption("All");
+  };
+
+  const filterData = () => {
+    if (option !== "All") {
+      setFilteredGroup(data.filter((item) => item.category === option));
+    } else {
+      setFilteredGroup(data);
+    }
+  };
+
   useEffect(() => {
     calculateDuration();
-  }, [dates, times]);
+    filterData();
+  }, [dates, times, option]);
+
+  useEffect(() => {}, [filteredGroup]);
 
   return (
     <>
@@ -921,24 +947,55 @@ const Search = () => {
             <h5>Duration</h5>
             <p>{duration} Day(s)</p>
             <br />
-            <button className="searchBtn">Search</button>
+            <button className="searchBtn" onClick={() => handleSearch()}>
+              Search
+            </button>
           </div>
-
-          <div className="avaiableBikes">
-            <h5>Available Bikes</h5>
-            <div className="avaiableBikesCategory">
-              <button className="avaiableBikesBtn">All</button>
-              <button className="avaiableBikesBtn">Style</button>
-              <button className="avaiableBikesBtn">Comfort</button>
-              <button className="avaiableBikesBtn">Compact</button>
+          {showSearchResult && (
+            <div className="avaiableBikes">
+              <h5>Available Bikes</h5>
+              <div className="avaiableBikesCategory">
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => setOption("All")}
+                >
+                  All
+                </button>
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => setOption("Style")}
+                >
+                  Style
+                </button>
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => setOption("Comfort")}
+                >
+                  Comfort
+                </button>
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => setOption("Compact")}
+                >
+                  Compact
+                </button>
+              </div>
+              <h6>Recommendation</h6>
+              <div className="searchResults">
+                {filteredGroup.map((motorGroup, i) => {
+                  return (
+                    <SearchOption
+                      key={i}
+                      motorGroup={motorGroup}
+                      days={duration}
+                      deliveryDate={dates[0].startDate}
+                      returnDate={dates[0].endDate}
+                    ></SearchOption>
+                  );
+                })}
+              </div>
             </div>
-            <h6>Recommendation</h6>
-            <div className="searchResults">
-              <SearchOption></SearchOption>
-              <SearchOption></SearchOption>
-              <SearchOption></SearchOption>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </>

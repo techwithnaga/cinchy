@@ -4,10 +4,14 @@ import dotenv from "dotenv";
 import userRoute from "./routes/user.js";
 import otpRoute from "./routes/otp.js";
 import motorGroupRoute from "./routes/MotorGroup.js";
-import motorDetailRoute from "./routes/MotorDetail.js";
+import motorRoute from "./routes/Motor.js";
 import cors from "cors";
 import deliveryFeeRoute from "./routes/DeliveryFee.js";
+<<<<<<< HEAD
 import bookingRoute from  "./routes/Booking.js";
+=======
+import bookingRoute from "./routes/Booking.js";
+>>>>>>> 08656ecd6edbcb5d1de67896747af4bdde76d442
 
 const app = express();
 dotenv.config();
@@ -28,7 +32,7 @@ app.use(cors());
 app.use("/api/user", userRoute);
 app.use("/api/otp", otpRoute);
 app.use("/api/motorGroup", motorGroupRoute);
-app.use("/api/motorDetail", motorDetailRoute);
+app.use("/api/motor", motorRoute);
 app.use("/api/deliveryFee", deliveryFeeRoute);
 app.use("/api/booking", bookingRoute);
 

@@ -5,7 +5,9 @@ import "./miscellaneous.css";
 const Miscellaneous = () => {
   return (
     <div className="miscellaneous">
-      <div className="miscellaneousContainer">
+      <div className="video">video</div>
+      <img src={images.accessories} alt="" />
+      {/* <div className="miscellaneousContainer">
         <div className="miscellaneousText">
           <h1>DID YOU KNOW?</h1>
           <h5>All Motor Booking with Cinchy Includes:</h5>
@@ -27,7 +29,7 @@ const Miscellaneous = () => {
             <h3 style={{ color: "#FA5246" }}>FREE</h3>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

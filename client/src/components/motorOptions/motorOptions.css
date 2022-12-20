@@ -32,6 +32,14 @@
   width: 100%;
 }
 
+.reason {
+  display: flex;
+  gap: 1em;
+  width: max-content;
+  margin-left: 30%;
+  padding: 0.5em;
+}
+
 @media (max-width: 1080px) {
   .motorOptionsContainer {
     width: 95%;
@@ -50,5 +58,9 @@
 
   .motorOptionsItem {
     width: 100%;
+  }
+
+  .reason {
+    margin-left: 15%;
   }
 }

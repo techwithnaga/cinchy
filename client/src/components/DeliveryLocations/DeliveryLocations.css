@@ -1,0 +1,45 @@
+.DeliveryLocations {
+  background-color: var(--color-green700);
+  color: white;
+  padding-top: 72px;
+  padding-bottom: 20em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deliveryLocationsContainer {
+  max-width: 1080px;
+  width: 100%;
+}
+
+.locationsWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 7em;
+}
+
+.location {
+  width: 30%;
+}
+
+@media (max-width: 1080px) {
+  .deliveryLocationsContainer {
+    width: 90%;
+  }
+  .locationsWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+  }
+
+  .location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    gap: 0.5em;
+  }
+}

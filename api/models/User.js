@@ -12,13 +12,8 @@ const userSchema = new Schema(
     },
     emailAddress: {
       type: String,
-      required: true,
     },
     whatsappNumber: {
-      type: String,
-      required: true,
-    },
-    countryCode: {
       type: String,
       required: true,
     },
@@ -28,16 +23,13 @@ const userSchema = new Schema(
     emergencyContactNumber: {
       type: String,
     },
-    emergencyContactCountryCode: {
-      type: String,
-    },
-    gender: {
-      type: Number,
-      required: true,
-      min: 1,
-      max: 3,
-      default: 1,
-    },
+    // gender: {
+    //   type: Number,
+    //   required: true,
+    //   min: 1,
+    //   max: 3,
+    //   default: 1,
+    // },
     isAdmin: {
       type: Boolean,
       default: false,

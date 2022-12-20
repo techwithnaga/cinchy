@@ -1,15 +1,13 @@
 import React from "react";
 import images from "../../pictures/picture";
 import "./motorOptions.css";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 const MotorOptions = () => {
   return (
     <div className="motorOptions">
       <div className="motorOptionsContainer">
-        <h1>
-          RELIABLE MOTOR RENTAL IN
-          <span style={{ color: "#FAAE2B" }}> BALI</span>
-        </h1>
+        <h1>Reliable & Hassle-free Rentals</h1>
         <p>New fleet | No hidden fee</p>
         <div className="motorOptionsItems">
           <div className="motorOptionsItem">
@@ -32,6 +30,34 @@ const MotorOptions = () => {
               <h5>Honda Scopy 125</h5>
             </div>
             <img src={images.hondaScoopy} alt="" />
+          </div>
+        </div>
+
+        <div className="motorOptionsReasons">
+          <h1>Why Choose Cinchy?</h1>
+          <br />
+          <div className="reasons">
+            <div className="reason">
+              <BsCheckCircleFill></BsCheckCircleFill>
+              <p>
+                <span style={{ fontWeight: "bolder" }}>Reliable</span> and
+                well-maintained scooters
+              </p>
+            </div>
+            <div className="reason">
+              <BsCheckCircleFill></BsCheckCircleFill>
+              <p>
+                <span style={{ fontWeight: "bolder" }}>Transparent</span> and no
+                hidden fee.
+              </p>
+            </div>
+            <div className="reason">
+              <BsCheckCircleFill></BsCheckCircleFill>
+              <p>
+                <span style={{ fontWeight: "bolder" }}>Delivered</span> to most
+                urban areas in Bali.
+              </p>
+            </div>
           </div>
         </div>
       </div>

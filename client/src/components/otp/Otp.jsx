@@ -29,26 +29,26 @@ const Otp = () => {
   const [wrongOTP, setWrongOTP] = useState(false);
 
   const handleVerify = async () => {
-    navigate("/information");
+    navigate("/information", { state: { phoneNumber: state.phoneNumber } });
     const verificationCode =
       digit1 + digit2 + digit3 + digit4 + digit5 + digit6;
 
-    await axios
-      .post("http://localhost:8800/api/otp/verifyOTP", {
-        phoneNumber: state,
-        otp: verificationCode,
-        // hash: hash,
-      })
-      .then((res) => {
-        //save token
-        sessionStorage.setItem("token", res.data.token);
+    // await axios
+    //   .post("http://localhost:8800/api/otp/verifyOTP", {
+    //     phoneNumber: state.phoneNumber,
+    //     otp: verificationCode,
+    //     // hash: hash,
+    //   })
+    //   .then((res) => {
+    //     //save token
+    //     sessionStorage.setItem("token", res.data.token);
 
-        navigate("/information");
-      })
-      .catch((err) => {
-        console.log(err);
-        setWrongOTP(true);
-      });
+    //     navigate("/information");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setWrongOTP(true);
+    //   });
   };
 
   // const tick = () => {
@@ -80,7 +80,7 @@ const Otp = () => {
         <div className="otpContainer">
           <h5>Enter code</h5>
           <label> A verification code has been sent to</label>
-          <p>+{state}</p>
+          <p>+{state.phoneNumber}</p>
           <div className="confirmationCode">
             <input
               type="text"

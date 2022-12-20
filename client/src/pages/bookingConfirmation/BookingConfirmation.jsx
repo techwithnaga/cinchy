@@ -1,84 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import "./BookingConfirmation.css";
+import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import Navbar2 from "../../components/navbar2/Navbar2";
-import ProgressBar from "../../components/progressBar/ProgressBar";
-import BikeOption from "../../components/bikeOption/BikeOption";
-import "./bookingConfirmation.css";
-import images from "../../pictures/picture";
-import Modal from "./Modal";
 
 const BookingConfirmation = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
   return (
-    <div className="bookingConfirmation">
+    <div className="BookingConfirmation">
       <Navbar2></Navbar2>
-      <br />
-      <ProgressBar step={3}></ProgressBar>
-      <div className="bookingConfirmationContainer">
-        <h3>Booking Summary</h3>
-        <div className="bookingConfirmationContent">
-          <BikeOption></BikeOption>
-          <div className="bookingConfirmationPolicy">
-            <div className="policyRequirement">
-              <h3>Rental Policy</h3>
-              <ul className="rentalPolicyList">
-                <li>Return the fuel as received</li>
-                <li>Usage of up to 24 hours per rental day</li>
-              </ul>
-              <br />
-              <h3>Rental Requirement</h3>
-              <ul className="rentalPolicyList">
-                <li>ID Card (KTP or passport)</li>
-                <li>Others (if provider requires additional verification)</li>
-                <li>Driver’s license (SIM C)/ International Driving Permit</li>
-                <li>Deposit of IDR 500.000</li>
-              </ul>
-            </div>
-            <button className="learnMoreBtn" onClick={() => openModal()}>
-              Learn More
-            </button>
-          </div>
-        </div>
-        <h3>Confirmation</h3>
-        <div className="bookingConfirmationFooter">
-          <p style={{ color: "#90A3BF" }}>
-            We are getting to the end. Just few clicks and your rental is ready!
-          </p>
-          <br />
-          <div className="BookingConfirmationCheckBoxes">
-            <div className="BookingConfirmationCheckBox">
-              <input type="checkbox" />
-              <label>
-                I agree with sending an Marketing and newsletter emails. No
-                spam, promissed!
-              </label>
-            </div>
-            <div className="BookingConfirmationCheckBox">
-              <input type="checkbox" />
-              <label>
-                I agree with sending an Marketing and newsletter emails. No
-                spam, promissed!
-              </label>
-            </div>
-          </div>
-        </div>
-        <button className="bookingConfirmationConfirmBtn">Confirm</button>
-        <div className="dataSecurity">
-          <img src={images.secureIcon} alt="" />
-          <h3>All your data are safe</h3>
-          <p style={{ color: "#90A3BF" }}>
-            We are using the most advanced security to provide you the best
-            experience ever.
-          </p>
-        </div>
+      <div className="BookingConfirmationContainer">
+        <IoCheckmarkCircleSharp></IoCheckmarkCircleSharp>
       </div>
-      <Modal isModalOpen={isModalOpen} closeModal={closeModal}></Modal>
     </div>
   );
 };

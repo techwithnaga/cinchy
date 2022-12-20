@@ -16,6 +16,10 @@ import kaori from "./kaori.png";
 import anthony from "./anthony.png";
 import secureIcon from "./secureIcon.png";
 import map from "./cinchyMap.png";
+import store from "./store.png";
+import hotel from "./hotel.png";
+import airport from "./airport.png";
+import accessories from "./accessories.png";
 
 const images = {
   yellowGreenLogo,
@@ -36,6 +40,10 @@ const images = {
   kaori,
   secureIcon,
   map,
+  store,
+  hotel,
+  airport,
+  accessories,
 };
 
 export default images;

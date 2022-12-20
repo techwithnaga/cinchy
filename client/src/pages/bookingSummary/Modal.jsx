@@ -1,16 +1,20 @@
 import React from "react";
 import "./modal.css";
+import { IoClose } from "react-icons/io5";
 
 const Modal = ({ isModalOpen, closeModal }) => {
-  console.log(isModalOpen);
   return (
     <div className={`${isModalOpen ? "modal showModal " : "modal"}`}>
       <div className="modalContainer">
         <div className="modalHeader">
           <h4>This is the policy</h4>
-          <button onClick={closeModal} className="modalCloseBtn">
+          {/* <button onClick={closeModal} className="modalCloseBtn">
             Done
-          </button>
+          </button> */}
+          <IoClose
+            onClick={closeModal}
+            style={{ fontSize: "150%", cursor: "pointer" }}
+          ></IoClose>
         </div>
         <br />
         <p>
@@ -38,6 +42,9 @@ const Modal = ({ isModalOpen, closeModal }) => {
           doloribus repellat. Illo consectetur pariatur alias porro et atque,
           nobis quia?
         </p>
+        <button onClick={closeModal} className="modalCloseBtn">
+          I agree with the above terms, conditions, and privacy policy
+        </button>
       </div>
     </div>
   );

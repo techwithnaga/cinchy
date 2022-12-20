@@ -5,7 +5,7 @@ import {
   getMotors,
   updateMotor,
   deleteMotor,
-} from "../controllers/MotorDetail.js";
+} from "../controllers/Motor.js";
 
 const router = express.Router();
 
