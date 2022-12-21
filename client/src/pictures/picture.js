@@ -3,7 +3,6 @@ import yellowGreenLogo from "./Cinchy_logo_yellow_green_horizontal_tagline_v2.sv
 import homepageBackground from "./cinchy_motor_scooter_rental_bali_homepage_background_v4.png";
 import headCap from "./cinchy_motor_scooter_rental_bali_homepage_feature_head_Cap.png";
 import helmet from "./cinchy_motor_scooter_rental_bali_homepage_feature_helmet.png";
-import phoneHolder from "./cinchy_motor_scooter_rental_bali_homepage_feature_phone_holder.png";
 import footer from "./cinchy_motor_scooter_rental_bali_homepage_footer.jpg";
 import hondaScoopy from "./cinchy_motor_scooter_rental_bali_homepage_honda_scoopy.png";
 import vespa from "./cinchy_motor_scooter_rental_bali_homepage_vespa.png";
@@ -19,7 +18,13 @@ import map from "./cinchyMap.png";
 import store from "./store.png";
 import hotel from "./hotel.png";
 import airport from "./airport.png";
-import accessories from "./accessories.png";
+import onlinePayment from "./onlinePayment.png";
+import phoneHolder from "./phoneHolder.png";
+import roadAssistance from "./roadAssistance.png";
+import secondDriver from "./secondDriver.png";
+import unlimitedKM from "./unlimitedKM.png"; 
+import cancellations from "./cancellations.png";
+
 
 const images = {
   yellowGreenLogo,
@@ -43,7 +48,12 @@ const images = {
   store,
   hotel,
   airport,
-  accessories,
+  onlinePayment,
+  roadAssistance,
+  secondDriver,
+  unlimitedKM,
+  cancellations,
+
 };
 
 export default images;

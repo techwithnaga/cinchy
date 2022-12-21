@@ -6,7 +6,50 @@ const Miscellaneous = () => {
   return (
     <div className="miscellaneous">
       <div className="video">video</div>
-      <img src={images.accessories} alt="" />
+      <div className="miscellaneousContainer">
+        <div className="miscellaneousItems">
+          <div className="miscellaneousHeader">
+            <h1>Our prices include</h1>
+            <br />
+            <p>All Motor booking with Cinchy include</p>
+          </div>
+          <div className="miscellaneousItem">
+            <img src={images.helmet} alt="" />
+            <p>Safety & clean Helmet</p>
+          </div>
+          <div className="miscellaneousItem">
+            <img src={images.headCap} alt="" />
+            <p>Head Cap</p>
+          </div>
+          <div className="miscellaneousItem">
+            <img src={images.phoneHolder} alt="" />
+            <p>Phone Holder</p>
+          </div>
+          <div className="miscellaneousItem">
+            <img src={images.cancellations} alt="" />
+            <p>24hrs free Cancellation</p>
+          </div>
+          <div className="miscellaneousItem">
+            <img src={images.secondDriver} alt="" />
+            <p>2nd driver free</p>
+          </div>
+          <div className="miscellaneousItem">
+            <img src={images.unlimitedKM} alt="" />
+            <p>Unlimited KM</p>
+          </div>
+          <div className="miscellaneousItem">
+            <img src={images.roadAssistance} alt="" />
+            <p>Road Assistance</p>
+          </div>
+          <div className="miscellaneousItem">
+            <img src={images.onlinePayment} alt="" />
+            <br />
+            <p>Online Payments (Coming Soon)</p>
+          </div>
+        </div>
+      </div>
+
+      
       {/* <div className="miscellaneousContainer">
         <div className="miscellaneousText">
           <h1>DID YOU KNOW?</h1>

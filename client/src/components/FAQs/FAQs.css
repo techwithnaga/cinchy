@@ -1,12 +1,14 @@
 .faqs {
   width: 100%;
-
   gap: 35px;
+  display: flex;
+  flex-direction: column;
   padding-top: 72px;
   padding-bottom: 72px;
   align-items: center;
   background-color: #2e2c30;
   color: white;
+  position: relative;
 }
 
 .faqsContainer {
@@ -18,6 +20,18 @@
 .accordian {
   border-bottom: 1px solid white;
   padding-top: 24px;
+}
+
+.accordians{
+  width: 70%;
+  margin-left: 28%;
+}
+
+.vespaMerah{
+  position: absolute;
+  left: 5%;
+  top: 65%;
+  width:450px;
 }
 
 .accordianQuestion {
@@ -55,5 +69,14 @@
 @media (max-width: 1080px) {
   .faqsContainer {
     width: 88%;
+  }
+
+  .vespaMerah{
+    display: none;
+  }
+
+  .accordians{
+    width: 95%;
+    margin-left: 0;
   }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "./FAQs.css";
 import Accordian from "./Accordian.jsx";
+import images from "../../pictures/picture";
 
 const FAQs = () => {
   const data = [
@@ -33,7 +34,9 @@ const FAQs = () => {
   return (
     <div className="faqs" id="faqs">
       <h2>FAQs</h2>
+      <img src={images.vespa} alt="" className="vespaMerah" />
       <div className="faqsContainer">
+        <div className="accordians">
         {data.map((item) => {
           return (
             <Accordian
@@ -43,6 +46,7 @@ const FAQs = () => {
             ></Accordian>
           );
         })}
+        </div>
       </div>
     </div>
   );

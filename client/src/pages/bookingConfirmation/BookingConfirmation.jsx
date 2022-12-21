@@ -1,5 +1,5 @@
 import React from "react";
-import "./BookingConfirmation.css";
+import "./bookingConfirmation.css";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import Navbar2 from "../../components/navbar2/Navbar2";
 
