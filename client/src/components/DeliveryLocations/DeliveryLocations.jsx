@@ -11,18 +11,25 @@ const DeliveryLocations = () => {
         <div className="locationsWrapper">
           <div className="location">
             <img src={images.airport} alt="" />
-            <h5>01.</h5>
-            <h2>Bali Airport (Ngurah Rai)</h2>
+            <div className="locationTxt">
+              <h5>01.</h5>
+              <h2>Bali Airport (Ngurah Rai)</h2>
+            </div>
           </div>
           <div className="location">
             <img src={images.hotel} alt="" />
-            <h5>02.</h5>
-            <h2>Hotel / Villa</h2>
+            <div className="locationTxt">
+              <h5>02.</h5>
+              <h2>Hotel / </h2>
+              <h2>Villa</h2>
+            </div>
           </div>
           <div className="location">
             <img src={images.store} alt="" />
-            <h5>03.</h5>
-            <h2>Store / Walk-in</h2>
+            <div className="locationTxt">
+              <h5>03.</h5>
+              <h2>Store / Walk-in</h2>
+            </div>
           </div>
         </div>
       </div>

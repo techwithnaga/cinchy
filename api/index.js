@@ -7,11 +7,7 @@ import motorGroupRoute from "./routes/MotorGroup.js";
 import motorRoute from "./routes/Motor.js";
 import cors from "cors";
 import deliveryFeeRoute from "./routes/DeliveryFee.js";
-<<<<<<< HEAD
-import bookingRoute from  "./routes/Booking.js";
-=======
 import bookingRoute from "./routes/Booking.js";
->>>>>>> 08656ecd6edbcb5d1de67896747af4bdde76d442
 
 const app = express();
 dotenv.config();

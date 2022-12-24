@@ -8,7 +8,7 @@ import Footer from "../../components/footer/Footer";
 import MotorOptions from "../../components/motorOptions/MotorOptions";
 import DeliveryLocations from "../../components/DeliveryLocations/DeliveryLocations";
 import Miscellaneous from "../../components/miscellaneous/Miscellaneous";
-import Comment from "../../components/comment/Comment";
+// import Comment from "../../components/comment/Comment";
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
       <MotorOptions></MotorOptions>
       <DeliveryLocations></DeliveryLocations>
       <Miscellaneous></Miscellaneous>
-      <Comment></Comment>
+      {/* <Comment></Comment> */}
       <FAQs></FAQs>
       <Feedback></Feedback>
       <Footer></Footer>

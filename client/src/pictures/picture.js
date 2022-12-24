@@ -1,8 +1,8 @@
 import whiteWhiteLogo from "./Cinchy_logo_white_white_horizontal_tagline_v2.svg";
 import yellowGreenLogo from "./Cinchy_logo_yellow_green_horizontal_tagline_v2.svg";
 import homepageBackground from "./cinchy_motor_scooter_rental_bali_homepage_background_v4.png";
-import headCap from "./cinchy_motor_scooter_rental_bali_homepage_feature_head_Cap.png";
-import helmet from "./cinchy_motor_scooter_rental_bali_homepage_feature_helmet.png";
+import headCap from "./Cinchy_prices_headcap.png";
+import helmet from "./Cinchy_prices_helmet.png";
 import footer from "./cinchy_motor_scooter_rental_bali_homepage_footer.jpg";
 import hondaScoopy from "./cinchy_motor_scooter_rental_bali_homepage_honda_scoopy.png";
 import vespa from "./cinchy_motor_scooter_rental_bali_homepage_vespa.png";
@@ -15,16 +15,17 @@ import kaori from "./kaori.png";
 import anthony from "./anthony.png";
 import secureIcon from "./secureIcon.png";
 import map from "./cinchyMap.png";
-import store from "./store.png";
-import hotel from "./hotel.png";
-import airport from "./airport.png";
-import onlinePayment from "./onlinePayment.png";
-import phoneHolder from "./phoneHolder.png";
-import roadAssistance from "./roadAssistance.png";
-import secondDriver from "./secondDriver.png";
-import unlimitedKM from "./unlimitedKM.png"; 
-import cancellations from "./cancellations.png";
-
+import store from "./Cinchy_delivery_store_illustration.png";
+import hotel from "./Cinchy_delivery_hotelvilla_illustration.png";
+import airport from "./Cinchy_delivery_airport_illustration.png";
+import onlinePayment from "./Cinchy_prices_payment.png";
+import phoneHolder from "./Cinchy_prices_phoneholder.png";
+import roadAssistance from "./Cinchy_prices_roadassistance.png";
+import secondDriver from "./Cinchy_prices_2nddriverfree.png";
+import unlimitedKM from "./Cinchy_prices_unlimitedkm.png";
+import cancellations from "./Cinchy_prices_cancellation.png";
+import videoHorizontal from "./Cinchy_teaser_web_horizontal.mp4";
+import videoVertical from "./Cinchy_teaser_mobile_vertical.mp4";
 
 const images = {
   yellowGreenLogo,
@@ -53,7 +54,8 @@ const images = {
   secondDriver,
   unlimitedKM,
   cancellations,
-
+  videoHorizontal,
+  videoVertical,
 };
 
 export default images;

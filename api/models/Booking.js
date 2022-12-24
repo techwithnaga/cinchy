@@ -1,32 +1,4 @@
 import mongoose from "mongoose";
-<<<<<<< HEAD
-import MotorDetail from "./MotorDetail.js";
-import User from "./User.js";
-const { Schema } = mongoose;
-
-const BookingSchema = new Schema ({
-    motor: {
-        type: Schema.ObjectId,
-        ref: MotorDetail,
-        required: true,
-      },
-    pickupDate : {
-        type : Number,
-        required : true
-    },
-    returnDate : {
-        type : Number,
-        required : true
-    }, 
-    user: {
-        type: Schema.ObjectId,
-        ref: User,
-        required: true,
-      },
-    comments : {
-        type : String,
-        required : true
-=======
 import Motor from "./Motor.js";
 import MotorGroup from "./MotorGroup.js";
 import DeliveryFee from "./DeliveryFee.js";
@@ -48,7 +20,6 @@ const BookingSchema = new Schema(
     returnDate: {
       type: Date,
       required: true,
->>>>>>> 08656ecd6edbcb5d1de67896747af4bdde76d442
     },
     rentalDuration: {
       type: Number,
@@ -103,24 +74,12 @@ const BookingSchema = new Schema(
     tncDate: {
       type: Date,
     },
-<<<<<<< HEAD
-    is_paid : {
-        type : Boolean,
-        required : true,
-        default : false
-    },
-    is_confirm : {
-        type : Boolean,
-        required : true,
-        default : false
-=======
     cancelTime: {
       type: Date,
     },
     is_paid: {
       type: Boolean,
       default: false,
->>>>>>> 08656ecd6edbcb5d1de67896747af4bdde76d442
     },
     is_confirm: {
       type: Boolean,

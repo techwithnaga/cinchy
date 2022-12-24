@@ -2,7 +2,8 @@
   background-color: var(--color-green700);
   color: white;
   padding-top: 72px;
-  padding-bottom: 20em;
+  padding-bottom: 35em;
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,7 +22,18 @@
 }
 
 .location {
-  width: 30%;
+  height: 280px;
+}
+
+.location > img {
+  height: 100%;
+}
+
+.locationTxt {
+  width: 220px;
+  text-align: center;
+  margin: auto;
+  margin-top: 31px;
 }
 
 @media (max-width: 1080px) {

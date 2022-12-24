@@ -5,51 +5,59 @@ import "./miscellaneous.css";
 const Miscellaneous = () => {
   return (
     <div className="miscellaneous">
-      <div className="video">video</div>
+      <div className="video">
+        <video
+          src={images.videoHorizontal}
+          autoPlay
+          loop
+          muted
+          id="video"
+          typeof="video/mp4"
+        ></video>
+      </div>
       <div className="miscellaneousContainer">
+        <div className="miscellaneousHeader">
+          <h1>Our prices include</h1>
+          <br />
+          <p>All Motor booking with Cinchy include</p>
+        </div>
         <div className="miscellaneousItems">
-          <div className="miscellaneousHeader">
-            <h1>Our prices include</h1>
-            <br />
-            <p>All Motor booking with Cinchy include</p>
-          </div>
           <div className="miscellaneousItem">
             <img src={images.helmet} alt="" />
-            <p>Safety & clean Helmet</p>
+            <h6>Safety & clean Helmet</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.headCap} alt="" />
-            <p>Head Cap</p>
+            <h6>Head Cap</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.phoneHolder} alt="" />
-            <p>Phone Holder</p>
+            <h6>Phone Holder</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.cancellations} alt="" />
-            <p>24hrs free Cancellation</p>
+            <h6>24hrs free Cancellation</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.secondDriver} alt="" />
-            <p>2nd driver free</p>
+            <h6>2nd driver free</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.unlimitedKM} alt="" />
-            <p>Unlimited KM</p>
+            <h6>Unlimited KM</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.roadAssistance} alt="" />
-            <p>Road Assistance</p>
+            <h6>Road Assistance</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.onlinePayment} alt="" />
             <br />
-            <p>Online Payments (Coming Soon)</p>
+            <h6>Online Payments (Coming Soon)</h6>
           </div>
         </div>
       </div>
 
-      
       {/* <div className="miscellaneousContainer">
         <div className="miscellaneousText">
           <h1>DID YOU KNOW?</h1>
