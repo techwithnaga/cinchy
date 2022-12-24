@@ -7,12 +7,11 @@ const Miscellaneous = () => {
     <div className="miscellaneous">
       <div className="video">
         <video
-          src={images.videoHorizontal}
           autoPlay
           loop
           muted
+          src={images.videoHorizontal}
           id="video"
-          typeof="video/mp4"
         ></video>
       </div>
       <div className="miscellaneousContainer">
