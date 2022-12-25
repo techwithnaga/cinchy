@@ -40,11 +40,12 @@
   .deliveryLocationsContainer {
     width: 90%;
   }
+
   .locationsWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3em;
+    gap: 13em;
   }
 
   .location {
@@ -52,6 +53,5 @@
     flex-direction: column;
     align-items: center;
     width: 70%;
-    gap: 0.5em;
   }
 }

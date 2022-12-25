@@ -38,13 +38,17 @@
 
 .reasons {
   margin-top: 15px;
+  width: 100%;
+}
+.reasonsWrapper {
+  width: max-content;
+  margin: auto;
 }
 
 .reason {
   display: flex;
   gap: 1em;
-  width: max-content;
-  margin-left: 30%;
+
   padding: 0.7em;
 }
 

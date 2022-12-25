@@ -37,26 +37,28 @@ const MotorOptions = () => {
           <h1>Why Choose Cinchy?</h1>
           <br />
           <div className="reasons">
-            <div className="reason">
-              <BsCheckCircleFill></BsCheckCircleFill>
-              <p>
-                <span style={{ fontWeight: "bolder" }}>Reliable</span> and
-                well-maintained scooters
-              </p>
-            </div>
-            <div className="reason">
-              <BsCheckCircleFill></BsCheckCircleFill>
-              <p>
-                <span style={{ fontWeight: "bolder" }}>Transparent</span> and no
-                hidden fee.
-              </p>
-            </div>
-            <div className="reason">
-              <BsCheckCircleFill></BsCheckCircleFill>
-              <p>
-                <span style={{ fontWeight: "bolder" }}>Delivered</span> to most
-                urban areas in Bali.
-              </p>
+            <div className="reasonsWrapper">
+              <div className="reason">
+                <BsCheckCircleFill></BsCheckCircleFill>
+                <p>
+                  <span style={{ fontWeight: "bolder" }}>Reliable</span> and
+                  well-maintained scooters
+                </p>
+              </div>
+              <div className="reason">
+                <BsCheckCircleFill></BsCheckCircleFill>
+                <p>
+                  <span style={{ fontWeight: "bolder" }}>Transparent</span> and
+                  no hidden fee.
+                </p>
+              </div>
+              <div className="reason">
+                <BsCheckCircleFill></BsCheckCircleFill>
+                <p>
+                  <span style={{ fontWeight: "bolder" }}>Delivered</span> to
+                  most urban areas in Bali.
+                </p>
+              </div>
             </div>
           </div>
         </div>
