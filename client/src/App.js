@@ -9,7 +9,7 @@ import MyBooking from "./pages/myBooking/MyBooking";
 import Aboutus from "./pages/aboutus/Aboutus";
 import BookingSummary from "./pages/bookingSummary/BookingSummary";
 import Faq from "./pages/Faq/Faq";
-import BookingConfirmation from "./pages/BookingConfirmation/BookingConfirmation";
+import BookingConfirmation from "./pages/BookingConfirmation/bookingConfirmation";
 
 function App() {
   return (
