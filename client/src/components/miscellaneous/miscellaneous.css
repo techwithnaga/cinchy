@@ -18,7 +18,7 @@
   margin: auto;
   position: absolute;
   left: 5%;
-  top: -25%;
+  top: -260px;
 }
 
 .miscellaneousItems {
@@ -70,10 +70,11 @@
 
   .video {
     height: 615px;
+    top: -300px;
   }
 
   .miscellaneousHeader {
-    top: 30.5%;
+    top: 375px;
     width: 60%;
     left: 20%;
   }
