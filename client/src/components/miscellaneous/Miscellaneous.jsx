@@ -1,8 +1,27 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import images from "../../pictures/picture";
 import "./miscellaneous.css";
 
 const Miscellaneous = () => {
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  const changeVideo = () => {
+    if (window.innerWidth < 1080) {
+      setIsMobileView(true);
+    } else {
+      setIsMobileView(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", changeVideo);
+    return () => {
+      window.removeEventListener("resize", changeVideo);
+    };
+  }, []);
+
   return (
     <div className="miscellaneous">
       <div className="video">
@@ -10,7 +29,8 @@ const Miscellaneous = () => {
           autoPlay
           loop
           muted
-          src={images.videoHorizontal}
+          playsInline
+          src={isMobileView ? images.videoVertical : images.videoHorizontal}
           id="video"
         ></video>
       </div>

@@ -48,7 +48,6 @@
 .reason {
   display: flex;
   gap: 1em;
-
   padding: 0.7em;
 }
 
@@ -64,15 +63,10 @@
   .motorOptionsItems {
     display: flex;
     flex-direction: column;
-
     gap: 30px;
   }
 
   .motorOptionsItem {
     width: 100%;
-  }
-
-  .reason {
-    margin-left: 15%;
   }
 }
