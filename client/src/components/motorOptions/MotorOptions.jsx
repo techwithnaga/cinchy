@@ -8,7 +8,6 @@ const MotorOptions = () => {
     <div className="motorOptions">
       <div className="motorOptionsContainer">
         <h1>Reliable & Hassle-free Rentals</h1>
-        <p>New fleet | No hidden fee</p>
         <div className="motorOptionsItems">
           <div className="motorOptionsItem">
             <div className="motorOptionsItemDescription">

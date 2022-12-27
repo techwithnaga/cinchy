@@ -34,4 +34,8 @@
   .faqContainer {
     width: 88%;
   }
+
+  .faqItems {
+    margin: auto;
+  }
 }

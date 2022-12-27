@@ -16,8 +16,8 @@ const Footer = () => {
             <img src={images.yellowWhiteLogo} alt="" />
             <br />
             <br />
-            <p>PT Hidup Mudah Indonesia</p>
-            <p>info@cinchy.life</p>
+            <p>CV Hidup Mudah Cinchy</p>
+            <p>support@cinchy.life</p>
             <p>(021)1234765</p>
             <br />
             <p> https://cinchy.life/</p>
@@ -46,9 +46,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footerBottom">
-        <label>
-          CINCHY 2022. ALL RIGHTS RESERVED. PT HIDUP MUDAH INDONESIA
-        </label>
+        <label>CINCHY 2023. ALL RIGHTS RESERVED. CV Hidup Mudah Cinchy</label>
       </div>
     </div>
   );

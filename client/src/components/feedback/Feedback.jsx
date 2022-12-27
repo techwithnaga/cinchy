@@ -31,22 +31,22 @@ const Feedback = () => {
 
       {success ? (
         <div className="rsvpSuccess">
-          <h3>Success! We have received your voice. Thank you.</h3>
+          <h3>Success! We have received your feedback. Thank you.</h3>
         </div>
       ) : (
         <>
           <div className="rsvpContainer">
             <p>
-              Cinchy is making continuous improvement and we love to hear what
-              other features you think can help smoothen your journey in Bali?
-              Comment below and leave your email if you would like to be part of
-              Cinchy’s early buddies :) promise we won’t spam.
+              Cinchy is dedicated to making continuous improvements, and we love
+              your feedback. What other features should we add to smoothen your
+              journey in Bali? Comment below and leave your email if you would
+              like to be part of Cinchy’s buddies 🙂 Promise we won’t spam.
             </p>
             <div className="rsvpItem">
               <h6>Message</h6>
               <textarea
                 name="request"
-                placeholder="e.g. I'd love to have a credit card payment; do you offer"
+                placeholder="e.g. I’d love to have a credit card payment"
                 rows="5"
                 onChange={handleChange}
               />

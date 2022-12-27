@@ -36,22 +36,24 @@ const Miscellaneous = () => {
       </div>
       <div className="miscellaneousContainer">
         <div className="miscellaneousHeader">
-          <h1>Our prices include</h1>
-          <br />
-          <p>All Motor booking with Cinchy include</p>
+          <h2>Our price includes</h2>
+          <p>All bookings include worry-free:</p>
         </div>
+        <br />
         <div className="miscellaneousItems">
           <div className="miscellaneousItem">
             <img src={images.helmet} alt="" />
-            <h6>Safety & clean Helmet</h6>
+            <h6>SNI Certified & Clean Helmet</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.headCap} alt="" />
-            <h6>Head Cap</h6>
+            <h6>Head </h6>
+            <h6>Cap</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.phoneHolder} alt="" />
-            <h6>Phone Holder</h6>
+            <h6>Phone </h6>
+            <h6>Holder</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.cancellations} alt="" />
@@ -59,20 +61,23 @@ const Miscellaneous = () => {
           </div>
           <div className="miscellaneousItem">
             <img src={images.secondDriver} alt="" />
-            <h6>2nd driver free</h6>
+            <h6>2nd Driver </h6>
+            <h6>Included</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.unlimitedKM} alt="" />
-            <h6>Unlimited KM</h6>
+            <h6>Unlimited </h6>
+            <h6>KM</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.roadAssistance} alt="" />
-            <h6>Road Assistance</h6>
+            <h6>Road </h6>
+            <h6>Assistance</h6>
           </div>
           <div className="miscellaneousItem">
             <img src={images.onlinePayment} alt="" />
             <br />
-            <h6>Online Payments (Coming Soon)</h6>
+            <h6 style={{ color: "#BEBAC2" }}>Online Payments (Coming Soon)</h6>
           </div>
         </div>
       </div>

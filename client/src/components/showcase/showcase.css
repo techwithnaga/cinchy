@@ -21,7 +21,7 @@
   width: 100%;
   max-width: 1080px;
   /* border: 1px solid red; */
-  margin-top: 200px;
+  margin-top: 170px;
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -35,14 +35,16 @@
 .showcaseContainer > h1 {
   line-height: 32px;
   font-size: 3.35rem;
+  font-weight: 600;
+  font-size: 44px;
   /* font-size: 54px; */
 }
 .showcaseContainer > h6 {
-  margin-top: 16px;
+  line-height: 36px;
 }
 
 .bookBtn {
-  width: 171px;
+  width: 215px;
   padding: 12px;
   font-weight: 600;
   font-size: 14px;
@@ -51,7 +53,6 @@
   border: none;
   color: white;
   border-radius: 10px;
-  margin-top: 32px;
   display: flex;
   align-items: center;
   gap: 8%;

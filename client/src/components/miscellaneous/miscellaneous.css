@@ -3,6 +3,7 @@
   padding: 72px 0 72px 0;
   padding-top: 25em;
   position: relative;
+  color: var(--color-green700);
 }
 
 .miscellaneousContainer {
@@ -64,7 +65,7 @@
     padding-top: 200px;
   }
   .miscellaneousContainer {
-    width: 95%;
+    width: 90%;
     margin-top: 12em;
   }
 
@@ -75,12 +76,8 @@
 
   .miscellaneousHeader {
     top: 375px;
-    width: 60%;
-    left: 20%;
-  }
-
-  .miscellaneousHeader > h1 {
-    font-size: 22px;
+    width: 80%;
+    left: 10%;
   }
 
   .miscellaneousItems {
