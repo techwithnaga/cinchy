@@ -104,6 +104,10 @@
     width: 90%;
   }
 
+  .meaning {
+    display: none;
+  }
+
   .navbarNav {
     display: none;
   }
