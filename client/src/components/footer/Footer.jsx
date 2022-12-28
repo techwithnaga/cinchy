@@ -25,16 +25,24 @@ const Footer = () => {
           <div className="footerCol2">
             <ul className="listNavItems">
               <li>
-                <Link className="navItem">About Us</Link>
+                <Link to={"/aboutus"} className="navItem">
+                  About Us
+                </Link>
               </li>
               <li>
-                <Link className="navItem">Pricing</Link>
+                <Link to={"/search"} className="navItem">
+                  Pricing
+                </Link>
               </li>
               <li>
-                <Link className="navItem">FAQ</Link>
+                <Link to={"/faq"} className="navItem">
+                  FAQ
+                </Link>
               </li>
               <li>
-                <Link className="navItem">My Booking</Link>
+                <Link to={"/mybooking"} className="navItem">
+                  My Booking
+                </Link>
               </li>
             </ul>
           </div>

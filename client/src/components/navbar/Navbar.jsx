@@ -4,9 +4,12 @@ import "./navbar.css";
 import { MdClose, MdOutlineMenu } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [showMeaning, setShowMeaning] = useState(false);
+
   if (showSidebar) {
     document.body.style.overflow = "hidden";
   } else {
@@ -17,6 +20,8 @@ const Navbar = () => {
     sessionStorage.removeItem("token");
     window.location.reload();
   };
+
+  useEffect(() => {}, [showMeaning]);
   return (
     <nav className="navbar">
       <div className="navbarContainer">
@@ -24,7 +29,18 @@ const Navbar = () => {
           src={images.whiteWhiteLogo}
           alt=""
           style={{ width: "275px", cursor: "pointer" }}
+          // onMouseOver={setShowMeaning(true)}
+          // onMouseLeave={setShowMeaning(false)}
+          onMouseEnter={() => setShowMeaning(true)}
+          onMouseLeave={() => setShowMeaning(false)}
         />
+        {showMeaning && (
+          <div className="meaning">
+            <div className="triangle"></div>
+            <p>[sɪn - chee] - defligthfuly easy</p>
+          </div>
+        )}
+
         <ul className="navbarNav">
           <li className="navbarItem">
             <Link style={{ color: "#00332c" }} to="/aboutus">
@@ -47,7 +63,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="navbarSupport">
-            <a>
+            <a href="">
               <BsWhatsapp className="whatsappIcon"></BsWhatsapp> Support
             </a>
           </li>
@@ -105,7 +121,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="sidebarLastItem">
-                  <a>
+                  <a href="">
                     <BsWhatsapp className="whatsappIcon"></BsWhatsapp>Support
                   </a>
                 </li>

@@ -4,6 +4,13 @@
   position: absolute;
   top: 0;
   z-index: 2;
+  color: var(--color-green700);
+}
+
+.meaning {
+  position: absolute;
+  top: 95px;
+  left: 70px;
 }
 
 .navbarContainer {
@@ -15,6 +22,7 @@
   color: black;
   margin: auto;
   padding: 20px;
+  position: relative;
 }
 
 .navbarNav {
@@ -30,7 +38,6 @@
   font-weight: 300;
   letter-spacing: 1px;
   padding: 10px;
-  border-radius: 5px;
 }
 
 .navbarSupport {
@@ -70,6 +77,22 @@
 
 .sidebar {
   display: none;
+}
+
+.meaning {
+  background-color: white;
+  padding: 10px;
+  border-radius: 0 10px 10px 10px;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid white;
+  border-right: 10px solid transparent;
+  position: absolute;
+  top: -10px;
+  left: 0;
 }
 
 @media (max-width: 1080px) {

@@ -26,6 +26,7 @@ import unlimitedKM from "./Cinchy_prices_unlimitedkm.png";
 import cancellations from "./Cinchy_prices_cancellation.png";
 import videoHorizontal from "./Cinchy_teaser_web_horizontal.mp4";
 import videoVertical from "./Cinchy_teaser_mobile_vertical.mp4";
+import aboutusMotor from "./Cinchy_aboutus_motor.png";
 
 const images = {
   yellowGreenLogo,
@@ -56,6 +57,7 @@ const images = {
   cancellations,
   videoHorizontal,
   videoVertical,
+  aboutusMotor,
 };
 
 export default images;
