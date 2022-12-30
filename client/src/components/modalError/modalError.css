@@ -10,6 +10,7 @@
   transition: var(--transition);
   visibility: hidden;
   z-index: -1;
+  color: var(--color-green700);
 }
 
 .modalErrorContainer {
@@ -46,6 +47,7 @@
   cursor: pointer;
   background-color: white;
   margin-top: 1em;
+  border-color: var(--color-green700);
 }
 
 @media (max-width: 1080px) {

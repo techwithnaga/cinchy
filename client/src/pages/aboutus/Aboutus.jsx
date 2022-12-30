@@ -36,6 +36,8 @@ const Aboutus = () => {
         <img src={images.aboutusMotor} alt="aboutusMotor" />
         <br />
         <br />
+        <br />
+        <br />
         <h5>Why travel by scooter, you asked?</h5>
         <br />
         <p>
@@ -47,6 +49,11 @@ const Aboutus = () => {
           Not only you can enjoy the freedom to explore the hidden gems, but it
           is also cost-efficient!
         </p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     </div>
   );

@@ -44,6 +44,7 @@ const Feedback = () => {
             </p>
             <div className="rsvpItem">
               <h6>Message</h6>
+              <br />
               <textarea
                 name="request"
                 placeholder="e.g. I’d love to have a credit card payment"
@@ -53,6 +54,7 @@ const Feedback = () => {
             </div>
             <div className="rsvpItem">
               <h6>email (optional)</h6>
+              <br />
               <input
                 type="text"
                 placeholder="youremail@gmail.com"

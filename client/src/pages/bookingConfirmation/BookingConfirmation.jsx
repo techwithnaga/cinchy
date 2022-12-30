@@ -4,8 +4,13 @@ import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import images from "../../pictures/picture";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const BookingConfirmation = () => {
+  const location = useLocation();
+
+  const bookingInfo = location.state;
+  console.log(bookingInfo._id);
   return (
     <div className="BookingConfirmation">
       <Navbar2></Navbar2>

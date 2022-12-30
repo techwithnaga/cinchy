@@ -62,22 +62,22 @@ const Navbar2 = () => {
         />
         <ul className="navbar2Nav">
           <li className="navbar2Item">
-            <Link style={{ color: "black" }} to="/aboutus">
+            <Link className="navbar2ItemLink" to="/aboutus">
               About Us
             </Link>
           </li>
           <li className="navbar2Item">
-            <Link style={{ color: "black" }} to="/search">
+            <Link className="navbar2ItemLink" to="/search">
               Pricing
             </Link>
           </li>
           <li className="navbar2Item">
-            <Link style={{ color: "black" }} to="/faq">
+            <Link className="navbar2ItemLink" to="/faq">
               FAQ
             </Link>
           </li>
           <li className="navbar2Item">
-            <Link style={{ color: "black" }} to="/mybooking">
+            <Link className="navbar2ItemLink" to="/mybooking">
               My Booking
             </Link>
           </li>

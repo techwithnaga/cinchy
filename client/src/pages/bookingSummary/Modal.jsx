@@ -2,7 +2,11 @@ import React from "react";
 import "./modal.css";
 import { IoClose } from "react-icons/io5";
 
-const Modal = ({ isModalOpen, closeModal }) => {
+const Modal = ({ isModalOpen, closeModal, setHasAgreed }) => {
+  const handleAgreeClick = () => {
+    setHasAgreed(true);
+    closeModal();
+  };
   return (
     <div className={`${isModalOpen ? "modal showModal " : "modal"}`}>
       <div className="modalContainer">
@@ -42,7 +46,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
           doloribus repellat. Illo consectetur pariatur alias porro et atque,
           nobis quia?
         </p>
-        <button onClick={closeModal} className="modalCloseBtn">
+        <button onClick={() => handleAgreeClick()} className="modalCloseBtn">
           I agree with the above terms, conditions, and privacy policy
         </button>
       </div>

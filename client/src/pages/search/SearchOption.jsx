@@ -33,7 +33,6 @@ const SearchOption = ({ motorGroup, days, deliveryDate, returnDate }) => {
       ></BikeOption>
       <div className="searchOptionInfo">
         <div className="searchOptionInfoTxt">
-          <br />
           <h6>
             IDR {motorGroup.price}K/<label> day</label>
           </h6>

@@ -1,6 +1,7 @@
 .navbar2 {
   width: 100%;
   z-index: 1;
+  color: var(--color-green700);
 }
 
 .navbar2Container {
@@ -44,6 +45,10 @@
 
 .navbar2Nav li a {
   text-decoration: none;
+}
+
+.navbar2ItemLink {
+  color: var(--color-green700);
 }
 
 .navbar2Item:hover {

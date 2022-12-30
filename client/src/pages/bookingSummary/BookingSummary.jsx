@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
-import BikeOption from "../../components/bikeOption/BikeOption";
 import "./bookingSummary.css";
 import images from "../../pictures/picture";
 import Modal from "./Modal";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { format } from "date-fns";
+import ModalError from "../../components/modalError/ModalError";
 
 const BookingSummary = () => {
   const { state } = useLocation();
+  const [showError, setShowError] = useState(false);
+  const closeModalError = () => {
+    setShowError(false);
+  };
+  const navigate = useNavigate();
+
   const newBooking = state.newBooking;
   const { data, loading, error, reFetch } = useFetch(
     `http://localhost:8800/api/motorGroup/${newBooking.motorGroup}`,
     "get"
   );
-  console.log("total rental price :" + newBooking.totalRentalPrice);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -26,6 +31,18 @@ const BookingSummary = () => {
   };
   const openModal = () => {
     setIsModalOpen(true);
+  };
+
+  const [hasAgreed, setHasAgreed] = useState(false);
+  const handleConfirmClick = () => {
+    console.log(hasAgreed);
+    if (hasAgreed) {
+      //goto next page
+      console.log("go to next page !");
+      navigate("/bookingconfirmation", { state: { bookingInfo: newBooking } });
+    } else {
+      setShowError(true);
+    }
   };
 
   return (
@@ -63,12 +80,6 @@ const BookingSummary = () => {
                 </ul>
               </div>
             </div>
-            // <BikeOption
-            //   groupName={data.groupName}
-            //   category={data.category}
-            //   description={data.description}
-            //   photos={data.photos}
-            // ></BikeOption>
           )}
 
           <div className="datePaymentSummary">
@@ -122,7 +133,12 @@ const BookingSummary = () => {
             </div>
           </div>
         </div>
-        <button className="bookingConfirmationConfirmBtn">Confirm</button>
+        <button
+          className="bookingConfirmationConfirmBtn"
+          onClick={() => handleConfirmClick()}
+        >
+          Confirm
+        </button>
         <div className="dataSecurity">
           <img src={images.secureIcon} alt="" />
           <h3>All your data are safe</h3>
@@ -132,7 +148,19 @@ const BookingSummary = () => {
           </p>
         </div>
       </div>
-      <Modal isModalOpen={isModalOpen} closeModal={closeModal}></Modal>
+      <Modal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        setHasAgreed={setHasAgreed}
+      ></Modal>
+      {showError && (
+        <ModalError
+          closeModal={closeModalError}
+          showError={showError}
+          errorMessage="You must agree to rental terms and conditions before continue"
+        ></ModalError>
+      )}
+      ;
     </div>
   );
 };

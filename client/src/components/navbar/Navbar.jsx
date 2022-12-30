@@ -37,7 +37,7 @@ const Navbar = () => {
         {showMeaning && (
           <div className="meaning">
             <div className="triangle"></div>
-            <p>[sɪn - chee] - defligthfuly easy</p>
+            <p>[sɪn - chee] - defligthfully easy</p>
           </div>
         )}
 

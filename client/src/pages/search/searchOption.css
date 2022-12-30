@@ -1,9 +1,9 @@
 .searchOption {
   width: 45%;
-  padding: 12px;
   border: 1px solid #00332c;
   border-radius: 10px;
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 .searchOptionBookBtn {
@@ -11,11 +11,14 @@
   border-radius: 10px;
   cursor: pointer;
   background-color: white;
+  height: 38px;
 }
 
 .searchOptionInfo {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 56px;
 }
 
 @media (max-width: 1080px) {

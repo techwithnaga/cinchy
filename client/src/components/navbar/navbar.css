@@ -11,6 +11,7 @@
   position: absolute;
   top: 95px;
   left: 70px;
+  color: var(--color-green700);
 }
 
 .navbarContainer {

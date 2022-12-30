@@ -5,10 +5,10 @@ const BikeOption = ({ groupName, category, description, photos }) => {
   return (
     <div className="bikeOption">
       <div className="bikeOptionHeader">
-        <h6>{groupName}</h6>
         <label style={{ color: "red" }} htmlFor="style">
           {category}
         </label>
+        <h6>{groupName}</h6>
       </div>
       <div className="bikeOptionInfo">
         <img

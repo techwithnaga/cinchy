@@ -961,6 +961,13 @@ const Search = () => {
                 >
                   All
                 </button>
+
+                {/* <div
+                  className="avaiableBikesDiv"
+                  onClick={() => setOption("All")}
+                >
+                  Style
+                </div> */}
                 <button
                   className="avaiableBikesBtn"
                   onClick={() => setOption("Style")}
