@@ -35,6 +35,10 @@
   margin-top: 1em;
 }
 
+.motorPhotoDescription img {
+  width: 33%;
+}
+
 .motorDescription {
   display: flex;
   flex-direction: column;

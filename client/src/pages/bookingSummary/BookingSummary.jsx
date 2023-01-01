@@ -39,7 +39,9 @@ const BookingSummary = () => {
     if (hasAgreed) {
       //goto next page
       console.log("go to next page !");
-      navigate("/bookingconfirmation", { state: { bookingInfo: newBooking } });
+      navigate("/bookingconfirmation", {
+        state: { bookingInfo: newBooking, motorGroup: data },
+      });
     } else {
       setShowError(true);
     }

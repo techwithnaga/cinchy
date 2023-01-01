@@ -124,7 +124,8 @@ export const verifyOTP = (req, res) => {
       //generate JWT token
       let data = {
         time: Date(),
-        userId: 12,
+        // userId: 12,
+        phoneNumber: phoneNumber,
       };
 
       const token = jwt.sign(data, process.env.JWT_SECRET_KEY, {

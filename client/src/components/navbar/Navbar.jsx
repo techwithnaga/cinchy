@@ -63,9 +63,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="navbarSupport">
-            <a href="">
-              <BsWhatsapp className="whatsappIcon"></BsWhatsapp> Support
-            </a>
+            <BsWhatsapp className="whatsappIcon"></BsWhatsapp> Support
           </li>
         </ul>
         <MdOutlineMenu

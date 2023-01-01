@@ -32,8 +32,7 @@ export const calculateRentalPrice = async (booking) => {
   const pricePerDay = motorGroup.price;
   const milisecondsPerDay = 24 * 60 * 60 * 1000;
   const duration = Math.ceil(
-    (booking.returnDate.getTime() - booking.deliveryDate.getTime()) /
-      milisecondsPerDay
+    (booking.returnDate - booking.deliveryDate) / milisecondsPerDay
   );
   booking.rentalDuration = duration;
   return duration * pricePerDay;

@@ -2,10 +2,10 @@ import { createContext, useReducer } from "react";
 
 const INITIAL_STATE = {
   days: 0,
-  deliveryDate: new Date(),
-  returnDate: new Date(),
-  startTime: 9 * 60 * 60 * 1000,
-  endTime: 9 * 60 * 60 * 1000,
+  deliveryDateInMillisecond: 0,
+  returnDateInMillisecond: 0,
+  // deliveryTime: 9 * 60 * 60 * 1000,
+  // returnTime: 9 * 60 * 60 * 1000,
   motorGroupId: "",
 };
 
@@ -29,10 +29,10 @@ export const SearchContextProvider = ({ children }) => {
     <SearchContext.Provider
       value={{
         days: state.days,
-        deliveryDate: state.deliveryDate,
-        returnDate: state.returnDate,
-        startTime: state.startTime,
-        endTime: state.endTime,
+        deliveryDateInMillisecond: state.deliveryDateInMillisecond,
+        returnDateInMillisecond: state.returnDateInMillisecond,
+        // deliveryTime: state.startTime,
+        // returnTime: state.endTime,
         motorGroupId: state.motorGroupId,
         dispatch,
       }}

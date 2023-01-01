@@ -11,8 +11,14 @@ import axios from "axios";
 const Information = () => {
   const isLoggedIn = sessionStorage.getItem("token");
   const { state } = useLocation();
-  const { motorGroupId, days, deliveryDate, returnDate } =
-    useContext(SearchContext);
+  const {
+    motorGroupId,
+    days,
+    deliveryDateInMillisecond,
+    returnDateInMillisecond,
+  } = useContext(SearchContext);
+
+  console.log("in information " + deliveryDateInMillisecond);
 
   const [user, setUser] = useState({
     firstName: "",
@@ -27,8 +33,8 @@ const Information = () => {
 
   const [booking, setBooking] = useState({
     motorGroup: motorGroupId,
-    deliveryDate: deliveryDate,
-    returnDate: returnDate,
+    deliveryDate: deliveryDateInMillisecond,
+    returnDate: returnDateInMillisecond,
     user: "",
     comments: "",
     flightNumber: "",
@@ -70,6 +76,18 @@ const Information = () => {
   //   "get"
   // );
 
+  // const { data, loading, error, reFetch } = useFetch(
+  //   `http://localhost:8800/api/motorGroup/${motorGroupId}`,
+  //   "get"
+  // );
+
+  // Promise.all([useFetch(
+  //   "http://localhost:8800/api/deliveryFee",
+  //   "get"
+  // ), useFetch(
+  //   `http://localhost:8800/api/motorGroup/${motorGroupId}`,
+  //   "get")]).then(([]) =>)
+
   const handleChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -83,6 +101,13 @@ const Information = () => {
       <Navbar2></Navbar2>
       <br />
       <ProgressBar step={2}></ProgressBar>
+      <div className="selectedMotorInfo">
+        <img src="" alt="" />
+        <div className="selectedMotorInfoDates"></div>
+
+        <h6>CHANGE</h6>
+      </div>
+
       <div className="informationContainer">
         <div className="driverInfo">
           <h5>Driver Info</h5>

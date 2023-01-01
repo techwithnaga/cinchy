@@ -5,12 +5,14 @@ import Navbar2 from "../../components/navbar2/Navbar2";
 import images from "../../pictures/picture";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { format } from "date-fns";
 
 const BookingConfirmation = () => {
-  const location = useLocation();
+  const { state } = useLocation();
 
-  const bookingInfo = location.state;
-  console.log(bookingInfo._id);
+  const bookingInfo = state.bookingInfo;
+  const motorGroup = state.motorGroup;
+
   return (
     <div className="BookingConfirmation">
       <Navbar2></Navbar2>
@@ -20,16 +22,19 @@ const BookingConfirmation = () => {
 
         <div className="bookingConfirmationMid">
           <div className="bookingConfirmationMidHeader">
-            <h5>Booking #12345</h5>
-            <p>Sun, 25 Dec 09:00 - Wed, 28 Dec 09:00</p>
+            <h5>Booking #{bookingInfo._id.slice(-5)}</h5>
+            <p>
+              {format(new Date(bookingInfo.deliveryDate), "E, d MMM HH:mm")} -
+              {format(new Date(bookingInfo.returnDate), "E, d MMM HH:mm")}
+            </p>
           </div>
           <div className="bookingConfirmationMidBody">
-            <img src={images.vespaPrimavera} alt="" />
+            <img src={motorGroup.photos} alt="" />
             <div className="bookingConfirmationMidBodyText">
-              <h6>Vespa Primavera</h6>
               <label htmlFor="Style" style={{ color: "red" }}>
-                Style
+                {motorGroup.category}
               </label>
+              <h6>{motorGroup.groupName}</h6>
             </div>
           </div>
         </div>

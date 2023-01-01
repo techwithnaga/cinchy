@@ -5,10 +5,16 @@ import "./searchOption.css";
 import ModalError from "../../components/modalError/ModalError";
 import { SearchContext } from "../../context/SearchContext";
 
-const SearchOption = ({ motorGroup, days, deliveryDate, returnDate }) => {
+const SearchOption = ({
+  motorGroup,
+  days,
+  deliveryDateInMillisecond,
+  returnDateInMillisecond,
+}) => {
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
   const [showError, setShowError] = useState(false);
+
   const closeModal = () => {
     setShowError(false);
   };
@@ -18,7 +24,12 @@ const SearchOption = ({ motorGroup, days, deliveryDate, returnDate }) => {
     } else {
       dispatch({
         type: "NEW_SEARCH",
-        payload: { motorGroupId, days, deliveryDate, returnDate },
+        payload: {
+          motorGroupId,
+          days,
+          deliveryDateInMillisecond,
+          returnDateInMillisecond,
+        },
       });
       navigate("/login");
     }

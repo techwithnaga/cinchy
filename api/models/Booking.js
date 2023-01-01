@@ -14,11 +14,11 @@ const BookingSchema = new Schema(
       type: String,
     },
     deliveryDate: {
-      type: Date,
+      type: Number,
       required: true,
     },
     returnDate: {
-      type: Date,
+      type: Number,
       required: true,
     },
     rentalDuration: {

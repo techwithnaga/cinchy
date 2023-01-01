@@ -55,9 +55,17 @@ const Search = () => {
   };
 
   const day_in_millisecond = 24 * 60 * 60 * 1000;
+  let deliveryDateInMillisecond = 0;
+  let returnDateInMillisecond = 0;
+
+  const [deliveryDateInMs, setDeliveryDateInMs] = useState(0);
+  const [returnDateInMs, setReturnDateInMs] = useState(0);
+
   const calculateDuration = () => {
     let startDate = dates[0].startDate.getTime() + times.startTimeVal;
+    setDeliveryDateInMs(startDate);
     let endDate = dates[0].endDate.getTime() + times.endTimeVal;
+    setReturnDateInMs(endDate);
     setDuration(Math.ceil(Math.abs(endDate - startDate) / day_in_millisecond));
   };
 
@@ -995,8 +1003,8 @@ const Search = () => {
                       key={i}
                       motorGroup={motorGroup}
                       days={duration}
-                      deliveryDate={dates[0].startDate}
-                      returnDate={dates[0].endDate}
+                      deliveryDateInMillisecond={deliveryDateInMs}
+                      returnDateInMillisecond={returnDateInMs}
                     ></SearchOption>
                   );
                 })}
