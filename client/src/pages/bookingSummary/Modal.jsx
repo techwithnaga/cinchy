@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./modal.css";
 import { IoClose } from "react-icons/io5";
 
-const Modal = ({ isModalOpen, closeModal, setHasAgreed }) => {
-  const handleAgreeClick = () => {
-    setHasAgreed(true);
+const Modal = ({ isModalOpen, closeModal, agreeToTNC, setAgreeToTNC }) => {
+  // const handleAgreeClick = () => {
+  //   setHasAgreed(true);
+  //   closeModal();
+  // };
+
+  const handleTNCClick = () => {
+    setAgreeToTNC(!agreeToTNC);
     closeModal();
   };
+
   return (
     <div className={`${isModalOpen ? "modal showModal " : "modal"}`}>
       <div className="modalContainer">
@@ -46,9 +52,22 @@ const Modal = ({ isModalOpen, closeModal, setHasAgreed }) => {
           doloribus repellat. Illo consectetur pariatur alias porro et atque,
           nobis quia?
         </p>
-        <button onClick={() => handleAgreeClick()} className="modalCloseBtn">
+        {/* <button onClick={() => handleAgreeClick()} className="modalCloseBtn">
           I agree with the above terms, conditions, and privacy policy
-        </button>
+        </button> */}
+        <div className="agreeToTNC">
+          <div className="agreeToTNCContainer">
+            <input
+              type="checkbox"
+              class="checkbox"
+              checked={agreeToTNC}
+              onClick={handleTNCClick}
+            />
+            <label style={{ textAlign: "left" }}>
+              I agree with our terms and conditions and privacy policy.
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -58,7 +58,7 @@ const SearchOption = ({
       <ModalError
         closeModal={closeModal}
         showError={showError}
-        errorMessage="Please select pick-up and drop-off dates."
+        errorMessage="Please select delivery and return dates."
       ></ModalError>
     </div>
   );

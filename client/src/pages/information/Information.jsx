@@ -7,6 +7,7 @@ import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import ModalError from "../../components/modalError/ModalError";
 
 const Information = () => {
   const isLoggedIn = sessionStorage.getItem("token");
@@ -17,8 +18,6 @@ const Information = () => {
     deliveryDateInMillisecond,
     returnDateInMillisecond,
   } = useContext(SearchContext);
-
-  console.log("in information " + deliveryDateInMillisecond);
 
   const [user, setUser] = useState({
     firstName: "",
@@ -46,7 +45,22 @@ const Information = () => {
   });
 
   const navigate = useNavigate();
+  const [showError, setShowError] = useState(false);
+  const closeModalError = () => {
+    setShowError(false);
+  };
+
   const handleContinueConfirmationClick = async () => {
+    //check if the user has filled all required field
+    if (
+      user.firstName === "" ||
+      booking.deliveryLocation === "" ||
+      booking.returnLocation === ""
+    ) {
+      //throw modal error
+      setShowError(true);
+    }
+
     let newUser;
     await axios
       .post("http://localhost:8800/api/user", user)
@@ -155,7 +169,7 @@ const Information = () => {
         <div className="otherInfo">
           <h5>Other Info</h5>
           <h6>
-            Pick Up/Delivery Area<span style={{ color: "red" }}>*</span>
+            Delivery Area<span style={{ color: "red" }}>*</span>
           </h6>
           <select
             name="deliveryLocation"
@@ -168,8 +182,12 @@ const Information = () => {
             </option>
             {data.map((df) => {
               return (
-                <option key={df._id} value={df._id}>
+                <option key={df._id} value={df._id} className="option">
                   {df.region} - {df.fee === 0 ? "Free" : `Rp ${df.fee}K`}
+                  {/* <div className="optionRegion"></div>
+                  <div className="optionDash">  </div>
+                  <div className="optionFee">
+                  </div> */}
                 </option>
               );
             })}
@@ -178,7 +196,7 @@ const Information = () => {
             Pick Up/Delivery Location<span style={{ color: "red" }}>*</span>
           </h6>
           <input type="text" placeholder="Please enter your hotel/landmark" /> */}
-          <h6>Pick Up/ Delivery Map Link</h6>
+          <h6>Delivery Map Link</h6>
           <input
             type="text"
             placeholder="Please paste google map URL"
@@ -214,7 +232,7 @@ const Information = () => {
 
         <div className="pickUp">
           <h6>
-            Drop Off/Return Area <span style={{ color: "red" }}>*</span>
+            Return Area <span style={{ color: "red" }}>*</span>
           </h6>
           {/* <input type="text" placeholder="Kuta (FREE)" /> */}
           <select
@@ -240,7 +258,7 @@ const Information = () => {
           </h6>
           <input type="text" placeholder="Please enter your hotel/landmark" /> */}
 
-          <h6>Drop Off/Return Map Link</h6>
+          <h6>Return Map Link</h6>
           <input
             type="text"
             placeholder="Please paste google map URL"
@@ -274,6 +292,14 @@ const Information = () => {
           Continue to confirmation
         </button>
       </div>
+
+      {showError && (
+        <ModalError
+          showError={showError}
+          closeModal={closeModalError}
+          errorMessage="Please fill out all required field."
+        ></ModalError>
+      )}
     </div>
   );
 };

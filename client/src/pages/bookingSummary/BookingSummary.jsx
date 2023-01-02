@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
 import "./bookingSummary.css";
@@ -13,6 +13,9 @@ import ModalError from "../../components/modalError/ModalError";
 const BookingSummary = () => {
   const { state } = useLocation();
   const [showError, setShowError] = useState(false);
+  const [agreeToMarketing, setAgreeToMarketing] = useState(true);
+  const [agreeToTNC, setAgreeToTNC] = useState(false);
+
   const closeModalError = () => {
     setShowError(false);
   };
@@ -35,8 +38,7 @@ const BookingSummary = () => {
 
   const [hasAgreed, setHasAgreed] = useState(false);
   const handleConfirmClick = () => {
-    console.log(hasAgreed);
-    if (hasAgreed) {
+    if (agreeToTNC) {
       //goto next page
       console.log("go to next page !");
       navigate("/bookingconfirmation", {
@@ -46,6 +48,12 @@ const BookingSummary = () => {
       setShowError(true);
     }
   };
+
+  const handleMarketingClick = () => {
+    setAgreeToMarketing(!agreeToMarketing);
+  };
+
+  useEffect(() => {}, [agreeToMarketing]);
 
   return (
     <div className="bookingConfirmation">
@@ -104,56 +112,41 @@ const BookingSummary = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="marketingAndTNC">
             <div className="bookingSummaryCancelation">
               <p>Free cancelation (24-hours notice)</p>
             </div>
-            <button className="learnMoreBtn" onClick={() => openModal()}>
+            <div className="BookingConfirmationCheckBox">
+              <input
+                type="checkbox"
+                class="checkbox"
+                checked={agreeToMarketing}
+                onClick={handleMarketingClick}
+              />
+              <label style={{ textAlign: "left" }}>
+                Opt in to marketing and newsletter emails. No spam, promised!
+              </label>
+            </div>
+            <button className="TNCBtn" onClick={() => openModal()}>
               Read All Terms & Conditions<span style={{ color: "red" }}>*</span>
             </button>
           </div>
         </div>
-        <h3>Confirmation</h3>
-        <div className="bookingConfirmationFooter">
-          <p style={{ color: "#90A3BF" }}>
-            We are getting to the end. Just few clicks and your rental is ready!
-          </p>
-          <br />
-          <div className="BookingConfirmationCheckBoxes">
-            {/* <div className="BookingConfirmationCheckBox">
-              <input type="checkbox" />
-              <label>
-                I agree with sending an Marketing and newsletter emails. No
-                spam, promissed!
-              </label>
-            </div> */}
-            <div className="BookingConfirmationCheckBox">
-              <input type="checkbox" />
-              <label>
-                I agree with sending an Marketing and newsletter emails. No
-                spam, promissed!
-              </label>
-            </div>
-          </div>
-        </div>
+
         <button
           className="bookingConfirmationConfirmBtn"
           onClick={() => handleConfirmClick()}
         >
           Confirm
         </button>
-        <div className="dataSecurity">
-          <img src={images.secureIcon} alt="" />
-          <h3>All your data are safe</h3>
-          <p style={{ color: "#90A3BF" }}>
-            We are using the most advanced security to provide you the best
-            experience ever.
-          </p>
-        </div>
       </div>
       <Modal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
-        setHasAgreed={setHasAgreed}
+        agreeToTNC={agreeToTNC}
+        setAgreeToTNC={setAgreeToTNC}
       ></Modal>
       {showError && (
         <ModalError

@@ -43,6 +43,23 @@
   z-index: 10;
 }
 
+.agreeToTNC {
+  width: 99%;
+  background-color: white;
+  border: 1px solid var(--color-green700);
+  border-radius: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-top: 24px;
+}
+
+.agreeToTNCContainer {
+  width: 50%;
+  display: flex;
+  gap: 25px;
+  margin: auto;
+}
+
 @media (max-width: 1080px) {
   .modalContainer {
     width: 80%;

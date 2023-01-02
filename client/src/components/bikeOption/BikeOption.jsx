@@ -8,7 +8,9 @@ const BikeOption = ({ groupName, category, description, photos }) => {
         <label style={{ color: "red" }} htmlFor="style">
           {category}
         </label>
-        <h6>{groupName}</h6>
+        <h6>
+          {groupName} <span style={{ fontWeight: "lighter" }}>or similiar</span>
+        </h6>
       </div>
       <div className="bikeOptionInfo">
         <img

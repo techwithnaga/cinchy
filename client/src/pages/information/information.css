@@ -115,6 +115,17 @@
   cursor: pointer;
 }
 
+/* .optionRegion {
+  width: 30%;
+}
+
+.option {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  background-color: red;
+} */
+
 @media (max-width: 1080px) {
   .informationContainer {
     width: 88%;

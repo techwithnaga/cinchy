@@ -105,7 +105,7 @@ const Search = () => {
       <div className="search">
         <div className="searchContainer">
           <div className="searchDateTimeContainer">
-            <h5>Pick-Up</h5>
+            <h5>Delivery</h5>
             <div className="searchDateTime">
               <div className="searchDateTimeItem">
                 <p>Date</p>
@@ -582,7 +582,7 @@ const Search = () => {
               </div>
             </div>
             <br />
-            <h5>Drop-Off</h5>
+            <h5>Return</h5>
             <div className="searchDateTime">
               <div className="searchDateTimeItem">
                 <p>Date</p>
