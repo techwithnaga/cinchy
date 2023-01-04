@@ -34,15 +34,18 @@ const motorGroupSchema = new Schema(
       required: true,
     },
     count: {
-      type: String,
+      type: Number,
     },
     bookedTime: [
       {
-        bookingId: { type: Schema.ObjectId },
-        startDate: { type: Number },
-        endDate: { type: Number },
+        startTime: { type: Number },
+        endTime: { type: Number },
       },
     ],
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );

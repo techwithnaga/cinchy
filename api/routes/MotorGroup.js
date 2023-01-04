@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", getMotorGroups);
+router.get("/:startTime&:endTime", getMotorGroups);
 router.get("/:id", getMotorGroup);
 router.post("/", createMotorGroup);
 router.put("/:id", updateMotorGroup);

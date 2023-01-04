@@ -13,11 +13,39 @@ export const createMotorGroup = async (req, res) => {
 export const getMotorGroups = async (req, res) => {
   try {
     const motorGroups = await MotorGroup.find();
+
+    motorGroups.forEach((mg) => {
+      if (mg.brand === "Vespa") {
+        return (mg.isAvailable = false);
+      } else {
+        let startTimeToSearch = req.params.startTime;
+        let endTimeToSearch = req.params.endTime;
+        let requiredMotor = 1;
+
+        mg.bookedTime.forEach((bt) => {
+          if (
+            bt.endTime >= startTimeToSearch &&
+            bt.startTime <= endTimeToSearch
+          ) {
+            requiredMotor += 1;
+          }
+        });
+
+        if (requiredMotor > mg.count) {
+          return (mg.isAvailable = false);
+        }
+      }
+    });
+    console.log(motorGroups);
     res.status(200).json(motorGroups);
   } catch (err) {
     res.status(500).json(err);
   }
 };
+
+// export const isAvailable = (bookedTime) => {
+//   const arr = bookedTime.sort((a, b));
+// };
 
 export const getMotorGroup = async (req, res) => {
   try {
