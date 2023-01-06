@@ -9,6 +9,7 @@ import useFetch from "../../hooks/useFetch";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { format } from "date-fns";
 import ModalError from "../../components/modalError/ModalError";
+import axios from "axios";
 
 const BookingSummary = () => {
   const { state } = useLocation();
@@ -39,8 +40,17 @@ const BookingSummary = () => {
   const [hasAgreed, setHasAgreed] = useState(false);
   const handleConfirmClick = () => {
     if (agreeToTNC) {
-      //goto next page
-      console.log("go to next page !");
+      let bookingId = newBooking._id;
+      let st = newBooking.deliveryDate;
+      let et = newBooking.returnDate;
+
+      axios
+        .put(`http://localhost:8000/api/motorGroup/${bookingId}`, {
+          bookedTime: [{ startTime: st, endtime: et }],
+        })
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
+
       navigate("/bookingconfirmation", {
         state: { bookingInfo: newBooking, motorGroup: data },
       });

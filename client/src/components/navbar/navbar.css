@@ -45,6 +45,21 @@
   border: 1px solid #00332c;
   color: #00332c;
 }
+
+.navbarSupport a {
+  color: var(--color-green700);
+  text-decoration: none;
+}
+
+.navbarSupport a:hover {
+  color: #fff;
+}
+
+.whatsappWrapper {
+  display: flex;
+  align-items: center;
+}
+
 .navbarNav {
   cursor: pointer;
 }
@@ -170,6 +185,17 @@
     text-align: center;
     border: 1px solid #faae2b;
     border-radius: 5px;
+  }
+
+  .sidebarLastItem a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .whatsappWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .greyArea {

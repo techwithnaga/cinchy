@@ -60,12 +60,11 @@ export const getMotorGroup = async (req, res) => {
 };
 
 export const updateMotorGroup = async (req, res) => {
+  console.log("updating");
   try {
-    const updatedGroup = await MotorGroup.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
+    const updatedGroup = await MotorGroup.findByIdAndUpdate(req.params.id, {
+      $push: { bookedTime: req.body },
+    });
     res.status(200).json(updatedGroup);
   } catch (err) {
     res.status(500).json(err);

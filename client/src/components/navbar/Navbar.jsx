@@ -63,7 +63,12 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="navbarSupport">
-            <BsWhatsapp className="whatsappIcon"></BsWhatsapp> Support
+            <a href="">
+              <div className="whatsappWrapper">
+                <BsWhatsapp className="whatsappIcon"></BsWhatsapp>{" "}
+                <p>Support</p>
+              </div>
+            </a>
           </li>
         </ul>
         <MdOutlineMenu
@@ -119,8 +124,11 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="sidebarLastItem">
-                  <a href="">
-                    <BsWhatsapp className="whatsappIcon"></BsWhatsapp>Support
+                  <a href="www.google.com" target="_blank">
+                    <div className="whatsappWrapper">
+                      <BsWhatsapp className="whatsappIcon"></BsWhatsapp>{" "}
+                      <p>Support</p>
+                    </div>
                   </a>
                 </li>
                 <li className="sidebarLastItem">

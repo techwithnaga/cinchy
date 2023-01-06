@@ -10,6 +10,7 @@ const SearchOption = ({
   days,
   deliveryDateInMillisecond,
   returnDateInMillisecond,
+  isAvailable,
 }) => {
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
@@ -35,7 +36,7 @@ const SearchOption = ({
     }
   };
   return (
-    <div className="searchOption">
+    <div className={isAvailable ? "searchOption" : "searchOption booked"}>
       <BikeOption
         groupName={motorGroup.groupName}
         category={motorGroup.category}
@@ -51,6 +52,7 @@ const SearchOption = ({
         <button
           className="searchOptionBookBtn"
           onClick={() => handleSearchBookNowClick(motorGroup._id)}
+          disabled={!isAvailable}
         >
           BOOK NOW
         </button>

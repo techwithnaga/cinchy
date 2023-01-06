@@ -72,7 +72,7 @@ const Search = () => {
   const [option, setOption] = useState("");
 
   const { data, loading, error, reFetch } = useFetch(
-    "http://localhost:8800/api/motorGroup",
+    `http://localhost:8800/api/motorGroup/${deliveryDateInMs}&${returnDateInMs}`,
     "get"
   );
 
@@ -1005,6 +1005,7 @@ const Search = () => {
                       days={duration}
                       deliveryDateInMillisecond={deliveryDateInMs}
                       returnDateInMillisecond={returnDateInMs}
+                      isAvailable={motorGroup.isAvailable}
                     ></SearchOption>
                   );
                 })}

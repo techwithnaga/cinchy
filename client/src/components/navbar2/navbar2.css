@@ -33,7 +33,14 @@
 
 .navbar2Support {
   border: 1px solid #00332c;
+  color: var(--color-green700);
 }
+
+.navbar2Support a {
+  display: flex;
+  align-items: center;
+}
+
 .navbar2Nav {
   cursor: pointer;
 }
