@@ -82,7 +82,10 @@ const Navbar2 = () => {
             </Link>
           </li>
           <li className="navbar2Support">
-            <a>
+            <a
+              href="https://api.whatsapp.com/send?phone=17085431524"
+              target="_blank"
+            >
               <BsWhatsapp className="whatsappIcon"></BsWhatsapp> Support
             </a>
           </li>
