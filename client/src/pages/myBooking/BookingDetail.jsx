@@ -1,39 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import images from "../../pictures/picture";
+import useFetch from "../../hooks/useFetch";
 
-const BookingDetail = () => {
+const BookingDetail = ({
+  bookingId,
+  deliveryDate,
+  returnDate,
+  groupName,
+  photos,
+  category,
+  totalRentalPrice,
+  deliveryArea,
+  deliveryURL,
+  returnArea,
+  returnURL,
+  isPaid,
+}) => {
   return (
     <div className="bookingDetail">
       <div className="bookingDetailTop">
-        <h6>Booking #1234567</h6>
-        <label> Sun, 25 Dec 09:00 - Wed, 28 Dec 09:00</label>
+        <h6>Booking #{bookingId}</h6>
+        <label>
+          {deliveryDate} - {returnDate}
+          {/*  -
+          {format(new Date(1673362800000), "E, d MMM HH:mm")} */}
+        </label>
       </div>
       <div className="bookingDetailMid">
-        <img src={images.vespaPrimavera} alt="" />
+        <img src={photos[0]} alt="" />
         <div className="bookingDetailMidDescription">
-          <h6>Vespa Primavera</h6>
-          <label style={{ color: "red" }}>Style</label>
-          <h6>IDR 480K</h6>
+          <h6>{groupName}</h6>
+          <label style={{ color: "red" }}>{category}</label>
+          <h6>IDR {totalRentalPrice}K</h6>
+          <button className="cancelBtn"> Cancel </button>
         </div>
       </div>
 
       <div className="bookingDetailBottom">
-        <h6>Pick-Up Location:</h6>
-        <p>Canggu, Bali</p>
-        <p>https://goo.gl/maps/cqMqHfu9MbEmyu7aA</p>
+        <h6>Delivery Area:</h6>
+        <p>{deliveryArea}</p>
         <br />
-        <h6>Return Location:</h6>
-        <p>Kuta, Bali</p>
-        <p>https://www.google.com/maps/place/kartika+plaza/@-8.7362073</p>
+        <h6>Delivery - Google Map Link</h6>
+        {deliveryURL === "" ? <p>Not Provided</p> : <p>{deliveryURL}</p>}
+
+        <br />
+        <h6>Return Area:</h6>
+        <p>{returnArea}</p>
+        <br />
+        <h6>Return - Google Map Link</h6>
+        {deliveryURL === "" ? <p>Not Provided</p> : <p>{returnURL}</p>}
         <br />
         <h6>Booking Paid Status:</h6>
-        <p>Paid(Y)/Not paid yet(N)</p>
+        {isPaid ? <p>Paid(Y)</p> : <p>Not paid yet(N)</p>}
         <br />
-        <h6>Vehicle Delivered Status:</h6>
-        <p>No</p>
+        {/* <h6>Vehicle Delivered Status:</h6>
+        <p>Delivered/ Not Delivered</p>
         <br />
         <h6>Vehicle Returned Status:</h6>
-        <p>None</p>
+        <p>Returned/ Not Returned</p> */}
       </div>
     </div>
   );

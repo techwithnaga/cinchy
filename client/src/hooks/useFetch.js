@@ -8,13 +8,13 @@ const useFetch = (url, method, body) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("fetching data using use fetch...");
       setLoading(true);
       let res;
-      // console.log("Fetching... ");
       try {
         if (method === "get") {
           res = await axios.get(url);
-          // console.log(url + " " + res);
+          console.log(url + " " + res);
         } else if (method === "post") {
           res = await axios.post(url, body);
         }

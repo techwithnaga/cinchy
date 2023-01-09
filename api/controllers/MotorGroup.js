@@ -36,7 +36,6 @@ export const getMotorGroups = async (req, res) => {
         }
       }
     });
-    console.log(motorGroups);
     res.status(200).json(motorGroups);
   } catch (err) {
     res.status(500).json(err);
@@ -59,12 +58,30 @@ export const getMotorGroup = async (req, res) => {
   }
 };
 
-export const updateMotorGroup = async (req, res) => {
-  console.log("updating");
+export const updateBookedTime = async (req, res) => {
+  console.log("in update booked time");
+  console.log(req.body);
+  console.log(req.params.id);
   try {
-    const updatedGroup = await MotorGroup.findByIdAndUpdate(req.params.id, {
-      $push: { bookedTime: req.body },
-    });
+    const updatedGroup = await MotorGroup.findByIdAndUpdate(
+      req.params.id,
+      { $push: { bookedTime: req.body } },
+      { new: true }
+    );
+    console.log(updatedGroup);
+    res.status(200).json(updatedGroup);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+export const updateMotorGroup = async (req, res) => {
+  try {
+    const updatedGroup = await MotorGroup.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     res.status(200).json(updatedGroup);
   } catch (err) {
     res.status(500).json(err);
@@ -74,6 +91,7 @@ export const updateMotorGroup = async (req, res) => {
 export const deleteMotorGroup = async (req, res) => {
   try {
     const deletedUser = await MotorGroup.findByIdAndDelete(req.params.id);
+
     res.status(200).json(deletedUser);
   } catch (err) {
     res.status(500).json(err);

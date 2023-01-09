@@ -38,16 +38,21 @@ const BookingSummary = () => {
   };
 
   const [hasAgreed, setHasAgreed] = useState(false);
-  const handleConfirmClick = () => {
+  const handleConfirmClick = async () => {
     if (agreeToTNC) {
       let bookingId = newBooking._id;
       let st = newBooking.deliveryDate;
       let et = newBooking.returnDate;
 
-      axios
-        .put(`http://localhost:8000/api/motorGroup/${bookingId}`, {
-          bookedTime: [{ startTime: st, endtime: et }],
-        })
+      await axios
+        .put(
+          `http://localhost:8800/api/motorGroup/updatetime/${newBooking.motorGroup}`,
+          {
+            bookingId: bookingId,
+            startTime: st,
+            endTime: et,
+          }
+        )
         .then((result) => console.log(result))
         .catch((err) => console.log(err));
 
@@ -165,7 +170,6 @@ const BookingSummary = () => {
           errorMessage="You must agree to rental terms and conditions before continue"
         ></ModalError>
       )}
-      ;
     </div>
   );
 };

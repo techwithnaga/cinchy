@@ -1,24 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import BookingDetail from "./BookingDetail";
 import "./myBooking.css";
+import useFetch from "../../hooks/useFetch";
+import format from "date-fns/format";
+import axios from "axios";
 
 const MyBooking = () => {
+  let phoneNumber = "62999777";
+  const { data, loading, error, reFetch } = useFetch(
+    `http://localhost:8800/api/user/mycurrentbooking/${phoneNumber}`,
+    "get"
+  );
+
+  const [currentBookings, setCurrentBookings] = useState(data);
+
+  const cancelBooking = async (motorGroupId, bookingId) => {
+    await axios.delete(
+      `http://localhost:8800/api/booking/${motorGroupId}/${bookingId}`
+    );
+    reFetch();
+  };
+
+  useEffect(() => {}, [currentBookings]);
+
   return (
     <div className="myBooking">
       <Navbar2></Navbar2>
-      <div className="myBookingContainer">
-        <h5 style={{ textAlign: "left" }}>My Booking</h5>
-        <br />
-        <h6>Recent Booking</h6>
-        <BookingDetail></BookingDetail>
-        <br />
-        <h6>Previous Booking</h6>
-        <BookingDetail></BookingDetail>
-        <br />
-        <h6>Cancelled Booking</h6>
-        <BookingDetail></BookingDetail>
-      </div>
+      {loading ? (
+        <h5> Loading...</h5>
+      ) : (
+        <div className="myBookingContainer">
+          <h5 style={{ textAlign: "left" }}>My Booking</h5>
+          <br />
+          <h6>Recent Booking</h6>
+          {data.map((currentBooking) => {
+            return <BookingDetail {...currentBooking}></BookingDetail>;
+          })}
+          <br />
+          {/* <h6>Previous Booking</h6>
+          <BookingDetail></BookingDetail>
+          <br />
+          <h6>Cancelled Booking</h6>
+          <BookingDetail></BookingDetail> */}
+        </div>
+      )}
     </div>
   );
 };

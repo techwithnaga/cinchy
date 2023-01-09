@@ -29,7 +29,9 @@ const Otp = () => {
   const [wrongOTP, setWrongOTP] = useState(false);
 
   const handleVerify = async () => {
+    //go to next page
     navigate("/information", { state: { phoneNumber: state.phoneNumber } });
+
     const verificationCode =
       digit1 + digit2 + digit3 + digit4 + digit5 + digit6;
 

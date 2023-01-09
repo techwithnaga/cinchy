@@ -36,7 +36,8 @@ const SearchOption = ({
     }
   };
   return (
-    <div className={isAvailable ? "searchOption" : "searchOption booked"}>
+    <div className={isAvailable ? "searchOption" : "searchOption"}>
+      {!isAvailable && <div className="bookedGreyCover"></div>}
       <BikeOption
         groupName={motorGroup.groupName}
         category={motorGroup.category}

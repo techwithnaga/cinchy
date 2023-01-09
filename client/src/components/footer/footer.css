@@ -54,6 +54,11 @@
   border: 2px solid yellow;
 } */
 
+.footerCol3 a {
+  text-decoration: none;
+  color: white;
+}
+
 @media (max-width: 1080px) {
   .footerTopContainer {
     width: 80%;

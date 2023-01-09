@@ -70,10 +70,23 @@ export const updateBooking = async (req, res) => {
 };
 
 export const deleteBooking = async (req, res) => {
+  const motorGroupId = req.params.motorGroupId;
+  // try {
+  //   const deletedBooking = await Booking.findByIdAndDelete(
+  //     req.params.bookingId
+  //   );
+  console.log("delete booking");
+
   try {
-    const deletedBooking = await Booking.findByIdAndDelete(req.params.id);
-    res.status(200).json(deletedBooking);
+    const res = await MotorGroup.findByIdAndUpdate(motorGroupId, {
+      $pull: { bookedTime: req.params.bookingId },
+    });
   } catch (err) {
     res.status(500).json(err);
   }
+
+  //   res.status(200).json(res);
+  // } catch (err) {
+  //   res.status(500).json(err);
+  // }
 };

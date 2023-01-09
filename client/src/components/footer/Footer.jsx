@@ -47,9 +47,19 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footerCol3">
-            <BsWhatsapp className="sosmedIcon"></BsWhatsapp>
-            <BsInstagram className="sosmedIcon"></BsInstagram>
-            <BsFacebook className="sosmedIcon"></BsFacebook>
+            <a
+              href="https://api.whatsapp.com/send?phone=17085431524"
+              target="_blank"
+            >
+              <BsWhatsapp className="sosmedIcon"></BsWhatsapp>
+            </a>
+            <a href="https://www.instagram.com/cinchy.life/" target="_blank">
+              <BsInstagram className="sosmedIcon"></BsInstagram>
+            </a>
+
+            <a href="https://www.facebook.com/cinchy.life" target="_blank">
+              <BsFacebook className="sosmedIcon"></BsFacebook>
+            </a>
           </div>
         </div>
       </div>
