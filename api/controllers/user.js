@@ -79,8 +79,12 @@ export const getMyCurrentBooking = async (req, res) => {
   try {
     const bookings = await Booking.find({ whatsappNumber: whatsappNumber });
 
+    const filteredBookings = bookings.filter(
+      (b) => b.returnDate >= new Date().getTime()
+    );
+
     let result = await Promise.all(
-      bookings.map(async (booking) => {
+      filteredBookings.map(async (booking) => {
         let currentBooking = {
           bookingId: "",
           fullBookingId: "",
@@ -98,38 +102,35 @@ export const getMyCurrentBooking = async (req, res) => {
           isPaid: false,
         };
 
-        if (booking.deliveryDate > new Date().getTime()) {
-          currentBooking.bookingId = booking._id.toString().slice(-5);
-          currentBooking.fullBookingId = booking._id;
-          currentBooking.deliveryDate = format(
-            new Date(booking.deliveryDate),
-            "E, d MMM HH:mm"
-          );
-          currentBooking.returnDate = format(
-            new Date(booking.returnDate),
-            "E, d MMM HH:mm"
-          );
+        currentBooking.bookingId = booking._id.toString().slice(-5);
+        currentBooking.fullBookingId = booking._id;
+        currentBooking.deliveryDate = format(
+          new Date(booking.deliveryDate),
+          "E, d MMM HH:mm"
+        );
+        currentBooking.returnDate = format(
+          new Date(booking.returnDate),
+          "E, d MMM HH:mm"
+        );
+        // console.log(booking.motorGroup);
+        const motorGroup = await MotorGroup.findById(booking.motorGroup);
+        currentBooking.motorGroupId = booking.motorGroup;
+        currentBooking.photos = motorGroup.photos;
+        currentBooking.groupName = motorGroup.groupName;
+        currentBooking.category = motorGroup.category;
+        currentBooking.totalRentalPrice = booking.totalRentalPrice;
 
-          const motorGroup = await MotorGroup.findById(booking.motorGroup);
-          currentBooking.motorGroupId = booking.motorGroup;
-          currentBooking.photos = motorGroup.photos;
-          currentBooking.groupName = motorGroup.groupName;
-          currentBooking.category = motorGroup.category;
-          currentBooking.totalRentalPrice = booking.totalRentalPrice;
+        const delivery = await DeliveryFee.findById(booking.deliveryLocation);
+        currentBooking.deliveryArea = delivery.region;
+        currentBooking.deliveryURL = booking.deliveryURL;
 
-          const delivery = await DeliveryFee.findById(booking.deliveryLocation);
-          currentBooking.deliveryArea = delivery.region;
-          currentBooking.deliveryURL = booking.deliveryURL;
-
-          const pickup = await DeliveryFee.findById(booking.returnLocation);
-          currentBooking.returnArea = pickup.region;
-          currentBooking.returnURL = booking.returnURL;
-          currentBooking.isPaid = booking.is_paid;
-          // currentBooking.isDelivered = booking.isDelivered;
-          // currentBooking.isReturned = booking.isReturned;
-
-          return currentBooking;
-        }
+        const pickup = await DeliveryFee.findById(booking.returnLocation);
+        currentBooking.returnArea = pickup.region;
+        currentBooking.returnURL = booking.returnURL;
+        currentBooking.isPaid = booking.is_paid;
+        // currentBooking.isDelivered = booking.isDelivered;
+        // currentBooking.isReturned = booking.isReturned;
+        return currentBooking;
       })
     );
     // console.log(result);

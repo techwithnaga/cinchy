@@ -11,7 +11,9 @@ export const createBooking = async (req, res) => {
 
   //calculate total Price
   const rentPrice = await calculateRentalPrice(newBooking);
-  newBooking.totalRentalPrice = fees + rentPrice;
+  newBooking.subtotal = rentPrice;
+  newBooking.discount = 0.3 * (fees + rentPrice);
+  newBooking.totalRentalPrice = fees + rentPrice - newBooking.discount;
 
   try {
     const savedBooking = await newBooking.save();

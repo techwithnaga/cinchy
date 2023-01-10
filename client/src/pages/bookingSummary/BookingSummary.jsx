@@ -116,8 +116,33 @@ const BookingSummary = () => {
               <br />
               <h4>Payment Summary</h4>
               <br />
-              <div className="paymentTotal">
-                <div className="payementTotalText">
+              <div className="paymentSummaryItems">
+                <div className="paymentSummaryItem">
+                  <label htmlFor="subtotal">Subtotal</label>
+                  <p>IDR {newBooking.subtotal}K</p>
+                </div>
+                <div className="paymentSummaryItem">
+                  <label htmlFor="subtotal">Delivery Fee</label>
+                  <p>IDR {newBooking.deliveryPickupFee}K</p>
+                </div>
+                <div className="paymentSummaryItem">
+                  <label htmlFor="subtotal">Accessories Fee</label>
+                  <p>IDR 0</p>
+                </div>
+                <div className="paymentSummaryItem">
+                  <label htmlFor="subtotal">
+                    30% Discount (until 30 Jun 2023)
+                  </label>
+                  <p>(IDR {newBooking.discount}K)</p>
+                </div>
+                <div className="paymentSummaryItem">
+                  <h5 htmlFor="subtotal">Total Payment</h5>
+                  <h4>IDR {newBooking.totalRentalPrice}K</h4>
+                </div>
+              </div>
+
+              {/* <div className="paymentTotal">
+                <div className="paymentTotalText">
                   <h5>Total</h5>
                   <label>(Incl. Delivery Fee)</label>
                 </div>
@@ -125,7 +150,7 @@ const BookingSummary = () => {
                 <div className="paymentTotalRupiah">
                   <h4>IDR {newBooking.totalRentalPrice}K</h4>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
