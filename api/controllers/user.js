@@ -75,6 +75,7 @@ export const getUsersBookings = async (req, res) => {
 
 export const getMyCurrentBooking = async (req, res) => {
   const whatsappNumber = req.params.whatsappNumber;
+
   try {
     const bookings = await Booking.find({ whatsappNumber: whatsappNumber });
 
@@ -82,8 +83,10 @@ export const getMyCurrentBooking = async (req, res) => {
       bookings.map(async (booking) => {
         let currentBooking = {
           bookingId: "",
+          fullBookingId: "",
           deliveryDate: "",
           returnDate: "",
+          motorGroupId: "",
           photos: [],
           groupName: "",
           category: "",
@@ -97,6 +100,7 @@ export const getMyCurrentBooking = async (req, res) => {
 
         if (booking.deliveryDate > new Date().getTime()) {
           currentBooking.bookingId = booking._id.toString().slice(-5);
+          currentBooking.fullBookingId = booking._id;
           currentBooking.deliveryDate = format(
             new Date(booking.deliveryDate),
             "E, d MMM HH:mm"
@@ -107,6 +111,7 @@ export const getMyCurrentBooking = async (req, res) => {
           );
 
           const motorGroup = await MotorGroup.findById(booking.motorGroup);
+          currentBooking.motorGroupId = booking.motorGroup;
           currentBooking.photos = motorGroup.photos;
           currentBooking.groupName = motorGroup.groupName;
           currentBooking.category = motorGroup.category;
@@ -122,10 +127,16 @@ export const getMyCurrentBooking = async (req, res) => {
           currentBooking.isPaid = booking.is_paid;
           // currentBooking.isDelivered = booking.isDelivered;
           // currentBooking.isReturned = booking.isReturned;
+
           return currentBooking;
         }
       })
     );
+    // console.log(result);
+    // if (result[0] === undefined) {
+    //   result = [];
+    // }
+
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);

@@ -71,22 +71,26 @@ export const updateBooking = async (req, res) => {
 
 export const deleteBooking = async (req, res) => {
   const motorGroupId = req.params.motorGroupId;
-  // try {
-  //   const deletedBooking = await Booking.findByIdAndDelete(
-  //     req.params.bookingId
-  //   );
-  console.log("delete booking");
-
+  const bookingId = req.params.bookingId;
+  // console.log("in delete booking...");
+  // console.log(motorGroupId + " " + bookingId);
   try {
-    const res = await MotorGroup.findByIdAndUpdate(motorGroupId, {
-      $pull: { bookedTime: req.params.bookingId },
-    });
+    const deletedBooking = await Booking.findByIdAndDelete(
+      req.params.bookingId
+    );
+
+    await MotorGroup.findByIdAndUpdate(
+      motorGroupId,
+      { $pull: { bookedTime: { bookingId: bookingId } } },
+      { safe: true, multi: true }
+    );
+    //   res.status(200).json("success");
+    // } catch (err) {
+    //   res.status(500).json(err);
+    // }
+
+    res.status(200).json(deletedBooking);
   } catch (err) {
     res.status(500).json(err);
   }
-
-  //   res.status(200).json(res);
-  // } catch (err) {
-  //   res.status(500).json(err);
-  // }
 };

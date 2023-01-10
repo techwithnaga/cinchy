@@ -13,7 +13,7 @@ const MyBooking = () => {
     "get"
   );
 
-  const [currentBookings, setCurrentBookings] = useState(data);
+  // const [currentBookings, setCurrentBookings] = useState(data);
 
   const cancelBooking = async (motorGroupId, bookingId) => {
     await axios.delete(
@@ -22,7 +22,7 @@ const MyBooking = () => {
     reFetch();
   };
 
-  useEffect(() => {}, [currentBookings]);
+  // useEffect(() => {}, [currentBookings]);
 
   return (
     <div className="myBooking">
@@ -35,7 +35,12 @@ const MyBooking = () => {
           <br />
           <h6>Recent Booking</h6>
           {data.map((currentBooking) => {
-            return <BookingDetail {...currentBooking}></BookingDetail>;
+            return (
+              <BookingDetail
+                {...currentBooking}
+                cancelBooking={cancelBooking}
+              ></BookingDetail>
+            );
           })}
           <br />
           {/* <h6>Previous Booking</h6>

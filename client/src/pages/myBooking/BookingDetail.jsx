@@ -4,8 +4,10 @@ import useFetch from "../../hooks/useFetch";
 
 const BookingDetail = ({
   bookingId,
+  fullBookingId,
   deliveryDate,
   returnDate,
+  motorGroupId,
   groupName,
   photos,
   category,
@@ -15,6 +17,7 @@ const BookingDetail = ({
   returnArea,
   returnURL,
   isPaid,
+  cancelBooking,
 }) => {
   return (
     <div className="bookingDetail">
@@ -29,10 +32,15 @@ const BookingDetail = ({
       <div className="bookingDetailMid">
         <img src={photos[0]} alt="" />
         <div className="bookingDetailMidDescription">
-          <h6>{groupName}</h6>
+          <h6>{groupName} or similiar</h6>
           <label style={{ color: "red" }}>{category}</label>
           <h6>IDR {totalRentalPrice}K</h6>
-          <button className="cancelBtn"> Cancel </button>
+          <button
+            className="cancelBtn"
+            onClick={() => cancelBooking(motorGroupId, fullBookingId)}
+          >
+            Cancel
+          </button>
         </div>
       </div>
 

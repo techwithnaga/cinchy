@@ -15,12 +15,18 @@ const SearchOption = ({
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
   const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const closeModal = () => {
     setShowError(false);
   };
   const handleSearchBookNowClick = (motorGroupId) => {
+    //check valid delivery date
     if (days === 0) {
+      setErrorMessage("Please select valid delivery and return dates.");
+      setShowError(true);
+    } else if (deliveryDateInMillisecond <= new Date().getTime()) {
+      setErrorMessage("Delivery time must be in the future.");
       setShowError(true);
     } else {
       dispatch({
@@ -61,7 +67,7 @@ const SearchOption = ({
       <ModalError
         closeModal={closeModal}
         showError={showError}
-        errorMessage="Please select delivery and return dates."
+        errorMessage={errorMessage}
       ></ModalError>
     </div>
   );

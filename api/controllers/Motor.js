@@ -1,7 +1,7 @@
 import MotorDetail from "../models/Motor.js";
 
 export const createMotor = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const newMotorDetail = new MotorDetail(req.body);
   try {
     const savedMotorDetail = await newMotorDetail.save();

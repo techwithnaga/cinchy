@@ -35,6 +35,9 @@ export const getMotorGroups = async (req, res) => {
           return (mg.isAvailable = false);
         }
       }
+      motorGroups.sort((a, b) => {
+        return b.isAvailable - a.isAvailable;
+      });
     });
     res.status(200).json(motorGroups);
   } catch (err) {
@@ -59,16 +62,16 @@ export const getMotorGroup = async (req, res) => {
 };
 
 export const updateBookedTime = async (req, res) => {
-  console.log("in update booked time");
-  console.log(req.body);
-  console.log(req.params.id);
+  // console.log("in update booked time");
+  // console.log(req.body);
+  // console.log(req.params.id);
   try {
     const updatedGroup = await MotorGroup.findByIdAndUpdate(
       req.params.id,
       { $push: { bookedTime: req.body } },
       { new: true }
     );
-    console.log(updatedGroup);
+    // console.log(updatedGroup);
     res.status(200).json(updatedGroup);
   } catch (err) {
     res.status(500).json(err);
