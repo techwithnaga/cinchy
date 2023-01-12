@@ -3,18 +3,25 @@ import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
 import "./information.css";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import ModalError from "../../components/modalError/ModalError";
+import { useEffect } from "react";
 
 const Information = () => {
   const isLoggedIn = sessionStorage.getItem("token");
+  const navigate = useNavigate();
+  if (!isLoggedIn) {
+    navigate("/login");
+  }
+
   const { state } = useLocation();
   const {
     motorGroupId,
-    days,
+    subtotal,
     deliveryDateInMillisecond,
     returnDateInMillisecond,
   } = useContext(SearchContext);
@@ -42,9 +49,12 @@ const Information = () => {
     deliveryURL: "",
     returnLocation: "",
     returnURL: "",
+    subtotal: 0,
+    deliveryPickupFee: 0,
+    totalRentalPrice: 0,
+    discount: 0,
   });
 
-  const navigate = useNavigate();
   const [showError, setShowError] = useState(false);
   const closeModalError = () => {
     setShowError(false);
@@ -61,23 +71,31 @@ const Information = () => {
       setShowError(true);
     }
 
+    //set prices
+    booking.subtotal = subtotal;
+    console.log(booking.deliveryLocation + " " + booking.returnLocation);
+    let delivery = await axios.get(
+      `http://localhost:8800/api/deliveryFee/${booking.deliveryLocation}`
+    );
+    let pickup = await axios.get(
+      `http://localhost:8800/api/deliveryFee/${booking.returnLocation}`
+    );
+    booking.deliveryPickupFee = delivery.data.fee + pickup.data.fee;
+    console.log("delivery pick up fee... " + booking.deliveryPickupFee);
+    booking.discount = Math.floor(0.3 * (subtotal + booking.deliveryPickupFee));
+    booking.totalRentalPrice =
+      subtotal + booking.deliveryPickupFee - booking.discount;
+
     let newUser;
     await axios
       .post("http://localhost:8800/api/user", user)
       .then((res) => {
         newUser = res.data;
+        booking.user = newUser._id;
+        console.log(booking);
+        navigate("/bookingSummary", { state: { newBooking: booking } });
       })
       .catch((err) => console.log(err));
-    booking.user = newUser._id;
-
-    await axios
-      .post("http://localhost:8800/api/booking", booking)
-      .then((res) => {
-        navigate("/bookingSummary", { state: { newBooking: res.data } });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const { data, loading, error, reFetch } = useFetch(
@@ -110,6 +128,19 @@ const Information = () => {
     setBooking((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+  // const handleBookingLocationChange = (e) => {
+  //   setBooking((prev) => ({ ...prev, [e.target.id]: e.target.value[0] }));
+  //   if (e.target.id === "deliveryLocation") {
+  //     setDeliveryFee(e.target.value[1]);
+  //     console.log("delivery Fee" + e.target.value[1]);
+  //   } else {
+  //     setPickUpFee(e.target.value[1]);
+  //     console.log("pick up Fee" + e.target.value[1]);
+  //   }
+  // };
+
+  useEffect(() => {});
+
   return (
     <div className="information">
       <Navbar2></Navbar2>
@@ -118,8 +149,6 @@ const Information = () => {
       <div className="selectedMotorInfo">
         <img src="" alt="" />
         <div className="selectedMotorInfoDates"></div>
-
-        <h6>CHANGE</h6>
       </div>
 
       <div className="informationContainer">
@@ -183,7 +212,7 @@ const Information = () => {
             {data.map((df) => {
               return (
                 <option key={df._id} value={df._id} className="option">
-                  {df.region} - {df.fee === 0 ? "Free" : `Rp ${df.fee}K`}
+                  {df.region}- {df.fee === 0 ? "Free" : `Rp ${df.fee}K`}
                   {/* <div className="optionRegion"></div>
                   <div className="optionDash">  </div>
                   <div className="optionFee">

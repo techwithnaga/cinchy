@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import BookingDetail from "./BookingDetail";
+import { useNavigate } from "react-router-dom";
 import "./myBooking.css";
 import useFetch from "../../hooks/useFetch";
 import format from "date-fns/format";
 import axios from "axios";
 
 const MyBooking = () => {
+  const isLoggedIn = sessionStorage.getItem("token");
+  const navigate = useNavigate();
+  if (!isLoggedIn) {
+    navigate("/login", { state: { fromPage: "mybooking" } });
+  }
+
   let phoneNumber = "62999777";
   const { data, loading, error, reFetch } = useFetch(
     `http://localhost:8800/api/user/mycurrentbooking/${phoneNumber}`,

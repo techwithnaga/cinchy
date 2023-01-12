@@ -36,7 +36,7 @@ import jwt from "jsonwebtoken";
 //         headers: {
 //           "Content-Type": "application/json",
 //           Authorization:
-//             "Bearer EAAIfuxmWLU0BAOa0fY3S8nmTBfJp1YQCMaZAVlrjUETN1YE4FrUq9onjQSwdUxGZAxtMgwsREbcsRXQms0WHxhUNzOHAjlkPQbjoXeDelhcOGvTjTBrWsG4IIcorbNXD60Je7HkUKjyhdV8IJfwEqwnoEKLAQMzzXrzSU7FIUXXUy9PYUvaUpPEMlV9YLtJFQ7slnbmkLZCmtWN46ZBW",
+//             "Bearer EAAIfuxmWLU0BAHHZAgr4snhP5eZBPdbC9pAp4qZBa1ZBb1mtB3FZAyeCUdAq6MkacBozeZCNGZCZAw4QttGapx6SGZBOcjia7uXrVAqNAJWQWLnjTBZAzHPu19ds1pRZB32NTtPKX5gNditPbSgKzZAAq0G2Y5UAWF9M4F3bdGUvfsymQhjuEBojYZCZCJj4kXqhKAmnzAISz0uCqwZAT0AsZC1l3Ve5",
 //         },
 //         body: JSON.stringify(body),
 //       }
@@ -50,7 +50,7 @@ import jwt from "jsonwebtoken";
 // };
 
 export const getOTP = async (req, res) => {
-  const phoneNumber = req.body.phoneNumber;
+  const phoneNumber = req.params.whatsappNumber;
   let otp = otpGen.generate(6, {
     upperCaseAlphabets: false,
     lowerCaseAlphabets: false,

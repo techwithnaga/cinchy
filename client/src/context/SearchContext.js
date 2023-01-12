@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 
 const INITIAL_STATE = {
-  days: 0,
+  subtotal: 0,
   deliveryDateInMillisecond: 0,
   returnDateInMillisecond: 0,
   // deliveryTime: 9 * 60 * 60 * 1000,
@@ -28,7 +28,7 @@ export const SearchContextProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
-        days: state.days,
+        subtotal: state.subtotal,
         deliveryDateInMillisecond: state.deliveryDateInMillisecond,
         returnDateInMillisecond: state.returnDateInMillisecond,
         // deliveryTime: state.startTime,

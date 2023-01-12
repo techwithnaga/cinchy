@@ -39,6 +39,17 @@
 .navbar2Support a {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: var(--color-green700);
+}
+
+.navbar2Support a :hover {
+  color: white;
+}
+
+.navbar2whatsappWrapper {
+  display: flex;
+  align-items: center;
 }
 
 .navbar2Nav {

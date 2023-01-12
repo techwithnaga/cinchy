@@ -11,6 +11,7 @@ const BookingConfirmation = () => {
   const { state } = useLocation();
 
   const bookingInfo = state.bookingInfo;
+  console.log(bookingInfo);
   const motorGroup = state.motorGroup;
 
   return (
@@ -56,8 +57,8 @@ const BookingConfirmation = () => {
         <br />
         <p>
           *Please note that we only accept{" "}
-          <span style={{ fontWeight: "bold" }}>Local Currency (IDR)</span> via{" "}
-          <span style={{ fontWeight: "bold" }}> Cash</span> or{" "}
+          <span style={{ fontWeight: "bold" }}>Local Currency (IDR)</span> via
+          <span style={{ fontWeight: "bold" }}> Cash</span> or
           <span style={{ fontWeight: "bold" }}>Bank Transfer. </span>
           (Online payment coming soon)
         </p>

@@ -12,12 +12,12 @@ const Countdown = ({ phonenumber }) => {
     setTimer(10);
     navigate("/otpConfirmation", { state: phonenumber });
 
-    // await axios
-    //   .post("http://localhost:8800/api/otp/getOTP", {
-    //     phonenumber: phonenumber,
-    //   })
-    //   .then((res) => {})
-    //   .catch((err) => {});
+    await axios
+      .post("http://localhost:8800/api/otp/getOTP", {
+        phonenumber: phonenumber,
+      })
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   useEffect(() => {

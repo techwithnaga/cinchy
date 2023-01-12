@@ -68,7 +68,7 @@ const Navbar = () => {
               target="_blank"
             >
               <div className="whatsappWrapper">
-                <BsWhatsapp className="whatsappIcon"></BsWhatsapp>{" "}
+                <BsWhatsapp className="whatsappIcon"></BsWhatsapp>
                 <p>Support</p>
               </div>
             </a>
@@ -142,9 +142,13 @@ const Navbar = () => {
                     BOOK NOW
                   </Link>
                 </li>
-                <div className="navbarLogout" onClick={() => handleLogout()}>
-                  {isLoggedIn ? <p>Log Out</p> : <p></p>}
-                </div>
+                <li>
+                  {isLoggedIn ? (
+                    <p onClick={() => handleLogout()}>Log Out</p>
+                  ) : (
+                    <p></p>
+                  )}
+                </li>
               </ul>
             </div>
           </div>

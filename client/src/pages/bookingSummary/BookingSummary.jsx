@@ -10,6 +10,7 @@ import { BsInfoCircleFill } from "react-icons/bs";
 import { format } from "date-fns";
 import ModalError from "../../components/modalError/ModalError";
 import axios from "axios";
+import formatNumber from "../../utils/formatNumber";
 
 const BookingSummary = () => {
   const { state } = useLocation();
@@ -44,6 +45,14 @@ const BookingSummary = () => {
       let st = newBooking.deliveryDate;
       let et = newBooking.returnDate;
 
+      //create new booking
+      let createdBooking = await axios
+        .post("http://localhost:8800/api/booking", newBooking)
+        .catch((err) => {
+          console.log(err);
+        });
+
+      //update motorgroup
       await axios
         .put(
           `http://localhost:8800/api/motorGroup/updatetime/${newBooking.motorGroup}`,
@@ -53,12 +62,12 @@ const BookingSummary = () => {
             endTime: et,
           }
         )
-        .then((result) => console.log(result))
+        .then(() => {
+          navigate("/bookingconfirmation", {
+            state: { bookingInfo: createdBooking.data, motorGroup: data },
+          });
+        })
         .catch((err) => console.log(err));
-
-      navigate("/bookingconfirmation", {
-        state: { bookingInfo: newBooking, motorGroup: data },
-      });
     } else {
       setShowError(true);
     }
@@ -119,11 +128,11 @@ const BookingSummary = () => {
               <div className="paymentSummaryItems">
                 <div className="paymentSummaryItem">
                   <label htmlFor="subtotal">Subtotal</label>
-                  <p>IDR {newBooking.subtotal}K</p>
+                  <p>IDR {formatNumber(newBooking.subtotal)}K</p>
                 </div>
                 <div className="paymentSummaryItem">
                   <label htmlFor="subtotal">Delivery Fee</label>
-                  <p>IDR {newBooking.deliveryPickupFee}K</p>
+                  <p>IDR {formatNumber(newBooking.deliveryPickupFee)}K</p>
                 </div>
                 <div className="paymentSummaryItem">
                   <label htmlFor="subtotal">Accessories Fee</label>
@@ -133,11 +142,11 @@ const BookingSummary = () => {
                   <label htmlFor="subtotal">
                     30% Discount (until 30 Jun 2023)
                   </label>
-                  <p>(IDR {newBooking.discount}K)</p>
+                  <p>(IDR {formatNumber(newBooking.discount)}K)</p>
                 </div>
                 <div className="paymentSummaryItem">
                   <h5 htmlFor="subtotal">Total Payment</h5>
-                  <h4>IDR {newBooking.totalRentalPrice}K</h4>
+                  <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
                 </div>
               </div>
 

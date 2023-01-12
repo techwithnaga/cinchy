@@ -9,7 +9,7 @@ const BikeOption = ({ groupName, category, description, photos }) => {
           {category}
         </label>
         <h6>
-          {groupName} <span style={{ fontWeight: "lighter" }}>or similiar</span>
+          {groupName} <span style={{ fontWeight: "lighter" }}>or similar</span>
         </h6>
       </div>
       <div className="bikeOptionInfo">

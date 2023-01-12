@@ -86,7 +86,10 @@ const Navbar2 = () => {
               href="https://api.whatsapp.com/send?phone=17085431524"
               target="_blank"
             >
-              <BsWhatsapp className="whatsappIcon"></BsWhatsapp> Support
+              <div className="navbar2whatsappWrapper">
+                <BsWhatsapp className="whatsappIcon"></BsWhatsapp>
+                <p>Support</p>
+              </div>
             </a>
           </li>
         </ul>
@@ -155,9 +158,16 @@ const Navbar2 = () => {
                     BOOK NOW
                   </Link>
                 </li>
-                <div className="navbar2Logout" onClick={() => handleLogout()}>
-                  {isLoggedIn ? <p>Log Out</p> : <p></p>}
-                </div>
+                <li>
+                  {isLoggedIn ? (
+                    <p onClick={() => handleLogout()}>Log Out</p>
+                  ) : (
+                    <p></p>
+                  )}
+                </li>
+                {/* // <div className="navbar2Logout" onClick={() => handleLogout()}>
+                //   {isLoggedIn ? <p>Log Out</p> : <p></p>}
+                // </div> */}
               </ul>
             </div>
           </div>

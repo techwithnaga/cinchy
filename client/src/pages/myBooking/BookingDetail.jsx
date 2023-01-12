@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import images from "../../pictures/picture";
 import useFetch from "../../hooks/useFetch";
+import formatNumber from "../../utils/formatNumber";
 
 const BookingDetail = ({
   bookingId,
@@ -32,9 +33,9 @@ const BookingDetail = ({
       <div className="bookingDetailMid">
         <img src={photos[0]} alt="" />
         <div className="bookingDetailMidDescription">
-          <h6>{groupName} or similiar</h6>
+          <h6>{groupName} or similar</h6>
           <label style={{ color: "red" }}>{category}</label>
-          <h6>IDR {totalRentalPrice}K</h6>
+          <h6>IDR {formatNumber(totalRentalPrice)}K</h6>
           <button
             className="cancelBtn"
             onClick={() => cancelBooking(motorGroupId, fullBookingId)}
@@ -49,14 +50,25 @@ const BookingDetail = ({
         <p>{deliveryArea}</p>
         <br />
         <h6>Delivery - Google Map Link</h6>
-        {deliveryURL === "" ? <p>Not Provided</p> : <p>{deliveryURL}</p>}
-
+        {deliveryURL === "" ? (
+          <p>Not Provided</p>
+        ) : (
+          <p>
+            <a href={deliveryURL}>{deliveryURL}</a>
+          </p>
+        )}
         <br />
         <h6>Return Area:</h6>
         <p>{returnArea}</p>
         <br />
         <h6>Return - Google Map Link</h6>
-        {deliveryURL === "" ? <p>Not Provided</p> : <p>{returnURL}</p>}
+        {returnURL === "" ? (
+          <p>Not Provided</p>
+        ) : (
+          <p>
+            <a href={returnURL}>{returnURL}</a>
+          </p>
+        )}
         <br />
         <h6>Booking Paid Status:</h6>
         {isPaid ? <p>Paid(Y)</p> : <p>Not paid yet(N)</p>}

@@ -20,7 +20,7 @@ const SearchOption = ({
   const closeModal = () => {
     setShowError(false);
   };
-  const handleSearchBookNowClick = (motorGroupId) => {
+  const handleSearchBookNowClick = (motorGroupId, priceperday) => {
     //check valid delivery date
     if (days === 0) {
       setErrorMessage("Please select valid delivery and return dates.");
@@ -29,16 +29,17 @@ const SearchOption = ({
       setErrorMessage("Delivery time must be in the future.");
       setShowError(true);
     } else {
+      let subtotal = days * priceperday;
       dispatch({
         type: "NEW_SEARCH",
         payload: {
           motorGroupId,
-          days,
+          subtotal,
           deliveryDateInMillisecond,
           returnDateInMillisecond,
         },
       });
-      navigate("/login");
+      navigate("/login", { state: { fromPage: "search" } });
     }
   };
   return (
@@ -58,7 +59,9 @@ const SearchOption = ({
         </div>
         <button
           className="searchOptionBookBtn"
-          onClick={() => handleSearchBookNowClick(motorGroup._id)}
+          onClick={() =>
+            handleSearchBookNowClick(motorGroup._id, motorGroup.price)
+          }
           disabled={!isAvailable}
         >
           BOOK NOW

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ModalError from "../modalError/ModalError";
 import "./phonenumber.css";
 
@@ -9,12 +9,15 @@ const Phonenumber = () => {
   const [phonenumber, setPhoneNumber] = useState("");
   const [error, setShowError] = useState(false);
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleLoginClick = () => {
     if (phonenumber.length < 8) {
       setShowError(true);
     } else {
-      navigate("/otpConfirmation", { state: { phoneNumber: phonenumber } });
+      navigate("/otpConfirmation", {
+        state: { phoneNumber: phonenumber, fromPage: state.fromPage },
+      });
     }
   };
 
