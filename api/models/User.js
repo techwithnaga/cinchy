@@ -48,7 +48,7 @@ const userSchema = new Schema(
     },
     agreeMarketing: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     hearAboutUs: {
       type: String,

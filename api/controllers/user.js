@@ -16,6 +16,7 @@ export const getUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   const whatsappNumber = req.body.whatsappNumber;
+
   try {
     const user = await User.findOne({ whatsappNumber: whatsappNumber });
     if (user) {

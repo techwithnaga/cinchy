@@ -92,7 +92,6 @@ const Information = () => {
       .then((res) => {
         newUser = res.data;
         booking.user = newUser._id;
-        console.log(booking);
         navigate("/bookingSummary", { state: { newBooking: booking } });
       })
       .catch((err) => console.log(err));

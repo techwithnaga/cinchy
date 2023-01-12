@@ -68,6 +68,12 @@ const BookingSummary = () => {
           });
         })
         .catch((err) => console.log(err));
+
+      //update user
+      console.log(newBooking.user);
+      await axios.put(`http://localhost:8800/api/user/${newBooking.user}`, {
+        agreeMarketing: agreeToMarketing,
+      });
     } else {
       setShowError(true);
     }

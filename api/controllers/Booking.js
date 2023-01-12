@@ -3,7 +3,7 @@ import DeliveryFee from "../models/DeliveryFee.js";
 import MotorGroup from "../models/MotorGroup.js";
 
 export const createBooking = async (req, res) => {
-  const newBooking = new Booking(req.body);
+  let newBooking = new Booking(req.body);
 
   //calculate delivery fee
   const fees = await calculateDeliveryFee(newBooking);
