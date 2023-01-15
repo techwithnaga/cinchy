@@ -1,6 +1,7 @@
 import Booking from "../models/Booking.js";
 import DeliveryFee from "../models/DeliveryFee.js";
 import MotorGroup from "../models/MotorGroup.js";
+import fetch from "node-fetch";
 
 export const createBooking = async (req, res) => {
   let newBooking = new Booking(req.body);
@@ -94,5 +95,92 @@ export const deleteBooking = async (req, res) => {
     res.status(200).json(deletedBooking);
   } catch (err) {
     res.status(500).json(err);
+  }
+};
+
+export const sendBookingConfirmation = async (req, res) => {
+  const firstName = req.body.firstName;
+  const phoneNumber = req.body.phoneNumber;
+  const reservationNumber = req.body.reservationNumber;
+  const groupName = req.body.groupName;
+  const deliveryDate = req.body.deliveryDate;
+  const deliveryLocation = req.body.deliveryLocation;
+  const returnDate = req.body.returnDate;
+  const returnLocation = req.body.returnLocation;
+
+  console.log(firstName);
+  console.log(phoneNumber);
+  console.log(reservationNumber);
+  console.log(groupName);
+  console.log(deliveryDate);
+  console.log(deliveryLocation);
+  console.log(returnDate);
+  console.log(returnLocation);
+
+  const body = {
+    messaging_product: "whatsapp",
+    to: `${phoneNumber}`,
+    type: "template",
+    template: {
+      name: "cinchy_booking_confirmation",
+      language: { code: "en" },
+      components: [
+        {
+          type: "body",
+          parameters: [
+            {
+              type: "text",
+              text: firstName,
+            },
+            {
+              type: "text",
+              text: reservationNumber,
+            },
+            {
+              type: "text",
+              text: groupName,
+            },
+            {
+              type: "text",
+              text: deliveryDate,
+            },
+            {
+              type: "text",
+              text: deliveryLocation,
+            },
+            {
+              type: "text",
+              text: returnDate,
+            },
+            {
+              type: "text",
+              text: returnLocation,
+            },
+          ],
+        },
+      ],
+    },
+  };
+
+  try {
+    const response = await fetch(
+      "https://graph.facebook.com/v15.0/114548434858579/messages",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + process.env.FBTOKEN,
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    if (response.status === 200) {
+      res.status(response.status).json("Confirmation message sent");
+    } else {
+      res.status(response.status).json(response.statusText);
+    }
+  } catch (error) {
+    res.status(500).json(error);
   }
 };

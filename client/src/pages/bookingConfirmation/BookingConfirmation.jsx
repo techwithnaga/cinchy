@@ -11,7 +11,6 @@ const BookingConfirmation = () => {
   const { state } = useLocation();
 
   const bookingInfo = state.bookingInfo;
-  console.log(bookingInfo);
   const motorGroup = state.motorGroup;
 
   return (

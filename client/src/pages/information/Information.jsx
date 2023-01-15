@@ -69,32 +69,33 @@ const Information = () => {
     ) {
       //throw modal error
       setShowError(true);
+    } else {
+      //set prices
+      booking.subtotal = subtotal;
+      let delivery = await axios.get(
+        `http://localhost:8800/api/deliveryFee/${booking.deliveryLocation}`
+      );
+      let pickup = await axios.get(
+        `http://localhost:8800/api/deliveryFee/${booking.returnLocation}`
+      );
+      booking.deliveryPickupFee = delivery.data.fee + pickup.data.fee;
+      console.log("delivery pick up fee... " + booking.deliveryPickupFee);
+      booking.discount = Math.floor(
+        0.3 * (subtotal + booking.deliveryPickupFee)
+      );
+      booking.totalRentalPrice =
+        subtotal + booking.deliveryPickupFee - booking.discount;
+
+      let newUser;
+      await axios
+        .post("http://localhost:8800/api/user", user)
+        .then((res) => {
+          newUser = res.data;
+          booking.user = newUser._id;
+          navigate("/bookingSummary", { state: { newBooking: booking } });
+        })
+        .catch((err) => console.log(err));
     }
-
-    //set prices
-    booking.subtotal = subtotal;
-    console.log(booking.deliveryLocation + " " + booking.returnLocation);
-    let delivery = await axios.get(
-      `http://localhost:8800/api/deliveryFee/${booking.deliveryLocation}`
-    );
-    let pickup = await axios.get(
-      `http://localhost:8800/api/deliveryFee/${booking.returnLocation}`
-    );
-    booking.deliveryPickupFee = delivery.data.fee + pickup.data.fee;
-    console.log("delivery pick up fee... " + booking.deliveryPickupFee);
-    booking.discount = Math.floor(0.3 * (subtotal + booking.deliveryPickupFee));
-    booking.totalRentalPrice =
-      subtotal + booking.deliveryPickupFee - booking.discount;
-
-    let newUser;
-    await axios
-      .post("http://localhost:8800/api/user", user)
-      .then((res) => {
-        newUser = res.data;
-        booking.user = newUser._id;
-        navigate("/bookingSummary", { state: { newBooking: booking } });
-      })
-      .catch((err) => console.log(err));
   };
 
   const { data, loading, error, reFetch } = useFetch(

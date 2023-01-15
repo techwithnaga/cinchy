@@ -41,7 +41,6 @@ const BookingSummary = () => {
   const [hasAgreed, setHasAgreed] = useState(false);
   const handleConfirmClick = async () => {
     if (agreeToTNC) {
-      let bookingId = newBooking._id;
       let st = newBooking.deliveryDate;
       let et = newBooking.returnDate;
 
@@ -53,27 +52,65 @@ const BookingSummary = () => {
         });
 
       //update motorgroup
+      await axios.put(
+        `http://localhost:8800/api/motorGroup/updatetime/${newBooking.motorGroup}`,
+        {
+          bookingId: createdBooking._id,
+          startTime: st,
+          endTime: et,
+        }
+      );
+
+      //update user
+      await axios.put(`http://localhost:8800/api/user/${newBooking.user}`, {
+        agreeMarketing: agreeToMarketing,
+      });
+
+      //send confirmation to user
+      const user = await axios.get(
+        `http://localhost:8800/api/user/${newBooking.user}`
+      );
+
+      let delivery = {};
+      let pickup = {};
       await axios
-        .put(
-          `http://localhost:8800/api/motorGroup/updatetime/${newBooking.motorGroup}`,
-          {
-            bookingId: bookingId,
-            startTime: st,
-            endTime: et,
-          }
+        .get(
+          `http://localhost:8800/api/deliveryFee/${newBooking.deliveryLocation}`
         )
+        .then((res) => {
+          delivery = res;
+        });
+      await axios
+        .get(
+          `http://localhost:8800/api/deliveryFee/${newBooking.returnLocation}`
+        )
+        .then((res) => {
+          pickup = res;
+        });
+      console.log(delivery.region);
+
+      await axios
+        .post("http://localhost:8800/api/booking/sendbookingconfirmation", {
+          firstName: "Masnaga",
+          phoneNumber: "17085431524",
+          reservationNumber: "12345",
+          groupName: data.groupName,
+          deliveryDate: format(
+            new Date(newBooking.deliveryDate),
+            "E, d MMM HH:mm"
+          ),
+          deliveryLocation: "Kuta",
+          returnDate: format(new Date(newBooking.returnDate), "E, d MMM HH:mm"),
+          returnLocation: "Ubud",
+        })
         .then(() => {
           navigate("/bookingconfirmation", {
             state: { bookingInfo: createdBooking.data, motorGroup: data },
           });
         })
-        .catch((err) => console.log(err));
-
-      //update user
-      console.log(newBooking.user);
-      await axios.put(`http://localhost:8800/api/user/${newBooking.user}`, {
-        agreeMarketing: agreeToMarketing,
-      });
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       setShowError(true);
     }

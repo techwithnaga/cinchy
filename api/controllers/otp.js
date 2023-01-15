@@ -71,7 +71,7 @@ export const getOTP = async (req, res) => {
     to: `${phoneNumber}`,
     type: "template",
     template: {
-      name: "testaja",
+      name: "cinchy_otp",
       language: { code: "en_US" },
       components: [
         {
@@ -93,7 +93,7 @@ export const getOTP = async (req, res) => {
 
   try {
     const response = await fetch(
-      "https://graph.facebook.com/v15.0/100853682764065/messages",
+      "https://graph.facebook.com/v15.0/114548434858579/messages",
       {
         method: "POST",
         headers: {
