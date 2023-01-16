@@ -15,7 +15,7 @@ const MyBooking = () => {
 
   let phoneNumber = "62999777";
   const { data, loading, error, reFetch } = useFetch(
-    `http://localhost:8800/api/user/mycurrentbooking/${phoneNumber}`,
+    `${process.env.REACT_APP_API_ENDPOINT}/api/user/mycurrentbooking/${phoneNumber}`,
     "get"
   );
 
@@ -23,7 +23,7 @@ const MyBooking = () => {
 
   const cancelBooking = async (motorGroupId, bookingId) => {
     await axios.delete(
-      `http://localhost:8800/api/booking/${motorGroupId}/${bookingId}`
+      `${process.env.REACT_APP_API_ENDPOINT}/api/booking/${motorGroupId}/${bookingId}`
     );
     reFetch();
   };

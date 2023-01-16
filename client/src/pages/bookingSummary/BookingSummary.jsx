@@ -24,7 +24,7 @@ const BookingSummary = () => {
 
   const newBooking = state.newBooking;
   const { data, loading, error, reFetch } = useFetch(
-    `http://localhost:8800/api/motorGroup/${newBooking.motorGroup}`,
+    `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${newBooking.motorGroup}`,
     "get"
   );
 
@@ -45,13 +45,13 @@ const BookingSummary = () => {
 
       //create new booking
       const createdBooking = await axios.post(
-        "http://localhost:8800/api/booking",
+        `${process.env.REACT_APP_API_ENDPOINT}/api/booking`,
         newBooking
       );
 
       //update motorgroup
       const mg = await axios.put(
-        `http://localhost:8800/api/motorGroup/updatetime/${newBooking.motorGroup}`,
+        `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/updatetime/${newBooking.motorGroup}`,
         {
           bookingId: createdBooking._id,
           startTime: st,
@@ -61,7 +61,7 @@ const BookingSummary = () => {
 
       //update agreeTo Marketing
       const updatedUser = await axios.put(
-        `http://localhost:8800/api/user/${newBooking.user}`,
+        `${process.env.REACT_APP_API_ENDPOINT}/api/user/${newBooking.user}`,
         {
           agreeMarketing: agreeToMarketing,
         }
@@ -74,27 +74,33 @@ const BookingSummary = () => {
 
       //send confirmation to user
       const delivery = await axios.get(
-        `http://localhost:8800/api/deliveryFee/${newBooking.deliveryLocation}`
+        `${process.env.REACT_APP_API_ENDPOINT}/api/deliveryFee/${newBooking.deliveryLocation}`
       );
 
       const pickup = await axios.get(
-        `http://localhost:8800/api/deliveryFee/${newBooking.returnLocation}`
+        `${process.env.REACT_APP_API_ENDPOINT}/api/deliveryFee/${newBooking.returnLocation}`
       );
 
       await axios
-        .post("http://localhost:8800/api/booking/sendbookingconfirmation", {
-          firstName: updatedUser.data.firstName,
-          phoneNumber: updatedUser.data.whatsappNumber,
-          reservationNumber: createdBooking.data._id.slice(-5),
-          groupName: data.groupName,
-          deliveryDate: format(
-            new Date(newBooking.deliveryDate),
-            "E, d MMM HH:mm"
-          ),
-          deliveryLocation: delivery.data.region,
-          returnDate: format(new Date(newBooking.returnDate), "E, d MMM HH:mm"),
-          returnLocation: pickup.data.region,
-        })
+        .post(
+          `${process.env.REACT_APP_API_ENDPOINT}/api/booking/sendbookingconfirmation`,
+          {
+            firstName: updatedUser.data.firstName,
+            phoneNumber: updatedUser.data.whatsappNumber,
+            reservationNumber: createdBooking.data._id.slice(-5),
+            groupName: data.groupName,
+            deliveryDate: format(
+              new Date(newBooking.deliveryDate),
+              "E, d MMM HH:mm"
+            ),
+            deliveryLocation: delivery.data.region,
+            returnDate: format(
+              new Date(newBooking.returnDate),
+              "E, d MMM HH:mm"
+            ),
+            returnLocation: pickup.data.region,
+          }
+        )
         .then(() => {
           navigate("/bookingconfirmation", {
             state: { bookingInfo: createdBooking.data, motorGroup: data },

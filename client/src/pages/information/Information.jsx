@@ -72,10 +72,10 @@ const Information = () => {
       //set prices
       booking.subtotal = subtotal;
       let delivery = await axios.get(
-        `http://localhost:8800/api/deliveryFee/${booking.deliveryLocation}`
+        `${process.env.REACT_APP_API_ENDPOINT}/api/deliveryFee/${booking.deliveryLocation}`
       );
       let pickup = await axios.get(
-        `http://localhost:8800/api/deliveryFee/${booking.returnLocation}`
+        `${process.env.REACT_APP_API_ENDPOINT}/api/deliveryFee/${booking.returnLocation}`
       );
       booking.deliveryPickupFee = delivery.data.fee + pickup.data.fee;
 
@@ -87,7 +87,7 @@ const Information = () => {
 
       let newUser;
       await axios
-        .post("http://localhost:8800/api/user", user)
+        .post(`${process.env.REACT_APP_API_ENDPOINT}/api/user`, user)
         .then((res) => {
           newUser = res.data;
           booking.user = newUser._id;
@@ -98,7 +98,7 @@ const Information = () => {
   };
 
   const { data, loading, error, reFetch } = useFetch(
-    "http://localhost:8800/api/deliveryFee",
+    `${process.env.REACT_APP_API_ENDPOINT}/api/deliveryFee`,
     "get"
   );
 

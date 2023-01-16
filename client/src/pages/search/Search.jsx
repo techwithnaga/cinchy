@@ -73,7 +73,7 @@ const Search = () => {
   const [option, setOption] = useState("");
 
   const { data, loading, error, reFetch } = useFetch(
-    `http://localhost:8800/api/motorGroup/${deliveryDateInMs}&${returnDateInMs}`,
+    `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${deliveryDateInMs}&${returnDateInMs}`,
     "get"
   );
 

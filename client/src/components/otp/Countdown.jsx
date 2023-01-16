@@ -13,7 +13,7 @@ const Countdown = ({ phonenumber }) => {
     navigate("/otpConfirmation", { state: phonenumber });
 
     await axios
-      .post("http://localhost:8800/api/otp/getOTP", {
+      .post(`${process.env.REACT_APP_API_ENDPOINT}/api/otp/getOTP`, {
         phonenumber: phonenumber,
       })
       .then((res) => {})

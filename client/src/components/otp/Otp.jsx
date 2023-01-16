@@ -35,7 +35,7 @@ const Otp = () => {
       digit1 + digit2 + digit3 + digit4 + digit5 + digit6;
 
     await axios
-      .post("http://localhost:8800/api/otp/verifyOTP", {
+      .post(`${process.env.REACT_APP_API_ENDPOINT}/api/otp/verifyOTP`, {
         phoneNumber: state.phoneNumber,
         otp: verificationCode,
         hash: hash,
