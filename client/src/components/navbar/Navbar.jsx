@@ -24,6 +24,12 @@ const Navbar = () => {
   useEffect(() => {}, [showMeaning]);
   return (
     <nav className="navbar">
+      <div className="bannerContainer">
+        <label>
+          This site is currently under Alpha test until end of January 2023. All
+          bookings are only for testing purposes.
+        </label>
+      </div>
       <div className="navbarContainer">
         <img
           src={images.whiteWhiteLogo}

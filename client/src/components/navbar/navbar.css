@@ -14,6 +14,12 @@
   color: var(--color-green700);
 }
 
+.bannerContainer {
+  color: white;
+  background-color: #02332c;
+  padding: 8px;
+}
+
 .navbarContainer {
   width: 100%;
   max-width: 1080px;

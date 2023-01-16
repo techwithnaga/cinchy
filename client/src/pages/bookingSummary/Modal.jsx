@@ -164,9 +164,9 @@ const Modal = ({ isModalOpen, closeModal, agreeToTNC, setAgreeToTNC }) => {
           <div className="agreeToTNCContainer">
             <input
               type="checkbox"
-              class="checkbox"
+              className="checkbox"
               checked={agreeToTNC}
-              onClick={handleTNCClick}
+              onChange={handleTNCClick}
             />
             <label style={{ textAlign: "left" }}>
               I agree with the above terms, conditions, and privacy policy.

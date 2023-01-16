@@ -18,7 +18,7 @@ const Footer = () => {
             <br />
             <p>CV Hidup Mudah Cinchy</p>
             <p>support@cinchy.life</p>
-            <p>(021)1234765</p>
+            <p>+1(586)372-8452</p>
             <br />
             <p> https://cinchy.life/</p>
           </div>

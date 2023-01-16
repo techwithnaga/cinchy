@@ -108,21 +108,12 @@ export const sendBookingConfirmation = async (req, res) => {
   const returnDate = req.body.returnDate;
   const returnLocation = req.body.returnLocation;
 
-  console.log(firstName);
-  console.log(phoneNumber);
-  console.log(reservationNumber);
-  console.log(groupName);
-  console.log(deliveryDate);
-  console.log(deliveryLocation);
-  console.log(returnDate);
-  console.log(returnLocation);
-
   const body = {
     messaging_product: "whatsapp",
     to: `${phoneNumber}`,
     type: "template",
     template: {
-      name: "cinchy_booking_confirmation",
+      name: "booking_confirmation",
       language: { code: "en" },
       components: [
         {

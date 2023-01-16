@@ -26,7 +26,7 @@ const MotorOptions = () => {
           <div className="motorOptionsItem">
             <div className="motorOptionsItemDescription">
               <h2>COMPACT</h2>
-              <h5>Honda Scopy 125</h5>
+              <h5>Honda Vario 125</h5>
             </div>
             <img src={images.hondaScoopy} alt="" />
           </div>

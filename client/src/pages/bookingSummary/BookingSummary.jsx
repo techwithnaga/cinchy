@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
 import "./bookingSummary.css";
-import images from "../../pictures/picture";
 import Modal from "./Modal";
 import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
@@ -38,21 +37,20 @@ const BookingSummary = () => {
     setIsModalOpen(true);
   };
 
-  const [hasAgreed, setHasAgreed] = useState(false);
+  // const [hasAgreed, setHasAgreed] = useState(false);
   const handleConfirmClick = async () => {
     if (agreeToTNC) {
       let st = newBooking.deliveryDate;
       let et = newBooking.returnDate;
 
       //create new booking
-      let createdBooking = await axios
-        .post("http://localhost:8800/api/booking", newBooking)
-        .catch((err) => {
-          console.log(err);
-        });
+      const createdBooking = await axios.post(
+        "http://localhost:8800/api/booking",
+        newBooking
+      );
 
       //update motorgroup
-      await axios.put(
+      const mg = await axios.put(
         `http://localhost:8800/api/motorGroup/updatetime/${newBooking.motorGroup}`,
         {
           bookingId: createdBooking._id,
@@ -61,47 +59,41 @@ const BookingSummary = () => {
         }
       );
 
-      //update user
-      await axios.put(`http://localhost:8800/api/user/${newBooking.user}`, {
-        agreeMarketing: agreeToMarketing,
-      });
-
-      //send confirmation to user
-      const user = await axios.get(
-        `http://localhost:8800/api/user/${newBooking.user}`
+      //update agreeTo Marketing
+      const updatedUser = await axios.put(
+        `http://localhost:8800/api/user/${newBooking.user}`,
+        {
+          agreeMarketing: agreeToMarketing,
+        }
       );
 
-      let delivery = {};
-      let pickup = {};
-      await axios
-        .get(
-          `http://localhost:8800/api/deliveryFee/${newBooking.deliveryLocation}`
-        )
-        .then((res) => {
-          delivery = res;
-        });
-      await axios
-        .get(
-          `http://localhost:8800/api/deliveryFee/${newBooking.returnLocation}`
-        )
-        .then((res) => {
-          pickup = res;
-        });
-      console.log(delivery.region);
+      //send confirmation to user
+      // const user = await axios.get(
+      //   `http://localhost:8800/api/user/${newBooking.user}`
+      // );
+
+      //send confirmation to user
+      const delivery = await axios.get(
+        `http://localhost:8800/api/deliveryFee/${newBooking.deliveryLocation}`
+      );
+
+      const pickup = await axios.get(
+        `http://localhost:8800/api/deliveryFee/${newBooking.returnLocation}`
+      );
 
       await axios
         .post("http://localhost:8800/api/booking/sendbookingconfirmation", {
-          firstName: "Masnaga",
-          phoneNumber: "17085431524",
-          reservationNumber: "12345",
+          firstName: updatedUser.data.firstName,
+          phoneNumber: updatedUser.data.whatsappNumber,
+          reservationNumber: createdBooking.data._id.slice(-5),
           groupName: data.groupName,
           deliveryDate: format(
             new Date(newBooking.deliveryDate),
             "E, d MMM HH:mm"
           ),
-          deliveryLocation: "Kuta",
+          deliveryLocation: delivery.data.region,
           returnDate: format(new Date(newBooking.returnDate), "E, d MMM HH:mm"),
-          returnLocation: "Ubud",
+          returnLocation: pickup.data.region,
         })
         .then(() => {
           navigate("/bookingconfirmation", {
@@ -213,9 +205,9 @@ const BookingSummary = () => {
             <div className="BookingConfirmationCheckBox">
               <input
                 type="checkbox"
-                class="checkbox"
+                className="checkbox"
                 checked={agreeToMarketing}
-                onClick={handleMarketingClick}
+                onChange={handleMarketingClick}
               />
               <label style={{ textAlign: "left" }}>
                 Opt in to marketing and newsletter emails. No spam, promised!

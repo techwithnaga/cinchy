@@ -4,7 +4,6 @@ import BookingDetail from "./BookingDetail";
 import { useNavigate } from "react-router-dom";
 import "./myBooking.css";
 import useFetch from "../../hooks/useFetch";
-import format from "date-fns/format";
 import axios from "axios";
 
 const MyBooking = () => {
@@ -46,6 +45,7 @@ const MyBooking = () => {
               <BookingDetail
                 {...currentBooking}
                 cancelBooking={cancelBooking}
+                key={currentBooking.fullBookingId}
               ></BookingDetail>
             );
           })}

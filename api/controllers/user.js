@@ -2,7 +2,6 @@ import User from "../models/User.js";
 import Booking from "../models/Booking.js";
 import { format } from "date-fns";
 import MotorGroup from "../models/MotorGroup.js";
-import { response } from "express";
 import DeliveryFee from "../models/DeliveryFee.js";
 
 export const getUsers = async (req, res) => {

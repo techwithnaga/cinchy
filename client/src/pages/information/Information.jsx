@@ -3,7 +3,6 @@ import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
 import "./information.css";
 import { useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
@@ -79,7 +78,7 @@ const Information = () => {
         `http://localhost:8800/api/deliveryFee/${booking.returnLocation}`
       );
       booking.deliveryPickupFee = delivery.data.fee + pickup.data.fee;
-      console.log("delivery pick up fee... " + booking.deliveryPickupFee);
+
       booking.discount = Math.floor(
         0.3 * (subtotal + booking.deliveryPickupFee)
       );

@@ -92,42 +92,42 @@ const Otp = () => {
               <input
                 type="text"
                 maxLength={1}
-                tabbable
+                tabbable="true"
                 className="digitInput"
                 onChange={(e) => setDigit1(e.target.value)}
               />
               <input
                 type="text"
                 maxLength={1}
-                tabbable
+                tabbable="true"
                 className="digitInput"
                 onChange={(e) => setDigit2(e.target.value)}
               />
               <input
                 type="text"
                 maxLength={1}
-                tabbable
+                tabbable="true"
                 className="digitInput"
                 onChange={(e) => setDigit3(e.target.value)}
               />
               <input
                 type="text"
                 maxLength={1}
-                tabbable
+                tabbable="true"
                 className="digitInput"
                 onChange={(e) => setDigit4(e.target.value)}
               />
               <input
                 type="text"
                 maxLength={1}
-                tabbable
+                tabbable="true"
                 className="digitInput"
                 onChange={(e) => setDigit5(e.target.value)}
               />
               <input
                 type="text"
                 maxLength={1}
-                tabbable
+                tabbable="true"
                 className="digitInput"
                 onChange={(e) => setDigit6(e.target.value)}
               />

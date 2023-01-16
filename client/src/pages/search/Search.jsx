@@ -98,7 +98,7 @@ const Search = () => {
     filterData();
   }, [dates, times, option]);
 
-  useEffect(() => {}, [filteredGroup]);
+  useEffect(() => {}, [filteredGroup, openEndTime, openStartTime]);
 
   return (
     <>
@@ -137,6 +137,7 @@ const Search = () => {
                   className="dateTimeSelection"
                   onClick={() => {
                     setOpenStartTime(!openStartTime);
+                    setOpenEndTime(false);
                   }}
                 >
                   <p>{times.startTime}</p>
@@ -393,6 +394,7 @@ const Search = () => {
                   className="dateTimeSelection"
                   onClick={() => {
                     setOpenEndTime(!openEndTime);
+                    setOpenStartTime(false);
                   }}
                 >
                   <p>{times.endTime}</p>
