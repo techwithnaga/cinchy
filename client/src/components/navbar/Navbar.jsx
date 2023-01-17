@@ -18,6 +18,7 @@ const Navbar = () => {
   const isLoggedIn = sessionStorage.getItem("token");
   const handleLogout = () => {
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("phoneNumber");
     window.location.reload();
   };
 

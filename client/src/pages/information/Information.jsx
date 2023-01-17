@@ -14,10 +14,10 @@ const Information = () => {
   const isLoggedIn = sessionStorage.getItem("token");
   const navigate = useNavigate();
   if (!isLoggedIn) {
-    navigate("/login");
+    navigate("/home");
   }
 
-  const { state } = useLocation();
+  // const { state } = useLocation();
   const {
     motorGroupId,
     subtotal,
@@ -29,7 +29,7 @@ const Information = () => {
     firstName: "",
     lastName: "",
     emailAddress: "",
-    whatsappNumber: state.phoneNumber,
+    whatsappNumber: sessionStorage.getItem("phoneNumber"),
     emergencyContactName: "",
     emergencyContactNumber: "",
     emergencyContactCountryCode: "",

@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   returnDateInMillisecond: 0,
   // deliveryTime: 9 * 60 * 60 * 1000,
   // returnTime: 9 * 60 * 60 * 1000,
+  phoneNumber: "",
   motorGroupId: "",
 };
 
@@ -33,6 +34,7 @@ export const SearchContextProvider = ({ children }) => {
         returnDateInMillisecond: state.returnDateInMillisecond,
         // deliveryTime: state.startTime,
         // returnTime: state.endTime,
+        phoneNumber: state.phoneNumber,
         motorGroupId: state.motorGroupId,
         dispatch,
       }}

@@ -118,6 +118,7 @@ export const verifyOTP = (req, res) => {
   const hashFromUser = req.body.hash;
   const otpFromUser = req.body.otp;
   const phoneNumber = req.body.phoneNumber;
+
   try {
     if (
       otpTool.verifyOTP(phoneNumber, otpFromUser, hashFromUser, process.env.OTP)
@@ -125,7 +126,6 @@ export const verifyOTP = (req, res) => {
       //generate JWT token
       let data = {
         time: Date(),
-        // userId: 12,
         phoneNumber: phoneNumber,
       };
 

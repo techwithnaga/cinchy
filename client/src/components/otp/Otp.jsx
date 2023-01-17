@@ -14,8 +14,6 @@ const Otp = () => {
     "get"
   );
 
-  const hash = data;
-
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
   const [digit3, setDigit3] = useState();
@@ -38,11 +36,12 @@ const Otp = () => {
       .post(`${process.env.REACT_APP_API_ENDPOINT}/api/otp/verifyOTP`, {
         phoneNumber: state.phoneNumber,
         otp: verificationCode,
-        hash: hash,
+        hash: data,
       })
       .then((res) => {
         //save token
         sessionStorage.setItem("token", res.data.token);
+        sessionStorage.setItem("phoneNumber", state.phoneNumber);
         if (state.fromPage === "mybooking") {
           navigate("/mybooking");
         } else {
@@ -57,28 +56,28 @@ const Otp = () => {
       });
   };
 
-  const tick = () => {
-    if (timer <= 0) {
-      setCanResend(true);
-    } else {
-      setTimer(timer - 1);
-    }
-  };
+  // const tick = () => {
+  //   if (timer <= 0) {
+  //     setCanResend(true);
+  //   } else {
+  //     setTimer(timer - 1);
+  //   }
+  // };
 
   // const handleResendCode = () => {
   //   setCanResend(false);
   //   setTimer(60);
   // };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      tick();
-    }, 1000);
+  // useEffect(() => {
+  //   // const interval = setInterval(() => {
+  //   //   tick();
+  //   // }, 1000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  });
+  //   // return () => {
+  //   //   clearInterval(interval);
+  //   // };
+  // });
 
   return (
     <>
@@ -135,7 +134,11 @@ const Otp = () => {
           </div>
           <br />
 
-          <Countdown phonenumber={state} reFetch={reFetch}></Countdown>
+          <Countdown
+            phonenumber={state.phoneNumber}
+            // setHash={setHash}
+            reFetch={reFetch}
+          ></Countdown>
           <button className="otpVerifyBtn" onClick={() => handleVerify()}>
             Verify
           </button>

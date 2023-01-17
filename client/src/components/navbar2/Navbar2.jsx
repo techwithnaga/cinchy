@@ -21,6 +21,7 @@ const Navbar2 = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("phoneNumber");
     window.location.reload();
   };
 

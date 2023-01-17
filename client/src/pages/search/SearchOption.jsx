@@ -20,6 +20,7 @@ const SearchOption = ({
   const closeModal = () => {
     setShowError(false);
   };
+
   const handleSearchBookNowClick = (motorGroupId, priceperday) => {
     //check valid delivery date
     if (days === 0) {
@@ -39,6 +40,13 @@ const SearchOption = ({
           returnDateInMillisecond,
         },
       });
+    }
+    //check if the user has log in
+    const isLoggedIn = sessionStorage.getItem("token");
+
+    if (isLoggedIn) {
+      navigate("/information");
+    } else {
       navigate("/login", { state: { fromPage: "search" } });
     }
   };
