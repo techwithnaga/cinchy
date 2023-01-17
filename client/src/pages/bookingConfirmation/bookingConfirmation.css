@@ -40,6 +40,8 @@
 
 .bookingConfirmationMidBody img {
   width: 45%;
+  object-fit: contain;
+  aspect-ratio: 16/9;
 }
 
 .bookingConfirmationMidBody {
@@ -63,4 +65,8 @@
   padding-bottom: 10px;
   text-decoration: none;
   color: white;
+}
+
+Link {
+  text-decoration: none;
 }

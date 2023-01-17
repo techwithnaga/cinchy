@@ -4,6 +4,7 @@ import "react-phone-input-2/lib/style.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import ModalError from "../modalError/ModalError";
 import "./phonenumber.css";
+import { BsWhatsapp } from "react-icons/bs";
 
 const Phonenumber = () => {
   const [phonenumber, setPhoneNumber] = useState("");
@@ -33,7 +34,11 @@ const Phonenumber = () => {
           Logging in with an unregistered phone number creates a new Cinchy
           account.
         </p>
-        <h5>Whatsapp Phone Number</h5>
+        <div className="whatsappTxt">
+          <BsWhatsapp></BsWhatsapp>
+          <h5>Whatsapp Phone Number</h5>
+        </div>
+
         <PhoneInput
           country={"id"}
           value={phonenumber}

@@ -85,7 +85,7 @@ const Otp = () => {
       <div className="otp">
         <div className="otpContainer">
           <h5>Enter code</h5>
-          <label> A verification code has been sent to</label>
+          <p> A verification code has been sent to your Whatsapp</p>
           <p>+{state.phoneNumber}</p>
           <div className="confirmationCode">
             <AutoTabProvider>

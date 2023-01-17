@@ -24,6 +24,12 @@
   cursor: pointer;
 }
 
+.whatsappTxt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 @media (max-width: 784px) {
   .phoneNumberContainer {
     width: 95%;

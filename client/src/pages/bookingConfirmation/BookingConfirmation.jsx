@@ -59,8 +59,8 @@ const BookingConfirmation = () => {
           <span style={{ fontWeight: "bold" }}>Local Currency (IDR)</span> via
           <span style={{ fontWeight: "bold" }}> Cash</span> or
           <span style={{ fontWeight: "bold" }}>Bank Transfer. </span>
-          (Online payment coming soon)
         </p>
+        <p> (Online payment coming soon)</p>
       </div>
     </div>
   );

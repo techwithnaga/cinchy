@@ -37,6 +37,8 @@
 
 .motorPhotoDescription img {
   width: 40%;
+  aspect-ratio: 16/9;
+  object-fit: contain;
 }
 
 .motorDescription {
