@@ -18,6 +18,19 @@
   color: white;
   background-color: #02332c;
   padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bannerContainerWrapper {
+  width: 100%;
+  max-width: 1080px;
+}
+
+.bannerContainerWrapper label {
+  font-size: 11px;
+  font-weight: lighter;
 }
 
 .navbarContainer {
@@ -28,7 +41,7 @@
   align-items: center;
   color: black;
   margin: auto;
-  padding: 20px;
+  padding: 16px;
   position: relative;
 }
 
@@ -120,6 +133,10 @@
 @media (max-width: 1080px) {
   .navbarMenuIcon {
     display: block;
+  }
+
+  .bannerContainerWrapper label {
+    font-size: 9px;
   }
 
   .navbarContainer {

@@ -25,10 +25,12 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="bannerContainer">
-        <label>
-          This site is currently under Alpha test until end of January 2023. All
-          bookings are only for testing purposes.
-        </label>
+        <div className="bannerContainerWrapper">
+          <label>
+            This site is currently under Alpha test until end of January 2023.
+            All bookings are invalid.
+          </label>
+        </div>
       </div>
       <div className="navbarContainer">
         <img
