@@ -11,10 +11,13 @@ const Phonenumber = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const handleLoginClick = () => {
+  const handleLoginClick = async () => {
     if (phonenumber.length < 8) {
       setShowError(true);
     } else {
+      await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/otp/getOTP`, {
+        phonenumber: phonenumber,
+      });
       navigate("/otpConfirmation", {
         state: { phoneNumber: phonenumber, fromPage: state.fromPage },
       });

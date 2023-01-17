@@ -10,7 +10,7 @@ const Otp = () => {
   const { state } = useLocation();
   const [timer, setTimer] = useState(60);
   const { data, loading, error, reFetch } = useFetch(
-    `http://localhost:8800/api/otp/${state.phoneNumber}`,
+    `${process.env.REACT_APP_API_ENDPOINT}/api/otp/${state.phoneNumber}`,
     "get"
   );
 
