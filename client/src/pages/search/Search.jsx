@@ -9,6 +9,7 @@ import { IoTimeOutline } from "react-icons/io5";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import useFetch from "../../hooks/useFetch";
+import FadeLoader from "react-spinners/FadeLoader";
 
 // import "react-calendar/dist/Calendar.css";
 // import Calendar from "react-calendar";
@@ -627,20 +628,32 @@ const Search = () => {
                 </button>
               </div>
               <h6>Recommendation</h6>
-              <div className="searchResults">
-                {filteredGroup.map((motorGroup, i) => {
-                  return (
-                    <SearchOption
-                      key={i}
-                      motorGroup={motorGroup}
-                      days={duration}
-                      deliveryDateInMillisecond={deliveryDateInMs}
-                      returnDateInMillisecond={returnDateInMs}
-                      isAvailable={motorGroup.isAvailable}
-                    ></SearchOption>
-                  );
-                })}
-              </div>
+              {loading ? (
+                <div className="loaderContainer">
+                  <FadeLoader
+                    color="#00332C"
+                    loading={loading}
+                    size={150}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                  />
+                </div>
+              ) : (
+                <div className="searchResults">
+                  {filteredGroup.map((motorGroup, i) => {
+                    return (
+                      <SearchOption
+                        key={i}
+                        motorGroup={motorGroup}
+                        days={duration}
+                        deliveryDateInMillisecond={deliveryDateInMs}
+                        returnDateInMillisecond={returnDateInMs}
+                        isAvailable={motorGroup.isAvailable}
+                      ></SearchOption>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
         </div>

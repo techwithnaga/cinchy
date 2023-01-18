@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./myBooking.css";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import FadeLoader from "react-spinners/FadeLoader";
 
 const MyBooking = () => {
   const isLoggedIn = sessionStorage.getItem("token");
@@ -34,7 +35,15 @@ const MyBooking = () => {
     <div className="myBooking">
       <Navbar2></Navbar2>
       {loading ? (
-        <h5> Loading...</h5>
+        <div className="loaderContainer">
+          <FadeLoader
+            color="#00332C"
+            loading={loading}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
       ) : (
         <div className="myBookingContainer">
           <h5 style={{ textAlign: "left" }}>My Booking</h5>

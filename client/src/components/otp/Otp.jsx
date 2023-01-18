@@ -32,6 +32,8 @@ const Otp = () => {
     const verificationCode =
       digit1 + digit2 + digit3 + digit4 + digit5 + digit6;
 
+    console.log("verification code : " + verificationCode);
+
     await axios
       .post(`${process.env.REACT_APP_API_ENDPOINT}/api/otp/verifyOTP`, {
         phoneNumber: state.phoneNumber,
