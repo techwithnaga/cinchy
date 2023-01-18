@@ -6,12 +6,18 @@ import images from "../../pictures/picture";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const BookingConfirmation = () => {
   const { state } = useLocation();
 
   const bookingInfo = state.bookingInfo;
   const motorGroup = state.motorGroup;
+  const navigate = useNavigate();
+
+  const handleMyBookingClick = () => {
+    navigate("/mybooking");
+  };
 
   return (
     <div className="BookingConfirmation">
@@ -49,10 +55,14 @@ const BookingConfirmation = () => {
             for the booking detail or to make a cancelation.
           </p>
         </div>
-
-        <Link to={"/mybooking"}>
-          <div className="myBookingLink">My Booking</div>
-        </Link>
+        <br />
+        <button
+          className="myBookingLink"
+          onClick={() => handleMyBookingClick()}
+        >
+          My Booking
+        </button>
+        <br />
         <br />
         <p>
           *Please note that we only accept{" "}

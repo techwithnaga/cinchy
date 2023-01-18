@@ -26,7 +26,12 @@ const SearchOption = ({
     if (days === 0) {
       setErrorMessage("Please select valid delivery and return dates.");
       setShowError(true);
-    } else if (deliveryDateInMillisecond <= new Date().getTime()) {
+    } else if (
+      deliveryDateInMillisecond <=
+      new Date(
+        new Date().toLocaleString("en-US", { timeZone: "Asia/Brunei" })
+      ).getTime()
+    ) {
       setErrorMessage("Delivery time must be in the future.");
       setShowError(true);
     } else {
@@ -40,14 +45,14 @@ const SearchOption = ({
           returnDateInMillisecond,
         },
       });
-    }
-    //check if the user has log in
-    const isLoggedIn = sessionStorage.getItem("token");
+      //check if the user has log in
+      const isLoggedIn = sessionStorage.getItem("token");
 
-    if (isLoggedIn) {
-      navigate("/information");
-    } else {
-      navigate("/login", { state: { fromPage: "search" } });
+      if (isLoggedIn) {
+        navigate("/information");
+      } else {
+        navigate("/login", { state: { fromPage: "search" } });
+      }
     }
   };
   return (
