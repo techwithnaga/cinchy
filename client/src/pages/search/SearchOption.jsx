@@ -23,6 +23,7 @@ const SearchOption = ({
 
   const handleSearchBookNowClick = (motorGroupId, priceperday) => {
     //check valid delivery date
+    console.log(deliveryDateInMillisecond);
     if (days === 0) {
       setErrorMessage("Please select valid delivery and return dates.");
       setShowError(true);
@@ -32,7 +33,7 @@ const SearchOption = ({
         new Date().toLocaleString("en-US", { timeZone: "Asia/Brunei" })
       ).getTime()
     ) {
-      setErrorMessage("Delivery time must be in the future.");
+      setErrorMessage("Invalid delivery time.");
       setShowError(true);
     } else {
       let subtotal = days * priceperday;

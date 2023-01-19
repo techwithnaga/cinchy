@@ -14,7 +14,7 @@ const MyBooking = () => {
     navigate("/login", { state: { fromPage: "mybooking" } });
   }
 
-  let phoneNumber = "62999777";
+  let phoneNumber = sessionStorage.getItem("phoneNumber");
   const { data, loading, error, reFetch } = useFetch(
     `${process.env.REACT_APP_API_ENDPOINT}/api/user/mycurrentbooking/${phoneNumber}`,
     "get"

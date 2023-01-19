@@ -110,13 +110,17 @@
 }
 
 .avaiableBikesBtn {
-  padding: 10px 25px 10px 25px;
   cursor: pointer;
   background: #ffffff;
   border: 1px solid #00332c;
   border-radius: 4px;
   width: 23%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   font-family: "Outfit", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-green700);
 }
 

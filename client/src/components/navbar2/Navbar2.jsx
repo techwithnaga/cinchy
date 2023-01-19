@@ -84,7 +84,7 @@ const Navbar2 = () => {
           </li>
           <li className="navbar2Support">
             <a
-              href="https://api.whatsapp.com/send?phone=17085431524"
+              href="https://api.whatsapp.com/send?phone=15863728452"
               target="_blank"
             >
               <div className="navbar2whatsappWrapper">

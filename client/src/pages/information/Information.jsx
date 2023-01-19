@@ -14,7 +14,7 @@ const Information = () => {
   const isLoggedIn = sessionStorage.getItem("token");
   const navigate = useNavigate();
   if (!isLoggedIn) {
-    navigate("/home");
+    navigate("/");
   }
 
   // const { state } = useLocation();

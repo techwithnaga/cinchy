@@ -595,12 +595,12 @@ const Search = () => {
             <div className="avaiableBikes">
               <h5>Available Bikes</h5>
               <div className="avaiableBikesCategory">
-                <button
+                <div
                   className="avaiableBikesBtn"
                   onClick={() => setOption("All")}
                 >
                   All
-                </button>
+                </div>
 
                 {/* <div
                   className="avaiableBikesDiv"
@@ -608,24 +608,24 @@ const Search = () => {
                 >
                   Style
                 </div> */}
-                <button
+                <div
                   className="avaiableBikesBtn"
                   onClick={() => setOption("Style")}
                 >
                   Style
-                </button>
-                <button
+                </div>
+                <div
                   className="avaiableBikesBtn"
                   onClick={() => setOption("Comfort")}
                 >
                   Comfort
-                </button>
-                <button
+                </div>
+                <div
                   className="avaiableBikesBtn"
                   onClick={() => setOption("Compact")}
                 >
                   Compact
-                </button>
+                </div>
               </div>
               <h6>Recommendation</h6>
               {loading ? (

@@ -2,6 +2,8 @@ import React from "react";
 import "./FAQs.css";
 import Accordian from "./Accordian.jsx";
 import images from "../../pictures/picture";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const FAQs = () => {
   const data = [
@@ -29,6 +31,10 @@ const FAQs = () => {
       answer: "Yes. we say NO to hidden fees! 🙂",
     },
   ];
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <div className="faqs" id="faqs">

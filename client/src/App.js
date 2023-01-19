@@ -10,11 +10,13 @@ import Aboutus from "./pages/aboutus/Aboutus";
 import BookingSummary from "./pages/bookingSummary/BookingSummary";
 import Faq from "./pages/Faq/Faq";
 import BookingConfirmation from "./pages/bookingConfirmation/BookingConfirmation";
+import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
