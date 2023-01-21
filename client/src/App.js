@@ -2,7 +2,7 @@ import "./App.css";
 import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
 import Confirmation from "./pages/confirmation/Confirmation.jsx";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Information from "./pages/information/Information";
 import Search from "./pages/search/Search";
 import MyBooking from "./pages/myBooking/MyBooking";
@@ -15,7 +15,7 @@ import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -35,7 +35,7 @@ function App() {
             element={<BookingConfirmation></BookingConfirmation>}
           ></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
