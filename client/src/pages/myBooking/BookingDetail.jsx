@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import images from "../../pictures/picture";
 import useFetch from "../../hooks/useFetch";
 import formatNumber from "../../utils/formatNumber";
+import { Link } from "react-router-dom";
 
 const BookingDetail = ({
   bookingId,
@@ -20,6 +21,7 @@ const BookingDetail = ({
   isPaid,
   cancelBooking,
 }) => {
+  // const absoulteUrl = new URL(baseOfAnotherHost).href;
   return (
     <div className="bookingDetail">
       <div className="bookingDetailTop">
@@ -54,7 +56,9 @@ const BookingDetail = ({
           <p>Not Provided</p>
         ) : (
           <p>
-            <a href={deliveryURL}>{deliveryURL}</a>
+            <a href={`https://${deliveryURL}`} target={"_blank"} rel="noopener">
+              {deliveryURL}
+            </a>
           </p>
         )}
         <br />
@@ -66,7 +70,9 @@ const BookingDetail = ({
           <p>Not Provided</p>
         ) : (
           <p>
-            <a href={returnURL}>{returnURL}</a>
+            <a href={`https://${returnURL}`} target="_blank" rel="noopener">
+              {returnURL}
+            </a>
           </p>
         )}
         <br />

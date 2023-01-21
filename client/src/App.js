@@ -18,7 +18,6 @@ function App() {
       <HashRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/otpConfirmation" element={<Confirmation />}></Route>
           <Route path="/information" element={<Information />} />
@@ -26,6 +25,7 @@ function App() {
           <Route path="/mybooking" element={<MyBooking />}></Route>
           <Route path="/aboutus" element={<Aboutus></Aboutus>}></Route>
           <Route path="/faq" element={<Faq></Faq>}></Route>
+          <Route path="/" element={<Home />} />
           <Route
             path="/bookingSummary"
             element={<BookingSummary></BookingSummary>}
