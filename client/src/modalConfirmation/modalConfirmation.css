@@ -1,0 +1,66 @@
+.modalConfirmation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  transition: var(--transition);
+  visibility: hidden;
+  color: var(--color-green700);
+}
+
+.modalConfirmationContainer {
+  width: 30%;
+  height: max-content;
+  background-color: #f2f7f5;
+  padding: 25px;
+  text-align: justify;
+  overflow-y: auto;
+}
+
+.modalConfirmationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalCloseBtn {
+  color: #00332c;
+  padding: 15px 25px 15px 25px;
+  background-color: white;
+  border-color: #00332c;
+  cursor: pointer;
+}
+
+.showModal {
+  visibility: visible;
+  z-index: 10;
+}
+
+.modalBtn {
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: white;
+  margin-top: 1em;
+  border-color: var(--color-green700);
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 1080px) {
+  .modalConfirmationContainer {
+    width: 80%;
+    height: max-content;
+    background-color: #f2f7f5;
+    padding: 25px;
+    text-align: justify;
+  }
+}

@@ -21,8 +21,13 @@ const MyBooking = () => {
   );
 
   // const [currentBookings, setCurrentBookings] = useState(data);
+  const [showModal, setShowModal] = useState(false);
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const cancelBooking = async (motorGroupId, bookingId) => {
+    setShowModal(false);
     await axios.delete(
       `${process.env.REACT_APP_API_ENDPOINT}/api/booking/${motorGroupId}/${bookingId}`
     );
@@ -55,6 +60,9 @@ const MyBooking = () => {
                 {...currentBooking}
                 cancelBooking={cancelBooking}
                 key={currentBooking.fullBookingId}
+                showModal={showModal}
+                closeModal={closeModal}
+                setShowModal={setShowModal}
               ></BookingDetail>
             );
           })}

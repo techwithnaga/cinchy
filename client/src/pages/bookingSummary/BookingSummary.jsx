@@ -49,20 +49,20 @@ const BookingSummary = () => {
       let et = newBooking.returnDate;
 
       //create new booking
-      const createdBooking = await axios.post(
-        `${process.env.REACT_APP_API_ENDPOINT}/api/booking`,
-        newBooking
-      );
-
-      //update motorgroup
-      const mg = await axios.put(
-        `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/updatetime/${newBooking.motorGroup}`,
-        {
-          bookingId: createdBooking._id,
-          startTime: st,
-          endTime: et,
-        }
-      );
+      let createdBooking = {};
+      await axios
+        .post(`${process.env.REACT_APP_API_ENDPOINT}/api/booking`, newBooking)
+        .then(async (res) => {
+          createdBooking = res;
+          await axios.put(
+            `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/updatetime/${newBooking.motorGroup}`,
+            {
+              bookingId: res.data._id,
+              startTime: st,
+              endTime: et,
+            }
+          );
+        });
 
       //update agreeTo Marketing
       const updatedUser = await axios.put(

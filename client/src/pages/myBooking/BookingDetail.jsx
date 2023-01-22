@@ -3,6 +3,7 @@ import images from "../../pictures/picture";
 import useFetch from "../../hooks/useFetch";
 import formatNumber from "../../utils/formatNumber";
 import { Link } from "react-router-dom";
+import ModalConfirmation from "../../modalConfirmation/ModalConfirmation";
 
 const BookingDetail = ({
   bookingId,
@@ -20,8 +21,12 @@ const BookingDetail = ({
   returnURL,
   isPaid,
   cancelBooking,
+  showModal,
+  closeModal,
+  setShowModal,
 }) => {
   // const absoulteUrl = new URL(baseOfAnotherHost).href;
+
   return (
     <div className="bookingDetail">
       <div className="bookingDetailTop">
@@ -38,10 +43,7 @@ const BookingDetail = ({
           <h6>{groupName} or similar</h6>
           <label style={{ color: "red" }}>{category}</label>
           <h6>IDR {formatNumber(totalRentalPrice)}K</h6>
-          <button
-            className="cancelBtn"
-            onClick={() => cancelBooking(motorGroupId, fullBookingId)}
-          >
+          <button className="cancelBtn" onClick={() => setShowModal(true)}>
             Cancel
           </button>
         </div>
@@ -85,6 +87,14 @@ const BookingDetail = ({
         <h6>Vehicle Returned Status:</h6>
         <p>Returned/ Not Returned</p> */}
       </div>
+      <ModalConfirmation
+        showModal={showModal}
+        closeModal={closeModal}
+        cancelBooking={cancelBooking}
+        motorGroupId={motorGroupId}
+        fullBookingId={fullBookingId}
+        message="Are you sure you want to cancel this booking? This action cannot be undone."
+      ></ModalConfirmation>
     </div>
   );
 };
