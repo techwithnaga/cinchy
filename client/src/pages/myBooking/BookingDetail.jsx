@@ -33,8 +33,8 @@ const BookingDetail = ({
       <div className="bookingDetailTop">
         <h6>Booking #{bookingId}</h6>
         <label>
-          {format(new Date(deliveryDate), "E, d MMM HH:mm")} -
-          {format(new Date(returnDate), "E, d MMM HH:mm")}
+          {format(new Date(deliveryDate - 21600000), "E, d MMM HH:mm")} -
+          {format(new Date(returnDate - 21600000), "E, d MMM HH:mm")}
           {/*  -
           {format(new Date(1673362800000), "E, d MMM HH:mm")} */}
         </label>
