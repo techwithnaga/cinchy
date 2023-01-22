@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import formatNumber from "../../utils/formatNumber";
 import { Link } from "react-router-dom";
 import ModalConfirmation from "../../modalConfirmation/ModalConfirmation";
+import { format } from "date-fns";
 
 const BookingDetail = ({
   bookingId,
@@ -32,7 +33,8 @@ const BookingDetail = ({
       <div className="bookingDetailTop">
         <h6>Booking #{bookingId}</h6>
         <label>
-          {deliveryDate} - {returnDate}
+          {format(new Date(deliveryDate), "E, d MMM HH:mm")} -
+          {format(new Date(returnDate), "E, d MMM HH:mm")}
           {/*  -
           {format(new Date(1673362800000), "E, d MMM HH:mm")} */}
         </label>
