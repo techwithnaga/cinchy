@@ -56,7 +56,7 @@ const Phonenumber = () => {
         <ModalError
           closeModal={closeModal}
           showError={error}
-          errorMessage="Please enter a valid phonenumber"
+          errorMessage="Please enter a valid Whatsapp number"
         ></ModalError>
       )}
     </div>

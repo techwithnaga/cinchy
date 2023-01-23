@@ -24,7 +24,7 @@ const SearchOption = ({
   const handleSearchBookNowClick = (motorGroupId, priceperday) => {
     //check valid delivery date
     console.log(deliveryDateInMillisecond);
-    if (days === 0) {
+    if (days === 0 || deliveryDateInMillisecond >= returnDateInMillisecond) {
       setErrorMessage("Please select valid delivery and return dates.");
       setShowError(true);
     } else if (
@@ -34,6 +34,9 @@ const SearchOption = ({
       ).getTime()
     ) {
       setErrorMessage("Invalid delivery time.");
+      setShowError(true);
+    } else if (days > 30) {
+      setErrorMessage("Unable to book more than 30 days.");
       setShowError(true);
     } else {
       let subtotal = days * priceperday;

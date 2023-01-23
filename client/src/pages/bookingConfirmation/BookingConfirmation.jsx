@@ -52,7 +52,7 @@ const BookingConfirmation = () => {
           <br />
           <p>
             Check<span style={{ fontWeight: "bold" }}> My Booking </span>menu
-            for the booking detail or to make a cancelation.
+            for the booking detail or to make a cancellation.
           </p>
         </div>
         <br />
@@ -67,7 +67,7 @@ const BookingConfirmation = () => {
         <p>
           *Please note that we only accept{" "}
           <span style={{ fontWeight: "bold" }}>Local Currency (IDR)</span> via
-          <span style={{ fontWeight: "bold" }}> Cash</span> or
+          <span style={{ fontWeight: "bold" }}> Cash</span> <span> or</span>
           <span style={{ fontWeight: "bold" }}>Bank Transfer. </span>
         </p>
         <p> (Online payment coming soon)</p>
