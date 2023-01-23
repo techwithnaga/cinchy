@@ -58,8 +58,8 @@ const BookingSummary = () => {
             `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/updatetime/${newBooking.motorGroup}`,
             {
               bookingId: res.data._id,
-              startTime: st,
-              endTime: et,
+              startTime: st.getTime(),
+              endTime: et.getTime(),
             }
           );
         });
@@ -94,15 +94,9 @@ const BookingSummary = () => {
             phoneNumber: updatedUser.data.whatsappNumber,
             reservationNumber: createdBooking.data._id.slice(-5),
             groupName: data.groupName,
-            deliveryDate: format(
-              new Date(newBooking.deliveryDate),
-              "E, d MMM HH:mm"
-            ),
+            deliveryDate: format(newBooking.deliveryDate, "E, d MMM HH:mm"),
             deliveryLocation: delivery.data.region,
-            returnDate: format(
-              new Date(newBooking.returnDate),
-              "E, d MMM HH:mm"
-            ),
+            returnDate: format(newBooking.returnDate, "E, d MMM HH:mm"),
             returnLocation: pickup.data.region,
           }
         )

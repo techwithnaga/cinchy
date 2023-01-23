@@ -38,8 +38,8 @@ const Information = () => {
 
   const [booking, setBooking] = useState({
     motorGroup: motorGroupId,
-    deliveryDate: deliveryDateInMillisecond,
-    returnDate: returnDateInMillisecond,
+    deliveryDate: new Date(deliveryDateInMillisecond),
+    returnDate: new Date(returnDateInMillisecond),
     user: "",
     comments: "",
     flightNumber: "",
