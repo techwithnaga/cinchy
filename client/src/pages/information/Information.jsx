@@ -9,6 +9,9 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import ModalError from "../../components/modalError/ModalError";
 import { useEffect } from "react";
+// import moment from "moment-timezone";
+// const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
+// var { zonedTimeToUtc } = require("date-fns-tz");
 
 const Information = () => {
   const isLoggedIn = sessionStorage.getItem("token");
@@ -35,11 +38,28 @@ const Information = () => {
     emergencyContactCountryCode: "",
     gender: 1,
   });
+  // console.log(
+  //   "delivery time in UTC " +
+  //     zonedTimeToUtc(
+  //       new Date(deliveryDateInMillisecond),
+  //       timeZone
+  //     ).toISOString()
+  // );
+
+  // console.log("delivery time " + new Date(deliveryDateInMillisecond));
 
   const [booking, setBooking] = useState({
     motorGroup: motorGroupId,
-    deliveryDate: new Date(deliveryDateInMillisecond),
-    returnDate: new Date(returnDateInMillisecond),
+    // deliveryDate: zonedTimeToUtc(
+    //   new Date(deliveryDateInMillisecond),
+    //   "asia/brunei"
+    // ),
+    // returnDate: zonedTimeToUtc(
+    //   new Date(returnDateInMillisecond),
+    //   "asia/brunei"
+    // ),
+    deliveryDate: deliveryDateInMillisecond,
+    returnDate: returnDateInMillisecond,
     user: "",
     comments: "",
     flightNumber: "",

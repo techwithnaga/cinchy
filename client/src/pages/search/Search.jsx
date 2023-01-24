@@ -10,11 +10,13 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import useFetch from "../../hooks/useFetch";
 import FadeLoader from "react-spinners/FadeLoader";
+// import moment from "moment-timezone";
 
 // import "react-calendar/dist/Calendar.css";
 // import Calendar from "react-calendar";
 
 const Search = () => {
+  // moment.tz.setDefault("asia/brunei");
   const [dates, setDates] = useState([
     {
       startDate: new Date(),

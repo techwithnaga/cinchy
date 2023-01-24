@@ -41,6 +41,10 @@ const BookingSummary = () => {
   // const [hasAgreed, setHasAgreed] = useState(false);
 
   const [loading2, setLoading2] = useState(false);
+  const d = new Date();
+  let deltaMinutes = d.getTimezoneOffset();
+  let deltaMiliseconds = deltaMinutes * 60 * 1000;
+  console.log(deltaMiliseconds);
 
   const handleConfirmClick = async () => {
     if (agreeToTNC) {
@@ -48,18 +52,34 @@ const BookingSummary = () => {
       let st = newBooking.deliveryDate;
       let et = newBooking.returnDate;
 
+      newBooking.deliveryDate = new Date(st);
+      newBooking.returnDate = new Date(et);
+
+      let clonedBooking = structuredClone(newBooking);
+
+      clonedBooking.deliveryDate = new Date(
+        newBooking.deliveryDate - deltaMiliseconds
+      );
+      clonedBooking.returnDate = new Date(
+        newBooking.returnDate - deltaMiliseconds
+      );
+
       //create new booking
       let createdBooking = {};
       await axios
-        .post(`${process.env.REACT_APP_API_ENDPOINT}/api/booking`, newBooking)
+        .post(
+          `${process.env.REACT_APP_API_ENDPOINT}/api/booking`,
+          clonedBooking
+        )
         .then(async (res) => {
           createdBooking = res;
+          // newBooking._id = createdBooking._id;
           await axios.put(
             `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/updatetime/${newBooking.motorGroup}`,
             {
               bookingId: res.data._id,
-              startTime: st.getTime(),
-              endTime: et.getTime(),
+              startTime: st + deltaMiliseconds,
+              endTime: et + deltaMiliseconds,
             }
           );
         });
