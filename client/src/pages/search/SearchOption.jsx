@@ -23,7 +23,8 @@ const SearchOption = ({
 
   const handleSearchBookNowClick = (motorGroupId, priceperday) => {
     //check valid delivery date
-    console.log(deliveryDateInMillisecond);
+    // console.log(deliveryDateInMillisecond);
+
     if (days === 0 || deliveryDateInMillisecond >= returnDateInMillisecond) {
       setErrorMessage("Please select valid delivery and return dates.");
       setShowError(true);

@@ -11,6 +11,7 @@ import ModalError from "../../components/modalError/ModalError";
 import axios from "axios";
 import formatNumber from "../../utils/formatNumber";
 import FadeLoader from "react-spinners/FadeLoader";
+import moment from "moment-timezone";
 
 const BookingSummary = () => {
   const { state } = useLocation();
@@ -42,9 +43,17 @@ const BookingSummary = () => {
 
   const [loading2, setLoading2] = useState(false);
   const d = new Date();
-  let deltaMinutes = d.getTimezoneOffset();
-  let deltaMiliseconds = deltaMinutes * 60 * 1000;
-  console.log(deltaMiliseconds);
+
+  var now = moment();
+  var localOffset = now.utcOffset();
+  let deltaMiliseconds = localOffset * 60 * 1000;
+  console.log(newBooking.returnDate - deltaMiliseconds);
+  let clonedBooking = structuredClone(newBooking);
+
+  clonedBooking.deliveryDate = new Date(
+    newBooking.deliveryDate + deltaMiliseconds
+  );
+  clonedBooking.returnDate = new Date(newBooking.returnDate + deltaMiliseconds);
 
   const handleConfirmClick = async () => {
     if (agreeToTNC) {
@@ -54,15 +63,6 @@ const BookingSummary = () => {
 
       newBooking.deliveryDate = new Date(st);
       newBooking.returnDate = new Date(et);
-
-      let clonedBooking = structuredClone(newBooking);
-
-      clonedBooking.deliveryDate = new Date(
-        newBooking.deliveryDate - deltaMiliseconds
-      );
-      clonedBooking.returnDate = new Date(
-        newBooking.returnDate - deltaMiliseconds
-      );
 
       //create new booking
       let createdBooking = {};
@@ -123,7 +123,12 @@ const BookingSummary = () => {
         .then(() => {
           setLoading2(false);
           navigate("/bookingconfirmation", {
-            state: { bookingInfo: createdBooking.data, motorGroup: data },
+            state: {
+              bookingInfo: createdBooking.data,
+              motorGroup: data,
+              deliveryDate: format(newBooking.deliveryDate, "E, d MMM HH:mm"),
+              returnDate: format(newBooking.returnDate, "E, d MMM HH:mm"),
+            },
           });
         })
         .catch((err) => {
