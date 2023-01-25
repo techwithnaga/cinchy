@@ -160,7 +160,12 @@ const Navbar2 = () => {
                   </Link>
                 </li>
                 <li className="sidebar2LastItem">
-                  <a>
+                  <a
+                    href="https://api.whatsapp.com/send?phone=15863728452"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
                     <BsWhatsapp className="whatsappIcon"></BsWhatsapp>Support
                   </a>
                 </li>

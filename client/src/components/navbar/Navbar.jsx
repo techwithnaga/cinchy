@@ -142,7 +142,11 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="sidebarLastItem">
-                  <a href="www.google.com" target="_blank">
+                  <a
+                    href="https://api.whatsapp.com/send?phone=15863728452"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <div className="whatsappWrapper">
                       <BsWhatsapp className="whatsappIcon"></BsWhatsapp>{" "}
                       <p>Support</p>

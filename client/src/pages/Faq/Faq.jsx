@@ -7,27 +7,33 @@ const Faq = () => {
   const data = [
     {
       id: 1,
-      question: "Which payment methods do you accept?",
+      question: "Where can I pick up the bike? Can you deliver?",
       answer:
-        "You can pay with any debit/credit card - Visa, Mastercard, Maestro, Amex, Discover, Diners, JCB, Unionpay. We use Stripe to process payments, so do not store your card details and never share this information with third parties. ApplePay and GooglePay are also supported.",
+        "At Cinchy, we deliver the motorbike at your convenience. You just need to choose your delivery and return location; Cinchy covers most urban areas. Just make sure to provide the location’s detail during the booking.",
     },
     {
       id: 2,
-      question: "What do I need to rent a motorbike?",
+      question:
+        "I carry a luggage. Do you provide Airport Transfer to my hotel or villa?",
       answer:
-        "To book your motorbike/scooter, all you need is a credit or debit card. When you pick the motorbike up, you'll need: proof of reservation, your passport/ID, valid driving license, debit or credit card.",
+        "If you have big and heavy luggage (7kg-30kg), it will be best to prebook the transport service from your accomodation. However, if you carry a backpack, you can still pick up and ride the scooter from the Airport. Just follow the map below. *Cinchy is working to provide Airport transfer by car. Stay tuned!",
     },
     {
       id: 3,
       question: "What happen if I damage the motorbike?",
       answer:
-        "In most occasions the maximum you might be charged is the security deposit. If you included Premium Insurance with your booking, then your security deposit will be protected. When you pickup up your rental, our local rental partner will explain the procedure to follow and emergency contact details in the event of an accident - your safety always comes first.",
+        "You are liable for the damages happened during rental. Our staff will explain the procedure to follow and emergency contact details in the event of an accident - your safety always comes first. *Cinchy is working to provide insurance to your rental. Stay tuned!",
     },
     {
       id: 4,
-      question: "Are all fees included in the rental price?",
+      question: "Which payment methods do you accept?",
       answer:
-        "Yes. The vast majority of our rentals include basic insurance, local taxes and any road fees. You have the option to add 'extras' (ie. One-Way rental, GPS, GoPro, etc) but we'll clearly list any additional costs involved before you book your motorbike/scooter.",
+        "At the moment we only accept Cash on Delivery, or local bank transfer. In the future, you can pay with any debit/credit card - Visa, Mastercard, Amex, Discover & Diners, JCB, Unionpay. We use Stripe to process payments, so do not store your card details and never share this information with third parties. Stay tuned!",
+    },
+    {
+      id: 5,
+      question: "Are all fees included in the rental price?",
+      answer: "Yes. we say NO to hidden fees! 🙂",
     },
   ];
 
@@ -37,6 +43,7 @@ const Faq = () => {
 
       <div className="faqContainer">
         <h2>Frequently Asked Questions</h2>
+        <br />
         <div className="faqItems">
           {data.map((item) => {
             return (
