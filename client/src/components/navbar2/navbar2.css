@@ -58,7 +58,10 @@
 
 .navbar2Support:hover {
   background-color: #00332c;
-  color: white;
+}
+
+.navbar2Support:hover .navbar2whatsappWrapper {
+  color: #fff;
 }
 
 .navbar2Nav li a {
@@ -69,7 +72,7 @@
   color: var(--color-green700);
 }
 
-.navbar2Item:hover {
+.navbar2ItemLink:hover {
   border-bottom: 1px solid var(--color-orange700);
   border-radius: 0;
 }

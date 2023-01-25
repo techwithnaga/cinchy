@@ -3,12 +3,13 @@ import images from "../../pictures/picture";
 import "./navbar.css";
 import { MdClose, MdOutlineMenu } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showMeaning, setShowMeaning] = useState(false);
+  const navigate = useNavigate();
 
   if (showSidebar) {
     document.body.style.overflow = "hidden";
@@ -20,6 +21,10 @@ const Navbar = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("phoneNumber");
     window.location.reload();
+  };
+
+  const handleNavbarClick = (page) => {
+    navigate("/" + page);
   };
 
   useEffect(() => {}, [showMeaning]);
@@ -51,25 +56,26 @@ const Navbar = () => {
         )}
 
         <ul className="navbarNav">
-          <li className="navbarItem">
-            <Link style={{ color: "#00332c" }} to="/aboutus">
-              About Us
-            </Link>
+          <li
+            className="navbarItem"
+            onClick={() => handleNavbarClick("aboutus")}
+          >
+            About Us
           </li>
-          <li className="navbarItem">
-            <Link style={{ color: "#00332c" }} to="/search">
-              Pricing
-            </Link>
+          <li
+            className="navbarItem"
+            onClick={() => handleNavbarClick("search")}
+          >
+            Pricing
           </li>
-          <li className="navbarItem">
-            <Link style={{ color: "#00332c" }} to="/faq">
-              FAQ
-            </Link>
+          <li className="navbarItem" onClick={() => handleNavbarClick("faq")}>
+            FAQ
           </li>
-          <li className="navbarItem">
-            <Link style={{ color: "#00332c" }} to="/mybooking">
-              My Booking
-            </Link>
+          <li
+            className="navbarItem"
+            onClick={() => handleNavbarClick("mybooking")}
+          >
+            My Booking
           </li>
           <li className="navbarSupport">
             <a

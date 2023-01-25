@@ -49,6 +49,10 @@ const Navbar2 = () => {
     navigate("/");
   };
 
+  const handleNavbar2Click = (page) => {
+    navigate("/" + page);
+  };
+
   return (
     <nav
       className="navbar2"
@@ -62,30 +66,39 @@ const Navbar2 = () => {
           onClick={() => goToHomePage()}
         />
         <ul className="navbar2Nav">
-          <li className="navbar2Item">
-            <Link className="navbar2ItemLink" to="/aboutus">
-              About Us
-            </Link>
+          <li
+            className="navbar2Item"
+            onClick={() => handleNavbar2Click("aboutus")}
+          >
+            About Us
           </li>
-          <li className="navbar2Item">
-            <Link className="navbar2ItemLink" to="/search">
-              Pricing
-            </Link>
+          <li
+            className="navbar2Item"
+            onClick={() => handleNavbar2Click("search")}
+          >
+            Pricing
           </li>
-          <li className="navbar2Item">
-            <Link className="navbar2ItemLink" to="/faq">
-              FAQ
-            </Link>
+
+          <li
+            className="navbar2Item"
+            onClick={() => {
+              handleNavbar2Click("faq");
+            }}
+          >
+            FAQ
           </li>
-          <li className="navbar2Item">
-            <Link className="navbar2ItemLink" to="/mybooking">
-              My Booking
-            </Link>
+
+          <li
+            className="navbar2Item"
+            onClick={() => handleNavbar2Click("mybooking")}
+          >
+            My Booking
           </li>
           <li className="navbar2Support">
             <a
               href="https://api.whatsapp.com/send?phone=15863728452"
               target="_blank"
+              rel="noreferrer"
             >
               <div className="navbar2whatsappWrapper">
                 <BsWhatsapp className="whatsappIcon"></BsWhatsapp>
