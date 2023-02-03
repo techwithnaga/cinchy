@@ -28,6 +28,7 @@ import videoHorizontal from "./Cinchy_teaser_web_horizontal.mp4";
 import videoVertical from "./Cinchy_teaser_mobile_vertical.mp4";
 import aboutusMotor from "./Cinchy_aboutus_motor.png";
 import thumbnail from "./cinchy_life_thumbnail_512px.png";
+import notFoundPage from "./cinchy-404-page-29.png";
 
 const images = {
   yellowGreenLogo,
@@ -60,6 +61,7 @@ const images = {
   videoVertical,
   aboutusMotor,
   thumbnail,
+  notFoundPage,
 };
 
 export default images;

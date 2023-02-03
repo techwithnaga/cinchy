@@ -2,7 +2,7 @@ import "./App.css";
 import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
 import Confirmation from "./pages/confirmation/Confirmation.jsx";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, HashRouter, Routes, Route } from "react-router-dom";
 import Information from "./pages/information/Information";
 import Search from "./pages/search/Search";
 import MyBooking from "./pages/myBooking/MyBooking";
@@ -11,11 +11,12 @@ import BookingSummary from "./pages/bookingSummary/BookingSummary";
 import Faq from "./pages/Faq/Faq";
 import BookingConfirmation from "./pages/bookingConfirmation/BookingConfirmation";
 import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
+import NotFound from "./pages/notFound/NotFound";
 
 function App() {
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter>
         <ScrollToTop />
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -34,8 +35,9 @@ function App() {
             path="/bookingConfirmation"
             element={<BookingConfirmation></BookingConfirmation>}
           ></Route>
+          <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }

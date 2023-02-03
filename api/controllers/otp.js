@@ -51,6 +51,7 @@ import jwt from "jsonwebtoken";
 
 export const getOTP = async (req, res) => {
   const phoneNumber = req.params.whatsappNumber;
+  console.log(phoneNumber);
 
   let otp = otpGen.generate(6, {
     upperCaseAlphabets: false,

@@ -1,0 +1,9 @@
+.notFound {
+  width: 100%;
+  background-color: var(--color-green700);
+  min-height: 100vh;
+}
+
+.notFoundImage {
+  height: 100vh;
+}
