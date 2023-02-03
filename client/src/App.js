@@ -35,7 +35,7 @@ function App() {
             path="/bookingConfirmation"
             element={<BookingConfirmation></BookingConfirmation>}
           ></Route>
-          <Route path="*" element={<NotFound></NotFound>}></Route>
+          <Route path="/*" element={<NotFound></NotFound>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
