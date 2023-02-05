@@ -593,6 +593,7 @@ const Search = () => {
               Search
             </button>
           </div>
+
           {showSearchResult && (
             <div className="avaiableBikes">
               <h5>Available Bikes</h5>
