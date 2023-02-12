@@ -116,6 +116,7 @@
   border: 1px solid #bebac2;
   gap: 25px;
   border-radius: 15px;
+  align-items: center;
 }
 
 .bookingConfirmationConfirmBtn {
@@ -147,6 +148,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.marketingCheckbox {
+  width: 18px;
+  height: 18px;
 }
 
 @media (max-width: 1080px) {

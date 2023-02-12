@@ -262,7 +262,7 @@ const BookingSummary = () => {
                 <div className="BookingConfirmationCheckBox">
                   <input
                     type="checkbox"
-                    className="checkbox"
+                    className="marketingCheckbox"
                     checked={agreeToMarketing}
                     onChange={handleMarketingClick}
                   />

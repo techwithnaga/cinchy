@@ -164,7 +164,7 @@ const Modal = ({ isModalOpen, closeModal, agreeToTNC, setAgreeToTNC }) => {
           <div className="agreeToTNCContainer">
             <input
               type="checkbox"
-              className="checkbox"
+              className="TNCcheckbox"
               checked={agreeToTNC}
               onChange={handleTNCClick}
             />

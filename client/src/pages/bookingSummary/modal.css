@@ -58,6 +58,12 @@
   display: flex;
   gap: 25px;
   margin: auto;
+  align-items: center;
+}
+
+.TNCcheckbox {
+  height: 45px;
+  width: 45px;
 }
 
 @media (max-width: 1080px) {
