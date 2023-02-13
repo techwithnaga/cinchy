@@ -64,6 +64,21 @@ select {
   line-height: 30px;
 }
 
+.rsvpItem span {
+  color: red;
+  padding: 3px;
+  font-size: 12px;
+  display: none;
+}
+
+input:invalid[focused="true"] ~ span {
+  display: block;
+}
+
+textarea:invalid[focused="true"] ~ span {
+  display: block;
+}
+
 @media (max-width: 1080px) {
   .rsvpContainer {
     width: 85%;

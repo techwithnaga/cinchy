@@ -4,22 +4,36 @@ import "./feedback.css";
 
 const Feedback = () => {
   const [success, setSuccess] = useState(false);
+  const [messagefocused, setMessageFocused] = useState(false);
+  const [emailfocused, setEmailFocused] = useState(false);
   const [params, setParams] = useState({
     from_name: "Cinchy",
     emailAddress: "",
     request: "",
   });
 
+  const handleMessageFocus = (e) => {
+    setMessageFocused(true);
+  };
+
+  const handleEmailFocus = (e) => {
+    setEmailFocused(true);
+  };
+
   const sendEmail = () => {
-    emailjs.send("cinchy", "cinchy-template", params, "C8V7M-Us8IHcCRyL_").then(
-      function (response) {
-        console.log("SUCCESS!", response.status, response.text);
-        setSuccess(true);
-      },
-      function (err) {
-        console.log("FAILED...", err);
-      }
-    );
+    if (params.emailAddress && params.request) {
+      emailjs
+        .send("cinchy", "cinchy-template", params, "C8V7M-Us8IHcCRyL_")
+        .then(
+          function (response) {
+            console.log("SUCCESS!", response.status, response.text);
+            setSuccess(true);
+          },
+          function (err) {
+            console.log("FAILED...", err);
+          }
+        );
+    }
   };
 
   const handleChange = (e) => {
@@ -47,20 +61,31 @@ const Feedback = () => {
               <br />
               <textarea
                 name="request"
+                type="textarea"
                 placeholder="e.g. I’d love to have a credit card payment"
-                rows="5"
                 onChange={handleChange}
+                required
+                onBlur={handleMessageFocus}
+                focused={messagefocused.toString()}
+                rows="5"
               />
+              <span>
+                Please enter your message. We would like to hear from you!
+              </span>
             </div>
             <div className="rsvpItem">
               <h6>email (optional)</h6>
               <br />
               <input
-                type="text"
+                type="email"
                 placeholder="youremail@gmail.com"
                 name="emailAddress"
                 onChange={handleChange}
+                onBlur={handleEmailFocus}
+                focused={emailfocused.toString()}
+                required
               />
+              <span>Please enter a valid email</span>
             </div>
           </div>
           <button className="rsvpBtn" onClick={() => sendEmail()}>
