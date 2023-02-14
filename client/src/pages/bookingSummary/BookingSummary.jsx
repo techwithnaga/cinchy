@@ -47,13 +47,14 @@ const BookingSummary = () => {
   var now = moment();
   var localOffset = now.utcOffset();
   let deltaMiliseconds = localOffset * 60 * 1000;
-  console.log(newBooking.returnDate - deltaMiliseconds);
+
   let clonedBooking = structuredClone(newBooking);
 
   clonedBooking.deliveryDate = new Date(
     newBooking.deliveryDate + deltaMiliseconds
   );
   clonedBooking.returnDate = new Date(newBooking.returnDate + deltaMiliseconds);
+  clonedBooking.isConfirmed = true;
 
   const handleConfirmClick = async () => {
     if (agreeToTNC) {
