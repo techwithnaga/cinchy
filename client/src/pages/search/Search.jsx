@@ -55,6 +55,7 @@ const Search = () => {
   const handleTimeSelect = (e, input, val) => {
     setOpenStartTime(false);
     setOpenEndTime(false);
+    setShowSearchResult(false);
     setTimes({ ...times, [input]: e.target.innerHTML, [input + "Val"]: val });
   };
 
@@ -81,16 +82,20 @@ const Search = () => {
   );
 
   const [filteredGroup, setFilteredGroup] = useState(data);
+  console.log(filteredGroup);
 
   const handleSearch = () => {
+    console.log("calling handle search");
     reFetch();
     setShowSearchResult(true);
+    setFilteredGroup(data);
     setOption("All");
   };
 
-  const filterData = () => {
-    if (option !== "All") {
-      setFilteredGroup(data.filter((item) => item.category === option));
+  const filterData = (opt) => {
+    setOption(opt);
+    if (opt !== "All") {
+      setFilteredGroup(data.filter((item) => item.category === opt));
     } else {
       setFilteredGroup(data);
     }
@@ -98,10 +103,10 @@ const Search = () => {
 
   useEffect(() => {
     calculateDuration();
-    filterData();
-  }, [dates, times, option]);
+    setShowSearchResult(false);
+  }, [dates, times]);
 
-  useEffect(() => {}, [filteredGroup, openEndTime, openStartTime]);
+  // useEffect(() => {}, [filteredGroup, openEndTime, openStartTime]);
 
   return (
     <>
@@ -600,7 +605,7 @@ const Search = () => {
               <div className="avaiableBikesCategory">
                 <button
                   className="avaiableBikesBtn"
-                  onClick={() => setOption("All")}
+                  onClick={() => filterData("All")}
                 >
                   All
                 </button>
@@ -613,19 +618,19 @@ const Search = () => {
                 </div> */}
                 <button
                   className="avaiableBikesBtn"
-                  onClick={() => setOption("Style")}
+                  onClick={() => filterData("Style")}
                 >
                   Style
                 </button>
                 <button
                   className="avaiableBikesBtn"
-                  onClick={() => setOption("Comfort")}
+                  onClick={() => filterData("Comfort")}
                 >
                   Comfort
                 </button>
                 <button
                   className="avaiableBikesBtn"
-                  onClick={() => setOption("Compact")}
+                  onClick={() => filterData("Compact")}
                 >
                   Compact
                 </button>
