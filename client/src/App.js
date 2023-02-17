@@ -1,8 +1,9 @@
 import "./App.css";
 import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
+import AdminLogin from "./pages/adminLogin/AdminLogin";
 import Confirmation from "./pages/confirmation/Confirmation.jsx";
-import { BrowserRouter, HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Information from "./pages/information/Information";
 import Search from "./pages/search/Search";
 import MyBooking from "./pages/myBooking/MyBooking";
@@ -12,6 +13,7 @@ import Faq from "./pages/Faq/Faq";
 import BookingConfirmation from "./pages/bookingConfirmation/BookingConfirmation";
 import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
 import NotFound from "./pages/notFound/NotFound";
+import Admin from "./pages/admin/Admin";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/mybooking" element={<MyBooking />}></Route>
           <Route path="/aboutus" element={<Aboutus></Aboutus>}></Route>
           <Route path="/faq" element={<Faq></Faq>}></Route>
+          <Route path="/adminLogin" element={<AdminLogin></AdminLogin>}></Route>
+          <Route path="/adminDashboard" element={<Admin></Admin>}></Route>
           <Route path="/" element={<Home />} />
           <Route
             path="/bookingSummary"

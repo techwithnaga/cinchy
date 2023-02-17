@@ -1,0 +1,34 @@
+.adminLogin {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.adminLoginContainer {
+  max-width: 1080px;
+  margin: auto;
+}
+
+.adminLoginForm {
+  border: 1px solid black;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: lightblue;
+}
+
+.adminLoginBtn {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminFormItem input {
+  padding: 9px;
+  border-radius: 5px;
+}
