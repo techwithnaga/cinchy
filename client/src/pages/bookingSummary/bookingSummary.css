@@ -96,9 +96,9 @@
 
 .TNCBtn {
   padding: 10px 20px;
-  background: #bebac2;
+  background: transparent;
   width: 100%;
-  border: 2px solid #bebac2;
+  border: 2px solid var(--color-green700);
   border-radius: 4px;
   color: #00332c;
   cursor: pointer;

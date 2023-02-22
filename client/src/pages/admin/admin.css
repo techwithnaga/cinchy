@@ -1,0 +1,245 @@
+.adminNavbar2 {
+  width: 100%;
+  z-index: 1;
+  color: var(--color-green700);
+}
+
+.adminNavbar2Container {
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  margin: auto;
+  padding: 20px;
+}
+
+.adminNavbar2Nav {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+}
+
+.adminNavbar2Nav li {
+  padding-bottom: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.adminNavbar2Support {
+  border: 1px solid #00332c;
+  color: var(--color-green700);
+}
+
+.adminNavbar2Support a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-green700);
+}
+
+.adminNavbar2Support a :hover {
+  color: white;
+}
+
+.adminNavbar2whatsappWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.adminNavbar2Nav {
+  cursor: pointer;
+}
+
+.adminNavbar2Support:hover {
+  background-color: #00332c;
+}
+
+.adminNavbar2Support:hover .navbar2whatsappWrapper {
+  color: #fff;
+}
+
+.adminNavbar2Nav li a {
+  text-decoration: none;
+}
+
+.adminNavbar2ItemLink {
+  color: var(--color-green700);
+}
+
+.adminNavbar2ItemLink:hover {
+  border-bottom: 1px solid var(--color-orange700);
+  border-radius: 0;
+}
+
+.adminNavbar2MenuIcon {
+  display: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.whatsappIcon {
+  font-size: 16px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.sidebar2 {
+  display: none;
+}
+
+.logoCinchy {
+  cursor: pointer;
+  width: 275px;
+}
+.adminBody {
+  max-width: 1080px;
+  width: 100%;
+  margin: auto;
+  padding-top: 3em;
+  padding-left: 0.5em;
+}
+.bookingDate {
+  display: flex;
+  gap: 20px;
+}
+
+.jadwalBooking {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 3em 1em 3em;
+}
+
+.jadwalBookingInfo {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jadwalBookingInfoItem {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  margin-top: 1em;
+  border: 1px solid #00332c;
+  color: var(--color-green700);
+  padding: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.button a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-green700);
+}
+
+.button:hover {
+  background-color: #00332c;
+}
+
+.button:hover .buttonTxt {
+  color: #fff;
+}
+
+@media (max-width: 1080px) {
+  .adminNavbar2MenuIcon {
+    display: block;
+  }
+
+  .adminNavbar2Container {
+    width: 90%;
+  }
+
+  .adminNavbar2Nav {
+    display: none;
+  }
+
+  .sidebar2 {
+    position: absolute;
+    width: 50%;
+    height: 100vh;
+    border-right: 1px solid black;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-blue1);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background: #00332c;
+  }
+
+  .sidebar2Container {
+    width: 100%;
+  }
+
+  .sidebar2Icon {
+    width: 90%;
+    display: flex;
+    justify-content: right;
+    margin-top: 15px;
+  }
+
+  .adminNavbar2CloseIcon {
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+  }
+
+  .adminNavbar2CloseIcon:hover {
+    color: red;
+  }
+
+  .sidebar2Nav {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 25px;
+    width: 78%;
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .sidebar2Nav li {
+    cursor: pointer;
+  }
+
+  .sidebar2LastItem {
+    width: 95%;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #faae2b;
+    border-radius: 5px;
+  }
+
+  .greyArea {
+    width: 30%;
+    height: 100vh;
+    background-color: #2e2c30;
+    opacity: 0.8;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+  }
+
+  .navbar2Logout {
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .jadwalBooking {
+    display: flex;
+    flex-direction: column;
+  }
+}

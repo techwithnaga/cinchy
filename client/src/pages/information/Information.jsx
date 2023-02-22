@@ -99,9 +99,7 @@ const Information = () => {
       );
       booking.deliveryPickupFee = delivery.data.fee + pickup.data.fee;
 
-      booking.discount = Math.floor(
-        0.3 * (subtotal + booking.deliveryPickupFee)
-      );
+      booking.discount = Math.floor(0.25 * subtotal);
       booking.totalRentalPrice =
         subtotal + booking.deliveryPickupFee - booking.discount;
 

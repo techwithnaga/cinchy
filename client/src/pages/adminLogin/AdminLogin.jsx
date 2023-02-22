@@ -16,13 +16,10 @@ const AdminLogin = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "https://masbeegrace.cyclic.app/api/auth/login",
-        {
-          username: userName,
-          password: password,
-        }
-      );
+      const res = await axios.post("http://localhost:8800/api/auth/login", {
+        username: userName,
+        password: password,
+      });
 
       //console.log(res.data.token);
       await sessionStorage.setItem("token", res.data.token);

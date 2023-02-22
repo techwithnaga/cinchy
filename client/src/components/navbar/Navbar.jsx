@@ -33,8 +33,8 @@ const Navbar = () => {
       <div className="bannerContainer">
         <div className="bannerContainerWrapper">
           <label>
-            This site is currently under Alpha test until end of January 2023.
-            All bookings are invalid.
+            25% OFF Soft Opening Promo. Discount is reflected on checkout
+            confirmation.
           </label>
         </div>
       </div>
