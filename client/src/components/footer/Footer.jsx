@@ -21,6 +21,8 @@ const Footer = () => {
             <p>+62 851-74-CINCHY</p>
             <br />
             <p> https://cinchy.life/</p>
+            <br />
+            <p>No rek bca 8390-85-88-85</p>
           </div>
           <div className="footerCol2">
             <ul className="listNavItems">
