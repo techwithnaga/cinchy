@@ -5,6 +5,9 @@ import { MdClose, MdOutlineMenu } from "react-icons/md";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { BsWhatsapp } from "react-icons/bs";
+import FadeLoader from "react-spinners/FadeLoader";
+import ModalCheckIn from "./ModalCheckIn";
+import ModalCheckOut from "./ModalCheckOut";
 
 const Admin = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -13,6 +16,38 @@ const Admin = () => {
   const navigate = useNavigate();
   const [bookingDate, setBookingDate] = useState("");
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showModalCheckIn, setShowModalCheckIn] = useState(false);
+  const [showModalCheckOut, setShowModalCheckOut] = useState(false);
+  const closeModal = () => {
+    setShowModalCheckIn(false);
+    setShowModalCheckOut(false);
+  };
+  const [data, setData] = useState({
+    bookingId: "",
+    customerName: "",
+    checkOutTime: "",
+  });
+
+  const openModalCheckIn = (bookingId, name, checkOutTime) => {
+    setData({
+      bookingId: bookingId,
+      customerName: name,
+      checkOutTime: checkOutTime,
+    });
+    console.log(data);
+    setShowModalCheckIn(true);
+  };
+
+  const openModalCheckOut = (bookingId, name, checkOutTime) => {
+    setData({
+      bookingId: bookingId,
+      customerName: name,
+      checkOutTime: checkOutTime,
+    });
+    console.log(data);
+    setShowModalCheckOut(true);
+  };
 
   if (showSidebar) {
     document.body.style.overflow = "hidden";
@@ -50,29 +85,30 @@ const Admin = () => {
   };
 
   const getBookings = async () => {
+    setLoading(true);
     await axios
       .post("http://localhost:8800/api/booking/getbookingsbydate", {
         date: bookingDate,
       })
       .then((res) => {
         setResult(res.data);
-        console.log("result " + res.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
     window.addEventListener("resize", changeLogo);
     window.addEventListener("hashchange", changeLogo());
-    getBookings();
 
     return () => {
       window.removeEventListener("resize", changeLogo);
       window.removeEventListener("hashchange", changeLogo());
     };
-  }, [bookingDate]);
+  }, []);
 
   return (
     <div>
@@ -161,83 +197,138 @@ const Admin = () => {
       <div className="adminBody">
         <h3>Jadwal</h3>
         <br />
+
         <div className="bookingDate">
-          <p>Tanggal</p>
-          <input type="date" onChange={(e) => handleDateChange(e)} />
+          <div>
+            <h5>Tanggal :</h5>
+          </div>
+          <div>
+            <input
+              type="date"
+              className="bookingDateInput"
+              onChange={(e) => handleDateChange(e)}
+            />
+          </div>
+          <div
+            className="submit button"
+            style={{ marginTop: 0, padding: "0.4em" }}
+            onClick={() => {
+              getBookings();
+            }}
+          >
+            <p className="buttonTxt">Submit</p>
+          </div>
         </div>
         <br />
+
         <hr />
-        <div>
-          {result.map((booking, i) => {
-            return (
-              <div key={i}>
-                <div className="jadwalBooking">
-                  <div className="jadwalBookingInfo">
-                    <h5
-                      style={{
-                        color: booking.status === "Kembali" ? "red" : "green",
-                      }}
-                    >
-                      {booking.status}
-                    </h5>
-                    <div className="jadwalBookingInfoItem">
-                      <h6>Jam : </h6>
-                      <p>{booking.time}</p>
-                    </div>
-
-                    <div className="jadwalBookingInfoItem">
-                      <h6>Booking ID : </h6>
-                      <p>{booking.bookingId}</p>
-                    </div>
-
-                    <div className="jadwalBookingInfoItem">
-                      <h6>Jenis Motor : </h6>
-                      <p>{booking.motorGroupName}</p>
-                    </div>
-                    <div className="jadwalBookingInfoItem">
-                      <h6>Nama Customer : </h6>
-                      <p>{booking.name}</p>
-                    </div>
-                    <div className="jadwalBookingInfoItem">
-                      <h6>Lokasi : </h6>
-                      <p>{booking.location}</p>
-                    </div>
-                    <div>
-                      <h6>URL Lokasi : </h6>
-                      <a href={booking.locationURL} target="_blank">
-                        {booking.locationURL}
-                      </a>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="checkincheckout button">
-                      <p className="buttonTxt">
-                        {booking.status === "Kembali"
-                          ? "Check Out"
-                          : "Check In"}
-                      </p>
-                    </div>
-                    <div className="contact button">
-                      <a
-                        href={`https://api.whatsapp.com/send?phone=${booking.whatsappNumber}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <div className="buttonWrapper">
-                          <BsWhatsapp className="buttonTxt"></BsWhatsapp>
-                          <p className="buttonTxt">Hubungi Customer</p>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+        {loading ? (
+          <div className="spinner">
+            <FadeLoader></FadeLoader>
+          </div>
+        ) : (
+          <div>
+            {result.length === 0 ? (
+              <div>
+                <h6>Tidak Ada Jadwal</h6>
                 <hr />
               </div>
-            );
-          })}
-        </div>
+            ) : (
+              result.map((booking, i) => {
+                return (
+                  <div key={i}>
+                    <div className="jadwalBooking">
+                      <div className="jadwalBookingInfo">
+                        <h5
+                          style={{
+                            color:
+                              booking.status === "Kembali" ? "red" : "green",
+                          }}
+                        >
+                          {booking.status}
+                        </h5>
+                        <div className="jadwalBookingInfoItem">
+                          <h6>Jam : </h6>
+                          <p>{booking.time}</p>
+                        </div>
+
+                        <div className="jadwalBookingInfoItem">
+                          <h6>Booking ID : </h6>
+                          <p>{booking.bookingId}</p>
+                        </div>
+
+                        <div className="jadwalBookingInfoItem">
+                          <h6>Jenis Motor : </h6>
+                          <p>{booking.motorGroupName}</p>
+                        </div>
+                        <div className="jadwalBookingInfoItem">
+                          <h6>Nama Customer : </h6>
+                          <p>{booking.name}</p>
+                        </div>
+                        <div className="jadwalBookingInfoItem">
+                          <h6>Lokasi : </h6>
+                          <p>{booking.location}</p>
+                        </div>
+                        <div>
+                          <h6>URL Lokasi : </h6>
+                          <a href={booking.locationURL} target="_blank">
+                            {booking.locationURL}
+                          </a>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div
+                          className="checkincheckout button"
+                          onClick={() =>
+                            booking.status === "Kembali"
+                              ? openModalCheckOut(
+                                  booking.bookingId,
+                                  booking.name,
+                                  booking.time
+                                )
+                              : openModalCheckIn()
+                          }
+                        >
+                          <p className="buttonTxt">
+                            {booking.status === "Kembali"
+                              ? "Check Out"
+                              : "Check In"}
+                          </p>
+                        </div>
+                        <div className="contact button">
+                          <a
+                            href={`https://api.whatsapp.com/send?phone=${booking.whatsappNumber}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <div className="buttonWrapper">
+                              <BsWhatsapp className="buttonTxt"></BsWhatsapp>
+                              <p className="buttonTxt">Hubungi Customer</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                );
+              })
+            )}
+          </div>
+        )}
       </div>
+
+      <ModalCheckIn
+        closeModal={closeModal}
+        showModal={showModalCheckIn}
+        data={data}
+      ></ModalCheckIn>
+      <ModalCheckOut
+        closeModal={closeModal}
+        showModal={showModalCheckOut}
+        data={data}
+      ></ModalCheckOut>
     </div>
   );
 };

@@ -107,6 +107,12 @@
 .bookingDate {
   display: flex;
   gap: 20px;
+  align-items: center;
+}
+
+.bookingDateInput {
+  padding: 0.5em;
+  margin-right: 2em;
 }
 
 .jadwalBooking {
@@ -150,6 +156,12 @@
 
 .button:hover .buttonTxt {
   color: #fff;
+}
+
+.spinner {
+  display: flex;
+  margin-top: 1em;
+  justify-content: center;
 }
 
 @media (max-width: 1080px) {

@@ -1,7 +1,6 @@
 import React from "react";
 import "./Faq.css";
 import Navbar2 from "../../components/navbar2/Navbar2";
-import images from "../../pictures/picture";
 
 const Faq = () => {
   const data = [
@@ -60,7 +59,11 @@ const Faq = () => {
         </div>
         <br />
         <br />
-        <img className="faqMap" src={images.map} alt="" />
+        <img
+          className="faqMap"
+          src="https://cinchy.s3.ap-southeast-1.amazonaws.com/cinchy_BALI_airport_guide.png"
+          alt=""
+        />
       </div>
     </div>
   );

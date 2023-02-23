@@ -18,7 +18,7 @@ const Footer = () => {
             <br />
             <p>CV Hidup Mudah Cinchy</p>
             <p>support@cinchy.life</p>
-            <p>+1(586)372-8452</p>
+            <p>+62 851-74-CINCHY</p>
             <br />
             <p> https://cinchy.life/</p>
           </div>
@@ -48,7 +48,7 @@ const Footer = () => {
           </div>
           <div className="footerCol3">
             <a
-              href="https://api.whatsapp.com/send?phone=15863728452"
+              href="https://api.whatsapp.com/send?phone=6285174246249"
               target="_blank"
             >
               <BsWhatsapp className="sosmedIcon"></BsWhatsapp>

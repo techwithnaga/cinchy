@@ -14,7 +14,6 @@ import yifei from "./yifei.png";
 import kaori from "./kaori.png";
 import anthony from "./anthony.png";
 import secureIcon from "./secureIcon.png";
-import map from "./cinchyMap.png";
 import store from "./Cinchy_delivery_store_illustration.png";
 import hotel from "./Cinchy_delivery_hotelvilla_illustration.png";
 import airport from "./Cinchy_delivery_airport_illustration.png";
@@ -48,7 +47,6 @@ const images = {
   anthony,
   kaori,
   secureIcon,
-  map,
   store,
   hotel,
   airport,

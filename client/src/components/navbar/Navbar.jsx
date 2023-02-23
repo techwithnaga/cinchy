@@ -79,7 +79,7 @@ const Navbar = () => {
           </li>
           <li className="navbarSupport">
             <a
-              href="https://api.whatsapp.com/send?phone=15863728452"
+              href="https://api.whatsapp.com/send?phone=6285174246249"
               target="_blank"
             >
               <div className="whatsappWrapper">
@@ -143,12 +143,12 @@ const Navbar = () => {
                 </li>
                 <li className="sidebarLastItem">
                   <a
-                    href="https://api.whatsapp.com/send?phone=15863728452"
+                    href="https://api.whatsapp.com/send?phone=6285174246249"
                     target="_blank"
                     rel="noreferrer"
                   >
                     <div className="whatsappWrapper">
-                      <BsWhatsapp className="whatsappIcon"></BsWhatsapp>{" "}
+                      <BsWhatsapp className="whatsappIcon"></BsWhatsapp>
                       <p>Support</p>
                     </div>
                   </a>
