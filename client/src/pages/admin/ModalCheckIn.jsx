@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./modalCheckInOut.css";
 import { AiOutlineClose } from "react-icons/ai";
+import useFetch from "../../hooks/useFetch";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
-const ModalCheckIn = ({ showModal, closeModal, data }) => {
+const ModalCheckIn = ({
+  showModal,
+  closeModal,
+  selectedMotor,
+  handleMotorSelected,
+}) => {
+  const { data, loading, error, reFetch } = useFetch(
+    `${process.env.REACT_APP_API_ENDPOINT}/api/motor/getAllAvailableMotors`,
+    "get"
+  );
+
+  console.log(data);
+
   return (
     <div
       className={`${
@@ -42,7 +59,28 @@ const ModalCheckIn = ({ showModal, closeModal, data }) => {
           <h6>KM Sekarang : </h6>
           <input type="number" />
           <br />
-          <h6>Motor : </h6>
+          <br />
+
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Motor</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={selectedMotor}
+              label="Pilih Motor"
+              onChange={handleMotorSelected}
+            >
+              {data.map((motor) => {
+                return (
+                  <MenuItem value={motor.licensePlate}>
+                    {motor.category} {"   -  "} {motor.brand} {motor.name}
+                    {"  -  "}
+                    {motor.licensePlate}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
         </div>
         <button className="okButton" onClick={() => closeModal()}>
           Check In

@@ -26,6 +26,10 @@
   z-index: 2;
 }
 
+.muiDateTimePicker {
+  width: 45%;
+}
+
 .dateTimeSelection {
   display: flex;
   border: 1px solid rgba(46, 44, 48, 0.4);
@@ -80,8 +84,9 @@
 }
 
 .searchDateTimeItem input {
-  width: 90%;
-  padding: 8px;
+  width: 100%;
+  padding: 0.7em;
+  cursor: pointer;
 }
 
 .searchBtn {
@@ -166,6 +171,38 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.MuiCalendarOrClockPicker-root {
+  color: var(--color-green700) !important;
+}
+
+.MuiPickersDay-root:hover {
+  background-color: var(--color-babyPowder700) !important;
+  color: var(--color-green700) !important;
+}
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  color: var(--color-green700) !important;
+}
+
+.Mui-selected:focus {
+  background-color: var(--color-green700) !important;
+}
+.Mui-selected {
+  background-color: var(--color-green700) !important;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+  padding-right: 10px !important;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
+}
+
+.MuiPickersToolbar-penIconButton {
+  display: none !important;
 }
 
 @media (max-width: 784px) {

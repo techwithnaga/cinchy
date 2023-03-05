@@ -37,7 +37,7 @@ const SearchOption = ({
         new Date().toLocaleString("en-US", { timeZone: "Asia/Brunei" })
       ).getTime()
     ) {
-      setErrorMessage("Invalid delivery time.");
+      setErrorMessage("Invalid Pick-up Time.");
       setShowError(true);
     } else if (days > 30) {
       setErrorMessage("Unable to book more than 30 days.");

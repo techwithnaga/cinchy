@@ -22,7 +22,7 @@ const Footer = () => {
             <br />
             <p> https://cinchy.life/</p>
             <br />
-            <p>No rek bca 8390-85-88-85</p>
+            <p>BCA Bank Account# 8390-85-88-85</p>
           </div>
           <div className="footerCol2">
             <ul className="listNavItems">

@@ -4,16 +4,19 @@ import "./search.css";
 import { format } from "date-fns";
 import SearchOption from "./SearchOption";
 import { DateRange } from "react-date-range";
-import { BsCalendar } from "react-icons/bs";
+import { BsCalendar3 } from "react-icons/bs";
 import { IoTimeOutline } from "react-icons/io5";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import useFetch from "../../hooks/useFetch";
 import FadeLoader from "react-spinners/FadeLoader";
-// import moment from "moment-timezone";
-
-// import "react-calendar/dist/Calendar.css";
-// import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import InputAdornment from "@mui/material/InputAdornment";
+import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
+import { TextField } from "@mui/material";
+import axios from "axios";
 
 const Search = () => {
   // moment.tz.setDefault("asia/brunei");
@@ -27,6 +30,7 @@ const Search = () => {
 
   const [duration, setDuration] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
+  const dayInMillisecond = 24 * 60 * 60 * 1000;
   const milisecondsInHour = 60 * 60 * 1000;
 
   const [times, setTimes] = useState({
@@ -36,21 +40,23 @@ const Search = () => {
     endTimeVal: 9 * milisecondsInHour,
   });
 
-  const [openDateRange, setOpenDateRange] = useState(false);
+  const [openDeliveryCalendar, setOpenDeliveryCalendar] = useState(false);
+  const [openReturnCalendar, setOpenReturnCalendar] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [openStartTime, setOpenStartTime] = useState(false);
   const [openEndTime, setOpenEndTime] = useState(false);
   const [showSearchResult, setShowSearchResult] = useState(false);
-
-  const handleChange = (item) => {
-    const selection = item.selection;
-    if (selection.startDate === selection.endDate) {
-      const dateRange = document.querySelector(".dateRange");
-      dateRange.style.transform = "translateY(120px)";
-    } else {
-      setOpenDateRange(false);
-    }
-    setDates([item.selection]);
-  };
+  const [deliveryDate, setDeliveryDate] = useState(
+    new Date(
+      new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Brunei",
+      })
+    )
+  );
+  const [returnDate, setReturnDate] = useState(
+    new Date(deliveryDate.getTime() + dayInMillisecond)
+  );
+  const [data, setData] = useState([]);
 
   const handleTimeSelect = (e, input, val) => {
     setOpenStartTime(false);
@@ -59,7 +65,6 @@ const Search = () => {
     setTimes({ ...times, [input]: e.target.innerHTML, [input + "Val"]: val });
   };
 
-  const day_in_millisecond = 24 * 60 * 60 * 1000;
   let deliveryDateInMillisecond = 0;
   let returnDateInMillisecond = 0;
 
@@ -67,29 +72,39 @@ const Search = () => {
   const [returnDateInMs, setReturnDateInMs] = useState(0);
 
   const calculateDuration = () => {
-    let startDate = dates[0].startDate.getTime() + times.startTimeVal;
+    let startDate = deliveryDate.getTime() + times.startTimeVal;
     setDeliveryDateInMs(startDate);
-    let endDate = dates[0].endDate.getTime() + times.endTimeVal;
+    let endDate = returnDate.getTime() + times.endTimeVal;
     setReturnDateInMs(endDate);
-    setDuration(Math.ceil(Math.abs(endDate - startDate) / day_in_millisecond));
+    let duration = Math.ceil(Math.abs(endDate - startDate) / dayInMillisecond);
+    setDuration(duration);
   };
 
   const [option, setOption] = useState("");
 
-  const { data, loading, error, reFetch } = useFetch(
-    `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${deliveryDateInMs}&${returnDateInMs}`,
-    "get"
-  );
+  // const { data, loading, error, reFetch } = useFetch(
+  //   `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${deliveryDateInMs}&${returnDateInMs}`,
+  //   "get"
+  // );
 
   const [filteredGroup, setFilteredGroup] = useState(data);
-  console.log(filteredGroup);
 
   const handleSearch = () => {
-    console.log("calling handle search");
-    reFetch();
-    setShowSearchResult(true);
-    setFilteredGroup(data);
-    setOption("All");
+    axios
+      .get(
+        `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${deliveryDateInMs}&${returnDateInMs}`
+      )
+      .then((res) => {
+        setData(res.data);
+        setFilteredGroup(res.data);
+        setShowSearchResult(true);
+        setOption("All");
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   const filterData = (opt) => {
@@ -101,10 +116,20 @@ const Search = () => {
     }
   };
 
+  const handleDateChange = (item, type) => {
+    if (type === "delivery") {
+      setDeliveryDate(item);
+      setOpenDeliveryCalendar(false);
+    } else {
+      setReturnDate(item);
+      setOpenReturnCalendar(false);
+    }
+  };
+
   useEffect(() => {
     calculateDuration();
     setShowSearchResult(false);
-  }, [dates, times]);
+  }, [deliveryDate, returnDate, times]);
 
   // useEffect(() => {}, [filteredGroup, openEndTime, openStartTime]);
 
@@ -114,33 +139,92 @@ const Search = () => {
       <div className="search">
         <div className="searchContainer">
           <div className="searchDateTimeContainer">
-            <h5>Delivery</h5>
+            <div className="dateTimePicker"></div>
             <div className="searchDateTime">
               <div className="searchDateTimeItem">
-                <p>Date</p>
-                <div
-                  className="dateTimeSelection"
-                  onClick={() => {
-                    setOpenDateRange(!openDateRange);
-                  }}
-                >
-                  <p>{`${format(dates[0].startDate, "dd MMM yyyy")}`}</p>
-                  <BsCalendar></BsCalendar>
-                </div>
+                <h6>Pick-Up Date</h6>
 
-                {openDateRange && (
-                  <DateRange
-                    className="dateRange"
-                    minDate={new Date()}
-                    editableDateInputs={true}
-                    onChange={(item) => handleChange(item, "start")}
-                    moveRangeOnFirstSelection={false}
-                    ranges={dates}
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <MobileDatePicker
+                    label=""
+                    value={deliveryDate}
+                    inputFormat="dd MMM yyyy"
+                    minDate={
+                      new Date(
+                        new Date().toLocaleString("en-US", {
+                          timeZone: "Asia/Brunei",
+                        })
+                      )
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <BsCalendar3></BsCalendar3>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(newValue) => {
+                      setShowSearchResult(false);
+                      newValue.setHours(0, 0, 0, 0);
+
+                      //adjust return date if needed
+                      if (newValue.getTime() >= returnDate.getTime()) {
+                        setReturnDate(
+                          new Date(newValue.getTime() + dayInMillisecond)
+                        );
+                      }
+                      setDeliveryDate(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} disabled />}
                   />
-                )}
+                  {/* <DatePicker
+                    disablePast
+                    label=""
+                    openTo="day"
+                    inputFormat="dd MMM yyyy"
+                    value={deliveryDate}
+                    onChange={(newValue) => {
+                      setDeliveryDate(newValue);
+                    }}
+                    renderInput={(params) => (
+                      // <TextField
+                      //   {...params}
+                      //   sx={inputSx}
+                      //   disabled
+                      //   onkeydown="return false;"
+                      // />
+                      <div
+                        className="dateTimeSelection"
+                        onClick={() => {
+                          setOpenDeliveryCalendar(!openDeliveryCalendar);
+                        }}
+                      >
+                        <p>{`${format(deliveryDate, "dd MMM yyyy")}`}</p>
+                        <BsCalendar></BsCalendar>
+                      </div>
+                    )}
+                    // InputProps={{
+                    // sx: inputSx,
+                    // }}
+                  />
+                  <CalendarPicker
+                    disablePast
+                    label=""
+                    openTo="day"
+                    views={["day", "month"]}
+                    value={returnDate}
+                    onChange={(newValue) => {
+                      setReturnDate(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                  /> */}
+                </LocalizationProvider>
               </div>
               <div className="searchDateTimeItem">
-                <p>Time</p>
+                <h6>Pick-up Time</h6>
                 <div
                   className="dateTimeSelection"
                   onClick={() => {
@@ -382,22 +466,58 @@ const Search = () => {
               </div>
             </div>
             <br />
-            <h5>Return</h5>
             <div className="searchDateTime">
               <div className="searchDateTimeItem">
-                <p>Date</p>
-                <div
+                <h6>Drop-off Date</h6>
+                {/* <div
                   className="dateTimeSelection"
                   onClick={() => {
-                    setOpenDateRange(!openDateRange);
+                    setOpenReturnCalendar(!openReturnCalendar);
                   }}
                 >
-                  <p>{`${format(dates[0].endDate, "dd MMM yyyy")}`}</p>
+                  <p>{`${format(returnDate, "dd MMM yyyy")}`}</p>
                   <BsCalendar></BsCalendar>
-                </div>
+                </div> */}
+                {/* {openReturnCalendar && ( */}
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <MobileDatePicker
+                    label=""
+                    value={returnDate}
+                    inputFormat="dd MMM yyyy"
+                    minDate={
+                      new Date(
+                        new Date().toLocaleString("en-US", {
+                          timeZone: "Asia/Brunei",
+                        })
+                      )
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <BsCalendar3></BsCalendar3>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(newValue) => {
+                      newValue.setHours(0, 0, 0, 0);
+                      if (newValue.getTime() <= deliveryDate.getTime()) {
+                        let newDeliveryDate = new Date(
+                          newValue.getTime() - dayInMillisecond
+                        );
+                        setDeliveryDate(newDeliveryDate);
+                      }
+                      setReturnDate(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} disabled />}
+                  />
+                </LocalizationProvider>
+                {/* )} */}
               </div>
               <div className="searchDateTimeItem">
-                <p>Time</p>
+                <h6>Drop-off Time</h6>
                 <div
                   className="dateTimeSelection"
                   onClick={() => {

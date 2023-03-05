@@ -164,6 +164,34 @@
   justify-content: center;
 }
 
+.allBookingsHeader {
+  background-color: var(--color-green700);
+}
+
+.allBookingsHeader h3 {
+  color: white;
+}
+
+.jadwalBookingContainer {
+  width: 100%;
+}
+
+.jadwalBookingInfo {
+  width: 100%;
+}
+
+.jadwalBookingInfoItem {
+  width: 100%;
+}
+
+.jadwalHeader {
+  background-color: var(--color-green700);
+}
+
+.jadwalHeader h3 {
+  color: white;
+}
+
 @media (max-width: 1080px) {
   .adminNavbar2MenuIcon {
     display: block;
