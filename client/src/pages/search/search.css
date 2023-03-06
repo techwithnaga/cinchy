@@ -213,6 +213,10 @@
   display: none !important;
 }
 
+.css-1ujsas3 {
+  color: var(--color-green700) !important;
+}
+
 @media (max-width: 784px) {
   .searchContainer {
     width: 88%;
