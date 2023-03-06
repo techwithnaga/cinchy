@@ -18,16 +18,16 @@ const Admin = () => {
   const [bookingDate, setBookingDate] = useState("");
   const [result, setResult] = useState([]);
   const [bookings, setBookings] = useState([]);
-  const [booking, setBooking] = useState();
+  const [booking, setBooking] = useState({});
   const [allBookingsLoading, setAllBookingsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModalCheckIn, setShowModalCheckIn] = useState(false);
   const [showModalCheckOut, setShowModalCheckOut] = useState(false);
-  const [selectedMotor, setSelectedMotor] = useState("");
+  const [selectedMotor, setSelectedMotor] = useState();
+  const [availableMotors, setAvailableMotors] = useState([]);
 
-  const handleMotorSelected = (licensePlate) => {
-    console.log(licensePlate);
-    setSelectedMotor(licensePlate);
+  const handleMotorSelected = (event) => {
+    setSelectedMotor(event.target.value);
   };
 
   const closeModal = () => {
@@ -40,9 +40,19 @@ const Admin = () => {
     checkOutTime: "",
   });
 
-  const openModalCheckIn = (booking) => {
+  const openModalCheckIn = async (booking) => {
     setBooking(booking);
-    setShowModalCheckIn(true);
+    await axios
+      .get(
+        `${process.env.REACT_APP_API_ENDPOINT}/api/motor/getAllAvailableMotors`
+      )
+      .then((res) => {
+        setAvailableMotors(res.data);
+        setShowModalCheckIn(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const openModalCheckOut = (booking) => {
@@ -125,7 +135,7 @@ const Admin = () => {
       window.removeEventListener("resize", changeLogo);
       window.removeEventListener("hashchange", changeLogo());
     };
-  }, []);
+  }, [selectedMotor]);
 
   return (
     <div>
@@ -442,6 +452,9 @@ const Admin = () => {
       <ModalCheckIn
         closeModal={closeModal}
         showModal={showModalCheckIn}
+        bookingId={booking.bookingId}
+        customerName={booking.name}
+        availableMotors={availableMotors}
         data={result}
         handleMotorSelected={handleMotorSelected}
         selectedMotor={selectedMotor}

@@ -193,8 +193,13 @@
 .Mui-selected:focus {
   background-color: var(--color-green700) !important;
 }
+
 .Mui-selected {
   background-color: var(--color-green700) !important;
+  color: #fff !important;
+}
+.Mui-selected:hover {
+  color: #fff !important;
 }
 
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {

@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import "./modalCheckInOut.css";
 import { AiOutlineClose } from "react-icons/ai";
-import useFetch from "../../hooks/useFetch";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
 
 const ModalCheckIn = ({
   showModal,
   closeModal,
+  bookingId,
+  customerName,
   selectedMotor,
   handleMotorSelected,
+  availableMotors,
 }) => {
-  const { data, loading, error, reFetch } = useFetch(
-    `${process.env.REACT_APP_API_ENDPOINT}/api/motor/getAllAvailableMotors`,
-    "get"
-  );
+  // const { data, loading, error, reFetch } = useFetch(
+  //   `${process.env.REACT_APP_API_ENDPOINT}/api/motor/getAllAvailableMotors`,
+  //   "get"
+  // );
 
-  console.log(data);
+  const handleCheckIn = () => {};
 
   return (
     <div
@@ -39,12 +42,12 @@ const ModalCheckIn = ({
         <div className="modalCheckInOutBody">
           <div className="modalCheckInOutBodyItem">
             <h6>Booking ID : </h6>
-            <p>{data.bookingId}</p>
+            <p> {bookingId}</p>
           </div>
 
           <div className="modalCheckInOutBodyItem">
             <h6>Customer Name : </h6>
-            <p>{data.customerName}</p>
+            <p> {customerName}</p>
           </div>
 
           {/* <div className="modalCheckInOutBodyItem">
@@ -56,8 +59,12 @@ const ModalCheckIn = ({
           </div> */}
           <br />
 
-          <h6>KM Sekarang : </h6>
-          <input type="number" />
+          <TextField
+            id="outlined-basic"
+            type="number"
+            label="Check-in KM "
+            variant="outlined"
+          />
           <br />
           <br />
 
@@ -70,9 +77,13 @@ const ModalCheckIn = ({
               label="Pilih Motor"
               onChange={handleMotorSelected}
             >
-              {data.map((motor) => {
+              {availableMotors.map((motor, index) => {
                 return (
-                  <MenuItem value={motor.licensePlate}>
+                  <MenuItem
+                    defaultValue=""
+                    value={motor.licensePlate}
+                    key={index}
+                  >
                     {motor.category} {"   -  "} {motor.brand} {motor.name}
                     {"  -  "}
                     {motor.licensePlate}
