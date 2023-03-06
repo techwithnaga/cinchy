@@ -149,7 +149,6 @@ const Search = () => {
               <div className="searchDateTime">
                 <div className="searchDateTimeItem">
                   <h6>Pick-Up Date</h6>
-
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <MobileDatePicker
                       label=""
