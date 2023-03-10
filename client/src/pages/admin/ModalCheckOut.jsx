@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./modalCheckInOut.css";
 import { AiOutlineClose } from "react-icons/ai";
+import TextField from "@mui/material/TextField";
 
-const ModalCheckOut = ({ showModal, closeModal, data }) => {
+const ModalCheckOut = ({
+  showModal,
+  closeModal,
+  bookingId,
+  customerName,
+  licensePlate,
+  checkOutTime,
+  handleCheckOut,
+}) => {
+  const [endingKM, setEndingKM] = useState(0);
+  const [note, setNote] = useState("");
+
   return (
     <div
       className={`${
@@ -22,37 +34,74 @@ const ModalCheckOut = ({ showModal, closeModal, data }) => {
         <div className="modalCheckInOutBody">
           <div className="modalCheckInOutBodyItem">
             <h6>Booking ID : </h6>
-            <p>{data.bookingId}</p>
+            <p>{bookingId}</p>
           </div>
 
           <div className="modalCheckInOutBodyItem">
             <h6>Customer Name : </h6>
-            <p>{data.customerName}</p>
+            <p>{customerName}</p>
           </div>
 
           <div className="modalCheckInOutBodyItem">
             <h6>Check Out Time : </h6>
-            <p>{data.checkOutTime}</p>
+            <p>{checkOutTime}</p>
           </div>
           <div className="modalCheckInOutBodyItem">
             <h6>Nomor Plat Motor : </h6>
+            <p>{licensePlate}</p>
           </div>
           <br />
-          <h6>KM Terakhir : </h6>
-          <input type="number" />
           <br />
-          <h6>Note : </h6>
-          <textarea
-            name="comments"
-            id="comments"
-            rows="5"
-            placeholder="Tulis disini kalau ada kerusakan di motor dan komentar"
-          ></textarea>
-        </div>
+          <TextField
+            id="outlined-basic"
+            type="number"
+            label="KM Terakhir"
+            variant="outlined"
+            value={endingKM}
+            onChange={(e) => {
+              setEndingKM(e.target.value);
+            }}
+          />
+          <br />
+          <br />
 
-        <button className="okButton" onClick={() => closeModal()}>
-          Check Out
+          <TextField
+            id="outlined-basic"
+            type="text"
+            label="Note"
+            multiline
+            minRows={3}
+            variant="outlined"
+            value={note}
+            onChange={(e) => {
+              setNote(e.target.value);
+            }}
+          />
+          <br />
+          <br />
+        </div>
+        <button
+          className="checkincheckout button"
+          onClick={() => handleCheckOut(endingKM, note)}
+        >
+          <p className="buttonTxt">Check Out</p>
         </button>
+        {/* {vehicleReturned ? (
+          <button
+            className="okButton"
+            onClick={() => handleCheckOut(endingKM, note)}
+            disabled
+          >
+            Checked-Out
+          </button>
+        ) : (
+          <button
+            className="okButton"
+            onClick={() => handleCheckOut(endingKM, note)}
+          >
+            Check Out
+          </button>
+        )} */}
       </div>
     </div>
   );

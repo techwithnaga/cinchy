@@ -141,6 +141,7 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
+  min-width: 5em;
 }
 
 .button a {
@@ -152,6 +153,21 @@
 
 .button:hover {
   background-color: #00332c;
+}
+
+.checkincheckout {
+  width: 100%;
+}
+
+.disabledButton {
+  margin-top: 1em;
+  border: 1px solid lightgrey;
+  color: lightgrey;
+  padding: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .button:hover .buttonTxt {

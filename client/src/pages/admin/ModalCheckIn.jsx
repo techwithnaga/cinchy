@@ -15,13 +15,14 @@ const ModalCheckIn = ({
   selectedMotor,
   handleMotorSelected,
   availableMotors,
+  handleCheckIn,
 }) => {
   // const { data, loading, error, reFetch } = useFetch(
   //   `${process.env.REACT_APP_API_ENDPOINT}/api/motor/getAllAvailableMotors`,
   //   "get"
   // );
 
-  const handleCheckIn = () => {};
+  const [checkInKM, setCheckInKM] = useState(0);
 
   return (
     <div
@@ -64,6 +65,10 @@ const ModalCheckIn = ({
             type="number"
             label="Check-in KM "
             variant="outlined"
+            value={checkInKM}
+            onChange={(e) => {
+              setCheckInKM(e.target.value);
+            }}
           />
           <br />
           <br />
@@ -93,7 +98,7 @@ const ModalCheckIn = ({
             </Select>
           </FormControl>
         </div>
-        <button className="okButton" onClick={() => closeModal()}>
+        <button className="okButton" onClick={() => handleCheckIn(checkInKM)}>
           Check In
         </button>
       </div>
