@@ -12,19 +12,25 @@ import axios from "axios";
 import formatNumber from "../../utils/formatNumber";
 import FadeLoader from "react-spinners/FadeLoader";
 import moment from "moment-timezone";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 
 const BookingSummary = () => {
   const { state } = useLocation();
   const [showError, setShowError] = useState(false);
   const [agreeToMarketing, setAgreeToMarketing] = useState(true);
   const [agreeToTNC, setAgreeToTNC] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [promoCode, setPromoCode] = useState("");
+  const [showPromoError, setShowPromoError] = useState(false);
+  const [promoErrorMessage, setPromoErrorMessage] = useState("");
+  const [percentDiscount, setPercentDiscount] = useState(25);
 
   const closeModalError = () => {
     setShowError(false);
   };
   const navigate = useNavigate();
 
-  const newBooking = state.newBooking;
+  const [newBooking, setNewBooking] = useState(state.newBooking);
   const { data, loading, error, reFetch } = useFetch(
     `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${newBooking.motorGroup}`,
     "get"
@@ -59,6 +65,19 @@ const BookingSummary = () => {
   const handleConfirmClick = async () => {
     if (agreeToTNC) {
       setLoading2(true);
+      let clonedBooking = structuredClone(newBooking);
+
+      clonedBooking.deliveryDate = new Date(
+        newBooking.deliveryDate + deltaMiliseconds
+      );
+      clonedBooking.returnDate = new Date(
+        newBooking.returnDate + deltaMiliseconds
+      );
+      clonedBooking.isConfirmed = true;
+
+      console.log("discount " + clonedBooking.discount);
+      console.log("total rental " + clonedBooking.totalRentalPrice);
+
       let st = newBooking.deliveryDate;
       let et = newBooking.returnDate;
 
@@ -142,6 +161,66 @@ const BookingSummary = () => {
 
   const handleMarketingClick = () => {
     setAgreeToMarketing(!agreeToMarketing);
+  };
+
+  //Handle Promo Code Change
+  const handlePromoCode = (e) => {
+    setIsDisabled(false);
+    setPromoCode(e.target.value);
+    setShowPromoError(false);
+  };
+
+  //handle promo code apply
+  const handlePromoApply = () => {
+    if (percentDiscount !== 25) {
+      setPromoErrorMessage("Only one promo code can be applied.");
+      setShowPromoError(true);
+    } else {
+      if (promoCode === "CINCHYVIP") {
+        setShowPromoError(false);
+        setPercentDiscount(40);
+        setPromoCode("");
+      } else {
+        setPromoErrorMessage("Invalid Promo Code.");
+        setShowPromoError(true);
+      }
+    }
+  };
+
+  const DiscountTxt = () => {
+    if (percentDiscount === 25) {
+      return (
+        <>
+          <div className="paymentSummaryItem">
+            <label htmlFor="subtotal">25% Discount (until 30 Jun 2023)</label>
+            <p>(IDR {formatNumber(newBooking.discount)}K)</p>
+          </div>
+          <div className="paymentSummaryItem">
+            <h5 htmlFor="subtotal">Total Payment</h5>
+            <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+          </div>
+        </>
+      );
+    } else {
+      newBooking.discount = (newBooking.subtotal * percentDiscount) / 100;
+      newBooking.totalRentalPrice = newBooking.subtotal - newBooking.discount;
+      setNewBooking(newBooking);
+      return (
+        <>
+          <div className="paymentSummaryItem">
+            <label htmlFor="subtotal">{percentDiscount}% Discount </label>
+            <p>
+              (IDR {formatNumber((newBooking.subtotal * percentDiscount) / 100)}
+              K)
+            </p>
+          </div>
+          <div className="paymentSummaryItem">
+            <h5 htmlFor="subtotal">Total Payment</h5>
+            <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+          </div>
+        </>
+      );
+    }
   };
 
   useEffect(() => {
@@ -231,16 +310,41 @@ const BookingSummary = () => {
                       <label htmlFor="subtotal">Accessories Fee</label>
                       <p>IDR 0</p>
                     </div>
-                    <div className="paymentSummaryItem">
-                      <label htmlFor="subtotal">
-                        25% Discount (until 30 Jun 2023)
-                      </label>
-                      <p>(IDR {formatNumber(newBooking.discount)}K)</p>
+                    <DiscountTxt />
+                    {/* <div className="paymentSummaryItem">
+                 
                     </div>
                     <div className="paymentSummaryItem">
                       <h5 htmlFor="subtotal">Total Payment</h5>
                       <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
-                    </div>
+                    </div> */}
+                  </div>
+                  <hr />
+
+                  <div className="promoCode">
+                    <Stack direction="row" spacing={3} mt={3}>
+                      <TextField
+                        id="outlined-basic"
+                        label="Promo Code"
+                        variant="outlined"
+                        onChange={(e) => handlePromoCode(e)}
+                      />
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        sx={{ width: 150 }}
+                        disabled={isDisabled}
+                        onClick={() => handlePromoApply()}
+                      >
+                        Apply
+                      </Button>
+                    </Stack>
+
+                    {showPromoError && (
+                      <Typography style={{ color: "red" }}>
+                        {promoErrorMessage}
+                      </Typography>
+                    )}
                   </div>
 
                   {/* <div className="paymentTotal">
