@@ -75,9 +75,6 @@ const BookingSummary = () => {
       );
       clonedBooking.isConfirmed = true;
 
-      console.log("discount " + clonedBooking.discount);
-      console.log("total rental " + clonedBooking.totalRentalPrice);
-
       let st = newBooking.deliveryDate;
       let et = newBooking.returnDate;
 

@@ -447,6 +447,11 @@ const Admin = () => {
                           <p>{booking.licensePlate}</p>
                         </div>
                         <div className="jadwalBookingInfoItem">
+                          <h6>KM Awal : </h6>
+                          <p>{booking.startingKM}</p>
+                        </div>
+
+                        <div className="jadwalBookingInfoItem">
                           <h6>Nama Customer : </h6>
                           <p>{booking.name}</p>
                         </div>
@@ -456,11 +461,11 @@ const Admin = () => {
                         </div>
                         <div className="jadwalBookingInfoItem">
                           <h6>Delivery Date : </h6>
-                          <p>{booking.deliveryDate}</p>
+                          <p>{booking.deliveryDate.slice(0, 22)}</p>
                         </div>
                         <div className="jadwalBookingInfoItem">
                           <h6>Return Date : </h6>
-                          <p>{booking.returnDate}</p>
+                          <p>{booking.returnDate.slice(0, 22)}</p>
                         </div>
                         <div className="jadwalBookingInfoItem">
                           <h6>Delivery Location : </h6>
