@@ -84,34 +84,6 @@ const Modal = ({ isModalOpen, closeModal, agreeToTNC, setAgreeToTNC }) => {
           </li>
         </ul>
 
-        <h5>Driver’s Responsibility</h5>
-        <ul>
-          <li>
-            Renter needs to provide Cinchy a copy of items below with the same
-            name with booking at maximum of 48 hours before delivery. Our staff
-            will contact you via your provided contact number to verify the
-            items. Failure to do so will result in booking cancellation.
-          </li>
-          <ul>
-            <li>Valid ID</li>
-            <li>Valid Driving License</li>
-            <li>Round Trip Flight Ticket</li>
-            <li>Hotel Booking for the trip duration </li>
-          </ul>
-          <li>
-            Your safety is our priority. Our staff will assess the renter’s
-            riding capability during pick up. If deemed unsafe, your booking is
-            subject to a full refund cancellation.
-          </li>
-          <li>
-            Cinchy is not liable to any damage, loss, injury, or death sustained
-            by the renters or any party involved during the renting period.{" "}
-          </li>
-          <li>
-            Renter is liable for all penalties and fines incurred during the
-            rental period.{" "}
-          </li>
-        </ul>
         <br />
         <h5>Payment & Cancellation</h5>
         <ul>

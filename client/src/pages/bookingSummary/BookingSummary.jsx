@@ -189,7 +189,7 @@ const BookingSummary = () => {
       return (
         <>
           <div className="paymentSummaryItem">
-            <label htmlFor="subtotal">25% Discount (until 30 Jun 2023)</label>
+            <label htmlFor="subtotal">25% Discount</label>
             <p>(IDR {formatNumber(newBooking.discount)}K)</p>
           </div>
           <div className="paymentSummaryItem">

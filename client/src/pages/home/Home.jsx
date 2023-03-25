@@ -18,7 +18,6 @@ const Home = () => {
       <MotorOptions></MotorOptions>
       <DeliveryLocations></DeliveryLocations>
       <Miscellaneous></Miscellaneous>
-      {/* <Comment></Comment> */}
       <FAQs></FAQs>
       <Feedback></Feedback>
       <Footer></Footer>
