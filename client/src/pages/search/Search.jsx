@@ -133,61 +133,48 @@ const Search = () => {
     <>
       <Navbar2></Navbar2>
       <div className="search">
-        {loading ? (
-          <div className="loaderContainer">
-            <FadeLoader
-              color="#00332C"
-              loading={loading}
-              size={150}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
-          </div>
-        ) : (
-          <div className="searchContainer">
-            <div className="searchDateTimeContainer">
-              <div className="searchDateTime">
-                <div className="searchDateTimeItem">
-                  <h6>Pick-Up Date</h6>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <MobileDatePicker
-                      label=""
-                      value={deliveryDate}
-                      inputFormat="dd MMM yyyy"
-                      minDate={
-                        new Date(
-                          new Date().toLocaleString("en-US", {
-                            timeZone: "Asia/Brunei",
-                          })
-                        )
-                      }
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment
-                            position="end"
-                            style={{ cursor: "pointer" }}
-                          >
-                            <BsCalendar3></BsCalendar3>
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(newValue) => {
-                        setShowSearchResult(false);
-                        newValue.setHours(0, 0, 0, 0);
+        <div className="searchContainer">
+          <div className="searchDateTimeContainer">
+            <div className="searchDateTime">
+              <div className="searchDateTimeItem">
+                <h6>Pick-Up Date</h6>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <MobileDatePicker
+                    label=""
+                    value={deliveryDate}
+                    inputFormat="dd MMM yyyy"
+                    minDate={
+                      new Date(
+                        new Date().toLocaleString("en-US", {
+                          timeZone: "Asia/Brunei",
+                        })
+                      )
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <BsCalendar3></BsCalendar3>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(newValue) => {
+                      setShowSearchResult(false);
+                      newValue.setHours(0, 0, 0, 0);
 
-                        //adjust return date if needed
-                        if (newValue.getTime() >= returnDate.getTime()) {
-                          setReturnDate(
-                            new Date(newValue.getTime() + dayInMillisecond)
-                          );
-                        }
-                        setDeliveryDate(newValue);
-                      }}
-                      renderInput={(params) => (
-                        <TextField {...params} disabled />
-                      )}
-                    />
-                    {/* <DatePicker
+                      //adjust return date if needed
+                      if (newValue.getTime() >= returnDate.getTime()) {
+                        setReturnDate(
+                          new Date(newValue.getTime() + dayInMillisecond)
+                        );
+                      }
+                      setDeliveryDate(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} disabled />}
+                  />
+                  {/* <DatePicker
                     disablePast
                     label=""
                     openTo="day"
@@ -228,307 +215,255 @@ const Search = () => {
                     }}
                     renderInput={(params) => <TextField {...params} />}
                   /> */}
-                  </LocalizationProvider>
-                </div>
-                <div className="searchDateTimeItem">
-                  <h6>Pick-up Time</h6>
-                  <div
-                    className="dateTimeSelection"
-                    onClick={() => {
-                      setOpenStartTime(!openStartTime);
-                      setOpenEndTime(false);
-                    }}
-                  >
-                    <p>{times.startTime}</p>
-                    <IoTimeOutline style={{ fontSize: "130%" }}></IoTimeOutline>
-                  </div>
-                  {openStartTime && (
-                    <ul className="timeSelection">
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            9 * milisecondsInHour
-                          )
-                        }
-                      >
-                        09:00 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            9.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        09:30 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            10 * milisecondsInHour
-                          )
-                        }
-                      >
-                        10:00 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            10.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        10:30 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            11 * milisecondsInHour
-                          )
-                        }
-                      >
-                        11:00 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            11.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        11:30 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            12 * milisecondsInHour
-                          )
-                        }
-                      >
-                        noon
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            12.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        12:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            13 * milisecondsInHour
-                          )
-                        }
-                      >
-                        01:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            13.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        01:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            14 * milisecondsInHour
-                          )
-                        }
-                      >
-                        02:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            14.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        02:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            15 * milisecondsInHour
-                          )
-                        }
-                      >
-                        03:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            15.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        03:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            16 * milisecondsInHour
-                          )
-                        }
-                      >
-                        04:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            16.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        04:30 PM
-                      </li>
-
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            17 * milisecondsInHour
-                          )
-                        }
-                      >
-                        05:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            17.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        05:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            18 * milisecondsInHour
-                          )
-                        }
-                      >
-                        06:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            18.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        06:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            19 * milisecondsInHour
-                          )
-                        }
-                      >
-                        07:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            19.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        07:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            20 * milisecondsInHour
-                          )
-                        }
-                      >
-                        08:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            20.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        08:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "startTime",
-                            21 * milisecondsInHour
-                          )
-                        }
-                      >
-                        09:00 PM
-                      </li>
-                    </ul>
-                  )}
-                </div>
+                </LocalizationProvider>
               </div>
-              <br />
-              <div className="searchDateTime">
-                <div className="searchDateTimeItem">
-                  <h6>Drop-off Date</h6>
-                  {/* <div
+              <div className="searchDateTimeItem">
+                <h6>Pick-up Time</h6>
+                <div
+                  className="dateTimeSelection"
+                  onClick={() => {
+                    setOpenStartTime(!openStartTime);
+                    setOpenEndTime(false);
+                  }}
+                >
+                  <p>{times.startTime}</p>
+                  <IoTimeOutline style={{ fontSize: "130%" }}></IoTimeOutline>
+                </div>
+                {openStartTime && (
+                  <ul className="timeSelection">
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 9 * milisecondsInHour)
+                      }
+                    >
+                      09:00 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          9.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      09:30 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 10 * milisecondsInHour)
+                      }
+                    >
+                      10:00 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          10.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      10:30 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 11 * milisecondsInHour)
+                      }
+                    >
+                      11:00 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          11.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      11:30 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 12 * milisecondsInHour)
+                      }
+                    >
+                      noon
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          12.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      12:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 13 * milisecondsInHour)
+                      }
+                    >
+                      01:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          13.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      01:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 14 * milisecondsInHour)
+                      }
+                    >
+                      02:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          14.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      02:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 15 * milisecondsInHour)
+                      }
+                    >
+                      03:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          15.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      03:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 16 * milisecondsInHour)
+                      }
+                    >
+                      04:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          16.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      04:30 PM
+                    </li>
+
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 17 * milisecondsInHour)
+                      }
+                    >
+                      05:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          17.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      05:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 18 * milisecondsInHour)
+                      }
+                    >
+                      06:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          18.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      06:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 19 * milisecondsInHour)
+                      }
+                    >
+                      07:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          19.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      07:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 20 * milisecondsInHour)
+                      }
+                    >
+                      08:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(
+                          e,
+                          "startTime",
+                          20.5 * milisecondsInHour
+                        )
+                      }
+                    >
+                      08:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "startTime", 21 * milisecondsInHour)
+                      }
+                    >
+                      09:00 PM
+                    </li>
+                  </ul>
+                )}
+              </div>
+            </div>
+            <br />
+            <div className="searchDateTime">
+              <div className="searchDateTimeItem">
+                <h6>Drop-off Date</h6>
+                {/* <div
                   className="dateTimeSelection"
                   onClick={() => {
                     setOpenReturnCalendar(!openReturnCalendar);
@@ -537,364 +472,314 @@ const Search = () => {
                   <p>{`${format(returnDate, "dd MMM yyyy")}`}</p>
                   <BsCalendar></BsCalendar>
                 </div> */}
-                  {/* {openReturnCalendar && ( */}
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <MobileDatePicker
-                      label=""
-                      value={returnDate}
-                      inputFormat="dd MMM yyyy"
-                      minDate={
-                        new Date(
-                          new Date().toLocaleString("en-US", {
-                            timeZone: "Asia/Brunei",
-                          })
-                        )
-                      }
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment
-                            position="end"
-                            style={{ cursor: "pointer" }}
-                          >
-                            <BsCalendar3></BsCalendar3>
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={(newValue) => {
-                        newValue.setHours(0, 0, 0, 0);
-                        if (newValue.getTime() <= deliveryDate.getTime()) {
-                          let newDeliveryDate = new Date(
-                            newValue.getTime() - dayInMillisecond
-                          );
-                          setDeliveryDate(newDeliveryDate);
-                        }
-                        setReturnDate(newValue);
-                      }}
-                      renderInput={(params) => (
-                        <TextField {...params} disabled />
-                      )}
-                    />
-                  </LocalizationProvider>
-                  {/* )} */}
-                </div>
-                <div className="searchDateTimeItem">
-                  <h6>Drop-off Time</h6>
-                  <div
-                    className="dateTimeSelection"
-                    onClick={() => {
-                      setOpenEndTime(!openEndTime);
-                      setOpenStartTime(false);
+                {/* {openReturnCalendar && ( */}
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <MobileDatePicker
+                    label=""
+                    value={returnDate}
+                    inputFormat="dd MMM yyyy"
+                    minDate={
+                      new Date(
+                        new Date().toLocaleString("en-US", {
+                          timeZone: "Asia/Brunei",
+                        })
+                      )
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <BsCalendar3></BsCalendar3>
+                        </InputAdornment>
+                      ),
                     }}
-                  >
-                    <p>{times.endTime}</p>
-                    <IoTimeOutline style={{ fontSize: "130%" }}></IoTimeOutline>
-                  </div>
-                  {openEndTime && (
-                    <ul className="timeSelection">
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 9 * milisecondsInHour)
-                        }
-                      >
-                        09:00 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            9.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        09:30 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 10 * milisecondsInHour)
-                        }
-                      >
-                        10:00 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            10.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        10:30 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 11 * milisecondsInHour)
-                        }
-                      >
-                        11:00 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            11.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        11:30 AM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 12 * milisecondsInHour)
-                        }
-                      >
-                        noon
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            12.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        12:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 13 * milisecondsInHour)
-                        }
-                      >
-                        01:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            13.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        01:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 14 * milisecondsInHour)
-                        }
-                      >
-                        02:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            14.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        02:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 15 * milisecondsInHour)
-                        }
-                      >
-                        03:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            15.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        03:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 16 * milisecondsInHour)
-                        }
-                      >
-                        04:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            16.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        04:30 PM
-                      </li>
-
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 17 * milisecondsInHour)
-                        }
-                      >
-                        05:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            17.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        05:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 18 * milisecondsInHour)
-                        }
-                      >
-                        06:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            18.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        06:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 19 * milisecondsInHour)
-                        }
-                      >
-                        07:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            19.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        07:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 20 * milisecondsInHour)
-                        }
-                      >
-                        08:00 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(
-                            e,
-                            "endTime",
-                            20.5 * milisecondsInHour
-                          )
-                        }
-                      >
-                        08:30 PM
-                      </li>
-                      <li
-                        onClick={(e) =>
-                          handleTimeSelect(e, "endTime", 21 * milisecondsInHour)
-                        }
-                      >
-                        09:00 PM
-                      </li>
-                    </ul>
-                  )}
-                </div>
+                    onChange={(newValue) => {
+                      newValue.setHours(0, 0, 0, 0);
+                      if (newValue.getTime() <= deliveryDate.getTime()) {
+                        let newDeliveryDate = new Date(
+                          newValue.getTime() - dayInMillisecond
+                        );
+                        setDeliveryDate(newDeliveryDate);
+                      }
+                      setReturnDate(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} disabled />}
+                  />
+                </LocalizationProvider>
+                {/* )} */}
               </div>
-              <br />
-              <h5>Duration</h5>
-              <p>{duration} Day(s)</p>
-              <br />
-              <button className="searchBtn" onClick={() => handleSearch()}>
-                Search
-              </button>
+              <div className="searchDateTimeItem">
+                <h6>Drop-off Time</h6>
+                <div
+                  className="dateTimeSelection"
+                  onClick={() => {
+                    setOpenEndTime(!openEndTime);
+                    setOpenStartTime(false);
+                  }}
+                >
+                  <p>{times.endTime}</p>
+                  <IoTimeOutline style={{ fontSize: "130%" }}></IoTimeOutline>
+                </div>
+                {openEndTime && (
+                  <ul className="timeSelection">
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 9 * milisecondsInHour)
+                      }
+                    >
+                      09:00 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 9.5 * milisecondsInHour)
+                      }
+                    >
+                      09:30 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 10 * milisecondsInHour)
+                      }
+                    >
+                      10:00 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 10.5 * milisecondsInHour)
+                      }
+                    >
+                      10:30 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 11 * milisecondsInHour)
+                      }
+                    >
+                      11:00 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 11.5 * milisecondsInHour)
+                      }
+                    >
+                      11:30 AM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 12 * milisecondsInHour)
+                      }
+                    >
+                      noon
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 12.5 * milisecondsInHour)
+                      }
+                    >
+                      12:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 13 * milisecondsInHour)
+                      }
+                    >
+                      01:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 13.5 * milisecondsInHour)
+                      }
+                    >
+                      01:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 14 * milisecondsInHour)
+                      }
+                    >
+                      02:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 14.5 * milisecondsInHour)
+                      }
+                    >
+                      02:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 15 * milisecondsInHour)
+                      }
+                    >
+                      03:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 15.5 * milisecondsInHour)
+                      }
+                    >
+                      03:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 16 * milisecondsInHour)
+                      }
+                    >
+                      04:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 16.5 * milisecondsInHour)
+                      }
+                    >
+                      04:30 PM
+                    </li>
+
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 17 * milisecondsInHour)
+                      }
+                    >
+                      05:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 17.5 * milisecondsInHour)
+                      }
+                    >
+                      05:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 18 * milisecondsInHour)
+                      }
+                    >
+                      06:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 18.5 * milisecondsInHour)
+                      }
+                    >
+                      06:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 19 * milisecondsInHour)
+                      }
+                    >
+                      07:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 19.5 * milisecondsInHour)
+                      }
+                    >
+                      07:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 20 * milisecondsInHour)
+                      }
+                    >
+                      08:00 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 20.5 * milisecondsInHour)
+                      }
+                    >
+                      08:30 PM
+                    </li>
+                    <li
+                      onClick={(e) =>
+                        handleTimeSelect(e, "endTime", 21 * milisecondsInHour)
+                      }
+                    >
+                      09:00 PM
+                    </li>
+                  </ul>
+                )}
+              </div>
             </div>
+            <br />
+            <h5>Duration</h5>
+            <p>{duration} Day(s)</p>
+            <br />
+            <button className="searchBtn" onClick={() => handleSearch()}>
+              Search
+            </button>
+          </div>
 
-            {showSearchResult && (
-              <div className="avaiableBikes">
-                <h5>Available Bikes</h5>
-                <div className="avaiableBikesCategory">
-                  <button
-                    className="avaiableBikesBtn"
-                    onClick={() => filterData("All")}
-                  >
-                    All
-                  </button>
+          {showSearchResult && (
+            <div className="avaiableBikes">
+              <h5>Available Bikes</h5>
+              <div className="avaiableBikesCategory">
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => filterData("All")}
+                >
+                  All
+                </button>
 
-                  {/* <div
+                {/* <div
                   className="avaiableBikesDiv"
                   onClick={() => setOption("All")}
                 >
                   Style
                 </div> */}
-                  <button
-                    className="avaiableBikesBtn"
-                    onClick={() => filterData("Style")}
-                  >
-                    Style
-                  </button>
-                  <button
-                    className="avaiableBikesBtn"
-                    onClick={() => filterData("Comfort")}
-                  >
-                    Comfort
-                  </button>
-                  <button
-                    className="avaiableBikesBtn"
-                    onClick={() => filterData("Compact")}
-                  >
-                    Compact
-                  </button>
-                </div>
-                <h6>Recommendation</h6>
-                {loading ? (
-                  <div className="loaderContainer">
-                    <FadeLoader
-                      color="#00332C"
-                      loading={loading}
-                      size={150}
-                      aria-label="Loading Spinner"
-                      data-testid="loader"
-                    />
-                  </div>
-                ) : (
-                  <div className="searchResults">
-                    {filteredGroup.map((motorGroup, i) => {
-                      return (
-                        <SearchOption
-                          key={i}
-                          motorGroup={motorGroup}
-                          days={duration}
-                          deliveryDateInMillisecond={deliveryDateInMs}
-                          returnDateInMillisecond={returnDateInMs}
-                          isAvailable={motorGroup.isAvailable}
-                        ></SearchOption>
-                      );
-                    })}
-                  </div>
-                )}
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => filterData("Style")}
+                >
+                  Style
+                </button>
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => filterData("Comfort")}
+                >
+                  Comfort
+                </button>
+                <button
+                  className="avaiableBikesBtn"
+                  onClick={() => filterData("Compact")}
+                >
+                  Compact
+                </button>
               </div>
-            )}
-          </div>
-        )}
+              <h6>Recommendation</h6>
+              {loading ? (
+                <div className="loaderContainer">
+                  <FadeLoader
+                    color="#00332C"
+                    loading={loading}
+                    size={150}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    className="searchLoader"
+                  />
+                </div>
+              ) : (
+                <div className="searchResults">
+                  {filteredGroup.map((motorGroup, i) => {
+                    return (
+                      <SearchOption
+                        key={i}
+                        motorGroup={motorGroup}
+                        days={duration}
+                        deliveryDateInMillisecond={deliveryDateInMs}
+                        returnDateInMillisecond={returnDateInMs}
+                        isAvailable={motorGroup.isAvailable}
+                      ></SearchOption>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
