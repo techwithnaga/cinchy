@@ -9,6 +9,8 @@ import moment from "moment-timezone";
 const SearchOption = ({
   motorGroup,
   days,
+  localDeliveryDateTimeInMs,
+  localReturnDateTimeInMs,
   deliveryDateInMillisecond,
   returnDateInMillisecond,
   isAvailable,
@@ -24,10 +26,6 @@ const SearchOption = ({
 
   const handleSearchBookNowClick = (motorGroupId, priceperday) => {
     //check valid delivery date
-    // let now = moment();
-
-    // console.log(now);
-
     if (days === 0 || deliveryDateInMillisecond >= returnDateInMillisecond) {
       setErrorMessage("Please select valid delivery and return dates.");
       setShowError(true);
@@ -49,6 +47,8 @@ const SearchOption = ({
         payload: {
           motorGroupId,
           subtotal,
+          localDeliveryDateTimeInMs,
+          localReturnDateTimeInMs,
           deliveryDateInMillisecond,
           returnDateInMillisecond,
         },

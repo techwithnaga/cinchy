@@ -15,6 +15,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { MobileDatePicker } from "@mui/x-date-pickers";
 import { TextField } from "@mui/material";
 import axios from "axios";
+import moment from "moment-timezone";
 
 const Search = () => {
   // moment.tz.setDefault("asia/brunei");
@@ -54,6 +55,10 @@ const Search = () => {
   const [returnDate, setReturnDate] = useState(
     new Date(deliveryDate.getTime() + dayInMillisecond)
   );
+
+  const [localDeliveryDateTimeInMs, setLocalDeliveryDateTimeInMs] = useState(0);
+  const [localReturnDateTimeInMs, setLocalReturnDateTimeInMs] = useState(0);
+
   const [data, setData] = useState([]);
 
   const handleTimeSelect = (e, input, val) => {
@@ -67,10 +72,18 @@ const Search = () => {
   const [returnDateInMs, setReturnDateInMs] = useState(0);
 
   const calculateDuration = () => {
-    let startDate = deliveryDate.getTime() + times.startTimeVal;
+    var now = moment();
+    var localOffset = now.utcOffset();
+    let deltaMiliseconds = localOffset * 60 * 1000;
+
+    //converting to UTC MS
+    let startDate =
+      deliveryDate.getTime() + times.startTimeVal + deltaMiliseconds;
     setDeliveryDateInMs(startDate);
-    let endDate = returnDate.getTime() + times.endTimeVal;
+    setLocalDeliveryDateTimeInMs(deliveryDate.getTime() + times.startTimeVal);
+    let endDate = returnDate.getTime() + times.endTimeVal + deltaMiliseconds;
     setReturnDateInMs(endDate);
+    setLocalReturnDateTimeInMs(returnDate.getTime() + times.endTimeVal);
     let duration = Math.ceil(Math.abs(endDate - startDate) / dayInMillisecond);
     setDuration(duration);
   };
@@ -757,6 +770,8 @@ const Search = () => {
                       key={i}
                       motorGroup={motorGroup}
                       days={duration}
+                      localDeliveryDateTimeInMs={localDeliveryDateTimeInMs}
+                      localReturnDateTimeInMs={localReturnDateTimeInMs}
                       deliveryDateInMillisecond={deliveryDateInMs}
                       returnDateInMillisecond={returnDateInMs}
                       isAvailable={motorGroup.isAvailable}

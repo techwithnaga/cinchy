@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { SearchContext } from "../../context/SearchContext";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import ProgressBar from "../../components/progressBar/ProgressBar";
 import "./bookingSummary.css";
@@ -24,6 +25,15 @@ const BookingSummary = () => {
   const [showPromoError, setShowPromoError] = useState(false);
   const [promoErrorMessage, setPromoErrorMessage] = useState("");
   const [percentDiscount, setPercentDiscount] = useState(25);
+
+  const {
+    motorGroupId,
+    subtotal,
+    deliveryDateInMillisecond,
+    returnDateInMillisecond,
+    localDeliveryDateTimeInMs,
+    localReturnDateTimeInMs,
+  } = useContext(SearchContext);
 
   const closeModalError = () => {
     setShowError(false);
@@ -118,9 +128,9 @@ const BookingSummary = () => {
             phoneNumber: updatedUser.data.whatsappNumber,
             reservationNumber: createdBooking.data._id.slice(-5),
             groupName: data.groupName,
-            deliveryDate: format(newBooking.deliveryDate, "E, d MMM HH:mm"),
+            deliveryDate: format(localDeliveryDateTimeInMs, "E, d MMM HH:mm"),
             deliveryLocation: delivery.data.region,
-            returnDate: format(newBooking.returnDate, "E, d MMM HH:mm"),
+            returnDate: format(localReturnDateTimeInMs, "E, d MMM HH:mm"),
             returnLocation: pickup.data.region,
           }
         )
@@ -269,8 +279,11 @@ const BookingSummary = () => {
 
               <div className="datePaymentSummary">
                 <div className="bookingDate">
-                  {format(new Date(newBooking.deliveryDate), "E, d MMM HH:mm")}{" "}
-                  -{format(new Date(newBooking.returnDate), "E, d MMM HH:mm")}
+                  {format(
+                    new Date(localDeliveryDateTimeInMs),
+                    "E, d MMM HH:mm"
+                  )}
+                  -{format(new Date(localReturnDateTimeInMs), "E, d MMM HH:mm")}
                 </div>
                 <div className="paymentSummary">
                   <br />

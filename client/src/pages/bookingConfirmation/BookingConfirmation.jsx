@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./bookingConfirmation.css";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import Navbar2 from "../../components/navbar2/Navbar2";
@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 
 const BookingConfirmation = () => {
@@ -15,8 +14,17 @@ const BookingConfirmation = () => {
 
   const bookingInfo = state.bookingInfo;
   const motorGroup = state.motorGroup;
-  const deliveryDate = state.deliveryDate;
-  const returnDate = state.returnDate;
+  const deliveryDate = state.localDeliveryDate;
+  const returnDate = state.localReturnDate;
+
+  const {
+    motorGroupId,
+    subtotal,
+    deliveryDateInMillisecond,
+    returnDateInMillisecond,
+    localDeliveryDateTimeInMs,
+    localReturnDateTimeInMs,
+  } = useContext(SearchContext);
 
   const navigate = useNavigate();
 
@@ -35,8 +43,8 @@ const BookingConfirmation = () => {
           <div className="bookingConfirmationMidHeader">
             <h5>Booking #{bookingInfo._id.slice(-5)}</h5>
             <p>
-              {format(new Date(deliveryDate), "E, d MMM HH:mm")} -
-              {format(new Date(returnDate), "E, d MMM HH:mm")}
+              {format(new Date(localDeliveryDateTimeInMs), "E, d MMM HH:mm")} -
+              {format(new Date(localReturnDateTimeInMs), "E, d MMM HH:mm")}
             </p>
           </div>
           <div className="bookingConfirmationMidBody">
