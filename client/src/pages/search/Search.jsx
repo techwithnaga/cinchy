@@ -750,33 +750,33 @@ const Search = () => {
                 </button>
               </div>
               <h6>Recommendation</h6>
-              {loading ? (
-                <div className="loaderContainer">
-                  <FadeLoader
-                    color="#00332C"
-                    loading={loading}
-                    size={150}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                    className="searchLoader"
-                  />
-                </div>
-              ) : (
-                <div className="searchResults">
-                  {filteredGroup.map((motorGroup, i) => {
-                    return (
-                      <SearchOption
-                        key={i}
-                        motorGroup={motorGroup}
-                        days={duration}
-                        deliveryDateInMillisecond={deliveryDateInMs}
-                        returnDateInMillisecond={returnDateInMs}
-                        isAvailable={motorGroup.isAvailable}
-                      ></SearchOption>
-                    );
-                  })}
-                </div>
-              )}
+              <div className="searchResults">
+                {filteredGroup.map((motorGroup, i) => {
+                  return (
+                    <SearchOption
+                      key={i}
+                      motorGroup={motorGroup}
+                      days={duration}
+                      deliveryDateInMillisecond={deliveryDateInMs}
+                      returnDateInMillisecond={returnDateInMs}
+                      isAvailable={motorGroup.isAvailable}
+                    ></SearchOption>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {loading && (
+            <div className="loaderContainer">
+              <FadeLoader
+                color="#00332C"
+                loading={loading}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+                className="searchLoader"
+              />
             </div>
           )}
         </div>
