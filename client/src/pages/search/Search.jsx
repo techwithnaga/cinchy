@@ -81,6 +81,7 @@ const Search = () => {
       deliveryDate.getTime() + times.startTimeVal + deltaMiliseconds;
     setDeliveryDateInMs(startDate);
     setLocalDeliveryDateTimeInMs(deliveryDate.getTime() + times.startTimeVal);
+
     let endDate = returnDate.getTime() + times.endTimeVal + deltaMiliseconds;
     setReturnDateInMs(endDate);
     setLocalReturnDateTimeInMs(returnDate.getTime() + times.endTimeVal);
