@@ -11,7 +11,7 @@ import ModalError from "../../components/modalError/ModalError";
 import axios from "axios";
 import formatNumber from "../../utils/formatNumber";
 import FadeLoader from "react-spinners/FadeLoader";
-import moment from "moment-timezone";
+// import moment from "moment-timezone";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 
 const BookingSummary = () => {
@@ -50,44 +50,29 @@ const BookingSummary = () => {
   const [loading2, setLoading2] = useState(false);
   const d = new Date();
 
-  var now = moment();
-  var localOffset = now.utcOffset();
-  let deltaMiliseconds = localOffset * 60 * 1000;
-
-  let clonedBooking = structuredClone(newBooking);
-
-  clonedBooking.deliveryDate = new Date(
-    newBooking.deliveryDate + deltaMiliseconds
-  );
-  clonedBooking.returnDate = new Date(newBooking.returnDate + deltaMiliseconds);
-  clonedBooking.isConfirmed = true;
-
   const handleConfirmClick = async () => {
     if (agreeToTNC) {
       setLoading2(true);
-      let clonedBooking = structuredClone(newBooking);
+      // let clonedBooking = structuredClone(newBooking);
 
-      clonedBooking.deliveryDate = new Date(
-        newBooking.deliveryDate + deltaMiliseconds
-      );
-      clonedBooking.returnDate = new Date(
-        newBooking.returnDate + deltaMiliseconds
-      );
-      clonedBooking.isConfirmed = true;
+      // clonedBooking.deliveryDate = new Date(
+      //   newBooking.deliveryDate + deltaMiliseconds
+      // );
+      // clonedBooking.returnDate = new Date(
+      //   newBooking.returnDate + deltaMiliseconds
+      // );
+      // clonedBooking.isConfirmed = true;
 
-      let st = newBooking.deliveryDate;
-      let et = newBooking.returnDate;
+      // let st = newBooking.deliveryDate;
+      // let et = newBooking.returnDate;
 
-      newBooking.deliveryDate = new Date(st);
-      newBooking.returnDate = new Date(et);
+      // newBooking.deliveryDate = new Date(st);
+      // newBooking.returnDate = new Date(et);
 
       //create new booking
       let createdBooking = {};
       await axios
-        .post(
-          `${process.env.REACT_APP_API_ENDPOINT}/api/booking`,
-          clonedBooking
-        )
+        .post(`${process.env.REACT_APP_API_ENDPOINT}/api/booking`, newBooking)
         .then(async (res) => {
           createdBooking = res;
           // newBooking._id = createdBooking._id;
@@ -95,8 +80,10 @@ const BookingSummary = () => {
             `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/updatetime/${newBooking.motorGroup}`,
             {
               bookingId: res.data._id,
-              startTime: st + deltaMiliseconds,
-              endTime: et + deltaMiliseconds,
+              // startTime: st + deltaMiliseconds,
+              // endTime: et + deltaMiliseconds,
+              startTime: newBooking.deliveryDate,
+              endTime: newBooking.returnDate,
             }
           );
         });
@@ -220,12 +207,7 @@ const BookingSummary = () => {
     }
   };
 
-  useEffect(() => {
-    // setLoading2(true);
-    // setTimeout(() => {
-    //   setLoading2(false);
-    // }, 5000);
-  }, [agreeToMarketing]);
+  useEffect(() => {}, [agreeToMarketing]);
 
   return (
     <div className="bookingConfirmation">
