@@ -48,6 +48,8 @@ const BookingSummary = () => {
     "get"
   );
 
+  console.log(newBooking);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => {

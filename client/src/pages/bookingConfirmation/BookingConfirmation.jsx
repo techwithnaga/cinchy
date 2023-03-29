@@ -14,8 +14,6 @@ const BookingConfirmation = () => {
 
   const bookingInfo = state.bookingInfo;
   const motorGroup = state.motorGroup;
-  const deliveryDate = state.localDeliveryDate;
-  const returnDate = state.localReturnDate;
 
   const {
     motorGroupId,
