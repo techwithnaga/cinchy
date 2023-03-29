@@ -9,10 +9,13 @@ import moment from "moment-timezone";
 const SearchOption = ({
   motorGroup,
   days,
+  UTCDeliveryDateTimeInString,
+  UTCReturnDateTimeInString,
   localDeliveryDateTimeInMs,
   localReturnDateTimeInMs,
-  deliveryDateInMillisecond,
-  returnDateInMillisecond,
+  UTCDeliveryDateTimeInMs,
+  UTCReturnDateTimeInMs,
+  rentalDuration,
   isAvailable,
 }) => {
   const navigate = useNavigate();
@@ -26,11 +29,11 @@ const SearchOption = ({
 
   const handleSearchBookNowClick = (motorGroupId, priceperday) => {
     //check valid delivery date
-    if (days === 0 || deliveryDateInMillisecond >= returnDateInMillisecond) {
+    if (days === 0 || localDeliveryDateTimeInMs >= localReturnDateTimeInMs) {
       setErrorMessage("Please select valid delivery and return dates.");
       setShowError(true);
     } else if (
-      deliveryDateInMillisecond <=
+      localDeliveryDateTimeInMs <=
       new Date(
         new Date().toLocaleString("en-US", { timeZone: "Asia/Brunei" })
       ).getTime()
@@ -47,10 +50,13 @@ const SearchOption = ({
         payload: {
           motorGroupId,
           subtotal,
+          UTCDeliveryDateTimeInString,
+          UTCReturnDateTimeInString,
           localDeliveryDateTimeInMs,
           localReturnDateTimeInMs,
-          deliveryDateInMillisecond,
-          returnDateInMillisecond,
+          UTCDeliveryDateTimeInMs,
+          UTCReturnDateTimeInMs,
+          rentalDuration,
         },
       });
       //check if the user has log in

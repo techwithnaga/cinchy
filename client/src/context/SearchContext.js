@@ -2,14 +2,15 @@ import { createContext, useReducer } from "react";
 
 const INITIAL_STATE = {
   subtotal: 0,
-  deliveryDateInMillisecond: 0,
-  returnDateInMillisecond: 0,
+  UTCDeliveryDateTimeInString: "",
+  UTCReturnDateTimeInString: "",
   localDeliveryDateTimeInMs: 0,
   localReturnDateTimeInMs: 0,
-  // deliveryTime: 9 * 60 * 60 * 1000,
-  // returnTime: 9 * 60 * 60 * 1000,
+  UTCDeliveryDateTimeInMs: 0,
+  UTCReturnDateTimeInMs: 0,
   phoneNumber: "",
   motorGroupId: "",
+  rentalDuration: 0,
 };
 
 export const SearchContext = createContext(INITIAL_STATE);
@@ -32,14 +33,15 @@ export const SearchContextProvider = ({ children }) => {
     <SearchContext.Provider
       value={{
         subtotal: state.subtotal,
-        deliveryDateInMillisecond: state.deliveryDateInMillisecond,
-        returnDateInMillisecond: state.returnDateInMillisecond,
+        UTCDeliveryDateTimeInString: state.UTCDeliveryDateTimeInString,
+        UTCReturnDateTimeInString: state.UTCReturnDateTimeInString,
         localDeliveryDateTimeInMs: state.localDeliveryDateTimeInMs,
         localReturnDateTimeInMs: state.localReturnDateTimeInMs,
         // deliveryTime: state.startTime,
         // returnTime: state.endTime,
         phoneNumber: state.phoneNumber,
         motorGroupId: state.motorGroupId,
+        rentalDuration: state.rentalDuration,
         dispatch,
       }}
     >

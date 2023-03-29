@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import "./search.css";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import SearchOption from "./SearchOption";
 import { BsCalendar3 } from "react-icons/bs";
 import { IoTimeOutline } from "react-icons/io5";
@@ -58,6 +58,12 @@ const Search = () => {
 
   const [localDeliveryDateTimeInMs, setLocalDeliveryDateTimeInMs] = useState(0);
   const [localReturnDateTimeInMs, setLocalReturnDateTimeInMs] = useState(0);
+  const [UTCDeliveryDateTimeInMs, setUTCDeliveryDateTimeInMs] = useState(0);
+  const [UTCReturnDateTimeInMs, setUTCReturnDateTimeInMs] = useState(0);
+  const [UTCDeliveryDateTimeInString, SetUTCDeliveryDateTimeInString] =
+    useState("");
+  const [UTCReturnDateTimeInString, SetUTCReturnDateTimeInString] =
+    useState("");
 
   const [data, setData] = useState([]);
 
@@ -68,9 +74,6 @@ const Search = () => {
     setTimes({ ...times, [input]: e.target.innerHTML, [input + "Val"]: val });
   };
 
-  const [deliveryDateInMs, setDeliveryDateInMs] = useState(0);
-  const [returnDateInMs, setReturnDateInMs] = useState(0);
-
   const calculateDuration = () => {
     var now = moment();
     var localOffset = now.utcOffset();
@@ -79,11 +82,13 @@ const Search = () => {
     //converting to UTC MS
     let startDate =
       deliveryDate.getTime() + times.startTimeVal + deltaMiliseconds;
-    setDeliveryDateInMs(startDate);
+    setUTCDeliveryDateTimeInMs(startDate);
+    SetUTCDeliveryDateTimeInString(new Date(startDate).toISOString());
     setLocalDeliveryDateTimeInMs(deliveryDate.getTime() + times.startTimeVal);
 
     let endDate = returnDate.getTime() + times.endTimeVal + deltaMiliseconds;
-    setReturnDateInMs(endDate);
+    setUTCReturnDateTimeInMs(endDate);
+    SetUTCReturnDateTimeInString(new Date(endDate).toISOString());
     setLocalReturnDateTimeInMs(returnDate.getTime() + times.endTimeVal);
     let duration = Math.ceil(Math.abs(endDate - startDate) / dayInMillisecond);
     setDuration(duration);
@@ -102,7 +107,7 @@ const Search = () => {
     setLoading(true);
     axios
       .get(
-        `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${deliveryDateInMs}&${returnDateInMs}`
+        `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${UTCDeliveryDateTimeInMs}&${UTCReturnDateTimeInMs}`
       )
       .then((res) => {
         setData(res.data);
@@ -771,10 +776,13 @@ const Search = () => {
                       key={i}
                       motorGroup={motorGroup}
                       days={duration}
+                      UTCDeliveryDateTimeInString={UTCDeliveryDateTimeInString}
+                      UTCReturnDateTimeInString={UTCReturnDateTimeInString}
                       localDeliveryDateTimeInMs={localDeliveryDateTimeInMs}
                       localReturnDateTimeInMs={localReturnDateTimeInMs}
-                      deliveryDateInMillisecond={deliveryDateInMs}
-                      returnDateInMillisecond={returnDateInMs}
+                      UTCDeliveryDateTimeInMs={UTCDeliveryDateTimeInMs}
+                      UTCReturnDateTimeInMs={UTCReturnDateTimeInMs}
+                      rentalDuration={duration}
                       isAvailable={motorGroup.isAvailable}
                     ></SearchOption>
                   );

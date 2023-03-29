@@ -29,10 +29,12 @@ const BookingSummary = () => {
   const {
     motorGroupId,
     subtotal,
-    deliveryDateInMillisecond,
-    returnDateInMillisecond,
+    UTCDeliveryDateTimeInString,
+    UTCReturnDateTimeInString,
     localDeliveryDateTimeInMs,
     localReturnDateTimeInMs,
+    UTCDeliveryDateTimeInMs,
+    UTCReturnDateTimeInMs,
   } = useContext(SearchContext);
 
   const closeModalError = () => {
@@ -92,8 +94,8 @@ const BookingSummary = () => {
               bookingId: res.data._id,
               // startTime: st + deltaMiliseconds,
               // endTime: et + deltaMiliseconds,
-              startTime: newBooking.deliveryDate,
-              endTime: newBooking.returnDate,
+              startTime: UTCDeliveryDateTimeInMs,
+              endTime: UTCReturnDateTimeInMs,
             }
           );
         });
@@ -140,8 +142,8 @@ const BookingSummary = () => {
             state: {
               bookingInfo: createdBooking.data,
               motorGroup: data,
-              deliveryDate: format(newBooking.deliveryDate, "E, d MMM HH:mm"),
-              returnDate: format(newBooking.returnDate, "E, d MMM HH:mm"),
+              // deliveryDate: format(localDeliveryDateTimeInMs, "E, d MMM HH:mm"),
+              // returnDate: format(localDeliveryDateTimeInMs, "E, d MMM HH:mm"),
             },
           });
         })

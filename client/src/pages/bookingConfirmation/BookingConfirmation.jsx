@@ -24,6 +24,8 @@ const BookingConfirmation = () => {
     returnDateInMillisecond,
     localDeliveryDateTimeInMs,
     localReturnDateTimeInMs,
+    UTCDeliveryDateTimeInMs,
+    UTCReturnDateTimeInMs,
   } = useContext(SearchContext);
 
   const navigate = useNavigate();

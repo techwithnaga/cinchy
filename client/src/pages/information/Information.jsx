@@ -24,8 +24,13 @@ const Information = () => {
   const {
     motorGroupId,
     subtotal,
-    deliveryDateInMillisecond,
-    returnDateInMillisecond,
+    UTCDeliveryDateTimeInString,
+    UTCReturnDateTimeInString,
+    localDeliveryDateTimeInMs,
+    localReturnDateTimeInMs,
+    UTCDeliveryDateTimeInMs,
+    UTCReturnDateTimeInMs,
+    rentalDuration,
   } = useContext(SearchContext);
 
   const [user, setUser] = useState({
@@ -50,16 +55,8 @@ const Information = () => {
 
   const [booking, setBooking] = useState({
     motorGroup: motorGroupId,
-    // deliveryDate: zonedTimeToUtc(
-    //   new Date(deliveryDateInMillisecond),
-    //   "asia/brunei"
-    // ),
-    // returnDate: zonedTimeToUtc(
-    //   new Date(returnDateInMillisecond),
-    //   "asia/brunei"
-    // ),
-    deliveryDate: deliveryDateInMillisecond,
-    returnDate: returnDateInMillisecond,
+    deliveryDate: UTCDeliveryDateTimeInString,
+    returnDate: UTCReturnDateTimeInString,
     user: "",
     comments: "",
     flightNumber: "",
@@ -68,6 +65,7 @@ const Information = () => {
     deliveryURL: "",
     returnLocation: "",
     returnURL: "",
+    rentalDuration: rentalDuration,
     subtotal: 0,
     deliveryPickupFee: 0,
     totalRentalPrice: 0,
