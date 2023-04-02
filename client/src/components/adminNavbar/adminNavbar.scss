@@ -1,0 +1,49 @@
+.adminNavbar {
+  width: 100%;
+  border-bottom: 0.5px solid rgb(245, 245, 245);
+  .adminNavbarContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        height: 35px;
+      }
+    }
+    .right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      .item {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 35px;
+          height: 35px;
+          margin-right: 20px;
+        }
+
+        .adminNavbarSearch {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 0.5px solid rgb(230, 230, 230);
+          padding: 7px;
+          border-radius: 20px;
+
+          input {
+            border: none;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -15,6 +15,9 @@ import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
 import NotFound from "./pages/notFound/NotFound";
 import Admin from "./pages/admin/Admin";
 import { createTheme, ThemeProvider } from "@mui/material";
+import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
+import PromoCodes from "./pages/promoCodes/PromoCodes";
+import CreatePromoCode from "./pages/createPromoCode/CreatePromoCode";
 
 const theme = createTheme({
   palette: {
@@ -58,6 +61,12 @@ function App() {
               path="/bookingConfirmation"
               element={<BookingConfirmation></BookingConfirmation>}
             ></Route>
+            <Route path="admin-dashboard">
+              <Route index element={<AdminDashboard />}></Route>
+              <Route path="promocodes" element={<PromoCodes />}></Route>
+              <Route path="createedit" element={<CreatePromoCode />}></Route>
+            </Route>
+
             <Route path="/*" element={<NotFound></NotFound>}></Route>
           </Routes>
         </BrowserRouter>

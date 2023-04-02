@@ -1,0 +1,38 @@
+.adminSidebar {
+  flex: 1;
+
+  .adminSidebarContainer {
+    border-right: 0.5px solid rgb(245, 245, 245);
+    height: 100vh;
+
+    ul {
+      list-style: none;
+      padding: 10px;
+      margin-left: 10px;
+      .title {
+        color: var(--color-green50);
+        font-weight: bold;
+        text-align: left;
+      }
+
+      li {
+        padding: 8px;
+        margin-left: 3px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .icon {
+          font-size: 20px;
+          margin-right: 7px;
+          color: var(--color-yellow700);
+          margin-right: 10px;
+        }
+
+        &:hover {
+          background-color: var(--color-babyPowder700);
+        }
+      }
+    }
+  }
+}

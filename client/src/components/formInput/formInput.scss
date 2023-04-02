@@ -1,0 +1,19 @@
+.formInput {
+  width: 50%;
+
+  .component {
+    width: 100%;
+    text-align: left;
+    color: grey;
+    input {
+      box-sizing: border-box;
+      padding: 20px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      border: 1px solid gray;
+      width: 100%;
+      font-size: 16px;
+      color: gray;
+    }
+  }
+}

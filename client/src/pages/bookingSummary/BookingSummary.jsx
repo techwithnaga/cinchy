@@ -25,6 +25,8 @@ const BookingSummary = () => {
   const [showPromoError, setShowPromoError] = useState(false);
   const [promoErrorMessage, setPromoErrorMessage] = useState("");
   const [percentDiscount, setPercentDiscount] = useState(25);
+  const [discountType, setDiscountType] = useState(2);
+  const [discountAmount, setDiscountAmount] = useState(25);
 
   const {
     motorGroupId,
@@ -47,8 +49,6 @@ const BookingSummary = () => {
     `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${newBooking.motorGroup}`,
     "get"
   );
-
-  console.log(newBooking);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -169,59 +169,129 @@ const BookingSummary = () => {
   };
 
   //handle promo code apply
-  const handlePromoApply = () => {
-    if (percentDiscount !== 25) {
-      setPromoErrorMessage("Only one promo code can be applied.");
-      setShowPromoError(true);
-    } else {
-      if (promoCode === "CINCHYVIP") {
-        setShowPromoError(false);
-        setPercentDiscount(40);
-        setPromoCode("");
-      } else {
-        setPromoErrorMessage("Invalid Promo Code.");
-        setShowPromoError(true);
-      }
-    }
+  const handlePromoApply = async () => {
+    await axios
+      .post(
+        `${process.env.REACT_APP_API_ENDPOINT}/api/promocode/checkpromocode`,
+        {
+          code: promoCode,
+          motorGroup: data.category.toLowerCase(),
+        }
+      )
+      .then((res) => {
+        let discountType = res.data.type;
+        let discountAmount = res.data.amount;
+        setDiscountType(discountType);
+
+        if (discountType === 1) {
+          newBooking.discount = discountAmount;
+        } else if (discountType === 2) {
+          newBooking.discount = (discountAmount / 100) * newBooking.subtotal;
+        }
+        newBooking.totalRentalPrice =
+          newBooking.subtotal -
+          newBooking.discount +
+          newBooking.deliveryPickupFee;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // if (percentDiscount !== 25) {
+    //   setPromoErrorMessage("Only one promo code can be applied.");
+    //   setShowPromoError(true);
+    // } else {
+    //   if (promoCode === "CINCHYVIP") {
+    //     setShowPromoError(false);
+    //     setPercentDiscount(40);
+    //     setPromoCode("");
+    //   } else {
+    //     setPromoErrorMessage("Invalid Promo Code.");
+    //     setShowPromoError(true);
+    //   }
+    // }
   };
 
   const DiscountTxt = () => {
-    if (percentDiscount === 25) {
-      return (
-        <>
-          <div className="paymentSummaryItem">
-            <label htmlFor="subtotal">25% Discount</label>
-            <p>(IDR {formatNumber(newBooking.discount)}K)</p>
-          </div>
-          <div className="paymentSummaryItem">
-            <h5 htmlFor="subtotal">Total Payment</h5>
-            <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
-          </div>
-        </>
-      );
-    } else {
-      newBooking.discount = (newBooking.subtotal * percentDiscount) / 100;
-      newBooking.totalRentalPrice = newBooking.subtotal - newBooking.discount;
-      setNewBooking(newBooking);
-      return (
-        <>
-          <div className="paymentSummaryItem">
-            <label htmlFor="subtotal">{percentDiscount}% Discount </label>
-            <p>
-              (IDR {formatNumber((newBooking.subtotal * percentDiscount) / 100)}
-              K)
-            </p>
-          </div>
-          <div className="paymentSummaryItem">
-            <h5 htmlFor="subtotal">Total Payment</h5>
-            <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
-          </div>
-        </>
-      );
-    }
-  };
+    // if (discountType === 0) {
+    //   return <></>;
+    // } else {
 
-  useEffect(() => {}, [agreeToMarketing]);
+    return (
+      <>
+        <div className="paymentSummaryItem">
+          <label htmlFor="subtotal">Discount</label>
+          <p>(IDR {formatNumber(newBooking.discount)}K)</p>
+        </div>
+        <div className="paymentSummaryItem">
+          <h5 htmlFor="subtotal">Total Payment</h5>
+          <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+        </div>
+      </>
+    );
+  };
+  // if (discountType === 1) {
+  //   return (
+  //     <>
+  //       <div className="paymentSummaryItem">
+  //         <label htmlFor="subtotal">Discount</label>
+  //         <p>(IDR {formatNumber(newBooking.discount)}K)</p>
+  //       </div>
+  //       <div className="paymentSummaryItem">
+  //         <h5 htmlFor="subtotal">Total Payment</h5>
+  //         <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+  //       </div>
+  //     </>
+  //   );
+  // } else {
+  //   return (
+  //     <>
+  //       <div className="paymentSummaryItem">
+  //         <label htmlFor="subtotal">{discountAmount}% Discount</label>
+  //         <p>(IDR {formatNumber(newBooking.discount)}K)</p>
+  //       </div>
+  //       <div className="paymentSummaryItem">
+  //         <h5 htmlFor="subtotal">Total Payment</h5>
+  //         <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+  //       </div>
+  //     </>
+  //   );
+  // }
+  // }
+  // if (percentDiscount === 25) {
+  //   return (
+  //     <>
+  //       <div className="paymentSummaryItem">
+  //         <label htmlFor="subtotal">25% Discount</label>
+  //         <p>(IDR {formatNumber(newBooking.discount)}K)</p>
+  //       </div>
+  //       <div className="paymentSummaryItem">
+  //         <h5 htmlFor="subtotal">Total Payment</h5>
+  //         <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+  //       </div>
+  //     </>
+  //   );
+  // } else {
+  //   newBooking.discount = (newBooking.subtotal * percentDiscount) / 100;
+  //   newBooking.totalRentalPrice = newBooking.subtotal - newBooking.discount;
+  //   setNewBooking(newBooking);
+  //   return (
+  //     <>
+  //       <div className="paymentSummaryItem">
+  //         <label htmlFor="subtotal">{percentDiscount}% Discount </label>
+  //         <p>
+  //           (IDR {formatNumber((newBooking.subtotal * percentDiscount) / 100)}
+  //           K)
+  //         </p>
+  //       </div>
+  //       <div className="paymentSummaryItem">
+  //         <h5 htmlFor="subtotal">Total Payment</h5>
+  //         <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+  //       </div>
+  //     </>
+  //   );
+
+  useEffect(() => {}, [agreeToMarketing, discountType]);
 
   return (
     <div className="bookingConfirmation">

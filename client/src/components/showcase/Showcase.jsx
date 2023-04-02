@@ -19,7 +19,7 @@ const Showcase = () => {
         <h1>made easy</h1>
         <h6>Simple to book, easy to use.</h6>
         <button className="bookBtn" onClick={() => handleBookNowClick()}>
-          Select My Scooter
+          Check Availability
           <BiRightArrowAlt style={{ fontSize: "25px" }}></BiRightArrowAlt>
         </button>
       </div>

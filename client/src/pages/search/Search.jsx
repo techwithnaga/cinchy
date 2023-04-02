@@ -728,7 +728,7 @@ const Search = () => {
             <p>{duration} Day(s)</p>
             <br />
             <button className="searchBtn" onClick={() => handleSearch()}>
-              Search
+              Check availability
             </button>
           </div>
 

@@ -1,0 +1,39 @@
+.promoCodes {
+  .promoCodesContainer {
+    .body {
+      display: flex;
+      .container {
+        padding: 20px;
+        flex: 6;
+
+        .top {
+          display: flex;
+          justify-content: space-between;
+          padding: 10px;
+
+          .title {
+            color: var(--color-green50);
+          }
+          .buttons {
+            display: flex;
+            gap: 15px;
+            .button {
+              display: flex;
+              justify-self: center;
+              align-items: center;
+              .icon {
+                font-size: 18px;
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+
+        .Mui-selected {
+          background-color: var(--color-babyPowder700) !important;
+          color: var(--color-green700) !important;
+        }
+      }
+    }
+  }
+}
