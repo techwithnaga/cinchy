@@ -1,38 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./adminLogin.css";
 import axios from "axios";
 import FadeLoader from "react-spinners/FadeLoader";
+import { AuthContext } from "../../context/AuthContext";
 
 const AdminLogin = () => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [credentials, setCredentials] = useState({
+    username: undefined,
+    password: undefined,
+  });
+  const { user, loading, error, dispatch } = useContext(AuthContext);
+
+  // const [userName, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [error, setError] = useState(false);
+  // const [loading, setLoading] = useState(false);
   // const { loading, error, dispatch } = useContext(AuthContext);
+
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
 
   const navigate = useNavigate();
 
+  // const handleClick = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     const res = await axios.post(
+  //       `${process.env.REACT_APP_API_ENDPOINT}/api/auth/login`,
+  //       {
+  //         username: userName,
+  //         password: password,
+  //       }
+  //     );
+
+  //     await sessionStorage.setItem("token", res.data.token);
+  //     setLoading(false);
+  //     navigate("/adminDashboard");
+  //   } catch (err) {
+  //     console.log(err);
+  //     setError(true);
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleClick = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_ENDPOINT}/api/auth/login`,
-        {
-          username: userName,
-          password: password,
-        }
+        credentials
       );
-
-      //console.log(res.data.token);
-      await sessionStorage.setItem("token", res.data.token);
-      setLoading(false);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      console.log(user);
       navigate("/adminDashboard");
     } catch (err) {
-      console.log(err);
-      setError(true);
-      setLoading(false);
+      dispatch({
+        type: "LOGIN_FAILURE",
+        payload: "wrong username or password",
+      });
     }
   };
 
@@ -52,22 +81,16 @@ const AdminLogin = () => {
         </div>
       ) : (
         <div className="adminLoginContainer">
-          {error && <p style={{ color: "red" }}>Wrong username or password!</p>}
+          {error && <span style={{ color: "red" }}>{error.message}</span>}
           <br />
           <div className="adminLoginForm">
             <div className="adminFormItem">
               <p>Username :</p>
-              <input
-                type="text"
-                onChange={(e) => setUserName(e.target.value)}
-              />
+              <input type="text" id="username" onChange={handleChange} />
             </div>
             <div className="adminFormItem">
               <p>Password :</p>
-              <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <input id="password" type="password" onChange={handleChange} />
             </div>
             <button className="adminLoginBtn" onClick={(e) => handleClick(e)}>
               Submit

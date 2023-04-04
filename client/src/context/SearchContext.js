@@ -37,8 +37,6 @@ export const SearchContextProvider = ({ children }) => {
         UTCReturnDateTimeInString: state.UTCReturnDateTimeInString,
         localDeliveryDateTimeInMs: state.localDeliveryDateTimeInMs,
         localReturnDateTimeInMs: state.localReturnDateTimeInMs,
-        // deliveryTime: state.startTime,
-        // returnTime: state.endTime,
         phoneNumber: state.phoneNumber,
         motorGroupId: state.motorGroupId,
         rentalDuration: state.rentalDuration,

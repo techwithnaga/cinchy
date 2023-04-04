@@ -24,9 +24,7 @@ const BookingSummary = () => {
   const [promoCode, setPromoCode] = useState("");
   const [showPromoError, setShowPromoError] = useState(false);
   const [promoErrorMessage, setPromoErrorMessage] = useState("");
-  const [percentDiscount, setPercentDiscount] = useState(25);
-  const [discountType, setDiscountType] = useState(2);
-  const [discountAmount, setDiscountAmount] = useState(25);
+  // const [percentDiscount, setPercentDiscount] = useState(25);
 
   const {
     motorGroupId,
@@ -43,8 +41,12 @@ const BookingSummary = () => {
     setShowError(false);
   };
   const navigate = useNavigate();
-
   const [newBooking, setNewBooking] = useState(state.newBooking);
+  const [discountTotal, setDiscountTotal] = useState({
+    discount: newBooking.discount,
+    total: newBooking.totalRentalPrice,
+  });
+
   const { data, loading, error, reFetch } = useFetch(
     `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${newBooking.motorGroup}`,
     "get"
@@ -181,17 +183,20 @@ const BookingSummary = () => {
       .then((res) => {
         let discountType = res.data.type;
         let discountAmount = res.data.amount;
-        setDiscountType(discountType);
 
         if (discountType === 1) {
-          newBooking.discount = discountAmount;
+          setDiscountTotal({ ...discountTotal, discount: discountAmount });
         } else if (discountType === 2) {
-          newBooking.discount = (discountAmount / 100) * newBooking.subtotal;
+          let newDiscount = (discountAmount / 100) * newBooking.subtotal;
+          setDiscountTotal({ ...discountTotal, discount: newDiscount });
         }
-        newBooking.totalRentalPrice =
+        let newTotalRentalPrice =
           newBooking.subtotal -
           newBooking.discount +
           newBooking.deliveryPickupFee;
+        setDiscountTotal({ ...discountTotal, total: newTotalRentalPrice });
+        newBooking.totalRentalPrice(newTotalRentalPrice);
+        newBooking.discount(discountTotal.discount);
       })
       .catch((err) => {
         console.log(err);
@@ -221,11 +226,11 @@ const BookingSummary = () => {
       <>
         <div className="paymentSummaryItem">
           <label htmlFor="subtotal">Discount</label>
-          <p>(IDR {formatNumber(newBooking.discount)}K)</p>
+          <p>(IDR {formatNumber(discountTotal.discount)}K)</p>
         </div>
         <div className="paymentSummaryItem">
           <h5 htmlFor="subtotal">Total Payment</h5>
-          <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+          <h4>IDR {formatNumber(discountTotal.total)}K</h4>
         </div>
       </>
     );
@@ -291,7 +296,7 @@ const BookingSummary = () => {
   //     </>
   //   );
 
-  useEffect(() => {}, [agreeToMarketing, discountType]);
+  useEffect(() => {}, [agreeToMarketing, discountTotal]);
 
   return (
     <div className="bookingConfirmation">

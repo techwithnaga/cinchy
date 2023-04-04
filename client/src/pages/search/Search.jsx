@@ -18,14 +18,23 @@ import axios from "axios";
 import moment from "moment-timezone";
 
 const Search = () => {
-  // moment.tz.setDefault("asia/brunei");
-  const [dates, setDates] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  let baliTime = new Date().toLocaleString("en-US", {
+    timeZone: "Asia/Brunei",
+  });
+
+  var now = moment();
+  var localOffset = now.utcOffset();
+  let deltaMiliseconds = localOffset * 60 * 1000;
+
+  // console.log(new Date(baliDateInMs).toString());
+
+  // const [dates, setDates] = useState([
+  //   {
+  //     startDate: new Date(todayDate + "09:00:00.000Z"),
+  //     endDate: new Date(todayDate + "09:00:00.000Z"),
+  //     key: "selection",
+  //   },
+  // ]);
 
   const [duration, setDuration] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
@@ -46,14 +55,10 @@ const Search = () => {
   const [openEndTime, setOpenEndTime] = useState(false);
   const [showSearchResult, setShowSearchResult] = useState(false);
   const [deliveryDate, setDeliveryDate] = useState(
-    new Date(
-      new Date().toLocaleString("en-US", {
-        timeZone: "Asia/Brunei",
-      })
-    )
+    new Date(baliTime.split(",")[0])
   );
   const [returnDate, setReturnDate] = useState(
-    new Date(deliveryDate.getTime() + dayInMillisecond)
+    new Date(new Date(baliTime.split(",")[0]).getTime() + dayInMillisecond)
   );
 
   const [localDeliveryDateTimeInMs, setLocalDeliveryDateTimeInMs] = useState(0);
@@ -75,20 +80,22 @@ const Search = () => {
   };
 
   const calculateDuration = () => {
-    var now = moment();
-    var localOffset = now.utcOffset();
-    let deltaMiliseconds = localOffset * 60 * 1000;
-
     //converting to UTC MS
     let startDate =
       deliveryDate.getTime() + times.startTimeVal + deltaMiliseconds;
     setUTCDeliveryDateTimeInMs(startDate);
     SetUTCDeliveryDateTimeInString(new Date(startDate).toISOString());
+    console.log("delivery String : " + UTCDeliveryDateTimeInString);
+    // console.log(
+    //   "delivery date" + new Date(UTCDeliveryDateTimeInString),
+    //   "E, d MMM HH:mm"
+    // );
     setLocalDeliveryDateTimeInMs(deliveryDate.getTime() + times.startTimeVal);
 
     let endDate = returnDate.getTime() + times.endTimeVal + deltaMiliseconds;
     setUTCReturnDateTimeInMs(endDate);
     SetUTCReturnDateTimeInString(new Date(endDate).toISOString());
+    // console.log("return date" + UTCReturnDateTimeInString);
     setLocalReturnDateTimeInMs(returnDate.getTime() + times.endTimeVal);
     let duration = Math.ceil(Math.abs(endDate - startDate) / dayInMillisecond);
     setDuration(duration);
