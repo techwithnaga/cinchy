@@ -54,13 +54,23 @@ const AdminLogin = () => {
         `${process.env.REACT_APP_API_ENDPOINT}/api/auth/login`,
         credentials
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      console.log(user);
-      navigate("/adminDashboard");
+
+      if (res.data.role === "superadmin") {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        navigate("/admin-dashboard");
+      } else if (res.data.role === "admin") {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        navigate("/adminDashboard");
+      } else {
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: { message: "you are not allowed!" },
+        });
+      }
     } catch (err) {
       dispatch({
         type: "LOGIN_FAILURE",
-        payload: "wrong username or password",
+        payload: err.response.data,
       });
     }
   };
@@ -81,7 +91,8 @@ const AdminLogin = () => {
         </div>
       ) : (
         <div className="adminLoginContainer">
-          {error && <span style={{ color: "red" }}>{error.message}</span>}
+          {error && <span style={{ color: "red" }}>{error}</span>}
+          <br />
           <br />
           <div className="adminLoginForm">
             <div className="adminFormItem">

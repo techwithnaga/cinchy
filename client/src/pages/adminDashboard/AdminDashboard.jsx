@@ -10,7 +10,7 @@ const AdminDashboard = () => {
 
         <div className="body">
           <AdminSidebar />
-          <div className="container">container</div>
+          <div className="container"> Dashboard</div>
         </div>
       </div>
     </div>

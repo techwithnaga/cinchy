@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import images from "../../pictures/picture";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useNavigate } from "react-router-dom";
+import DropDown from "./DropDown";
 
 import "./adminNavbar.scss";
 
 const AdminNavbar = () => {
   const navigate = useNavigate();
+  const [showDropDown, setShowDropDown] = useState(false);
 
   return (
     <div className="adminNavbar">
@@ -34,11 +36,13 @@ const AdminNavbar = () => {
           <div className="item">
             <NotificationsNoneOutlinedIcon></NotificationsNoneOutlinedIcon>
           </div>
-          <div className="item">
+          <div className="item" onClick={() => setShowDropDown(!showDropDown)}>
             <img src={images.thumbnail} alt="thumbnail" />
           </div>
         </div>
       </div>
+
+      {showDropDown && <DropDown className="dropDown"></DropDown>}
     </div>
   );
 };

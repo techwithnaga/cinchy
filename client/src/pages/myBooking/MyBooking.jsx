@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Navbar2 from "../../components/navbar2/Navbar2";
 import BookingDetail from "./BookingDetail";
 import { useNavigate } from "react-router-dom";
@@ -6,15 +6,17 @@ import "./myBooking.css";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import FadeLoader from "react-spinners/FadeLoader";
+import { AuthContext } from "../../context/AuthContext";
 
 const MyBooking = () => {
-  const isLoggedIn = sessionStorage.getItem("token");
+  const { user } = useContext(AuthContext);
+  // const isLoggedIn = sessionStorage.getItem("token");
   const navigate = useNavigate();
-  if (!isLoggedIn) {
+  if (!user) {
     navigate("/login", { state: { fromPage: "mybooking" } });
   }
 
-  let phoneNumber = sessionStorage.getItem("phoneNumber");
+  let phoneNumber = user?.username;
   const { data, loading, error, reFetch } = useFetch(
     `${process.env.REACT_APP_API_ENDPOINT}/api/user/mycurrentbooking/${phoneNumber}`,
     "get"
@@ -55,6 +57,7 @@ const MyBooking = () => {
           <br />
           <h6>Recent Booking</h6>
           {data.map((currentBooking) => {
+            console.log(currentBooking);
             return (
               <BookingDetail
                 {...currentBooking}

@@ -1,0 +1,26 @@
+.single {
+  .singleContainer {
+    .body {
+      display: flex;
+      .container {
+        flex: 6;
+        .title {
+          padding: 20px;
+          color: var(--color-green50);
+        }
+        form {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 25px;
+          .submitBtn {
+            margin-top: 15px;
+            width: 50%;
+            padding: 10px;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,8 @@
 .adminNavbar {
   width: 100%;
   border-bottom: 0.5px solid rgb(245, 245, 245);
+  position: relative;
+
   .adminNavbarContainer {
     display: flex;
     justify-content: space-between;
@@ -45,5 +47,11 @@
         }
       }
     }
+  }
+
+  .dropDown {
+    position: absolute;
+    top: 75px;
+    right: 30px;
   }
 }

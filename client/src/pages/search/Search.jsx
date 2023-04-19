@@ -85,7 +85,7 @@ const Search = () => {
       deliveryDate.getTime() + times.startTimeVal + deltaMiliseconds;
     setUTCDeliveryDateTimeInMs(startDate);
     SetUTCDeliveryDateTimeInString(new Date(startDate).toISOString());
-    console.log("delivery String : " + UTCDeliveryDateTimeInString);
+    // console.log("delivery String : " + UTCDeliveryDateTimeInString);
     // console.log(
     //   "delivery date" + new Date(UTCDeliveryDateTimeInString),
     //   "E, d MMM HH:mm"

@@ -9,16 +9,19 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import ModalError from "../../components/modalError/ModalError";
 import { useEffect } from "react";
+import { AuthContext } from "../../context/AuthContext";
 // import moment from "moment-timezone";
 // const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 // var { zonedTimeToUtc } = require("date-fns-tz");
 
 const Information = () => {
-  const isLoggedIn = sessionStorage.getItem("token");
+  // const isLoggedIn = sessionStorage.getItem("token");
   const navigate = useNavigate();
-  if (!isLoggedIn) {
-    navigate("/");
-  }
+  const { user } = useContext(AuthContext);
+
+  // if (!isLoggedIn) {
+  //   navigate("/");
+  // }
 
   // const { state } = useLocation();
   const {
@@ -33,16 +36,17 @@ const Information = () => {
     rentalDuration,
   } = useContext(SearchContext);
 
-  const [user, setUser] = useState({
+  const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
     emailAddress: "",
-    whatsappNumber: sessionStorage.getItem("phoneNumber"),
+    whatsappNumber: user.username,
     emergencyContactName: "",
     emergencyContactNumber: "",
     emergencyContactCountryCode: "",
     gender: 1,
   });
+
   // console.log(
   //   "delivery time in UTC " +
   //     zonedTimeToUtc(
@@ -101,12 +105,12 @@ const Information = () => {
       booking.totalRentalPrice =
         subtotal + booking.deliveryPickupFee - booking.discount;
 
-      let newUser;
       await axios
-        .post(`${process.env.REACT_APP_API_ENDPOINT}/api/user`, user)
+        .post(`${process.env.REACT_APP_API_ENDPOINT}/api/user`, newUser)
         .then((res) => {
-          newUser = res.data;
-          booking.user = newUser._id;
+          let createdUser;
+          createdUser = res.data;
+          booking.user = createdUser._id;
           navigate("/bookingSummary", { state: { newBooking: booking } });
         })
         .catch((err) => console.log(err));
@@ -136,7 +140,7 @@ const Information = () => {
   //   "get")]).then(([]) =>)
 
   const handleChange = (e) => {
-    setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setNewUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   const handleBookingChange = (e) => {

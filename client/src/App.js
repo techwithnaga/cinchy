@@ -18,6 +18,10 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 import PromoCodes from "./pages/promoCodes/PromoCodes";
 import CreatePromoCode from "./pages/createPromoCode/CreatePromoCode";
+import EditPromoCode from "./pages/editPromoCode/EditPromoCode";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -33,6 +37,24 @@ const theme = createTheme({
   },
 });
 
+const ProtectedRoute = ({ children, requiredRole }) => {
+  const { user } = useContext(AuthContext);
+
+  if (!user || (user.role !== "superadmin" && user.role !== requiredRole)) {
+    return <Navigate to="/adminLogin"></Navigate>;
+  }
+
+  return children;
+};
+
+const UserLoggedInOnlyRoute = ({ children }) => {
+  const { user } = useContext(AuthContext);
+  if (!user || user.role !== "user") {
+    return <Navigate to="/search"></Navigate>;
+  }
+  return children;
+};
+
 function App() {
   return (
     <div className="App">
@@ -40,9 +62,17 @@ function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/otpConfirmation" element={<Confirmation />}></Route>
-            <Route path="/information" element={<Information />} />
+            <Route
+              path="/information"
+              element={
+                <UserLoggedInOnlyRoute>
+                  <Information />
+                </UserLoggedInOnlyRoute>
+              }
+            />
             <Route path="/search" element={<Search />}></Route>
             <Route path="/mybooking" element={<MyBooking />}></Route>
             <Route path="/aboutus" element={<Aboutus></Aboutus>}></Route>
@@ -51,20 +81,63 @@ function App() {
               path="/adminLogin"
               element={<AdminLogin></AdminLogin>}
             ></Route>
-            <Route path="/adminDashboard" element={<Admin></Admin>}></Route>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/adminDashboard"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <Admin></Admin>
+                </ProtectedRoute>
+              }
+            ></Route>
             <Route
               path="/bookingSummary"
-              element={<BookingSummary></BookingSummary>}
+              element={
+                <UserLoggedInOnlyRoute>
+                  <BookingSummary />
+                </UserLoggedInOnlyRoute>
+              }
             ></Route>
             <Route
               path="/bookingConfirmation"
-              element={<BookingConfirmation></BookingConfirmation>}
+              element={
+                <UserLoggedInOnlyRoute>
+                  <BookingConfirmation></BookingConfirmation>
+                </UserLoggedInOnlyRoute>
+              }
             ></Route>
             <Route path="admin-dashboard">
-              <Route index element={<AdminDashboard />}></Route>
-              <Route path="promocodes" element={<PromoCodes />}></Route>
-              <Route path="createedit" element={<CreatePromoCode />}></Route>
+              <Route
+                index
+                element={
+                  <ProtectedRoute requiredRole="superadmin">
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route
+                path="promocodes"
+                element={
+                  <ProtectedRoute requiredRole="superadmin">
+                    <PromoCodes />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route
+                path="create-promocode"
+                element={
+                  <ProtectedRoute requiredRole="superadmin">
+                    <CreatePromoCode />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route
+                path="edit-promocode"
+                element={
+                  <ProtectedRoute requiredRole="superadmin">
+                    <EditPromoCode />
+                  </ProtectedRoute>
+                }
+              ></Route>
             </Route>
 
             <Route path="/*" element={<NotFound></NotFound>}></Route>

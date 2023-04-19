@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Countdown = ({ phonenumber, setHash, reFetch }) => {
+const Countdown = ({ reFetch, setWrongOTP }) => {
   const [timer, setTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
   // const navigate = useNavigate();
@@ -11,6 +11,7 @@ const Countdown = ({ phonenumber, setHash, reFetch }) => {
     setCanResend(false);
     setTimer(30);
     reFetch();
+    setWrongOTP(false);
   };
 
   useEffect(() => {

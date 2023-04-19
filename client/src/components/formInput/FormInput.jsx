@@ -10,29 +10,46 @@ import {
 import { MobileDatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
+import format from "date-fns/format";
 import InputAdornment from "@mui/material/InputAdornment";
 import { BsCalendar3 } from "react-icons/bs";
+import FormHelperText from "@mui/material/FormHelperText";
 
 const FormInput = (props) => {
-  const { id, label, type, menuitems, handleChange, name, value } = props;
+  const {
+    id,
+    label,
+    errorMessage = null,
+    type,
+    menuitems,
+    handleChange,
+    handleDateChange,
+    name,
+    value,
+  } = props;
 
   let component = <></>;
 
   if (type === "textField") {
     component = (
-      <TextField
-        id={id}
-        label={label}
-        onChange={handleChange}
-        name={name}
-        InputProps={{
-          sx: {
-            "& input": {
-              textAlign: "center",
+      <>
+        <TextField
+          id={id}
+          label={label}
+          onChange={handleChange}
+          name={name}
+          value={value}
+          InputProps={{
+            sx: {
+              "& input": {
+                textAlign: "left",
+              },
             },
-          },
-        }}
-      />
+          }}
+          error={errorMessage ? true : false}
+          helperText={errorMessage ? errorMessage : ""}
+        />
+      </>
     );
   } else if (type === "number") {
     component = (
@@ -42,10 +59,13 @@ const FormInput = (props) => {
         onChange={handleChange}
         name={name}
         type="number"
+        value={value}
+        error={errorMessage ? true : false}
+        helperText={errorMessage ? errorMessage : ""}
         InputProps={{
           sx: {
             "& input": {
-              textAlign: "center",
+              textAlign: "left",
             },
           },
         }}
@@ -53,7 +73,7 @@ const FormInput = (props) => {
     );
   } else if (type === "select") {
     component = (
-      <FormControl fullWidth>
+      <FormControl fullWidth error={errorMessage ? true : false}>
         <InputLabel>{label}</InputLabel>
         <Select
           id={id}
@@ -70,20 +90,42 @@ const FormInput = (props) => {
             );
           })}
         </Select>
+        <FormHelperText>{errorMessage ? errorMessage : ""}</FormHelperText>
       </FormControl>
     );
   } else if (type === "date") {
     component = (
-      <div className="component">
-        <p className="label">{label}</p>
-        <input
-          type={type}
-          placeholder={label}
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <MobileDatePicker
+          value={value}
+          inputFormat="dd MMM yyyy"
+          // minDate={
+          //   new Date(
+          //     new Date().toLocaleString("en-US", {
+          //       timeZone: "Asia/Brunei",
+          //     })
+          //   )
+          // }
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={label}
+              error={errorMessage ? true : false}
+              helperText={errorMessage ? errorMessage : ""}
+              InputProps={{
+                sx: {
+                  "& input": {
+                    textAlign: "left",
+                  },
+                },
+              }}
+              disabled
+            />
+          )}
+          onChange={(newValue) => handleDateChange(name, newValue)}
           name={name}
-          id={id}
-          onChange={handleChange}
-        ></input>
-      </div>
+        />
+      </LocalizationProvider>
     );
   }
   return <div className="formInput">{component}</div>;

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import images from "../../pictures/picture";
 import "./navbar2.css";
 import { MdClose, MdOutlineMenu } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar2 = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -11,18 +12,17 @@ const Navbar2 = () => {
   const [isDarkgreen, setIsDarkgreen] = useState(false);
   const navigate = useNavigate();
 
+  const { user, dispatch } = useContext(AuthContext);
+
   if (showSidebar) {
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "unset";
   }
 
-  const isLoggedIn = sessionStorage.getItem("token");
-
   const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("phoneNumber");
-    window.location.reload();
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
   };
 
   const changeLogo = () => {
@@ -178,7 +178,7 @@ const Navbar2 = () => {
                   </Link>
                 </li>
                 <li>
-                  {isLoggedIn ? (
+                  {user ? (
                     <p onClick={() => handleLogout()}>Log Out</p>
                   ) : (
                     <p></p>

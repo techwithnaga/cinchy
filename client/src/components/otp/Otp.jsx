@@ -1,34 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import Countdown from "./Countdown";
 import "./otp.css";
 import axios from "axios";
 import { AutoTabProvider } from "react-auto-tab";
+import { AuthContext } from "../../context/AuthContext";
 
 const Otp = () => {
   const { state } = useLocation();
-  const [timer, setTimer] = useState(60);
-  const { data, loading, error, reFetch } = useFetch(
+  // const [timer, setTimer] = useState(60);
+  const { data, reFetch } = useFetch(
     `${process.env.REACT_APP_API_ENDPOINT}/api/otp/${state.phoneNumber}`,
     "get"
   );
 
-  // const [digit1, setDigit1] = useState();
-  // const [digit2, setDigit2] = useState();
-  // const [digit3, setDigit3] = useState();
-  // const [digit4, setDigit4] = useState();
-  // const [digit5, setDigit5] = useState();
-  // const [digit6, setDigit6] = useState();
-
-  const [canResend, setCanResend] = useState(false);
   const navigate = useNavigate();
   const [wrongOTP, setWrongOTP] = useState(false);
+  const { user, loading, error, dispatch } = useContext(AuthContext);
 
   const handleVerify = async () => {
-    // const verificationCode =
-    //   digit1 + digit2 + digit3 + digit4 + digit5 + digit6;
-
     let num1 = document.querySelector("#digitInput1").value;
     let num2 = document.querySelector("#digitInput2").value;
     let num3 = document.querySelector("#digitInput3").value;
@@ -37,28 +28,50 @@ const Otp = () => {
     let num6 = document.querySelector("#digitInput6").value;
     const verificationCode = num1 + num2 + num3 + num4 + num5 + num6;
 
-    await axios
-      .post(`${process.env.REACT_APP_API_ENDPOINT}/api/otp/verifyOTP`, {
-        phoneNumber: state.phoneNumber,
-        otp: verificationCode,
-        hash: data,
-      })
-      .then((res) => {
-        //save token
-        sessionStorage.setItem("token", res.data.token);
-        sessionStorage.setItem("phoneNumber", state.phoneNumber);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_ENDPOINT}/api/otp/verifyOTP`,
+        {
+          phoneNumber: state.phoneNumber,
+          otp: verificationCode,
+          hash: data,
+        }
+      );
+
+      if (res.data) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         if (state.fromPage === "mybooking") {
           navigate("/mybooking");
         } else {
-          navigate("/information", {
-            state: { phoneNumber: state.phoneNumber },
-          });
+          navigate("/information");
         }
-      })
-      .catch((err) => {
-        console.log(err);
-        setWrongOTP(true);
-      });
+      } else {
+        dispatch({ type: "LOGIN_FAILURE", payload: "Invalid OTP" });
+      }
+    } catch (err) {
+      // dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+      console.log(err);
+    }
+    // await axios
+    //   .post(`${process.env.REACT_APP_API_ENDPOINT}/api/otp/verifyOTP`, {
+    //     phoneNumber: state.phoneNumber,
+    //     otp: verificationCode,
+    //     hash: data,
+    //   })
+    //   .then((res) => {
+    //     //save token
+    //     dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    //     if (state.fromPage === "mybooking") {
+    //       navigate("/mybooking");
+    //     } else {
+    //       navigate("/information");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+    //     setWrongOTP(true);
+    //   });
   };
 
   // const tick = () => {
@@ -143,14 +156,15 @@ const Otp = () => {
             phonenumber={state.phoneNumber}
             // setHash={setHash}
             reFetch={reFetch}
+            setWrongOTP={setWrongOTP}
           ></Countdown>
-          <button className="otpVerifyBtn" onClick={() => handleVerify()}>
+          <button className="otpVerifyBtn" onClick={handleVerify}>
             Verify
           </button>
           <br />
           {wrongOTP && (
             <div className="errorMessage">
-              <p>You entered a wrong OTP. Please try again.</p>
+              <p>{error}</p>
             </div>
           )}
         </div>

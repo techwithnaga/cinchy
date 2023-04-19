@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import images from "../../pictures/picture";
 import "./admin.css";
 import { MdClose, MdOutlineMenu } from "react-icons/md";
@@ -9,6 +9,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import ModalCheckIn from "./ModalCheckIn";
 import ModalCheckOut from "./ModalCheckOut";
 import Button from "@mui/material/Button";
+import { AuthContext } from "../../context/AuthContext";
 
 const Admin = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -20,11 +21,12 @@ const Admin = () => {
   const [bookings, setBookings] = useState([]);
   const [booking, setBooking] = useState({});
   const [allBookingsLoading, setAllBookingsLoading] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [showModalCheckIn, setShowModalCheckIn] = useState(false);
   const [showModalCheckOut, setShowModalCheckOut] = useState(false);
   const [selectedMotor, setSelectedMotor] = useState();
   const [availableMotors, setAvailableMotors] = useState([]);
+  const { user, loading, error, dispatch } = useContext(AuthContext);
 
   const handleMotorSelected = (event) => {
     setSelectedMotor(event.target.value);
@@ -56,7 +58,7 @@ const Admin = () => {
   };
 
   const handleCheckIn = async (startingKm) => {
-    setLoading(true);
+    setIsLoading(true);
     await axios
       .post(`${process.env.REACT_APP_API_ENDPOINT}/api/motor/checkin`, {
         bookingId: booking.longBookingId,
@@ -64,17 +66,17 @@ const Admin = () => {
         startingKm: startingKm,
       })
       .then(() => {
-        setLoading(false);
+        setIsLoading(false);
         closeModal();
       })
       .catch((err) => {
-        setLoading(false);
+        setIsLoading(false);
         console.log(err);
       });
   };
 
   const handleCheckOut = async (endingKm, note) => {
-    setLoading(true);
+    setIsLoading(true);
     await axios
       .post(`${process.env.REACT_APP_API_ENDPOINT}/api/motor/checkout`, {
         bookingId: booking.longBookingId,
@@ -82,11 +84,11 @@ const Admin = () => {
         endingKM: endingKm,
       })
       .then(() => {
-        setLoading(false);
+        setIsLoading(false);
         closeModal();
       })
       .catch((err) => {
-        setLoading(false);
+        setIsLoading(false);
         console.log(err);
       });
   };
@@ -105,8 +107,9 @@ const Admin = () => {
   const isLoggedIn = sessionStorage.getItem("token");
 
   const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    goToHomePage();
+    // sessionStorage.removeItem("token");
+    dispatch({ type: "LOGOUT" });
+    navigate("/adminLogin");
   };
 
   const changeLogo = () => {
@@ -133,20 +136,12 @@ const Admin = () => {
       });
   };
 
-  const goToHomePage = () => {
-    navigate("/");
-  };
-
-  const handleNavbar2Click = (page) => {
-    navigate("/" + page);
-  };
-
   const handleDateChange = (e) => {
     setBookingDate(e.target.value);
   };
 
   const getBookings = async () => {
-    setLoading(true);
+    setIsLoading(true);
     await axios
       .post(
         `${process.env.REACT_APP_API_ENDPOINT}/api/booking/getbookingsbydate`,
@@ -156,10 +151,10 @@ const Admin = () => {
       )
       .then((res) => {
         setResult(res.data);
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((err) => {
-        setLoading(false);
+        setIsLoading(false);
       });
   };
 
@@ -288,7 +283,7 @@ const Admin = () => {
         <br />
 
         <hr />
-        {loading ? (
+        {isLoading ? (
           <div className="spinner">
             <FadeLoader></FadeLoader>
           </div>
