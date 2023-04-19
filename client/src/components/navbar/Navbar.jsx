@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="bannerContainer">
         <div className="bannerContainerWrapper">
           <label>
-            25% OFF Soft Opening Promo. Discount is reflected on checkout
+            25% OFF Soft Opening Promo. Use promo code CINCHY25 at checkout
             confirmation.
           </label>
         </div>
