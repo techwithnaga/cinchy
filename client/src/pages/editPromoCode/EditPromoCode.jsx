@@ -12,8 +12,6 @@ const EditPromoCode = () => {
   const location = useLocation();
   const data = location.state?.data;
 
-  console.log(data);
-
   // const [values, setValues] = useState({
   //   id: data._id,
   //   code: data.code,

@@ -85,7 +85,6 @@ const BookingSummary = () => {
 
       //create new booking
       let createdBooking = {};
-      console.log(newBooking);
       await axios
         .post(`${process.env.REACT_APP_API_ENDPOINT}/api/booking`, newBooking)
         .then(async (res) => {
@@ -180,6 +179,7 @@ const BookingSummary = () => {
         }
       )
       .then((res) => {
+        console.log(res);
         setDiscountType(res.data.type);
         setDiscountAmount(res.data.amount);
         newBooking.promoCode = promoCode;
@@ -208,9 +208,16 @@ const BookingSummary = () => {
     let totalDiscount = 0;
     let totalRentalPrice = 0;
 
+    let numberOfDays = Math.ceil(
+      (localReturnDateTimeInMs - localDeliveryDateTimeInMs) / 86400000
+    );
+
+    //1 is Flat-Total, 2 is Flat-Daily, 3 is Discount
     if (discountType === 1) {
       totalDiscount = discountAmount;
     } else if (discountType === 2) {
+      totalDiscount = numberOfDays * discountAmount;
+    } else if (discountType === 3) {
       totalDiscount = (discountAmount / 100) * newBooking.subtotal;
     }
 
