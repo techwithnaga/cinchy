@@ -22,8 +22,9 @@ const BookingSummary = () => {
   const [agreeToTNC, setAgreeToTNC] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [promoCode, setPromoCode] = useState("");
-  const [showPromoError, setShowPromoError] = useState(false);
-  const [promoErrorMessage, setPromoErrorMessage] = useState("");
+  const [showPromoMessage, setShowPromoMessage] = useState(false);
+  const [promoMessage, setPromoMessage] = useState("");
+  const [isPromoError, setIsPromoError] = useState(true);
   // const [percentDiscount, setPercentDiscount] = useState(25);
 
   const {
@@ -36,6 +37,8 @@ const BookingSummary = () => {
     UTCDeliveryDateTimeInMs,
     UTCReturnDateTimeInMs,
   } = useContext(SearchContext);
+
+  console.log("delivery time " + localDeliveryDateTimeInMs);
 
   const closeModalError = () => {
     setShowError(false);
@@ -67,35 +70,18 @@ const BookingSummary = () => {
   const handleConfirmClick = async () => {
     if (agreeToTNC) {
       setLoading2(true);
-      // let clonedBooking = structuredClone(newBooking);
 
-      // clonedBooking.deliveryDate = new Date(
-      //   newBooking.deliveryDate + deltaMiliseconds
-      // );
-      // clonedBooking.returnDate = new Date(
-      //   newBooking.returnDate + deltaMiliseconds
-      // );
-      // clonedBooking.isConfirmed = true;
-
-      // let st = newBooking.deliveryDate;
-      // let et = newBooking.returnDate;
-
-      // newBooking.deliveryDate = new Date(st);
-      // newBooking.returnDate = new Date(et);
-
-      //create new booking
       let createdBooking = {};
       await axios
         .post(`${process.env.REACT_APP_API_ENDPOINT}/api/booking`, newBooking)
         .then(async (res) => {
           createdBooking = res;
           // newBooking._id = createdBooking._id;
+
           await axios.put(
             `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/updatetime/${newBooking.motorGroup}`,
             {
               bookingId: res.data._id,
-              // startTime: st + deltaMiliseconds,
-              // endTime: et + deltaMiliseconds,
               startTime: UTCDeliveryDateTimeInMs,
               endTime: UTCReturnDateTimeInMs,
             }
@@ -165,7 +151,7 @@ const BookingSummary = () => {
   const handlePromoCode = (e) => {
     setIsDisabled(false);
     setPromoCode(e.target.value);
-    setShowPromoError(false);
+    setShowPromoMessage(false);
   };
 
   //handle promo code apply
@@ -179,28 +165,19 @@ const BookingSummary = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setDiscountType(res.data.type);
         setDiscountAmount(res.data.amount);
         newBooking.promoCode = promoCode;
-
-        // if (discountType === 1) {
-        //   setDiscountTotal({ ...discountTotal, discount: discountAmount });
-        // } else if (discountType === 2) {
-        //   let newDiscount = (discountAmount / 100) * newBooking.subtotal;
-        //   setDiscountTotal({ ...discountTotal, discount: newDiscount });
-        // }
-        // let newTotalRentalPrice =
-        //   newBooking.subtotal -
-        //   newBooking.discount +
-        //   newBooking.deliveryPickupFee;
-        // setDiscountTotal({ ...discountTotal, total: newTotalRentalPrice });
-        // newBooking.totalRentalPrice(newTotalRentalPrice);
-        // newBooking.discount(discountTotal.discount);
+        setPromoMessage("Success! Promo code has been applied.");
+        setShowPromoMessage(true);
+        setIsPromoError(false);
       })
       .catch((err) => {
-        setPromoErrorMessage(err.response.data);
-        setShowPromoError(true);
+        console.log(err.response.data);
+        setPromoMessage("Invalid promo code.");
+        setShowPromoMessage(true);
+        setIsPromoError(true);
       });
   };
 
@@ -355,9 +332,9 @@ const BookingSummary = () => {
                       </Button>
                     </Stack>
 
-                    {showPromoError && (
-                      <label style={{ color: "red" }}>
-                        {promoErrorMessage}
+                    {showPromoMessage && (
+                      <label style={{ color: isPromoError ? "red" : "green" }}>
+                        {promoMessage}
                       </label>
                     )}
                   </div>

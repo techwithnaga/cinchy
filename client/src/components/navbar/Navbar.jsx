@@ -1,33 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import images from "../../pictures/picture";
 import "./navbar.css";
 import { MdClose, MdOutlineMenu } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showMeaning, setShowMeaning] = useState(false);
   const navigate = useNavigate();
+  const { user, dispatch } = useContext(AuthContext);
 
   if (showSidebar) {
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "unset";
   }
-  const isLoggedIn = sessionStorage.getItem("token");
+
   const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("phoneNumber");
-    window.location.reload();
+    dispatch({ type: "LOGOUT" });
+    setShowSidebar(false);
   };
 
   const handleNavbarClick = (page) => {
     navigate("/" + page);
   };
 
-  useEffect(() => {}, [showMeaning]);
+  useEffect(() => {}, [showMeaning, showSidebar]);
   return (
     <nav className="navbar">
       <div className="bannerContainer">
@@ -162,7 +163,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  {isLoggedIn ? (
+                  {user ? (
                     <p onClick={() => handleLogout()}>Log Out</p>
                   ) : (
                     <p></p>

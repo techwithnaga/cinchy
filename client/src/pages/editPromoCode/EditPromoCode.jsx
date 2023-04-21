@@ -133,18 +133,116 @@ const EditPromoCode = () => {
     setValues({ ...values, [name]: newValue });
   };
 
+  const validate = () => {
+    let temp = {};
+
+    //check code
+    if (values.code.length < 3 || values.code.length > 20) {
+      temp.code = "Promo code should be 3-20 characters!";
+    } else if (/[@!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(values.code)) {
+      temp.code = "Promo code should not contain any special characters!";
+    }
+
+    //code duplicate
+    // state.rows.forEach((row) => {
+    //   if (row.code === values.code) {
+    //     temp.code = "promo code has been used! please select another code.";
+    //   }
+    // });
+
+    //check motorgroup
+    if (values.motorGroup === "") {
+      temp.motorGroup = "Please select a motor Group!";
+    }
+
+    //check type
+    if (values.type === "") {
+      temp.type = "Please select a promo type!";
+    }
+
+    //check amount
+    //1 is Flat-Total, 2 is Flat-Daily, 3 is Discount
+    if (values.amount <= 0) {
+      temp.amount = "The amount can't be zero or a negative number!";
+    } else {
+      if (values.type === 1 && values.amount > 100) {
+        temp.amount = "The amount can't be greater than 100!";
+      } else if (values.type === 2 && values.amount > 50) {
+        temp.amount = "The amount can't be greater than 50!";
+      } else {
+        if (values.amount < 0 || values.amount > 50) {
+          temp.amount = "The amount must be between 0 and 50!";
+        }
+      }
+    }
+
+    //check maximum
+    if (values.maximum <= 0) {
+      temp.maximum =
+        "The maximum number of codes can't be zero or a negative number!";
+    }
+
+    //check active start dates
+    if (!values.activeStartDate) {
+      temp.activeStartDate = "Active Start date is required!";
+    }
+
+    //check active end date
+    if (!values.activeEndDate) {
+      temp.activeEndDate = "Active End date is required!";
+    } else if (
+      new Date(values.activeEndDate).getTime() <
+      new Date(values.activeStartDate).getTime()
+    ) {
+      temp.activeEndDate = "End date must be after start date!";
+    }
+
+    //check booking start dates
+    if (!values.bookingStartDate) {
+      temp.bookingStartDate = "Booking start date is required!";
+    } else if (
+      new Date(values.bookingStartDate).getTime() <
+      new Date(values.activeStartDate).getTime()
+    ) {
+      temp.bookingStartDate =
+        "Booking start date must be the same or after active start date!";
+    }
+
+    //check booking end dates
+    if (!values.bookingEndDate) {
+      temp.bookingEndDate = "Booking end date is required!";
+    } else if (
+      new Date(values.bookingEndDate).getTime() <
+      new Date(values.bookingStartDate).getTime()
+    ) {
+      temp.activeEndDate = "End date must be after start date!";
+    } else if (
+      new Date(values.bookingEndDate).getTime() <
+      new Date(values.activeEndDate).getTime()
+    ) {
+      temp.bookingEndDate =
+        "Booking end date must be the same or after active end date! ";
+    }
+
+    setErrorMessages({ ...temp });
+
+    return Object.keys(temp).length === 0;
+  };
+
   const handleSubmit = async () => {
-    await axios
-      .put(
-        `${process.env.REACT_APP_API_ENDPOINT}/api/promoCode/${values.id}`,
-        values
-      )
-      .then(() => {
-        navigate(-1);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (validate()) {
+      await axios
+        .put(
+          `${process.env.REACT_APP_API_ENDPOINT}/api/promoCode/${values.id}`,
+          values
+        )
+        .then(() => {
+          navigate(-1);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (

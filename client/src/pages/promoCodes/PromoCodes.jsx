@@ -24,8 +24,8 @@ const columns = [
 
       if (
         params.row.used >= params.row.maximum ||
-        new Date().getTime() < new Date(params.row.startDate).getTime() ||
-        new Date().getTime() > new Date(params.row.endDate).getTime()
+        new Date().getTime() < new Date(params.row.activeStartDate).getTime() ||
+        new Date().getTime() > new Date(params.row.activeEndDate).getTime()
       ) {
         isActive = false;
       }
@@ -57,7 +57,12 @@ const columns = [
     headerName: "Type",
     width: 130,
     renderCell: (params) => {
-      return <p>{params.row.type === 1 ? "Flat" : "Percent"}</p>;
+      if (params.row.type === 1) {
+        return <p>Flat Total</p>;
+      } else if (params.row.type === 2) {
+        return <p>Flat Daily</p>;
+      }
+      return <p>Percent</p>;
     },
   },
   {
@@ -152,7 +157,11 @@ const PromoCodes = () => {
                 <Button
                   variant="outlined"
                   color="success"
-                  onClick={() => navigate("/admin-dashboard/create-promocode")}
+                  onClick={() =>
+                    navigate("/admin-dashboard/create-promocode", {
+                      state: { rows: rows },
+                    })
+                  }
                 >
                   <AddIcon />
                   Create

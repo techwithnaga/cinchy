@@ -19,6 +19,7 @@ const SearchOption = ({
   isAvailable,
 }) => {
   const navigate = useNavigate();
+
   const { dispatch } = useContext(SearchContext);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");

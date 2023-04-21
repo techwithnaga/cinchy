@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminNavbar from "../../components/adminNavbar/AdminNavbar";
 import AdminSidebar from "../../components/adminSidebar/AdminSidebar";
 import FormInput from "../../components/formInput/FormInput";
@@ -7,11 +7,15 @@ import { useNavigate } from "react-router-dom";
 import "./createPromoCode.scss";
 import axios from "axios";
 import { es } from "date-fns/locale";
-import { TempleHinduSharp } from "@mui/icons-material";
+import { ConstructionOutlined, TempleHinduSharp } from "@mui/icons-material";
+import { FadeLoader } from "react-spinners";
+import { useLocation } from "react-router-dom";
 // import format from "date-fns/format";
 
 const CreatePromoCode = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const { state } = useLocation();
 
   const [values, setValues] = useState({
     code: "",
@@ -140,6 +144,13 @@ const CreatePromoCode = () => {
       temp.code = "Promo code should not contain any special characters!";
     }
 
+    //code duplicate
+    state.rows.forEach((row) => {
+      if (row.code === values.code) {
+        temp.code = "promo code has been used! please select another code.";
+      }
+    });
+
     //check motorgroup
     if (values.motorGroup === "") {
       temp.motorGroup = "Please select a motor Group!";
@@ -221,16 +232,20 @@ const CreatePromoCode = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (validate()) {
       await axios
         .post(`${process.env.REACT_APP_API_ENDPOINT}/api/promoCode`, values)
         .then(() => {
           navigate(-1);
+          setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   };
 
@@ -240,29 +255,41 @@ const CreatePromoCode = () => {
       <div className="singleContainer">
         <div className="body">
           <AdminSidebar />
-          <div className="container">
-            <h3 className="title">Create Promo Code </h3>
-            <form action="">
-              {inputs.map((input) => {
-                return (
-                  <FormInput
-                    key={input.id}
-                    {...input}
-                    handleChange={handleChange}
-                    handleDateChange={handleDateChange}
-                  />
-                );
-              })}
+          {loading ? (
+            <div className="loaderContainer">
+              <FadeLoader
+                color="#00332C"
+                loading={loading}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </div>
+          ) : (
+            <div className="container">
+              <h3 className="title">Create Promo Code </h3>
+              <form action="">
+                {inputs.map((input) => {
+                  return (
+                    <FormInput
+                      key={input.id}
+                      {...input}
+                      handleChange={handleChange}
+                      handleDateChange={handleDateChange}
+                    />
+                  );
+                })}
 
-              <Button
-                variant="outlined"
-                className="submitBtn"
-                onClick={(e) => handleSubmit(e)}
-              >
-                Submit
-              </Button>
-            </form>
-          </div>
+                <Button
+                  variant="outlined"
+                  className="submitBtn"
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  Submit
+                </Button>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     </div>
