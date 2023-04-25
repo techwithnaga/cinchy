@@ -171,7 +171,7 @@ const CreatePromoCode = () => {
       } else if (values.type === 2 && values.amount > 50) {
         temp.amount = "The amount can't be greater than 50!";
       } else {
-        if (values.amount < 0 || values.amount > 50) {
+        if (values.type === 3 && (values.amount < 0 || values.amount > 50)) {
           temp.amount = "The amount must be between 0 and 50!";
         }
       }
