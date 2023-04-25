@@ -166,8 +166,8 @@ const CreatePromoCode = () => {
     if (values.amount <= 0) {
       temp.amount = "The amount can't be zero or a negative number!";
     } else {
-      if (values.type === 1 && values.amount > 100) {
-        temp.amount = "The amount can't be greater than 100!";
+      if (values.type === 1 && values.amount > 150) {
+        temp.amount = "The amount can't be greater than 150!";
       } else if (values.type === 2 && values.amount > 50) {
         temp.amount = "The amount can't be greater than 50!";
       } else {
