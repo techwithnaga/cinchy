@@ -155,6 +155,30 @@
   height: 18px;
 }
 
+.socialMedialItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.instagram {
+  color: white;
+  padding: 5px;
+  background-color: var(--color-green700);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.instagram a {
+  color: white;
+}
+
 @media (max-width: 1080px) {
   .bookingConfirmationContainer {
     width: 88%;

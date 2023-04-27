@@ -42,7 +42,12 @@ const AdminSidebar = () => {
         </ul>
         <ul>
           <p className="title">LISTS</p>
-          <li className="item">
+          <li
+            className="item"
+            onClick={() => {
+              navigate("/admin-dashboard/bookings");
+            }}
+          >
             <BookOutlinedIcon className="icon" />
             Bookings
           </li>
@@ -54,7 +59,12 @@ const AdminSidebar = () => {
             <GroupOutlinedIcon className="icon" />
             Users
           </li>
-          <li className="item">
+          <li
+            className="item"
+            onClick={() => {
+              navigate("/admin-dashboard/motors");
+            }}
+          >
             <MopedOutlinedIcon className="icon" />
             Motors
           </li>

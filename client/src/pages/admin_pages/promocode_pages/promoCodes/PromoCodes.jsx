@@ -1,9 +1,9 @@
 import React from "react";
-import AdminNavbar from "../../components/adminNavbar/AdminNavbar";
-import AdminSidebar from "../../components/adminSidebar/AdminSidebar";
+import AdminNavbar from "../../../../components/adminNavbar/AdminNavbar";
+import AdminSidebar from "../../../../components/adminSidebar/AdminSidebar";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
-import useFetch from "../../hooks/useFetch";
+import useFetch from "../../../../hooks/useFetch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -72,9 +72,9 @@ const columns = [
     renderCell: (params) => {
       return (
         <p>
-          {params.row.type === 1
-            ? params.row.amount + ",000 IDR"
-            : params.row.amount + " %"}
+          {params.row.type === 3
+            ? params.row.amount + " %"
+            : params.row.amount + ",000 IDR"}
         </p>
       );
     },

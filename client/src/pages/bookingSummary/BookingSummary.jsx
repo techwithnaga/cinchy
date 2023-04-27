@@ -14,6 +14,7 @@ import formatNumber from "../../utils/formatNumber";
 import FadeLoader from "react-spinners/FadeLoader";
 // import moment from "moment-timezone";
 import { Button, Stack, TextField, Typography } from "@mui/material";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const BookingSummary = () => {
   const { state } = useLocation();
@@ -25,6 +26,7 @@ const BookingSummary = () => {
   const [showPromoMessage, setShowPromoMessage] = useState(false);
   const [promoMessage, setPromoMessage] = useState("");
   const [isPromoError, setIsPromoError] = useState(true);
+  const [isInstagram, setIsInstagram] = useState(false);
   // const [percentDiscount, setPercentDiscount] = useState(25);
 
   const {
@@ -36,9 +38,8 @@ const BookingSummary = () => {
     localReturnDateTimeInMs,
     UTCDeliveryDateTimeInMs,
     UTCReturnDateTimeInMs,
+    rentalDuration,
   } = useContext(SearchContext);
-
-  console.log("delivery time " + localDeliveryDateTimeInMs);
 
   const closeModalError = () => {
     setShowError(false);
@@ -47,6 +48,8 @@ const BookingSummary = () => {
   const [newBooking, setNewBooking] = useState(state.newBooking);
   const [discountType, setDiscountType] = useState(0);
   const [discountAmount, setDiscountAmount] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
+  const [totalRentalPrice, setTotalRentalPrice] = useState(0);
 
   const { data, loading, error, reFetch } = useFetch(
     `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${newBooking.motorGroup}`,
@@ -62,12 +65,14 @@ const BookingSummary = () => {
     setIsModalOpen(true);
   };
 
-  // const [hasAgreed, setHasAgreed] = useState(false);
-
   const [loading2, setLoading2] = useState(false);
   const d = new Date();
 
   const handleConfirmClick = async () => {
+    newBooking.promoCode = promoCode;
+    newBooking.discount = totalDiscount;
+    newBooking.totalRentalPrice = totalRentalPrice;
+
     if (agreeToTNC) {
       setLoading2(true);
 
@@ -156,49 +161,48 @@ const BookingSummary = () => {
 
   //handle promo code apply
   const handlePromoApply = async () => {
+    setIsInstagram(false);
     await axios
       .post(
         `${process.env.REACT_APP_API_ENDPOINT}/api/promocode/checkpromocode`,
         {
           code: promoCode,
           motorGroup: data.category.toLowerCase(),
+          deliveryTime: UTCDeliveryDateTimeInMs,
         }
       )
       .then((res) => {
-        // console.log(res);
         setDiscountType(res.data.type);
         setDiscountAmount(res.data.amount);
-        newBooking.promoCode = promoCode;
         setPromoMessage("Success! Promo code has been applied.");
         setShowPromoMessage(true);
         setIsPromoError(false);
+        // calculateDiscount();
       })
       .catch((err) => {
-        console.log(err.response.data);
         setPromoMessage("Invalid promo code.");
+        // setPromoCode("");
+        setTotalDiscount(0);
         setShowPromoMessage(true);
         setIsPromoError(true);
       });
   };
 
   const DiscountTxt = () => {
-    let totalDiscount = 0;
-    let totalRentalPrice = 0;
-
     let numberOfDays = Math.ceil(
       (localReturnDateTimeInMs - localDeliveryDateTimeInMs) / 86400000
     );
 
     //1 is Flat-Total, 2 is Flat-Daily, 3 is Discount
     if (discountType === 1) {
-      totalDiscount = discountAmount;
+      setTotalDiscount(discountAmount);
     } else if (discountType === 2) {
-      totalDiscount = numberOfDays * discountAmount;
+      setTotalDiscount(numberOfDays * discountAmount);
     } else if (discountType === 3) {
-      totalDiscount = (discountAmount / 100) * newBooking.subtotal;
+      setTotalDiscount((discountAmount / 100) * newBooking.subtotal);
     }
 
-    totalRentalPrice =
+    let totalRentalPrice =
       newBooking.subtotal - totalDiscount + newBooking.deliveryPickupFee;
     newBooking.totalRentalPrice = totalRentalPrice;
     newBooking.discount = totalDiscount;
@@ -206,9 +210,12 @@ const BookingSummary = () => {
     return (
       <>
         <div className="paymentSummaryItem">
-          <label htmlFor="subtotal">Discount</label>
+          <label htmlFor="subtotal">
+            Discount {isPromoError ? "" : `(${promoCode} Promo)`}
+          </label>
           <p>(IDR {formatNumber(totalDiscount)}K)</p>
         </div>
+
         <div className="paymentSummaryItem">
           <h5 htmlFor="subtotal">Total Payment</h5>
           <h4>IDR {formatNumber(totalRentalPrice)}K</h4>
@@ -217,7 +224,67 @@ const BookingSummary = () => {
     );
   };
 
-  useEffect(() => {}, [agreeToMarketing]);
+  const InstagramPromo = () => {
+    return (
+      <>
+        <div className="paymentSummaryItem">
+          <label htmlFor="subtotal">
+            Discount {isPromoError ? "" : `(${promoCode} Promo)`}
+          </label>
+          <p>(IDR {formatNumber(totalDiscount)}K)</p>
+        </div>
+
+        <div className="paymentSummaryItem">
+          <h5 htmlFor="subtotal">Total Payment</h5>
+          <h4>IDR {formatNumber(totalRentalPrice)}K</h4>
+        </div>
+      </>
+    );
+  };
+
+  // const calculateDiscount = () => {
+  //   let numberOfDays = Math.ceil(
+  //     (localReturnDateTimeInMs - localDeliveryDateTimeInMs) / 86400000
+  //   );
+
+  //   let discount = 0;
+
+  //   //1 is Flat-Total, 2 is Flat-Daily, 3 is Discount
+  //   if (discountType === 1) {
+  //     // setTotalDiscount(discountAmount);
+  //     discount = discountAmount;
+  //   } else if (discountType === 2) {
+  //     // setTotalDiscount(numberOfDays * discountAmount);
+  //     discount = numberOfDays * discountAmount;
+  //   } else if (discountType === 3) {
+  //     // setTotalDiscount((discountAmount / 100) * newBooking.subtotal);
+  //     discount = (discountAmount / 100) * newBooking.subtotal;
+  //   }
+
+  //   let total =
+  //     newBooking.subtotal - totalDiscount + newBooking.deliveryPickupFee;
+  //   newBooking.totalRentalPrice = totalRentalPrice;
+  //   newBooking.discount = totalDiscount;
+
+  //   setTotalRentalPrice(total);
+  //   setTotalDiscount(discount);
+  // };
+
+  // const handleInstaClick = async () => {
+  //   setPromoCode("CINCHYIG");
+  //   // await handlePromoApply();
+  //   setTotalDiscount(30);
+  //   setIsPromoError(false);
+  //   setShowPromoMessage(false);
+  // };
+
+  useEffect(() => {}, [
+    promoCode,
+    agreeToMarketing,
+    totalDiscount,
+    totalRentalPrice,
+    isInstagram,
+  ]);
 
   return (
     <div className="bookingConfirmation">
@@ -302,24 +369,40 @@ const BookingSummary = () => {
                       <label htmlFor="subtotal">Accessories Fee</label>
                       <p>IDR 0</p>
                     </div>
-                    <DiscountTxt />
                     {/* <div className="paymentSummaryItem">
-                 
+                      <label htmlFor="subtotal">Soft Opening Promo </label>
+                      <p>(IDR {formatNumber(rentalDuration * 20)}K)</p>
+                    </div> */}
+
+                    {/* <div className="paymentSummaryItem">
+                      <label htmlFor="subtotal">
+                        Discount {isPromoError ? "" : `(${promoCode} Promo)`}
+                      </label>
+                      <p>(IDR {formatNumber(totalDiscount)}K)</p>
                     </div>
+
                     <div className="paymentSummaryItem">
                       <h5 htmlFor="subtotal">Total Payment</h5>
-                      <h4>IDR {formatNumber(newBooking.totalRentalPrice)}K</h4>
+                      <h4>IDR {formatNumber(totalRentalPrice)}K</h4>
                     </div> */}
+
+                    {isInstagram ? <InstagramPromo /> : <DiscountTxt />}
+                    {/* <DiscountTxt></DiscountTxt> */}
                   </div>
                   <hr />
 
                   <div className="promoCode">
                     <Stack direction="row" spacing={3} mt={3}>
                       <TextField
-                        id="outlined-basic"
+                        id="promoCodeInput"
                         label="Promo Code"
                         variant="outlined"
-                        onChange={(e) => handlePromoCode(e)}
+                        value={promoCode}
+                        onChange={(e) => {
+                          handlePromoCode(e);
+                          setShowPromoMessage(false);
+                          setIsPromoError(true);
+                        }}
                       />
                       <Button
                         variant="contained"
@@ -337,6 +420,49 @@ const BookingSummary = () => {
                         {promoMessage}
                       </label>
                     )}
+                  </div>
+
+                  <br></br>
+                  <br></br>
+
+                  <div className="socialMedialItem">
+                    <span>Follow us on</span>
+                    <span
+                      onClick={() => {
+                        // setTotalDiscount(newBooking.subtotal / 4);
+                        // console.log(totalDiscount);
+                        // setDiscountAmount(0.25 * newBooking.subtotal);
+                        // setShowPromoMessage(false);
+                        // setPromoCode("CINCHYIG");
+                        // setIsPromoError(false);
+                        // setTotalDiscount(newBooking.subtotal * 0.25);
+                        // handlePromoApply();
+                        // handleInstaClick();
+                        setPromoCode("CINCHYIG");
+                        setTotalDiscount(rentalDuration * 20);
+                        setTotalRentalPrice(
+                          newBooking.subtotal -
+                            rentalDuration * 20 +
+                            newBooking.deliveryPickupFee
+                        );
+                        setIsInstagram(true);
+                      }}
+                      className="instagram"
+                    >
+                      <InstagramIcon
+                        style={{ fontSize: "14px" }}
+                      ></InstagramIcon>
+                      <a
+                        href="https://www.instagram.com/cinchy.life/"
+                        target="_blank"
+                        style={{
+                          textDecoration: "none",
+                        }}
+                      >
+                        instagram
+                      </a>
+                    </span>
+                    <span>for more discount</span>
                   </div>
 
                   {/* <div className="paymentTotal">

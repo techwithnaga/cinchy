@@ -33,15 +33,17 @@ const SearchOption = ({
     if (days === 0 || localDeliveryDateTimeInMs >= localReturnDateTimeInMs) {
       setErrorMessage("Please select valid delivery and return dates.");
       setShowError(true);
-    } else if (
-      localDeliveryDateTimeInMs <=
-      new Date(
-        new Date().toLocaleString("en-US", { timeZone: "Asia/Brunei" })
-      ).getTime()
-    ) {
-      setErrorMessage("Invalid Pick-up Time.");
-      setShowError(true);
-    } else if (days > 30) {
+    }
+    // } else if (
+    //   localDeliveryDateTimeInMs <=
+    //   new Date(
+    //     new Date().toLocaleString("en-US", { timeZone: "Asia/Brunei" })
+    //   ).getTime()
+    // ) {
+    //   setErrorMessage("Invalid Pick-up Time.");
+    //   setShowError(true);
+    // }
+    else if (days > 30) {
       setErrorMessage("Unable to book more than 30 days.");
       setShowError(true);
     } else {

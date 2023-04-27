@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import AdminNavbar from "../../components/adminNavbar/AdminNavbar";
-import AdminSidebar from "../../components/adminSidebar/AdminSidebar";
-import FormInput from "../../components/formInput/FormInput";
+import AdminNavbar from "../../../../components/adminNavbar/AdminNavbar";
+import AdminSidebar from "../../../../components/adminSidebar/AdminSidebar";
+import FormInput from "../../../../components/formInput/FormInput";
 import { Button } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./editPromoCode.scss";
@@ -165,12 +165,12 @@ const EditPromoCode = () => {
     if (values.amount <= 0) {
       temp.amount = "The amount can't be zero or a negative number!";
     } else {
-      if (values.type === 1 && values.amount > 100) {
-        temp.amount = "The amount can't be greater than 100!";
+      if (values.type === 1 && values.amount > 150) {
+        temp.amount = "The amount can't be greater than 150!";
       } else if (values.type === 2 && values.amount > 50) {
         temp.amount = "The amount can't be greater than 50!";
       } else {
-        if (values.amount < 0 || values.amount > 50) {
+        if (values.type === 3 && (values.amount < 0 || values.amount > 50)) {
           temp.amount = "The amount must be between 0 and 50!";
         }
       }

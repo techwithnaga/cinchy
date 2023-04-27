@@ -16,12 +16,14 @@ import NotFound from "./pages/notFound/NotFound";
 import Admin from "./pages/admin/Admin";
 import { createTheme, ThemeProvider } from "@mui/material";
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
-import PromoCodes from "./pages/promoCodes/PromoCodes";
-import CreatePromoCode from "./pages/createPromoCode/CreatePromoCode";
-import EditPromoCode from "./pages/editPromoCode/EditPromoCode";
+import PromoCodes from "./pages/admin_pages/promocode_pages/promoCodes/PromoCodes";
+import CreatePromoCode from "./pages/admin_pages/promocode_pages/createPromoCode/CreatePromoCode";
+import EditPromoCode from "./pages/admin_pages/promocode_pages/editPromoCode/EditPromoCode";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { Navigate } from "react-router-dom";
+import Motors from "./pages/admin_pages/motor_pages/motors/Motors";
+import Bookings from "./pages/admin_pages/booking_pages/bookings/Bookings";
 
 const theme = createTheme({
   palette: {
@@ -55,6 +57,14 @@ const UserLoggedInOnlyRoute = ({ children }) => {
   return children;
 };
 
+const UserRoleCanPass = ({ children }) => {
+  const { user } = useContext(AuthContext);
+  if (user && user.role === "user") {
+    return <Navigate to="/information"></Navigate>;
+  }
+  return children;
+};
+
 function App() {
   return (
     <div className="App">
@@ -63,7 +73,14 @@ function App() {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={
+                <UserRoleCanPass>
+                  <Login />
+                </UserRoleCanPass>
+              }
+            />
             <Route path="/otpConfirmation" element={<Confirmation />}></Route>
             <Route
               path="/information"
@@ -111,6 +128,22 @@ function App() {
                 element={
                   <ProtectedRoute requiredRole="superadmin">
                     <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route
+                path="bookings"
+                element={
+                  <ProtectedRoute requiredRole="superadmin">
+                    <Bookings />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route
+                path="motors"
+                element={
+                  <ProtectedRoute requiredRole="superadmin">
+                    <Motors />
                   </ProtectedRoute>
                 }
               ></Route>

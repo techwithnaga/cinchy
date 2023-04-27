@@ -16,6 +16,7 @@ import { MobileDatePicker } from "@mui/x-date-pickers";
 import { TextField } from "@mui/material";
 import axios from "axios";
 import moment from "moment-timezone";
+import ModalError from "../../components/modalError/ModalError";
 
 const Search = () => {
   let baliTime = new Date().toLocaleString("en-US", {
@@ -40,6 +41,12 @@ const Search = () => {
   const [subtotal, setSubtotal] = useState(0);
   const dayInMillisecond = 24 * 60 * 60 * 1000;
   const milisecondsInHour = 60 * 60 * 1000;
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const closeModal = () => {
+    setShowError(false);
+  };
 
   const [times, setTimes] = useState({
     startTime: "09:00 AM",
@@ -58,7 +65,7 @@ const Search = () => {
     new Date(baliTime.split(",")[0])
   );
   const [returnDate, setReturnDate] = useState(
-    new Date(new Date(baliTime.split(",")[0]).getTime() + dayInMillisecond)
+    new Date(new Date(baliTime.split(",")[0]).getTime() + dayInMillisecond * 2)
   );
 
   const [localDeliveryDateTimeInMs, setLocalDeliveryDateTimeInMs] = useState(0);
@@ -111,22 +118,32 @@ const Search = () => {
   const [filteredGroup, setFilteredGroup] = useState(data);
 
   const handleSearch = () => {
-    setLoading(true);
-    axios
-      .get(
-        `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${UTCDeliveryDateTimeInMs}&${UTCReturnDateTimeInMs}`
-      )
-      .then((res) => {
-        setData(res.data);
-        setFilteredGroup(res.data);
-        setShowSearchResult(true);
-        setOption("All");
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+    if (
+      Math.ceil(
+        (UTCReturnDateTimeInMs - UTCDeliveryDateTimeInMs) / dayInMillisecond
+      ) < 2
+    ) {
+      //show modal error
+      setShowError(true);
+      setErrorMessage("Minimum booking is 2 days");
+    } else {
+      setLoading(true);
+      axios
+        .get(
+          `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/${UTCDeliveryDateTimeInMs}&${UTCReturnDateTimeInMs}`
+        )
+        .then((res) => {
+          setData(res.data);
+          setFilteredGroup(res.data);
+          setShowSearchResult(true);
+          setOption("All");
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    }
   };
 
   const filterData = (opt) => {
@@ -193,7 +210,7 @@ const Search = () => {
                       //adjust return date if needed
                       if (newValue.getTime() >= returnDate.getTime()) {
                         setReturnDate(
-                          new Date(newValue.getTime() + dayInMillisecond)
+                          new Date(newValue.getTime() + dayInMillisecond * 2)
                         );
                       }
                       setDeliveryDate(newValue);
@@ -525,7 +542,7 @@ const Search = () => {
                       newValue.setHours(0, 0, 0, 0);
                       if (newValue.getTime() <= deliveryDate.getTime()) {
                         let newDeliveryDate = new Date(
-                          newValue.getTime() - dayInMillisecond
+                          newValue.getTime() - dayInMillisecond * 2
                         );
                         setDeliveryDate(newDeliveryDate);
                       }
@@ -811,6 +828,11 @@ const Search = () => {
             </div>
           )}
         </div>
+        <ModalError
+          closeModal={closeModal}
+          showError={showError}
+          errorMessage={errorMessage}
+        ></ModalError>
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import AdminNavbar from "../../components/adminNavbar/AdminNavbar";
-import AdminSidebar from "../../components/adminSidebar/AdminSidebar";
-import FormInput from "../../components/formInput/FormInput";
+import AdminNavbar from "../../../../components/adminNavbar/AdminNavbar";
+import AdminSidebar from "../../../../components/adminSidebar/AdminSidebar";
+import FormInput from "../../../../components/formInput/FormInput";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./createPromoCode.scss";
