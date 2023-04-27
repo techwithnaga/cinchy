@@ -27,7 +27,6 @@ const BookingSummary = () => {
   const [promoMessage, setPromoMessage] = useState("");
   const [isPromoError, setIsPromoError] = useState(true);
   const [isInstagram, setIsInstagram] = useState(false);
-  // const [percentDiscount, setPercentDiscount] = useState(25);
 
   const {
     motorGroupId,
@@ -71,7 +70,12 @@ const BookingSummary = () => {
   const handleConfirmClick = async () => {
     newBooking.promoCode = promoCode;
     newBooking.discount = totalDiscount;
-    newBooking.totalRentalPrice = totalRentalPrice;
+
+    if (totalRentalPrice !== 0) {
+      newBooking.totalRentalPrice = totalRentalPrice;
+    } else {
+      newBooking.totalRentalPrice = subtotal + newBooking.deliveryPickupFee;
+    }
 
     if (agreeToTNC) {
       setLoading2(true);
@@ -81,7 +85,6 @@ const BookingSummary = () => {
         .post(`${process.env.REACT_APP_API_ENDPOINT}/api/booking`, newBooking)
         .then(async (res) => {
           createdBooking = res;
-          // newBooking._id = createdBooking._id;
 
           await axios.put(
             `${process.env.REACT_APP_API_ENDPOINT}/api/motorGroup/updatetime/${newBooking.motorGroup}`,

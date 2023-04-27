@@ -194,6 +194,7 @@ const Information = () => {
             type="text"
             placeholder="youremail@email.com"
             id="emailAddress"
+            onChange={handleChange}
           />
           <div className="emergency">
             <h6>Emergency Contact Name</h6>
