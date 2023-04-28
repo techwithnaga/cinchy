@@ -350,16 +350,13 @@ const BookingSummary = () => {
 
               <div className="datePaymentSummary">
                 <div className="bookingDate">
-                  {/* {format(
-                    new Date(UTCDeliveryDateTimeInString),
-                    "E, d MMM HH:mm"
-                  )}
-                  {UTCDeliveryDateTimeInString}-
                   {format(
-                    new Date(UTCReturnDateTimeInString),
+                    new Date(localDeliveryDateTimeInMs),
                     "E, d MMM HH:mm"
-                  )} */}
-                  {UTCDeliveryDateTimeInString} - {UTCReturnDateTimeInString}
+                  )}{" "}
+                  -{" "}
+                  {format(new Date(localReturnDateTimeInMs), "E, d MMM HH:mm")}
+                  {/* {UTCDeliveryDateTimeInString} - {UTCReturnDateTimeInString} */}
                 </div>
                 <div className="paymentSummary">
                   <br />
