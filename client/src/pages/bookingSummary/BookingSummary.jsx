@@ -74,7 +74,8 @@ const BookingSummary = () => {
     if (totalRentalPrice !== 0) {
       newBooking.totalRentalPrice = totalRentalPrice;
     } else {
-      newBooking.totalRentalPrice = subtotal + newBooking.deliveryPickupFee;
+      newBooking.totalRentalPrice =
+        newBooking.subtotal + newBooking.deliveryPickupFee;
     }
 
     if (agreeToTNC) {
@@ -349,11 +350,16 @@ const BookingSummary = () => {
 
               <div className="datePaymentSummary">
                 <div className="bookingDate">
-                  {format(
-                    new Date(localDeliveryDateTimeInMs),
+                  {/* {format(
+                    new Date(UTCDeliveryDateTimeInString),
                     "E, d MMM HH:mm"
                   )}
-                  -{format(new Date(localReturnDateTimeInMs), "E, d MMM HH:mm")}
+                  {UTCDeliveryDateTimeInString}-
+                  {format(
+                    new Date(UTCReturnDateTimeInString),
+                    "E, d MMM HH:mm"
+                  )} */}
+                  {UTCDeliveryDateTimeInString} - {UTCReturnDateTimeInString}
                 </div>
                 <div className="paymentSummary">
                   <br />

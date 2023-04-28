@@ -107,42 +107,42 @@ const Otp = () => {
           <div className="confirmationCode">
             <AutoTabProvider>
               <input
-                type="text"
+                type="number"
                 maxLength={1}
                 tabbable="true"
                 className="digitInput"
                 id="digitInput1"
               />
               <input
-                type="text"
+                type="number"
                 maxLength={1}
                 tabbable="true"
                 className="digitInput"
                 id="digitInput2"
               />
               <input
-                type="text"
+                type="number"
                 maxLength={1}
                 tabbable="true"
                 className="digitInput"
                 id="digitInput3"
               />
               <input
-                type="text"
+                type="number"
                 maxLength={1}
                 tabbable="true"
                 className="digitInput"
                 id="digitInput4"
               />
               <input
-                type="text"
+                type="number"
                 maxLength={1}
                 tabbable="true"
                 className="digitInput"
                 id="digitInput5"
               />
               <input
-                type="text"
+                type="number"
                 maxLength={1}
                 tabbable="true"
                 className="digitInput"
