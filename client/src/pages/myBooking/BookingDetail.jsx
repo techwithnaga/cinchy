@@ -81,9 +81,9 @@ const BookingDetail = ({
           </p>
         )}
         <br />
-        <h6>Booking Paid Status:</h6>
+        {/* <h6>Booking Paid Status:</h6>
         {isPaid ? <p>Paid(Y)</p> : <p>Not paid yet(N)</p>}
-        <br />
+        <br /> */}
         {/* <h6>Vehicle Delivered Status:</h6>
         <p>Delivered/ Not Delivered</p>
         <br />
